@@ -1,0 +1,123 @@
+// Version: 1.0.0
+type AuditLog__1065702421 =
+  {
+    action : Text;
+    created_at : Int;
+    details_json : Text;
+    entity_id : Nat;
+    entity_type : Text;
+    id : Nat;
+    initiated_by : Text
+  };
+type Data__791452850<K, V> =
+  {var count : Nat__490723111; kvs : [var ?(K, V)]};
+type DriverPrices__564050036 = {large : Nat; medium : Nat; small : Nat};
+type DriverStatus__360602996 = {#offline; #online};
+type Driver__664711945 =
+  {
+    current_order_id : ?Nat;
+    id : Nat;
+    name : Text;
+    phone : Text;
+    pin : Text;
+    status : DriverStatus__360602996;
+    truck_plate : Text;
+    zone_id : Nat
+  };
+type Internal__8484328<K, V> =
+  {children : [var ?Node__46230540<K, V>]; data : Data__791452850<K, V>};
+type Leaf__809889148<K, V> = {data : Data__791452850<K, V>};
+type Nat__490723111 = Nat__920180692;
+type Nat__920180692 = Nat;
+type Node__46230540<K, V> =
+  {#internal : Internal__8484328<K, V>; #leaf : Leaf__809889148<K, V>};
+type OrderStatusEntry__193753053 =
+  {
+    created_at : Int;
+    id : Nat;
+    initiated_by : Text;
+    note : Text;
+    order_id : Nat;
+    status : OrderStatus__272730104
+  };
+type OrderStatus__272730104 =
+  {
+    #accepted;
+    #cancelled;
+    #completed;
+    #en_route;
+    #exception;
+    #expired;
+    #matched;
+    #pending;
+    #pumping
+  };
+type Order__141779993 =
+  {
+    address_note : Text;
+    completed_at : ?Int;
+    created_at : Int;
+    customer_phone : Text;
+    driver_id : ?Nat;
+    expired_at : ?Int;
+    help_flagged : Bool;
+    id : Nat;
+    idempotency_key : Text;
+    matched_at : ?Int;
+    payment_ref : Text;
+    payment_status : PaymentStatus__889961532;
+    size : TankSize__222818898;
+    status : OrderStatus__272730104;
+    zone_id : Nat
+  };
+type PaymentMode__510189616 = {#always_fail; #always_success; #random};
+type PaymentStatus__889961532 = {#failed; #pending; #success};
+type TankSize__222818898 = {#large; #medium; #small};
+type Zone__116707211 =
+  {city : Text; display_order : Nat; id : Nat; name : Text};
+actor {
+  stable auditLogs :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?AuditLog__1065702421]];
+      var elementIndex : Nat__490723111
+    };
+  stable config : {var paymentMode : PaymentMode__510189616};
+  stable counters :
+    {
+      var nextAuditId : Nat;
+      var nextDriverId : Nat;
+      var nextHistoryId : Nat;
+      var nextOrderId : Nat;
+      var nextZoneId : Nat
+    };
+  stable driverPrices :
+    {
+      var root : Node__46230540<Nat, DriverPrices__564050036>;
+      var size : Nat__490723111
+    };
+  stable drivers :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?Driver__664711945]];
+      var elementIndex : Nat__490723111
+    };
+  stable orders :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?Order__141779993]];
+      var elementIndex : Nat__490723111
+    };
+  stable statusHistory :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?OrderStatusEntry__193753053]];
+      var elementIndex : Nat__490723111
+    };
+  stable zones :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?Zone__116707211]];
+      var elementIndex : Nat__490723111
+    }
+};

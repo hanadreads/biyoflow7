@@ -1,0 +1,148 @@
+type Zone = 
+ record {
+   city: text;
+   display_order: nat;
+   id: nat;
+   name: text;
+ };
+type TankSize = 
+ variant {
+   large;
+   medium;
+   small;
+ };
+type PaymentStatus = 
+ variant {
+   failed;
+   pending;
+   success;
+ };
+type PaymentMode = 
+ variant {
+   always_fail;
+   always_success;
+   random;
+ };
+type OrderStatus = 
+ variant {
+   accepted;
+   cancelled;
+   completed;
+   en_route;
+   exception;
+   expired;
+   matched;
+   pending;
+   pumping;
+ };
+type Order = 
+ record {
+   address_note: text;
+   completed_at: opt int;
+   created_at: int;
+   customer_phone: text;
+   driver_id: opt nat;
+   expired_at: opt int;
+   help_flagged: bool;
+   id: nat;
+   idempotency_key: text;
+   matched_at: opt int;
+   payment_ref: text;
+   payment_status: PaymentStatus;
+   size: TankSize;
+   status: OrderStatus;
+   zone_id: nat;
+ };
+type DriverStatus = 
+ variant {
+   offline;
+   online;
+ };
+type DriverPrices = 
+ record {
+   large: nat;
+   medium: nat;
+   small: nat;
+ };
+type Driver = 
+ record {
+   current_order_id: opt nat;
+   id: nat;
+   name: text;
+   phone: text;
+   pin: text;
+   status: DriverStatus;
+   truck_plate: text;
+   zone_id: nat;
+ };
+service : {
+  acceptOrder: (driver_id: nat, order_id: nat) -> (variant {
+                                                     err: text;
+                                                     ok;
+                                                   });
+  createOrder: (zone_id: nat, size: TankSize, customer_phone: text,
+   address_note: text, idempotency_key: text) ->
+   (variant {
+      err: text;
+      ok: record {
+            order_id: nat;
+            payment_ref: text;
+          };
+    });
+  driverLogin: (phone: text, pin: text) ->
+   (variant {
+      err: text;
+      ok: record {
+            driver_id: nat;
+            name: text;
+          };
+    });
+  getDriverEarnings: (driver_id: nat, start_ms: opt int, end_ms: opt int) ->
+   (record {
+      orders: vec Order;
+      period_total: nat;
+      today_total: nat;
+    }) query;
+  getDriverHistory: (driver_id: nat) -> (vec Order) query;
+  getDriverProfile: (driver_id: nat) ->
+   (opt record {
+          driver: Driver;
+          prices: DriverPrices;
+        }) query;
+  getIncomingOrders: (driver_id: nat) -> (vec Order);
+  getOrder: (order_id: nat, phone_last4: text) -> (opt Order) query;
+  getZones: () -> (vec Zone) query;
+  processPayment: (order_id: nat, idempotency_key: text) ->
+   (variant {
+      err: text;
+      ok: record {
+            payment_ref: text;
+            status: PaymentStatus;
+          };
+    });
+  rejectOrder: (driver_id: nat, order_id: nat) -> (variant {
+                                                     err: text;
+                                                     ok;
+                                                   });
+  resetDemo: () -> (variant {ok;});
+  setDriverPrices: (driver_id: nat, prices: DriverPrices) ->
+   (variant {
+      err: text;
+      ok;
+    });
+  setDriverStatus: (driver_id: nat, status: DriverStatus, truck_plate:
+   text) -> (variant {
+               err: text;
+               ok;
+             });
+  setDriverZone: (driver_id: nat, zone_id: nat) -> (variant {
+                                                      err: text;
+                                                      ok;
+                                                    });
+  setPaymentMode: (mode: PaymentMode) -> (variant {ok;});
+  updateOrderStatus: (driver_id: nat, order_id: nat, new_status:
+   OrderStatus) -> (variant {
+                      err: text;
+                      ok;
+                    });
+}
