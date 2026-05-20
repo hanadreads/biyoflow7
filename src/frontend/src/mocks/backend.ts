@@ -4,6 +4,8 @@ import {
   OrderStatus,
   PaymentMode,
   PaymentStatus,
+  ShiftPeriod,
+  ShiftStatus,
   TankSize,
   Variant_ok,
 } from "../backend.d";
@@ -41,6 +43,8 @@ export const mockBackend: backendInterface = {
     idempotency_key: "idem-001",
     driver_id: BigInt(1),
     matched_at: BigInt(Date.now()),
+    customer_confirmed: false,
+    driver_confirmed: false,
   }),
 
   driverLogin: async () => ({
@@ -57,6 +61,8 @@ export const mockBackend: backendInterface = {
       truck_plate: "HRG-1234",
       phone: "0634200001",
       zone_id: BigInt(1),
+      allowed_zone_ids: [BigInt(1)],
+      is_active: true,
     },
     prices: {
       small: BigInt(15000),
@@ -78,6 +84,8 @@ export const mockBackend: backendInterface = {
       payment_ref: "ZAAD-2024-002",
       zone_id: BigInt(1),
       idempotency_key: "idem-002",
+      customer_confirmed: false,
+      driver_confirmed: false,
     },
   ],
 
@@ -108,6 +116,8 @@ export const mockBackend: backendInterface = {
         idempotency_key: "idem-003",
         driver_id: BigInt(1),
         completed_at: BigInt(Date.now() - 1800000),
+        customer_confirmed: true,
+        driver_confirmed: true,
       },
     ],
   }),
@@ -127,6 +137,8 @@ export const mockBackend: backendInterface = {
       idempotency_key: "idem-004",
       driver_id: BigInt(1),
       completed_at: BigInt(Date.now() - 82800000),
+      customer_confirmed: true,
+      driver_confirmed: true,
     },
     {
       id: BigInt(39),
@@ -142,9 +154,90 @@ export const mockBackend: backendInterface = {
       idempotency_key: "idem-005",
       driver_id: BigInt(1),
       completed_at: BigInt(Date.now() - 5400000),
+      customer_confirmed: true,
+      driver_confirmed: true,
     },
   ],
 
+  confirmDelivery: async () => ({ __kind__: "ok", ok: "confirmed" }),
+
+  getActiveShift: async () => null,
+
+  getDriverShifts: async () => [],
+
+  requestShift: async () => ({
+    __kind__: "ok",
+    ok: {
+      id: BigInt(1),
+      status: ShiftStatus.pending_payment,
+      driverId: BigInt(1),
+      period: ShiftPeriod.morning,
+      date: new Date().toISOString().split("T")[0],
+    },
+  }),
+
+  payShiftFee: async () => ({
+    __kind__: "ok",
+    ok: { zNumber: "ABCD1234", paymentRef: "ZAAD-SHIFT-001" },
+  }),
+
+  submitZNumber: async () => ({
+    __kind__: "ok",
+    ok: {
+      id: BigInt(1),
+      status: ShiftStatus.active,
+      driverId: BigInt(1),
+      period: ShiftPeriod.morning,
+      date: new Date().toISOString().split("T")[0],
+      zNumber: "ABCD1234",
+      paymentRef: "ZAAD-SHIFT-001",
+    },
+  }),
+
   resetDemo: async () => Variant_ok.ok,
   setPaymentMode: async () => Variant_ok.ok,
+
+  registerCustomer: async () => ({
+    __kind__: "ok",
+    ok: {
+      id: BigInt(1),
+      name: "Faadumo Test",
+      phone: "06XTEST01",
+      pin: "1234",
+      created_at: BigInt(Date.now()),
+    },
+  }),
+
+  loginCustomer: async () => ({
+    __kind__: "ok",
+    ok: { customerId: BigInt(1), name: "Faadumo Test", phone: "06XTEST01" },
+  }),
+
+  getCustomerProfile: async () => ({
+    __kind__: "ok",
+    ok: {
+      id: BigInt(1),
+      name: "Faadumo Test",
+      phone: "06XTEST01",
+      pin: "1234",
+      created_at: BigInt(Date.now()),
+    },
+  }),
+
+  adminLogin: async () => ({
+    __kind__: "ok",
+    ok: { token: "admin-session-token-2024", role: "admin" },
+  }),
+
+  getAllOrders: async () => [],
+
+  getDriverStatusSummary: async () => [],
+
+  getZoneSummary: async () => [],
+
+  adminSetDriverActive: async () => ({ __kind__: "ok", ok: null }),
+
+  adminSetOrderStatus: async () => ({ __kind__: "ok", ok: null }),
+
+  setDriverZones: async () => ({ __kind__: "ok", ok: null }),
 };

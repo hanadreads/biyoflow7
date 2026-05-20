@@ -76,6 +76,7 @@ module {
     customer_phone  : Text,
     address_note    : Text,
     idempotency_key : Text,
+    customer_id     : ?Nat,
   ) : { #ok : { order_id : Nat; payment_ref : Text }; #err : Text } {
     // Idempotency: if a matching key already exists, return the existing order
     switch (orders.find(func(o) { o.idempotency_key == idempotency_key })) {
@@ -91,21 +92,24 @@ module {
     let payment_ref = "PAY-" # order_id.toText() # "-" # now.toText();
 
     orders.add({
-      id              = order_id;
-      zone_id         = zone_id;
-      driver_id       = null;
-      customer_phone  = customer_phone;
-      size            = size;
-      address_note    = address_note;
-      status          = #pending;
-      payment_status  = #pending;
-      payment_ref     = payment_ref;
-      idempotency_key = idempotency_key;
-      created_at      = now;
-      matched_at      = null;
-      completed_at    = null;
-      expired_at      = null;
-      help_flagged    = false;
+      id                 = order_id;
+      zone_id            = zone_id;
+      driver_id          = null;
+      customer_id        = customer_id;
+      customer_phone     = customer_phone;
+      size               = size;
+      address_note       = address_note;
+      status             = #pending;
+      payment_status     = #pending;
+      payment_ref        = payment_ref;
+      idempotency_key    = idempotency_key;
+      created_at         = now;
+      matched_at         = null;
+      completed_at       = null;
+      expired_at         = null;
+      help_flagged       = false;
+      driver_confirmed   = false;
+      customer_confirmed = false;
     });
     counters.nextOrderId += 1;
 
@@ -229,12 +233,13 @@ module {
     // Only match if the order is paid and still pending (not already matched)
     if (order.payment_status != #success or order.status != #pending) return;
 
-    // Find the first online driver in this zone with no active order
+    // Find the first online, active driver whose allowed_zone_ids includes this order's zone
     let driverIdx = drivers.findIndex(
       func(d) {
-        d.zone_id == order.zone_id and
-        d.status  == #online and
-        d.current_order_id == null
+        d.is_active and
+        d.status == #online and
+        d.current_order_id == null and
+        d.allowed_zone_ids.find<Nat>(func(z) { z == order.zone_id }) != null
       }
     );
 

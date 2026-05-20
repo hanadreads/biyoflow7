@@ -10,13 +10,23 @@ import type { ActorMethod } from '@icp-sdk/core/agent';
 import type { IDL } from '@icp-sdk/core/candid';
 import type { Principal } from '@icp-sdk/core/principal';
 
+export interface Customer {
+  'id' : bigint,
+  'pin' : string,
+  'name' : string,
+  'created_at' : bigint,
+  'email' : [] | [string],
+  'phone' : string,
+}
 export interface Driver {
   'id' : bigint,
   'pin' : string,
   'status' : DriverStatus,
+  'allowed_zone_ids' : Array<bigint>,
   'name' : string,
   'current_order_id' : [] | [bigint],
   'truck_plate' : string,
+  'is_active' : boolean,
   'phone' : string,
   'zone_id' : bigint,
 }
@@ -27,6 +37,14 @@ export interface DriverPrices {
 }
 export type DriverStatus = { 'offline' : null } |
   { 'online' : null };
+export interface DriverSummary {
+  'id' : bigint,
+  'status' : string,
+  'activeOrderId' : [] | [bigint],
+  'name' : string,
+  'zone' : string,
+  'phone' : string,
+}
 export interface Order {
   'id' : bigint,
   'status' : OrderStatus,
@@ -35,8 +53,11 @@ export interface Order {
   'size' : TankSize,
   'created_at' : bigint,
   'payment_status' : PaymentStatus,
+  'customer_id' : [] | [bigint],
   'address_note' : string,
+  'customer_confirmed' : boolean,
   'driver_id' : [] | [bigint],
+  'driver_confirmed' : boolean,
   'payment_ref' : string,
   'completed_at' : [] | [bigint],
   'matched_at' : [] | [bigint],
@@ -45,6 +66,7 @@ export interface Order {
   'idempotency_key' : string,
 }
 export type OrderStatus = { 'pumping' : null } |
+  { 'fully_completed' : null } |
   { 'cancelled' : null } |
   { 'expired' : null } |
   { 'pending' : null } |
@@ -53,12 +75,40 @@ export type OrderStatus = { 'pumping' : null } |
   { 'en_route' : null } |
   { 'matched' : null } |
   { 'accepted' : null };
+export interface OrderSummary {
+  'id' : bigint,
+  'status' : string,
+  'customerPhone' : string,
+  'createdAt' : bigint,
+  'size' : string,
+  'zone' : string,
+  'driverName' : [] | [string],
+}
 export type PaymentMode = { 'always_success' : null } |
   { 'always_fail' : null } |
   { 'random' : null };
+export interface PaymentResult { 'zNumber' : string, 'paymentRef' : string }
 export type PaymentStatus = { 'pending' : null } |
   { 'success' : null } |
   { 'failed' : null };
+export interface Shift {
+  'id' : bigint,
+  'status' : ShiftStatus,
+  'driverId' : bigint,
+  'feePaidAt' : [] | [bigint],
+  'period' : ShiftPeriod,
+  'activatedAt' : [] | [bigint],
+  'date' : string,
+  'zNumber' : [] | [string],
+  'paymentRef' : [] | [string],
+  'verifiedAt' : [] | [bigint],
+}
+export type ShiftPeriod = { 'morning' : null } |
+  { 'evening' : null };
+export type ShiftStatus = { 'active' : null } |
+  { 'expired' : null } |
+  { 'pending_payment' : null } |
+  { 'pending_verification' : null };
 export type TankSize = { 'large' : null } |
   { 'small' : null } |
   { 'medium' : null };
@@ -68,20 +118,53 @@ export interface Zone {
   'name' : string,
   'display_order' : bigint,
 }
+export interface ZoneSummary {
+  'pendingOrders' : bigint,
+  'onlineDrivers' : bigint,
+  'zoneName' : string,
+  'activeOrders' : bigint,
+}
 export interface _SERVICE {
   'acceptOrder' : ActorMethod<
     [bigint, bigint],
     { 'ok' : null } |
       { 'err' : string }
   >,
+  'adminLogin' : ActorMethod<
+    [string],
+    { 'ok' : { 'token' : string, 'role' : string } } |
+      { 'err' : string }
+  >,
+  'adminSetDriverActive' : ActorMethod<
+    [bigint, boolean],
+    { 'ok' : null } |
+      { 'err' : string }
+  >,
+  'adminSetOrderStatus' : ActorMethod<
+    [bigint, OrderStatus],
+    { 'ok' : null } |
+      { 'err' : string }
+  >,
+  'confirmDelivery' : ActorMethod<
+    [bigint, string],
+    { 'ok' : string } |
+      { 'err' : string }
+  >,
   'createOrder' : ActorMethod<
-    [bigint, TankSize, string, string, string],
+    [bigint, TankSize, string, string, string, [] | [bigint]],
     { 'ok' : { 'payment_ref' : string, 'order_id' : bigint } } |
       { 'err' : string }
   >,
   'driverLogin' : ActorMethod<
     [string, string],
     { 'ok' : { 'name' : string, 'driver_id' : bigint } } |
+      { 'err' : string }
+  >,
+  'getActiveShift' : ActorMethod<[bigint], [] | [Shift]>,
+  'getAllOrders' : ActorMethod<[], Array<OrderSummary>>,
+  'getCustomerProfile' : ActorMethod<
+    [bigint],
+    { 'ok' : Customer } |
       { 'err' : string }
   >,
   'getDriverEarnings' : ActorMethod<
@@ -93,17 +176,40 @@ export interface _SERVICE {
     [bigint],
     [] | [{ 'prices' : DriverPrices, 'driver' : Driver }]
   >,
+  'getDriverShifts' : ActorMethod<[bigint], Array<Shift>>,
+  'getDriverStatusSummary' : ActorMethod<[], Array<DriverSummary>>,
   'getIncomingOrders' : ActorMethod<[bigint], Array<Order>>,
   'getOrder' : ActorMethod<[bigint, string], [] | [Order]>,
+  'getZoneSummary' : ActorMethod<[], Array<ZoneSummary>>,
   'getZones' : ActorMethod<[], Array<Zone>>,
+  'loginCustomer' : ActorMethod<
+    [string, string],
+    { 'ok' : { 'name' : string, 'customerId' : bigint, 'phone' : string } } |
+      { 'err' : string }
+  >,
+  'payShiftFee' : ActorMethod<
+    [bigint],
+    { 'ok' : PaymentResult } |
+      { 'err' : string }
+  >,
   'processPayment' : ActorMethod<
     [bigint, string],
     { 'ok' : { 'status' : PaymentStatus, 'payment_ref' : string } } |
       { 'err' : string }
   >,
+  'registerCustomer' : ActorMethod<
+    [string, string, string, [] | [string]],
+    { 'ok' : Customer } |
+      { 'err' : string }
+  >,
   'rejectOrder' : ActorMethod<
     [bigint, bigint],
     { 'ok' : null } |
+      { 'err' : string }
+  >,
+  'requestShift' : ActorMethod<
+    [bigint, ShiftPeriod, string],
+    { 'ok' : Shift } |
       { 'err' : string }
   >,
   'resetDemo' : ActorMethod<[], { 'ok' : null }>,
@@ -122,7 +228,17 @@ export interface _SERVICE {
     { 'ok' : null } |
       { 'err' : string }
   >,
+  'setDriverZones' : ActorMethod<
+    [bigint, Array<bigint>],
+    { 'ok' : null } |
+      { 'err' : string }
+  >,
   'setPaymentMode' : ActorMethod<[PaymentMode], { 'ok' : null }>,
+  'submitZNumber' : ActorMethod<
+    [bigint, string],
+    { 'ok' : Shift } |
+      { 'err' : string }
+  >,
   'updateOrderStatus' : ActorMethod<
     [bigint, bigint, OrderStatus],
     { 'ok' : null } |

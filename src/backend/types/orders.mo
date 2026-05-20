@@ -4,35 +4,39 @@ module {
 
   // Strict lifecycle — only forward transitions are valid during a delivery
   public type OrderStatus = {
-    #pending;   // created, awaiting driver match
-    #matched;   // driver assigned, awaiting acceptance
-    #accepted;  // driver accepted, will go en-route soon
-    #en_route;  // driver is driving to the customer
-    #pumping;   // water is being pumped
-    #completed; // delivery finished
-    #expired;   // no driver found within timeout
-    #cancelled; // cancelled before match
-    #exception; // driver went offline mid-delivery — needs follow-up
+    #pending;          // created, awaiting driver match
+    #matched;          // driver assigned, awaiting acceptance
+    #accepted;         // driver accepted, will go en-route soon
+    #en_route;         // driver is driving to the customer
+    #pumping;          // water is being pumped
+    #completed;        // delivery finished
+    #fully_completed;  // both driver AND customer confirmed delivery
+    #expired;          // no driver found within timeout
+    #cancelled;        // cancelled before match
+    #exception;        // driver went offline mid-delivery — needs follow-up
   };
 
   public type PaymentStatus = { #pending; #success; #failed };
 
   public type Order = {
-    id              : Nat;
-    zone_id         : Nat;
-    driver_id       : ?Nat;
-    customer_phone  : Text;
-    size            : TankSize;
-    address_note    : Text;    // max 120 chars
-    status          : OrderStatus;
-    payment_status  : PaymentStatus;
-    payment_ref     : Text;
-    idempotency_key : Text;    // prevents duplicate order creation
-    created_at      : Int;     // nanoseconds
-    matched_at      : ?Int;
-    completed_at    : ?Int;
-    expired_at      : ?Int;
-    help_flagged    : Bool;    // set true when exception state is entered
+    id                : Nat;
+    zone_id           : Nat;
+    driver_id         : ?Nat;
+    customer_id       : ?Nat;  // optional link to a registered RC account
+    customer_phone    : Text;
+    size              : TankSize;
+    address_note      : Text;    // max 120 chars
+    status            : OrderStatus;
+    payment_status    : PaymentStatus;
+    payment_ref       : Text;
+    idempotency_key   : Text;    // prevents duplicate order creation
+    created_at        : Int;     // nanoseconds
+    matched_at        : ?Int;
+    completed_at      : ?Int;
+    expired_at        : ?Int;
+    help_flagged      : Bool;    // set true when exception state is entered
+    driver_confirmed  : Bool;    // driver tapped "Delivered"
+    customer_confirmed: Bool;    // customer tapped "Water Received"
   };
 
   public type OrderStatusEntry = {

@@ -8,13 +8,9 @@
 
 import { IDL } from '@icp-sdk/core/candid';
 
-export const TankSize = IDL.Variant({
-  'large' : IDL.Null,
-  'small' : IDL.Null,
-  'medium' : IDL.Null,
-});
 export const OrderStatus = IDL.Variant({
   'pumping' : IDL.Null,
+  'fully_completed' : IDL.Null,
   'cancelled' : IDL.Null,
   'expired' : IDL.Null,
   'pending' : IDL.Null,
@@ -23,6 +19,50 @@ export const OrderStatus = IDL.Variant({
   'en_route' : IDL.Null,
   'matched' : IDL.Null,
   'accepted' : IDL.Null,
+});
+export const TankSize = IDL.Variant({
+  'large' : IDL.Null,
+  'small' : IDL.Null,
+  'medium' : IDL.Null,
+});
+export const ShiftStatus = IDL.Variant({
+  'active' : IDL.Null,
+  'expired' : IDL.Null,
+  'pending_payment' : IDL.Null,
+  'pending_verification' : IDL.Null,
+});
+export const ShiftPeriod = IDL.Variant({
+  'morning' : IDL.Null,
+  'evening' : IDL.Null,
+});
+export const Shift = IDL.Record({
+  'id' : IDL.Nat,
+  'status' : ShiftStatus,
+  'driverId' : IDL.Nat,
+  'feePaidAt' : IDL.Opt(IDL.Int),
+  'period' : ShiftPeriod,
+  'activatedAt' : IDL.Opt(IDL.Int),
+  'date' : IDL.Text,
+  'zNumber' : IDL.Opt(IDL.Text),
+  'paymentRef' : IDL.Opt(IDL.Text),
+  'verifiedAt' : IDL.Opt(IDL.Int),
+});
+export const OrderSummary = IDL.Record({
+  'id' : IDL.Nat,
+  'status' : IDL.Text,
+  'customerPhone' : IDL.Text,
+  'createdAt' : IDL.Int,
+  'size' : IDL.Text,
+  'zone' : IDL.Text,
+  'driverName' : IDL.Opt(IDL.Text),
+});
+export const Customer = IDL.Record({
+  'id' : IDL.Nat,
+  'pin' : IDL.Text,
+  'name' : IDL.Text,
+  'created_at' : IDL.Int,
+  'email' : IDL.Opt(IDL.Text),
+  'phone' : IDL.Text,
 });
 export const PaymentStatus = IDL.Variant({
   'pending' : IDL.Null,
@@ -37,8 +77,11 @@ export const Order = IDL.Record({
   'size' : TankSize,
   'created_at' : IDL.Int,
   'payment_status' : PaymentStatus,
+  'customer_id' : IDL.Opt(IDL.Nat),
   'address_note' : IDL.Text,
+  'customer_confirmed' : IDL.Bool,
   'driver_id' : IDL.Opt(IDL.Nat),
+  'driver_confirmed' : IDL.Bool,
   'payment_ref' : IDL.Text,
   'completed_at' : IDL.Opt(IDL.Int),
   'matched_at' : IDL.Opt(IDL.Int),
@@ -59,17 +102,37 @@ export const Driver = IDL.Record({
   'id' : IDL.Nat,
   'pin' : IDL.Text,
   'status' : DriverStatus,
+  'allowed_zone_ids' : IDL.Vec(IDL.Nat),
   'name' : IDL.Text,
   'current_order_id' : IDL.Opt(IDL.Nat),
   'truck_plate' : IDL.Text,
+  'is_active' : IDL.Bool,
   'phone' : IDL.Text,
   'zone_id' : IDL.Nat,
+});
+export const DriverSummary = IDL.Record({
+  'id' : IDL.Nat,
+  'status' : IDL.Text,
+  'activeOrderId' : IDL.Opt(IDL.Nat),
+  'name' : IDL.Text,
+  'zone' : IDL.Text,
+  'phone' : IDL.Text,
+});
+export const ZoneSummary = IDL.Record({
+  'pendingOrders' : IDL.Nat,
+  'onlineDrivers' : IDL.Nat,
+  'zoneName' : IDL.Text,
+  'activeOrders' : IDL.Nat,
 });
 export const Zone = IDL.Record({
   'id' : IDL.Nat,
   'city' : IDL.Text,
   'name' : IDL.Text,
   'display_order' : IDL.Nat,
+});
+export const PaymentResult = IDL.Record({
+  'zNumber' : IDL.Text,
+  'paymentRef' : IDL.Text,
 });
 export const PaymentMode = IDL.Variant({
   'always_success' : IDL.Null,
@@ -83,8 +146,33 @@ export const idlService = IDL.Service({
       [IDL.Variant({ 'ok' : IDL.Null, 'err' : IDL.Text })],
       [],
     ),
+  'adminLogin' : IDL.Func(
+      [IDL.Text],
+      [
+        IDL.Variant({
+          'ok' : IDL.Record({ 'token' : IDL.Text, 'role' : IDL.Text }),
+          'err' : IDL.Text,
+        }),
+      ],
+      [],
+    ),
+  'adminSetDriverActive' : IDL.Func(
+      [IDL.Nat, IDL.Bool],
+      [IDL.Variant({ 'ok' : IDL.Null, 'err' : IDL.Text })],
+      [],
+    ),
+  'adminSetOrderStatus' : IDL.Func(
+      [IDL.Nat, OrderStatus],
+      [IDL.Variant({ 'ok' : IDL.Null, 'err' : IDL.Text })],
+      [],
+    ),
+  'confirmDelivery' : IDL.Func(
+      [IDL.Nat, IDL.Text],
+      [IDL.Variant({ 'ok' : IDL.Text, 'err' : IDL.Text })],
+      [],
+    ),
   'createOrder' : IDL.Func(
-      [IDL.Nat, TankSize, IDL.Text, IDL.Text, IDL.Text],
+      [IDL.Nat, TankSize, IDL.Text, IDL.Text, IDL.Text, IDL.Opt(IDL.Nat)],
       [
         IDL.Variant({
           'ok' : IDL.Record({ 'payment_ref' : IDL.Text, 'order_id' : IDL.Nat }),
@@ -101,6 +189,13 @@ export const idlService = IDL.Service({
           'err' : IDL.Text,
         }),
       ],
+      [],
+    ),
+  'getActiveShift' : IDL.Func([IDL.Nat], [IDL.Opt(Shift)], ['query']),
+  'getAllOrders' : IDL.Func([], [IDL.Vec(OrderSummary)], ['query']),
+  'getCustomerProfile' : IDL.Func(
+      [IDL.Nat],
+      [IDL.Variant({ 'ok' : Customer, 'err' : IDL.Text })],
       [],
     ),
   'getDriverEarnings' : IDL.Func(
@@ -120,9 +215,31 @@ export const idlService = IDL.Service({
       [IDL.Opt(IDL.Record({ 'prices' : DriverPrices, 'driver' : Driver }))],
       ['query'],
     ),
+  'getDriverShifts' : IDL.Func([IDL.Nat], [IDL.Vec(Shift)], ['query']),
+  'getDriverStatusSummary' : IDL.Func([], [IDL.Vec(DriverSummary)], ['query']),
   'getIncomingOrders' : IDL.Func([IDL.Nat], [IDL.Vec(Order)], []),
   'getOrder' : IDL.Func([IDL.Nat, IDL.Text], [IDL.Opt(Order)], ['query']),
+  'getZoneSummary' : IDL.Func([], [IDL.Vec(ZoneSummary)], ['query']),
   'getZones' : IDL.Func([], [IDL.Vec(Zone)], ['query']),
+  'loginCustomer' : IDL.Func(
+      [IDL.Text, IDL.Text],
+      [
+        IDL.Variant({
+          'ok' : IDL.Record({
+            'name' : IDL.Text,
+            'customerId' : IDL.Nat,
+            'phone' : IDL.Text,
+          }),
+          'err' : IDL.Text,
+        }),
+      ],
+      [],
+    ),
+  'payShiftFee' : IDL.Func(
+      [IDL.Nat],
+      [IDL.Variant({ 'ok' : PaymentResult, 'err' : IDL.Text })],
+      [],
+    ),
   'processPayment' : IDL.Func(
       [IDL.Nat, IDL.Text],
       [
@@ -136,9 +253,19 @@ export const idlService = IDL.Service({
       ],
       [],
     ),
+  'registerCustomer' : IDL.Func(
+      [IDL.Text, IDL.Text, IDL.Text, IDL.Opt(IDL.Text)],
+      [IDL.Variant({ 'ok' : Customer, 'err' : IDL.Text })],
+      [],
+    ),
   'rejectOrder' : IDL.Func(
       [IDL.Nat, IDL.Nat],
       [IDL.Variant({ 'ok' : IDL.Null, 'err' : IDL.Text })],
+      [],
+    ),
+  'requestShift' : IDL.Func(
+      [IDL.Nat, ShiftPeriod, IDL.Text],
+      [IDL.Variant({ 'ok' : Shift, 'err' : IDL.Text })],
       [],
     ),
   'resetDemo' : IDL.Func([], [IDL.Variant({ 'ok' : IDL.Null })], []),
@@ -157,9 +284,19 @@ export const idlService = IDL.Service({
       [IDL.Variant({ 'ok' : IDL.Null, 'err' : IDL.Text })],
       [],
     ),
+  'setDriverZones' : IDL.Func(
+      [IDL.Nat, IDL.Vec(IDL.Nat)],
+      [IDL.Variant({ 'ok' : IDL.Null, 'err' : IDL.Text })],
+      [],
+    ),
   'setPaymentMode' : IDL.Func(
       [PaymentMode],
       [IDL.Variant({ 'ok' : IDL.Null })],
+      [],
+    ),
+  'submitZNumber' : IDL.Func(
+      [IDL.Nat, IDL.Text],
+      [IDL.Variant({ 'ok' : Shift, 'err' : IDL.Text })],
       [],
     ),
   'updateOrderStatus' : IDL.Func(
@@ -172,13 +309,9 @@ export const idlService = IDL.Service({
 export const idlInitArgs = [];
 
 export const idlFactory = ({ IDL }) => {
-  const TankSize = IDL.Variant({
-    'large' : IDL.Null,
-    'small' : IDL.Null,
-    'medium' : IDL.Null,
-  });
   const OrderStatus = IDL.Variant({
     'pumping' : IDL.Null,
+    'fully_completed' : IDL.Null,
     'cancelled' : IDL.Null,
     'expired' : IDL.Null,
     'pending' : IDL.Null,
@@ -187,6 +320,50 @@ export const idlFactory = ({ IDL }) => {
     'en_route' : IDL.Null,
     'matched' : IDL.Null,
     'accepted' : IDL.Null,
+  });
+  const TankSize = IDL.Variant({
+    'large' : IDL.Null,
+    'small' : IDL.Null,
+    'medium' : IDL.Null,
+  });
+  const ShiftStatus = IDL.Variant({
+    'active' : IDL.Null,
+    'expired' : IDL.Null,
+    'pending_payment' : IDL.Null,
+    'pending_verification' : IDL.Null,
+  });
+  const ShiftPeriod = IDL.Variant({
+    'morning' : IDL.Null,
+    'evening' : IDL.Null,
+  });
+  const Shift = IDL.Record({
+    'id' : IDL.Nat,
+    'status' : ShiftStatus,
+    'driverId' : IDL.Nat,
+    'feePaidAt' : IDL.Opt(IDL.Int),
+    'period' : ShiftPeriod,
+    'activatedAt' : IDL.Opt(IDL.Int),
+    'date' : IDL.Text,
+    'zNumber' : IDL.Opt(IDL.Text),
+    'paymentRef' : IDL.Opt(IDL.Text),
+    'verifiedAt' : IDL.Opt(IDL.Int),
+  });
+  const OrderSummary = IDL.Record({
+    'id' : IDL.Nat,
+    'status' : IDL.Text,
+    'customerPhone' : IDL.Text,
+    'createdAt' : IDL.Int,
+    'size' : IDL.Text,
+    'zone' : IDL.Text,
+    'driverName' : IDL.Opt(IDL.Text),
+  });
+  const Customer = IDL.Record({
+    'id' : IDL.Nat,
+    'pin' : IDL.Text,
+    'name' : IDL.Text,
+    'created_at' : IDL.Int,
+    'email' : IDL.Opt(IDL.Text),
+    'phone' : IDL.Text,
   });
   const PaymentStatus = IDL.Variant({
     'pending' : IDL.Null,
@@ -201,8 +378,11 @@ export const idlFactory = ({ IDL }) => {
     'size' : TankSize,
     'created_at' : IDL.Int,
     'payment_status' : PaymentStatus,
+    'customer_id' : IDL.Opt(IDL.Nat),
     'address_note' : IDL.Text,
+    'customer_confirmed' : IDL.Bool,
     'driver_id' : IDL.Opt(IDL.Nat),
+    'driver_confirmed' : IDL.Bool,
     'payment_ref' : IDL.Text,
     'completed_at' : IDL.Opt(IDL.Int),
     'matched_at' : IDL.Opt(IDL.Int),
@@ -223,17 +403,37 @@ export const idlFactory = ({ IDL }) => {
     'id' : IDL.Nat,
     'pin' : IDL.Text,
     'status' : DriverStatus,
+    'allowed_zone_ids' : IDL.Vec(IDL.Nat),
     'name' : IDL.Text,
     'current_order_id' : IDL.Opt(IDL.Nat),
     'truck_plate' : IDL.Text,
+    'is_active' : IDL.Bool,
     'phone' : IDL.Text,
     'zone_id' : IDL.Nat,
+  });
+  const DriverSummary = IDL.Record({
+    'id' : IDL.Nat,
+    'status' : IDL.Text,
+    'activeOrderId' : IDL.Opt(IDL.Nat),
+    'name' : IDL.Text,
+    'zone' : IDL.Text,
+    'phone' : IDL.Text,
+  });
+  const ZoneSummary = IDL.Record({
+    'pendingOrders' : IDL.Nat,
+    'onlineDrivers' : IDL.Nat,
+    'zoneName' : IDL.Text,
+    'activeOrders' : IDL.Nat,
   });
   const Zone = IDL.Record({
     'id' : IDL.Nat,
     'city' : IDL.Text,
     'name' : IDL.Text,
     'display_order' : IDL.Nat,
+  });
+  const PaymentResult = IDL.Record({
+    'zNumber' : IDL.Text,
+    'paymentRef' : IDL.Text,
   });
   const PaymentMode = IDL.Variant({
     'always_success' : IDL.Null,
@@ -247,8 +447,33 @@ export const idlFactory = ({ IDL }) => {
         [IDL.Variant({ 'ok' : IDL.Null, 'err' : IDL.Text })],
         [],
       ),
+    'adminLogin' : IDL.Func(
+        [IDL.Text],
+        [
+          IDL.Variant({
+            'ok' : IDL.Record({ 'token' : IDL.Text, 'role' : IDL.Text }),
+            'err' : IDL.Text,
+          }),
+        ],
+        [],
+      ),
+    'adminSetDriverActive' : IDL.Func(
+        [IDL.Nat, IDL.Bool],
+        [IDL.Variant({ 'ok' : IDL.Null, 'err' : IDL.Text })],
+        [],
+      ),
+    'adminSetOrderStatus' : IDL.Func(
+        [IDL.Nat, OrderStatus],
+        [IDL.Variant({ 'ok' : IDL.Null, 'err' : IDL.Text })],
+        [],
+      ),
+    'confirmDelivery' : IDL.Func(
+        [IDL.Nat, IDL.Text],
+        [IDL.Variant({ 'ok' : IDL.Text, 'err' : IDL.Text })],
+        [],
+      ),
     'createOrder' : IDL.Func(
-        [IDL.Nat, TankSize, IDL.Text, IDL.Text, IDL.Text],
+        [IDL.Nat, TankSize, IDL.Text, IDL.Text, IDL.Text, IDL.Opt(IDL.Nat)],
         [
           IDL.Variant({
             'ok' : IDL.Record({
@@ -270,6 +495,13 @@ export const idlFactory = ({ IDL }) => {
         ],
         [],
       ),
+    'getActiveShift' : IDL.Func([IDL.Nat], [IDL.Opt(Shift)], ['query']),
+    'getAllOrders' : IDL.Func([], [IDL.Vec(OrderSummary)], ['query']),
+    'getCustomerProfile' : IDL.Func(
+        [IDL.Nat],
+        [IDL.Variant({ 'ok' : Customer, 'err' : IDL.Text })],
+        [],
+      ),
     'getDriverEarnings' : IDL.Func(
         [IDL.Nat, IDL.Opt(IDL.Int), IDL.Opt(IDL.Int)],
         [
@@ -287,9 +519,35 @@ export const idlFactory = ({ IDL }) => {
         [IDL.Opt(IDL.Record({ 'prices' : DriverPrices, 'driver' : Driver }))],
         ['query'],
       ),
+    'getDriverShifts' : IDL.Func([IDL.Nat], [IDL.Vec(Shift)], ['query']),
+    'getDriverStatusSummary' : IDL.Func(
+        [],
+        [IDL.Vec(DriverSummary)],
+        ['query'],
+      ),
     'getIncomingOrders' : IDL.Func([IDL.Nat], [IDL.Vec(Order)], []),
     'getOrder' : IDL.Func([IDL.Nat, IDL.Text], [IDL.Opt(Order)], ['query']),
+    'getZoneSummary' : IDL.Func([], [IDL.Vec(ZoneSummary)], ['query']),
     'getZones' : IDL.Func([], [IDL.Vec(Zone)], ['query']),
+    'loginCustomer' : IDL.Func(
+        [IDL.Text, IDL.Text],
+        [
+          IDL.Variant({
+            'ok' : IDL.Record({
+              'name' : IDL.Text,
+              'customerId' : IDL.Nat,
+              'phone' : IDL.Text,
+            }),
+            'err' : IDL.Text,
+          }),
+        ],
+        [],
+      ),
+    'payShiftFee' : IDL.Func(
+        [IDL.Nat],
+        [IDL.Variant({ 'ok' : PaymentResult, 'err' : IDL.Text })],
+        [],
+      ),
     'processPayment' : IDL.Func(
         [IDL.Nat, IDL.Text],
         [
@@ -303,9 +561,19 @@ export const idlFactory = ({ IDL }) => {
         ],
         [],
       ),
+    'registerCustomer' : IDL.Func(
+        [IDL.Text, IDL.Text, IDL.Text, IDL.Opt(IDL.Text)],
+        [IDL.Variant({ 'ok' : Customer, 'err' : IDL.Text })],
+        [],
+      ),
     'rejectOrder' : IDL.Func(
         [IDL.Nat, IDL.Nat],
         [IDL.Variant({ 'ok' : IDL.Null, 'err' : IDL.Text })],
+        [],
+      ),
+    'requestShift' : IDL.Func(
+        [IDL.Nat, ShiftPeriod, IDL.Text],
+        [IDL.Variant({ 'ok' : Shift, 'err' : IDL.Text })],
         [],
       ),
     'resetDemo' : IDL.Func([], [IDL.Variant({ 'ok' : IDL.Null })], []),
@@ -324,9 +592,19 @@ export const idlFactory = ({ IDL }) => {
         [IDL.Variant({ 'ok' : IDL.Null, 'err' : IDL.Text })],
         [],
       ),
+    'setDriverZones' : IDL.Func(
+        [IDL.Nat, IDL.Vec(IDL.Nat)],
+        [IDL.Variant({ 'ok' : IDL.Null, 'err' : IDL.Text })],
+        [],
+      ),
     'setPaymentMode' : IDL.Func(
         [PaymentMode],
         [IDL.Variant({ 'ok' : IDL.Null })],
+        [],
+      ),
+    'submitZNumber' : IDL.Func(
+        [IDL.Nat, IDL.Text],
+        [IDL.Variant({ 'ok' : Shift, 'err' : IDL.Text })],
         [],
       ),
     'updateOrderStatus' : IDL.Func(

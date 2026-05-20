@@ -14,16 +14,17 @@ import { useLang } from "@/i18n/index";
 import type { Order, Zone } from "@/types/backend";
 import { OrderStatus, TankSize } from "@/types/backend";
 import { useActor } from "@caffeineai/core-infrastructure";
-// CustomerPage: 7-step USSD-style customer ordering flow.
+import { Link, useNavigate } from "@tanstack/react-router";
+// CustomerPage: 7-step button-driven customer ordering flow.
 // Steps: zone → size → phone → note → payment → finding → tracking
 // Plus: manual order lookup collapsible section at the bottom.
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 // ── Constants ────────────────────────────────────────────────────────────────
 const ZONE_LAST_KEY = "biyo_last_zone";
 const TOTAL_STEPS = 7;
 
-const SIZE_OPTIONS: {
+const _SIZE_OPTIONS: {
   value: TankSize;
   labelKey: "size_small" | "size_medium" | "size_large";
 }[] = [
@@ -53,26 +54,6 @@ function fmtElapsed(seconds: number): string {
 /** Shared input style */
 const inputCls =
   "w-full bg-background border border-input rounded-lg px-4 py-3 text-foreground text-lg font-mono focus:outline-none focus:ring-2 focus:ring-ring";
-
-/** Numeric USSD-style item row */
-function OptionRow({
-  num,
-  label,
-  selected,
-}: { num: number; label: string; selected: boolean }) {
-  return (
-    <div
-      className={`flex items-center gap-3 px-4 py-3 rounded-lg border transition-colors duration-150 ${
-        selected
-          ? "border-primary bg-primary/10 text-primary"
-          : "border-border bg-background text-foreground"
-      }`}
-    >
-      <span className="font-mono font-bold text-lg w-6 shrink-0">{num}.</span>
-      <span className="text-base">{label}</span>
-    </div>
-  );
-}
 
 /** Container card for each step */
 function StepCard({ children }: { children: React.ReactNode }) {
@@ -127,21 +108,42 @@ function PrimaryBtn({
 export default function CustomerPage() {
   const { t } = useLang();
   const { actor } = useActor(createActor);
+  const navigate = useNavigate();
+
+  // ── Auth guard ───────────────────────────────────────────────────────────
+  const rcSession = useMemo(() => {
+    try {
+      return JSON.parse(localStorage.getItem("rc_session") || "");
+    } catch {
+      return null;
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!rcSession) {
+      void navigate({ to: "/auth" });
+    }
+  }, [rcSession, navigate]);
+
+  // -- Step state --
+  const [step, setStep] = useState(1);
+
+  // Pre-populate phone from RC session when entering step 3
+  useEffect(() => {
+    if (step === 3) {
+      setPhone(rcSession?.phone ?? "");
+    }
+  }, [step, rcSession]);
 
   // -- Zone data --
   const zonesQuery = useZones();
   const zones: Zone[] = zonesQuery.data ?? [];
 
-  // -- Step state --
-  const [step, setStep] = useState(1);
-
   // -- Step 1: zone --
-  const [zoneInput, setZoneInput] = useState("");
   const [zoneError, setZoneError] = useState("");
   const [selectedZone, setSelectedZone] = useState<Zone | null>(null);
 
   // -- Step 2: size --
-  const [sizeInput, setSizeInput] = useState("");
   const [sizeError, setSizeError] = useState("");
   const [selectedSize, setSelectedSize] = useState<TankSize | null>(null);
 
@@ -244,30 +246,6 @@ export default function CustomerPage() {
 
   // ── Handlers ──────────────────────────────────────────────────────────────
 
-  function handleZoneSubmit() {
-    const num = Number.parseInt(zoneInput, 10);
-    if (Number.isNaN(num) || num < 1 || num > zones.length) {
-      setZoneError(t("zone_invalid", { max: zones.length }));
-      return;
-    }
-    const zone = zones[num - 1];
-    setSelectedZone(zone);
-    localStorage.setItem(ZONE_LAST_KEY, String(zone.id));
-    setZoneError("");
-    setStep(2);
-  }
-
-  function handleSizeSubmit() {
-    const num = Number.parseInt(sizeInput, 10);
-    if (num < 1 || num > 3) {
-      setSizeError(t("size_invalid"));
-      return;
-    }
-    setSelectedSize(SIZE_OPTIONS[num - 1].value);
-    setSizeError("");
-    setStep(3);
-  }
-
   function handlePhoneSubmit() {
     if (phone.trim().length < 6) {
       setPhoneError(t("phone_invalid"));
@@ -294,6 +272,7 @@ export default function CustomerPage() {
         customer_phone: phone.trim(),
         address_note: note.trim(),
         idempotency_key: idempotencyKey.current,
+        customer_id: rcSession ? BigInt(rcSession.customerId) : null,
       });
       const orderId = createRes.order_id;
 
@@ -361,15 +340,27 @@ export default function CustomerPage() {
         {zonesQuery.isError && (
           <p className="text-sm text-destructive">{t("zone_error")}</p>
         )}
-        {/* Zone list */}
-        <div className="space-y-2">
-          {zones.map((z, i) => (
-            <OptionRow
-              key={String(z.id)}
-              num={i + 1}
-              label={z.name}
-              selected={selectedZone?.id === z.id}
-            />
+        {/* Zone button grid */}
+        <div className="grid grid-cols-2 gap-3">
+          {zones.map((zone) => (
+            <button
+              key={String(zone.id)}
+              type="button"
+              data-ocid={`customer.zone_button.${zone.name.toLowerCase().replace(/\s+/g, "_")}`}
+              onClick={() => {
+                setSelectedZone(zone);
+                localStorage.setItem(ZONE_LAST_KEY, String(zone.id));
+                setZoneError("");
+                setStep(2);
+              }}
+              className={`p-3 rounded-xl border-2 text-left font-medium transition-all ${
+                selectedZone?.id === zone.id
+                  ? "border-primary bg-primary/10 text-primary"
+                  : "border-border hover:border-primary/50"
+              }`}
+            >
+              {zone.name}
+            </button>
           ))}
         </div>
         {selectedZone && (
@@ -377,23 +368,6 @@ export default function CustomerPage() {
             {t("zone_remembered", { name: selectedZone.name })}
           </p>
         )}
-        <p className="text-sm text-muted-foreground">{t("zone_hint")}</p>
-        <input
-          data-ocid="customer.zone_input"
-          type="number"
-          inputMode="numeric"
-          min={1}
-          max={zones.length}
-          className={inputCls}
-          placeholder={`1–${zones.length}`}
-          value={zoneInput}
-          onChange={(e) => {
-            setZoneInput(e.target.value);
-            setZoneError("");
-          }}
-          onKeyDown={(e) => e.key === "Enter" && handleZoneSubmit()}
-          aria-label={t("zone_hint")}
-        />
         {zoneError && (
           <p
             data-ocid="customer.zone_error"
@@ -402,50 +376,61 @@ export default function CustomerPage() {
             {zoneError}
           </p>
         )}
-        <PrimaryBtn
-          dataOcid="customer.zone_next_button"
-          onClick={handleZoneSubmit}
-          disabled={zonesQuery.isLoading || zones.length === 0}
-        >
-          {t("btn_next")}
-        </PrimaryBtn>
       </StepCard>
     );
   }
 
   function renderStep2() {
+    const sizeCards = [
+      {
+        value: TankSize.small,
+        label: t("size_small"),
+        liters: "1,000L",
+        icon: "🪣",
+      },
+      {
+        value: TankSize.medium,
+        label: t("size_medium"),
+        liters: "2,000L",
+        icon: "🛢️",
+      },
+      {
+        value: TankSize.large,
+        label: t("size_large"),
+        liters: "5,000L",
+        icon: "🚛",
+      },
+    ];
     return (
       <StepCard>
         <h2 className="font-display font-bold text-xl text-foreground">
           {t("size_title")}
         </h2>
-        <div className="space-y-2">
-          {SIZE_OPTIONS.map((opt, i) => (
-            <OptionRow
-              key={opt.value}
-              num={i + 1}
-              label={t(opt.labelKey)}
-              selected={selectedSize === opt.value}
-            />
+        <div className="space-y-3">
+          {sizeCards.map((size) => (
+            <button
+              key={size.value}
+              type="button"
+              data-ocid={`customer.size_button.${size.value}`}
+              onClick={() => {
+                setSelectedSize(size.value);
+                setSizeError("");
+                setStep(3);
+              }}
+              className={`w-full p-4 rounded-xl border-2 text-left flex items-center gap-4 transition-all ${
+                selectedSize === size.value
+                  ? "border-primary bg-primary/10"
+                  : "border-border hover:border-primary/50"
+              }`}
+            >
+              <span className="text-3xl">{size.icon}</span>
+              <div>
+                <p className="font-semibold text-foreground">{size.label}</p>
+                <p className="text-sm text-muted-foreground">{size.liters}</p>
+              </div>
+            </button>
           ))}
         </div>
-        <p className="text-sm text-muted-foreground">{t("size_hint")}</p>
-        <input
-          data-ocid="customer.size_input"
-          type="number"
-          inputMode="numeric"
-          min={1}
-          max={3}
-          className={inputCls}
-          placeholder="1–3"
-          value={sizeInput}
-          onChange={(e) => {
-            setSizeInput(e.target.value);
-            setSizeError("");
-          }}
-          onKeyDown={(e) => e.key === "Enter" && handleSizeSubmit()}
-          aria-label={t("size_hint")}
-        />
         {sizeError && (
           <p
             data-ocid="customer.size_error"
@@ -454,12 +439,6 @@ export default function CustomerPage() {
             {sizeError}
           </p>
         )}
-        <PrimaryBtn
-          dataOcid="customer.size_next_button"
-          onClick={handleSizeSubmit}
-        >
-          {t("btn_next")}
-        </PrimaryBtn>
         <BackBtn onClick={() => setStep(1)} label={t("btn_back")} />
       </StepCard>
     );
@@ -498,6 +477,10 @@ export default function CustomerPage() {
             {phoneError}
           </p>
         )}
+        <p className="text-xs text-muted-foreground mt-1">
+          Changes apply to this order only. We strongly encourage using your
+          registration number (the number you signed up with).
+        </p>
         <PrimaryBtn
           dataOcid="customer.phone_next_button"
           onClick={handlePhoneSubmit}
@@ -696,6 +679,7 @@ export default function CustomerPage() {
 
     const isCompleted = order.status === OrderStatus.completed;
     const isException = order.status === OrderStatus.exception;
+    const phone4 = localOrder?.phone.slice(-4) ?? "";
 
     // Timeline steps for tracking
     const timelineSteps: { status: OrderStatus; label: string }[] = [
@@ -716,6 +700,17 @@ export default function CustomerPage() {
 
     return (
       <StepCard>
+        {/* Check available trucks link */}
+        <div className="flex items-center justify-between mb-1">
+          <Link
+            data-ocid="customer.availability_link"
+            to="/availability"
+            className="text-xs text-primary hover:underline transition-colors flex items-center gap-1"
+          >
+            🚛 {t("availability_title")}
+          </Link>
+        </div>
+
         <div className="flex items-center justify-between">
           <h2 className="font-display font-bold text-xl text-foreground">
             {t("tracking_title")}
@@ -727,7 +722,33 @@ export default function CustomerPage() {
           {t("tracking_order_id", { id: String(order.id) })}
         </p>
 
-        {isCompleted && (
+        {isCompleted && !order.customer_confirmed && (
+          <div
+            data-ocid="customer.tracking_complete"
+            className="bg-primary/10 border border-primary/30 rounded-lg p-4 space-y-3"
+          >
+            <div className="text-center">
+              <p className="text-2xl mb-1">🚛</p>
+              <p className="font-semibold text-primary text-sm">
+                The driver has confirmed delivery. Have you received your water?
+              </p>
+            </div>
+            <Link
+              data-ocid="customer.confirm_receipt_button"
+              to="/confirm"
+              search={{
+                orderId: String(order.id),
+                role: "customer",
+                phone: phone4,
+              }}
+              className="block w-full text-center bg-primary text-primary-foreground font-bold py-3 rounded-xl text-sm transition-smooth active:scale-95"
+            >
+              {t("confirm_customerBtn")}
+            </Link>
+          </div>
+        )}
+
+        {isCompleted && order.customer_confirmed && (
           <div
             data-ocid="customer.tracking_complete"
             className="bg-primary/10 border border-primary/30 rounded-lg p-4 text-center"
@@ -929,9 +950,42 @@ export default function CustomerPage() {
   return (
     <Layout>
       <div className="max-w-[480px] mx-auto px-4 py-6 space-y-4">
+        {/* Session header — greeting + logout */}
+        {rcSession && (
+          <div className="flex items-center justify-between bg-card border border-border rounded-xl px-4 py-3">
+            <span className="text-sm font-medium text-foreground">
+              👋 {t("auth_hello", { name: rcSession.name ?? "Guest" })}
+            </span>
+            <button
+              type="button"
+              data-ocid="customer.logout_button"
+              onClick={() => {
+                localStorage.removeItem("rc_session");
+                void navigate({ to: "/auth" });
+              }}
+              className="text-xs text-muted-foreground hover:text-destructive transition-colors"
+            >
+              {t("auth_logout")}
+            </button>
+          </div>
+        )}
+
         {/* Step indicator — show for steps 1–7 */}
         {step <= 7 && (
           <StepIndicator current={currentStep} total={TOTAL_STEPS} />
+        )}
+
+        {/* See Available Trucks — visible on step 1 */}
+        {step === 1 && (
+          <div className="flex justify-end">
+            <Link
+              to="/availability"
+              data-ocid="customer.see_trucks_link"
+              className="inline-flex items-center gap-1.5 text-xs font-medium text-primary bg-primary/8 border border-primary/20 px-3 py-1.5 rounded-full hover:bg-primary/15 transition-colors"
+            >
+              🚛 {t("availability_title")}
+            </Link>
+          </div>
         )}
 
         {/* Step content */}

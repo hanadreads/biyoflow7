@@ -6,9 +6,15 @@ interface LayoutProps {
   children: ReactNode;
   /** Optional extra class on the main element */
   className?: string;
+  /** Hide footer (e.g. auth page) */
+  hideFooter?: boolean;
 }
 
-export function Layout({ children, className = "" }: LayoutProps) {
+export function Layout({
+  children,
+  className = "",
+  hideFooter = false,
+}: LayoutProps) {
   const { t, lang, setLang } = useLang();
 
   return (
@@ -46,21 +52,23 @@ export function Layout({ children, className = "" }: LayoutProps) {
       <main className={`flex-1 ${className}`}>{children}</main>
 
       {/* Footer */}
-      <footer className="bg-muted/40 border-t border-border py-3">
-        <div className="max-w-[480px] mx-auto px-4 text-center">
-          <p className="text-xs text-muted-foreground">
-            &copy; {new Date().getFullYear()}.{" "}
-            <a
-              href={`https://caffeine.ai?utm_source=caffeine-footer&utm_medium=referral&utm_content=${encodeURIComponent(typeof window !== "undefined" ? window.location.hostname : "")}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="underline hover:text-foreground transition-colors"
-            >
-              Built with love using caffeine.ai
-            </a>
-          </p>
-        </div>
-      </footer>
+      {!hideFooter && (
+        <footer className="bg-muted/40 border-t border-border py-3">
+          <div className="max-w-[480px] mx-auto px-4 text-center">
+            <p className="text-xs text-muted-foreground">
+              &copy; {new Date().getFullYear()}.{" "}
+              <a
+                href={`https://caffeine.ai?utm_source=caffeine-footer&utm_medium=referral&utm_content=${encodeURIComponent(typeof window !== "undefined" ? window.location.hostname : "")}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline hover:text-foreground transition-colors"
+              >
+                Built with love using caffeine.ai
+              </a>
+            </p>
+          </div>
+        </footer>
+      )}
     </div>
   );
 }

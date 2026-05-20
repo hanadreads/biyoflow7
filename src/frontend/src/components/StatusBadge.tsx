@@ -25,6 +25,8 @@ const STATUS_CLASSES: Record<BadgeStatus, string> = {
     "bg-destructive/10 text-destructive border border-destructive/30",
   [OrderStatus.exception]:
     "bg-destructive/10 text-destructive border border-destructive/30",
+  [OrderStatus.fully_completed]:
+    "bg-muted text-muted-foreground border border-border",
   // DriverStatus
   [DriverStatus.online]: "bg-primary/10 text-primary border border-primary/30",
   [DriverStatus.offline]: "bg-muted text-muted-foreground",
@@ -41,6 +43,7 @@ const STATUS_KEY_MAP: Record<BadgeStatus, StringKey> = {
   [OrderStatus.expired]: "status_expired",
   [OrderStatus.cancelled]: "status_cancelled",
   [OrderStatus.exception]: "status_exception",
+  [OrderStatus.fully_completed]: "status_fully_completed",
   // DriverStatus
   [DriverStatus.online]: "status_online",
   [DriverStatus.offline]: "status_offline",

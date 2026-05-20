@@ -1,6 +1,7 @@
 import { createActor } from "@/backend";
 import { useLang } from "@/i18n";
 import { useActor } from "@caffeineai/core-infrastructure";
+import { Link } from "@tanstack/react-router";
 // LoginView: phone + PIN form. On success calls onLogin(driverId, driverName).
 import { useState } from "react";
 
@@ -112,6 +113,19 @@ export function LoginView({ onLogin }: Props) {
           >
             {loading ? t("loading") : t("login_button")}
           </button>
+
+          <div className="pt-1 text-center">
+            <Link
+              data-ocid="login.register_link"
+              to="/driver/register"
+              className="text-sm text-primary hover:underline transition-colors"
+            >
+              {t("driver_alreadyRegistered").replace(
+                "Already registered? Sign in",
+                "New driver? Register here",
+              )}
+            </Link>
+          </div>
         </div>
       </div>
     </div>

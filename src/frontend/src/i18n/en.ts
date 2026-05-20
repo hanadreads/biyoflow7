@@ -84,6 +84,7 @@ export const en = {
   status_expired: "Expired",
   status_cancelled: "Cancelled",
   status_exception: "Exception",
+  status_fully_completed: "Fully Completed",
 
   // Driver statuses
   status_online: "Online",
@@ -253,6 +254,206 @@ export const en = {
   match_zone: "Zone",
   match_size: "Size",
   match_price: "Price",
+
+  // Shift activation
+  shift_title: "Shift Activation",
+  shift_selectPeriod: "Select Shift Period",
+  shift_morning: "Morning Shift (6am - 6pm)",
+  shift_evening: "Evening Shift (6pm - 6am)",
+  shift_feeLabel: "Shift Fee: $1.00 via ZAAD",
+  shift_payNow: "Pay Now",
+  shift_paying: "Processing payment…",
+  shift_paymentSuccess: "Payment confirmed!",
+  shift_enterZNumber: "Enter your Z-Number",
+  shift_zNumberHint: "8-character code sent to your phone",
+  shift_submitZNumber: "Activate Shift",
+  shift_verifying: "Verifying…",
+  shift_activated: "Shift activated! You're online.",
+  shift_activeShift: "Active Shift",
+  shift_noActiveShift: "No active shift",
+  shift_startShift: "Start a Shift",
+  shift_shiftHistory: "Shift History",
+
+  // Driver registration
+  driver_register: "Driver Registration",
+  driver_fullName: "Full Name",
+  driver_phone: "Phone Number",
+  driver_pin: "4-Digit PIN",
+  driver_truckPlate: "Truck Plate / ID",
+  driver_registerBtn: "Register",
+  driver_alreadyRegistered: "Already registered? Sign in",
+
+  // Delivery confirmation
+  confirm_title: "Confirm Delivery",
+  confirm_driverBtn: "I Delivered the Water",
+  confirm_customerBtn: "I Received the Water",
+  confirm_waiting: "Waiting for both confirmations…",
+  confirm_bothConfirmed: "Delivery confirmed by both sides!",
+  confirm_driverConfirmed: "Driver confirmed delivery",
+  confirm_customerConfirmed: "Customer confirmed receipt",
+
+  // Availability
+  availability_title: "Available Water Trucks",
+  availability_zone: "Zone",
+  availability_distance: "km away",
+  availability_noTrucks: "No trucks available in this zone",
+  availability_estimatedTime: "Est. arrival",
+  availability_available: "Available",
+  availability_busy: "Busy",
+  availability_orderNow: "Order Now",
+
+  // Driver registration extras
+  driver_confirmPin: "Confirm PIN",
+
+  // Shift activation extras
+  shift_redirecting: "Redirecting to dashboard…",
+
+  // Auth page — role selection & forms
+  auth_role_title: "Welcome to BiyoFlow",
+  auth_role_subtitle: "Who are you?",
+  auth_role_resident: "I am a Resident",
+  auth_role_driver: "I am a Water Truck Driver",
+  auth_rc_login_title: "Resident Login",
+  auth_rc_register_title: "Create Account",
+  auth_wt_login_title: "Driver Login",
+  auth_admin_title: "Admin Access",
+  auth_name_label: "Full Name",
+  auth_phone_label: "Phone Number",
+  auth_pin_label: "PIN (4 digits)",
+  auth_email_label: "Email (optional)",
+  auth_login_btn: "Login",
+  auth_register_btn: "Register",
+  auth_no_account: "Don't have an account?",
+  auth_register_link: "Register",
+  auth_new_driver: "New driver?",
+  auth_register_here: "Register here",
+  auth_back: "Back",
+  auth_test_account: "Test Account",
+  auth_test_use_btn: "Use test account",
+  auth_logout: "Logout",
+  auth_hello: "Hello, {name}",
+
+  // Auth page — existing keys referenced in so.ts (keep in sync)
+  auth_welcome_sub: "Who are you?",
+  auth_rc_role: "I am a Resident",
+  auth_rc_role_sub: "Order water to your home",
+  auth_wt_role: "I am a Water Truck Driver",
+  auth_wt_role_sub: "Accept deliveries in your zone",
+  auth_rc_login_sub: "Login to order water",
+  auth_rc_register_sub: "Register to start ordering water",
+  auth_wt_login_sub: "Login to see available jobs",
+  auth_admin_sub: "Operations dashboard",
+  auth_admin_password: "Admin password",
+  auth_login_error: "Invalid credentials. Please try again.",
+  auth_register_error: "Registration failed. Phone may already be in use.",
+  auth_fill_required: "Please fill in all required fields.",
+  auth_no_account_register: "Don't have an account? Register",
+  auth_already_have_account: "Already have an account? Login",
+  auth_wt_new_driver: "New driver? Register here",
+  auth_back_role: "Back to role selection",
+  auth_back_login: "Back to login",
+  auth_optional: "optional",
+  auth_test_account_label: "Test Account",
+  auth_use_test_account: "Use test account",
+
+  // Admin dashboard
+  admin_title: "BiyoFlow Admin",
+  admin_tab_overview: "Overview",
+  admin_tab_orders: "Orders",
+  admin_tab_drivers: "Drivers",
+  admin_tab_settings: "Settings",
+  admin_stat_today: "Today's Orders",
+  admin_stat_active: "Active Orders",
+  admin_stat_online: "Online Drivers",
+  admin_stat_empty: "Empty Zones",
+  admin_payment_title: "Payment Mode",
+  admin_payment_success: "Always Success",
+  admin_payment_fail: "Always Fail",
+  admin_payment_random: "Random",
+  admin_reset_title: "Reset Demo Data",
+  admin_reset_confirm: "Are you sure? This will reset all data.",
+  admin_reset_btn: "Reset Demo",
+  admin_logout: "Logout",
+
+  // Admin dashboard — existing keys referenced in so.ts (keep in sync)
+  admin_dashboard_title: "Admin Dashboard",
+  admin_dashboard_sub: "BiyoFlow operations overview",
+  admin_stat_active_orders: "Active Orders",
+  admin_stat_online_drivers: "Online Drivers",
+  admin_stat_pending_shifts: "Pending Shifts",
+  admin_stat_total_zones: "Zones",
+  admin_zone_summary: "Zone Summary",
+  admin_col_zone: "Zone",
+  admin_col_drivers: "Online Drivers",
+  admin_col_pending: "Pending Orders",
+  admin_col_active: "Active Orders",
+  admin_access_note: "Admin access location",
+  admin_access_desc: "Button at bottom-right of login page (/auth). Login",
+
+  // Admin login form
+  admin_login_title: "Admin Login",
+  admin_login_hint: "Enter your admin password to continue",
+  admin_password_label: "Admin Password",
+  admin_login_error: "Invalid admin password. Please try again.",
+  admin_login_btn: "Login",
+
+  // Admin stats (aligned with AdminPage keys)
+  admin_stat_today_orders: "Today's Orders",
+
+  // Admin table columns
+  admin_col_status: "Status",
+  admin_col_size: "Size",
+  admin_col_name: "Name",
+  admin_col_phone: "Phone",
+  admin_col_active_order: "Active Order",
+  admin_col_driver: "Driver",
+  admin_col_customer: "Customer",
+  admin_col_created: "Created",
+  admin_col_online_drivers: "Online Drivers",
+
+  // Admin orders/drivers
+  admin_filter_status: "Filter by status",
+  admin_no_orders: "No orders found.",
+  admin_no_drivers: "No drivers registered yet.",
+
+  // Admin payment mode
+  admin_payment_mode_title: "Payment Mode",
+  admin_payment_mode_hint: "Current mode",
+  admin_payment_always_success: "Always Success",
+  admin_payment_always_fail: "Always Fail",
+  admin_mode_error: "Could not update payment mode.",
+
+  // Admin settings
+  admin_reset_hint: "Resets all orders and shifts to seed data.",
+  admin_reset_yes: "Yes, Reset",
+  admin_credentials_title: "Admin Credentials",
+
+  // Phone pre-population note (CustomerPage step 3)
+  phone_order_only_note:
+    "Changes apply to this order only (we strongly encourage always using your registration number [{phone}])",
+
+  // Admin zone management
+  admin_zone_assign_title: "Zone Assignment",
+  admin_zone_assign_hint: "Assign zones to this driver",
+  admin_zone_max_label: "Max zones allowed",
+  admin_zone_save: "Save Zone",
+  admin_zone_saving: "Saving…",
+  admin_zone_saved: "Zone saved",
+  admin_zone_error: "Could not save zone assignment.",
+  admin_driver_active_label: "Active",
+  admin_driver_deactivate: "Deactivate",
+  admin_driver_activate: "Activate",
+  admin_override_order_status: "Override Status",
+  admin_override_saving: "Saving…",
+  admin_override_saved: "Status updated",
+  admin_override_error: "Could not update order status.",
+
+  // Shift activated — zone display
+  shift_assigned_zones: "Your assigned zones",
+  shift_no_zones: "No zones assigned yet. Contact admin.",
+
+  // WT test credentials
+  auth_wt_test_label: "Test Driver Account",
 };
 
 export type StringKey = keyof typeof en;

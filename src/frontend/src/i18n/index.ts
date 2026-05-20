@@ -32,12 +32,14 @@ function interpolate(
 export interface LangContextValue {
   lang: Lang;
   setLang: (l: Lang) => void;
+  toggleLang: () => void;
   t: (key: StringKey, vars?: Record<string, string | number>) => string;
 }
 
 export const LangContext = createContext<LangContextValue>({
   lang: "en",
   setLang: () => {},
+  toggleLang: () => {},
   t: (key) => key as string,
 });
 
@@ -51,6 +53,10 @@ export function LangProvider({ children }: { children: React.ReactNode }) {
     localStorage.setItem(STORAGE_KEY, l);
     setLangState(l);
   }, []);
+
+  const toggleLang = useCallback(() => {
+    setLang(lang === "en" ? "so" : "en");
+  }, [lang, setLang]);
 
   const t = useCallback(
     (key: StringKey, vars?: Record<string, string | number>): string => {
@@ -68,7 +74,7 @@ export function LangProvider({ children }: { children: React.ReactNode }) {
 
   return React.createElement(
     LangContext.Provider,
-    { value: { lang, setLang, t } },
+    { value: { lang, setLang, toggleLang, t } },
     children,
   );
 }

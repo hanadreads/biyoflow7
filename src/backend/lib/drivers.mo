@@ -1,6 +1,7 @@
 // Drivers domain logic — authentication, status, pricing, zone switching
 import List "mo:core/List";
 import Map "mo:core/Map";
+import Array "mo:core/Array";
 import DriverTypes "../types/drivers";
 import OrderTypes "../types/orders";
 
@@ -58,6 +59,7 @@ module {
     switch (drivers.find(func(d) { d.phone == phone })) {
       case null { #err "Phone number not found" };
       case (?d) {
+        if (not d.is_active) { return #err "Account is deactivated. Please contact support." };
         if (d.pin == pin) { #ok { driver_id = d.id; name = d.name } }
         else { #err "Incorrect PIN" };
       };
@@ -93,6 +95,10 @@ module {
       case null { #err "Driver not found" };
       case (?idx) {
         let d = drivers.at(idx);
+        // Validate that the requested zone is in the driver's allowed zones
+        if (d.allowed_zone_ids.find<Nat>(func(z) { z == zone_id }) == null) {
+          return #err "Zone not in your allowed zones list";
+        };
         drivers.put(idx, { d with zone_id = zone_id });
         #ok;
       };
@@ -143,15 +149,65 @@ module {
       drivers.add({
         id               = id;
         zone_id          = zone_id;
+        allowed_zone_ids = [zone_id]; // starts with only their registered zone
         name             = name;
         phone            = phone;
         pin              = pin;
         truck_plate      = plate;
         status           = #offline;
         current_order_id = null;
+        is_active        = true;
       });
       driverPrices.add(id, { small = sm; medium = md; large = lg });
       counters.nextDriverId += 1;
+    };
+    // Test WT account — pre-activated, zones 1/2/3, credentials visible on login page
+    let testId = counters.nextDriverId;
+    drivers.add({
+      id               = testId;
+      zone_id          = 1;
+      allowed_zone_ids = [1, 2, 3];
+      name             = "Test Driver";
+      phone            = "06WTEST01";
+      pin              = "1234";
+      truck_plate      = "TEST-001";
+      status           = #offline;
+      current_order_id = null;
+      is_active        = true;
+    });
+    driverPrices.add(testId, { small = 15000; medium = 25000; large = 40000 });
+    counters.nextDriverId += 1;
+  };
+
+  // Update the allowed zones for a driver (admin operation).
+  public func setDriverZones(
+    drivers   : List.List<Driver>,
+    driver_id : Nat,
+    zone_ids  : [Nat],
+  ) : { #ok; #err : Text } {
+    switch (drivers.findIndex(func(d) { d.id == driver_id })) {
+      case null { #err "Driver not found" };
+      case (?idx) {
+        let d = drivers.at(idx);
+        drivers.put(idx, { d with allowed_zone_ids = zone_ids });
+        #ok;
+      };
+    };
+  };
+
+  // Admin: activate or deactivate a driver account.
+  public func adminSetDriverActive(
+    drivers   : List.List<Driver>,
+    driver_id : Nat,
+    is_active : Bool,
+  ) : { #ok; #err : Text } {
+    switch (drivers.findIndex(func(d) { d.id == driver_id })) {
+      case null { #err "Driver not found" };
+      case (?idx) {
+        let d = drivers.at(idx);
+        drivers.put(idx, { d with is_active = is_active });
+        #ok;
+      };
     };
   };
 };

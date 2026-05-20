@@ -1,24 +1,24 @@
 {
-  "overview": "BiyoFlow is a water tanker delivery platform for Hargeisa, Somaliland. It connects households who need water with local tanker drivers through a USSD-inspired ordering flow and simulated ZAAD mobile payment. Customers order in simple numbered steps, drivers manage their availability and deliveries from a mobile-first dashboard, and the system matches orders zone-by-zone with full audit logging.",
+  "overview": "BiyoFlow connects households in Hargeisa, Somaliland with water tanker delivery drivers. Drivers register, pay a $1/shift fee via simulated ZAAD payment, receive a Z-number confirmation code, and activate their shift. Homeowners find nearby available trucks using GPS and zone matching, place orders, and both sides confirm delivery.",
   "features": [
-    "USSD-style customer ordering in 7 steps: zone, tank size, phone, address, payment, matching, tracking",
-    "Driver app with login, online/offline toggle, zone switching, price setting, and delivery status progression",
-    "Simulated ZAAD payment with configurable demo modes (always succeed, always fail, random)",
-    "Zone-based driver matching with race-condition protection and 15-minute expiry",
-    "Bilingual interface in English and Somali with persistent language preference",
-    "Real-time order tracking via 5-second polling",
-    "Full audit logging of all order events and state transitions",
-    "Demo reset function to restore seed data with 10 Hargeisa zones and realistic Somali drivers"
+    "Driver registration and shift-fee activation via Z-number verification",
+    "Simulated ZAAD payment flow for $1/shift fee",
+    "Zone-based driver matching with browser geolocation and distance display",
+    "USSD-style customer ordering flow (zone, size, phone, payment)",
+    "Dual delivery confirmation by both driver and homeowner",
+    "Bilingual English/Somali interface",
+    "Real-time order tracking with 5-second polling",
+    "10 Hargeisa zones with 24 seeded Somali drivers"
   ],
-  "category": "productivity",
+  "category": "marketplace",
   "tags": [
-    "delivery",
-    "logistics",
+    "water-delivery",
     "hargeisa",
     "somaliland",
-    "water",
-    "ussd",
+    "zaad",
+    "driver-app",
+    "logistics",
     "mobile-first"
   ],
-  "last_updated": "2026-05-15T14:56:06.487Z"
+  "last_updated": "2026-05-15T18:53:04.216Z"
 }

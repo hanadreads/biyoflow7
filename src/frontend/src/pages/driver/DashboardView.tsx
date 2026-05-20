@@ -1,8 +1,16 @@
-import type { Driver, DriverPrices, Order, Zone } from "@/backend";
-import { DriverStatus, OrderStatus, TankSize, createActor } from "@/backend";
+import type { Driver, DriverPrices, Order, Shift, Zone } from "@/backend";
+import {
+  DriverStatus,
+  OrderStatus,
+  ShiftStatus,
+  TankSize,
+  createActor,
+} from "@/backend";
 import { StatusBadge } from "@/components/StatusBadge";
+import { useGetActiveShift } from "@/hooks/useQueries";
 import { useLang } from "@/i18n";
 import { useActor } from "@caffeineai/core-infrastructure";
+import { useNavigate } from "@tanstack/react-router";
 // DashboardView: status/shift, prices, incoming order, active delivery sections.
 import { useEffect, useRef, useState } from "react";
 
@@ -206,8 +214,96 @@ export function DashboardView({
     return "";
   };
 
+  const navigate = useNavigate();
+  const shiftQuery = useGetActiveShift(driver.id);
+  const activeShift: Shift | null = shiftQuery.data ?? null;
+  const shiftIsActive = activeShift?.status === ShiftStatus.active;
+
+  // Compute shift time remaining
+  function shiftTimeRemaining(shift: Shift): string {
+    if (!shift.activatedAt) return "";
+    const activatedMs = Number(shift.activatedAt) / 1_000_000;
+    const shiftDurationMs = 12 * 60 * 60 * 1000;
+    const endsAt = activatedMs + shiftDurationMs;
+    const remainingMs = endsAt - Date.now();
+    if (remainingMs <= 0) return "Shift ended";
+    const h = Math.floor(remainingMs / 3_600_000);
+    const m = Math.floor((remainingMs % 3_600_000) / 60_000);
+    return `${h}h ${m}m remaining`;
+  }
+
   return (
     <div className="space-y-4 pb-4">
+      {/* Section 0: Shift Status Card */}
+      <div
+        data-ocid="shift.status_card"
+        className={`rounded-xl p-4 space-y-3 border ${
+          shiftIsActive
+            ? "bg-secondary/10 border-secondary/40"
+            : "bg-muted/40 border-border"
+        }`}
+      >
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            {shiftIsActive ? (
+              <span className="w-2.5 h-2.5 rounded-full bg-secondary animate-pulse" />
+            ) : (
+              <span className="w-2.5 h-2.5 rounded-full bg-muted-foreground/40" />
+            )}
+            <h3
+              className={`font-semibold text-sm ${
+                shiftIsActive
+                  ? "text-secondary-foreground"
+                  : "text-muted-foreground"
+              }`}
+            >
+              {shiftIsActive
+                ? t("shift_activeShift")
+                : t("shift_noActiveShift")}
+            </h3>
+          </div>
+          {shiftIsActive && activeShift?.period && (
+            <span className="text-xs font-medium px-2 py-0.5 rounded-full bg-secondary/15 text-secondary-foreground">
+              {activeShift.period === "morning"
+                ? t("shift_morning").split(" ")[0]
+                : t("shift_evening").split(" ")[0]}
+            </span>
+          )}
+        </div>
+
+        {shiftIsActive && activeShift ? (
+          <div className="space-y-1">
+            <p className="text-xs text-secondary-foreground font-medium">
+              ✓ {t("shift_activated")}
+            </p>
+            {activeShift.activatedAt && (
+              <p className="text-xs text-muted-foreground">
+                {shiftTimeRemaining(activeShift)}
+              </p>
+            )}
+            {activeShift.zNumber && (
+              <p className="text-xs font-mono text-muted-foreground">
+                Z-Number: ****{activeShift.zNumber.slice(-4)}
+              </p>
+            )}
+          </div>
+        ) : (
+          <div className="space-y-2">
+            <p className="text-xs text-muted-foreground">
+              You need an active shift to accept orders.
+            </p>
+            <button
+              data-ocid="shift.start_shift_button"
+              type="button"
+              onClick={() => navigate({ to: "/driver/shift" })}
+              className="w-full py-2.5 rounded-lg bg-primary text-primary-foreground font-semibold text-sm transition-smooth active:scale-95"
+            >
+              {t("shift_startShift")}
+            </button>
+          </div>
+        )}
+      </div>
+
       {/* Section A: Status + Shift */}
       <div className="bg-card border border-border rounded-xl p-4 space-y-3">
         <div className="flex items-center justify-between">
@@ -488,6 +584,23 @@ export function DashboardView({
               {advanceBusy
                 ? t("active_advancing")
                 : nextStatusLabel(activeOrder)}
+            </button>
+          )}
+
+          {/* Confirm Delivery button when order is completed */}
+          {activeOrder.status === OrderStatus.completed && (
+            <button
+              data-ocid="active.confirm_delivery_button"
+              type="button"
+              onClick={() =>
+                navigate({
+                  to: "/confirm",
+                  search: { orderId: String(activeOrder.id), role: "driver" },
+                })
+              }
+              className="w-full bg-secondary text-secondary-foreground py-3 rounded-xl font-bold text-base transition-smooth active:scale-95"
+            >
+              {t("confirm_driverBtn")}
             </button>
           )}
         </div>

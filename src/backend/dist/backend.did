@@ -1,3 +1,10 @@
+type ZoneSummary = 
+ record {
+   activeOrders: nat;
+   onlineDrivers: nat;
+   pendingOrders: nat;
+   zoneName: text;
+ };
 type Zone = 
  record {
    city: text;
@@ -11,17 +18,57 @@ type TankSize =
    medium;
    small;
  };
+type ShiftStatus = 
+ variant {
+   active;
+   expired;
+   pending_payment;
+   pending_verification;
+ };
+type ShiftPeriod = 
+ variant {
+   evening;
+   morning;
+ };
+type Shift = 
+ record {
+   activatedAt: opt int;
+   date: text;
+   driverId: nat;
+   feePaidAt: opt int;
+   id: nat;
+   paymentRef: opt text;
+   period: ShiftPeriod;
+   status: ShiftStatus;
+   verifiedAt: opt int;
+   zNumber: opt text;
+ };
 type PaymentStatus = 
  variant {
    failed;
    pending;
    success;
  };
+type PaymentResult = 
+ record {
+   paymentRef: text;
+   zNumber: text;
+ };
 type PaymentMode = 
  variant {
    always_fail;
    always_success;
    random;
+ };
+type OrderSummary = 
+ record {
+   createdAt: int;
+   customerPhone: text;
+   driverName: opt text;
+   id: nat;
+   size: text;
+   status: text;
+   zone: text;
  };
 type OrderStatus = 
  variant {
@@ -31,6 +78,7 @@ type OrderStatus =
    en_route;
    exception;
    expired;
+   fully_completed;
    matched;
    pending;
    pumping;
@@ -40,7 +88,10 @@ type Order =
    address_note: text;
    completed_at: opt int;
    created_at: int;
+   customer_confirmed: bool;
+   customer_id: opt nat;
    customer_phone: text;
+   driver_confirmed: bool;
    driver_id: opt nat;
    expired_at: opt int;
    help_flagged: bool;
@@ -52,6 +103,15 @@ type Order =
    size: TankSize;
    status: OrderStatus;
    zone_id: nat;
+ };
+type DriverSummary = 
+ record {
+   activeOrderId: opt nat;
+   id: nat;
+   name: text;
+   phone: text;
+   status: text;
+   zone: text;
  };
 type DriverStatus = 
  variant {
@@ -66,8 +126,10 @@ type DriverPrices =
  };
 type Driver = 
  record {
+   allowed_zone_ids: vec nat;
    current_order_id: opt nat;
    id: nat;
+   is_active: bool;
    name: text;
    phone: text;
    pin: text;
@@ -75,13 +137,45 @@ type Driver =
    truck_plate: text;
    zone_id: nat;
  };
+type Customer = 
+ record {
+   created_at: int;
+   email: opt text;
+   id: nat;
+   name: text;
+   phone: text;
+   pin: text;
+ };
 service : {
   acceptOrder: (driver_id: nat, order_id: nat) -> (variant {
                                                      err: text;
                                                      ok;
                                                    });
+  adminLogin: (password: text) ->
+   (variant {
+      err: text;
+      ok: record {
+            role: text;
+            token: text;
+          };
+    });
+  adminSetDriverActive: (driver_id: nat, is_active: bool) ->
+   (variant {
+      err: text;
+      ok;
+    });
+  adminSetOrderStatus: (order_id: nat, new_status: OrderStatus) ->
+   (variant {
+      err: text;
+      ok;
+    });
+  confirmDelivery: (order_id: nat, role: text) ->
+   (variant {
+      err: text;
+      ok: text;
+    });
   createOrder: (zone_id: nat, size: TankSize, customer_phone: text,
-   address_note: text, idempotency_key: text) ->
+   address_note: text, idempotency_key: text, customer_id: opt nat) ->
    (variant {
       err: text;
       ok: record {
@@ -97,6 +191,13 @@ service : {
             name: text;
           };
     });
+  getActiveShift: (driverId: nat) -> (opt Shift) query;
+  getAllOrders: () -> (vec OrderSummary) query;
+  getCustomerProfile: (customerId: nat) ->
+   (variant {
+      err: text;
+      ok: Customer;
+    });
   getDriverEarnings: (driver_id: nat, start_ms: opt int, end_ms: opt int) ->
    (record {
       orders: vec Order;
@@ -109,9 +210,25 @@ service : {
           driver: Driver;
           prices: DriverPrices;
         }) query;
+  getDriverShifts: (driverId: nat) -> (vec Shift) query;
+  getDriverStatusSummary: () -> (vec DriverSummary) query;
   getIncomingOrders: (driver_id: nat) -> (vec Order);
   getOrder: (order_id: nat, phone_last4: text) -> (opt Order) query;
+  getZoneSummary: () -> (vec ZoneSummary) query;
   getZones: () -> (vec Zone) query;
+  loginCustomer: (phone: text, pin: text) ->
+   (variant {
+      err: text;
+      ok: record {
+            customerId: nat;
+            name: text;
+            phone: text;
+          };
+    });
+  payShiftFee: (shiftId: nat) -> (variant {
+                                    err: text;
+                                    ok: PaymentResult;
+                                  });
   processPayment: (order_id: nat, idempotency_key: text) ->
    (variant {
       err: text;
@@ -120,10 +237,20 @@ service : {
             status: PaymentStatus;
           };
     });
+  registerCustomer: (name: text, phone: text, pin: text, email: opt text) ->
+   (variant {
+      err: text;
+      ok: Customer;
+    });
   rejectOrder: (driver_id: nat, order_id: nat) -> (variant {
                                                      err: text;
                                                      ok;
                                                    });
+  requestShift: (driverId: nat, period: ShiftPeriod, date: text) ->
+   (variant {
+      err: text;
+      ok: Shift;
+    });
   resetDemo: () -> (variant {ok;});
   setDriverPrices: (driver_id: nat, prices: DriverPrices) ->
    (variant {
@@ -139,7 +266,17 @@ service : {
                                                       err: text;
                                                       ok;
                                                     });
+  setDriverZones: (driver_id: nat, zone_ids: vec nat) ->
+   (variant {
+      err: text;
+      ok;
+    });
   setPaymentMode: (mode: PaymentMode) -> (variant {ok;});
+  submitZNumber: (shiftId: nat, zNumber: text) ->
+   (variant {
+      err: text;
+      ok: Shift;
+    });
   updateOrderStatus: (driver_id: nat, order_id: nat, new_status:
    OrderStatus) -> (variant {
                       err: text;

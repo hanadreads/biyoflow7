@@ -1,4 +1,4 @@
-// Version: 1.0.0
+// Version: 3.0.0
 type AuditLog__1065702421 =
   {
     action : Text;
@@ -9,14 +9,25 @@ type AuditLog__1065702421 =
     id : Nat;
     initiated_by : Text
   };
+type Customer__225412617 =
+  {
+    created_at : Int;
+    email : ?Text;
+    id : Nat;
+    name : Text;
+    phone : Text;
+    pin : Text
+  };
 type Data__791452850<K, V> =
   {var count : Nat__490723111; kvs : [var ?(K, V)]};
 type DriverPrices__564050036 = {large : Nat; medium : Nat; small : Nat};
 type DriverStatus__360602996 = {#offline; #online};
 type Driver__664711945 =
   {
+    allowed_zone_ids : [Nat];
     current_order_id : ?Nat;
     id : Nat;
+    is_active : Bool;
     name : Text;
     phone : Text;
     pin : Text;
@@ -27,10 +38,29 @@ type Driver__664711945 =
 type Internal__8484328<K, V> =
   {children : [var ?Node__46230540<K, V>]; data : Data__791452850<K, V>};
 type Leaf__809889148<K, V> = {data : Data__791452850<K, V>};
+type List__415060402<T> = List__790383201<T>;
+type List__790383201<T> =
+  {
+    var blockIndex : Nat__490723111;
+    var blocks : [var [var ?T]];
+    var elementIndex : Nat__490723111
+  };
 type Nat__490723111 = Nat__920180692;
 type Nat__920180692 = Nat;
 type Node__46230540<K, V> =
   {#internal : Internal__8484328<K, V>; #leaf : Leaf__809889148<K, V>};
+type OldDriverStatus__113826761 = {#offline; #online};
+type OldDriver__1008660884 =
+  {
+    current_order_id : ?Nat;
+    id : Nat;
+    name : Text;
+    phone : Text;
+    pin : Text;
+    status : OldDriverStatus__113826761;
+    truck_plate : Text;
+    zone_id : Nat
+  };
 type OrderStatusEntry__193753053 =
   {
     created_at : Int;
@@ -48,6 +78,7 @@ type OrderStatus__272730104 =
     #en_route;
     #exception;
     #expired;
+    #fully_completed;
     #matched;
     #pending;
     #pumping
@@ -57,7 +88,10 @@ type Order__141779993 =
     address_note : Text;
     completed_at : ?Int;
     created_at : Int;
+    customer_confirmed : Bool;
+    customer_id : ?Nat;
     customer_phone : Text;
+    driver_confirmed : Bool;
     driver_id : ?Nat;
     expired_at : ?Int;
     help_flagged : Bool;
@@ -72,10 +106,26 @@ type Order__141779993 =
   };
 type PaymentMode__510189616 = {#always_fail; #always_success; #random};
 type PaymentStatus__889961532 = {#failed; #pending; #success};
+type ShiftPeriod__936558028 = {#evening; #morning};
+type ShiftStatus__858291349 =
+  {#active; #expired; #pending_payment; #pending_verification};
+type Shift__740928251 =
+  {
+    activatedAt : ?Int;
+    date : Text;
+    driverId : Nat;
+    feePaidAt : ?Int;
+    id : Nat;
+    paymentRef : ?Text;
+    period : ShiftPeriod__936558028;
+    status : ShiftStatus__858291349;
+    verifiedAt : ?Int;
+    zNumber : ?Text
+  };
 type TankSize__222818898 = {#large; #medium; #small};
 type Zone__116707211 =
   {city : Text; display_order : Nat; id : Nat; name : Text};
-actor {
+actor ({
   stable auditLogs :
     {
       var blockIndex : Nat__490723111;
@@ -90,6 +140,67 @@ actor {
       var nextHistoryId : Nat;
       var nextOrderId : Nat;
       var nextZoneId : Nat
+    };
+  stable custCounters : {var nextCustomerId : Nat};
+  stable customers :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?Customer__225412617]];
+      var elementIndex : Nat__490723111
+    };
+  stable driverPrices :
+    {
+      var root : Node__46230540<Nat, DriverPrices__564050036>;
+      var size : Nat__490723111
+    };
+  in drivers : List__415060402<OldDriver__1008660884>;
+  stable orders :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?Order__141779993]];
+      var elementIndex : Nat__490723111
+    };
+  stable shiftCounters : {var nextShiftId : Nat; var shiftSeed : Nat};
+  stable shifts :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?Shift__740928251]];
+      var elementIndex : Nat__490723111
+    };
+  stable statusHistory :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?OrderStatusEntry__193753053]];
+      var elementIndex : Nat__490723111
+    };
+  stable zones :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?Zone__116707211]];
+      var elementIndex : Nat__490723111
+    }
+}, {
+  stable auditLogs :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?AuditLog__1065702421]];
+      var elementIndex : Nat__490723111
+    };
+  stable config : {var paymentMode : PaymentMode__510189616};
+  stable counters :
+    {
+      var nextAuditId : Nat;
+      var nextDriverId : Nat;
+      var nextHistoryId : Nat;
+      var nextOrderId : Nat;
+      var nextZoneId : Nat
+    };
+  stable custCounters : {var nextCustomerId : Nat};
+  stable customers :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?Customer__225412617]];
+      var elementIndex : Nat__490723111
     };
   stable driverPrices :
     {
@@ -108,6 +219,13 @@ actor {
       var blocks : [var [var ?Order__141779993]];
       var elementIndex : Nat__490723111
     };
+  stable shiftCounters : {var nextShiftId : Nat; var shiftSeed : Nat};
+  stable shifts :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?Shift__740928251]];
+      var elementIndex : Nat__490723111
+    };
   stable statusHistory :
     {
       var blockIndex : Nat__490723111;
@@ -120,4 +238,4 @@ actor {
       var blocks : [var [var ?Zone__116707211]];
       var elementIndex : Nat__490723111
     }
-};
+});

@@ -18,6 +18,25 @@ var __privateWrapper = (obj, member, setter, getter) => ({
   }
 });
 var _disableTimeVerification, _agent, _inner, _expirationTime, _rawKey, _derKey, _a2, _currentInterval, _randomizationFactor, _multiplier, _maxInterval, _startTime, _maxElapsedTime, _maxIterations, _date, _count, _rootKeyPromise, _shouldFetchRootKey, _timeDiffMsecs, _hasSyncedTime, _syncTimePromise, _shouldSyncTime, _identity, _fetch, _fetchOptions, _callOptions, _credentials, _retryTimes, _backoffStrategy, _maxIngressExpiryInMinutes, _HttpAgent_instances, maxIngressExpiryInMs_get, _queryPipeline, _updatePipeline, _subnetKeys, _verifyQuerySignatures, requestAndRetryQuery_fn, requestAndRetry_fn, _verifyQueryResponse, asyncGuard_fn, rootKeyGuard_fn, syncTimeGuard_fn, _focused, _cleanup, _setup, _b2, _provider, _providerCalled, _c, _online, _cleanup2, _setup2, _d, _gcTimeout, _e, _initialState, _revertState, _cache, _client, _retryer, _defaultOptions, _abortSignalConsumed, _Query_instances, isInitialPausedFetch_fn, dispatch_fn, _f, _client2, _currentQuery, _currentQueryInitialState, _currentResult, _currentResultState, _currentResultOptions, _currentThenable, _selectError, _selectFn, _selectResult, _lastQueryWithDefinedData, _staleTimeoutId, _refetchIntervalId, _currentRefetchInterval, _trackedProps, _QueryObserver_instances, executeFetch_fn, updateStaleTimeout_fn, computeRefetchInterval_fn, updateRefetchInterval_fn, updateTimers_fn, clearStaleTimeout_fn, clearRefetchInterval_fn, updateQuery_fn, notify_fn, _g, _client3, _observers, _mutationCache, _retryer2, _Mutation_instances, dispatch_fn2, _h, _mutations, _scopes, _mutationId, _i, _client4, _currentResult2, _currentMutation, _mutateOptions, _MutationObserver_instances, updateResult_fn, notify_fn2, _j, _queries, _k, _queryCache, _mutationCache2, _defaultOptions2, _queryDefaults, _mutationDefaults, _mountCount, _unsubscribeFocus, _unsubscribeOnline, _l, _rawKey2, _derKey2, _publicKey, _privateKey, _inner2, _delegation, _options;
+function _mergeNamespaces(n, m2) {
+  for (var i = 0; i < m2.length; i++) {
+    const e = m2[i];
+    if (typeof e !== "string" && !Array.isArray(e)) {
+      for (const k2 in e) {
+        if (k2 !== "default" && !(k2 in n)) {
+          const d2 = Object.getOwnPropertyDescriptor(e, k2);
+          if (d2) {
+            Object.defineProperty(n, k2, d2.get ? d2 : {
+              enumerable: true,
+              get: () => e[k2]
+            });
+          }
+        }
+      }
+    }
+  }
+  return Object.freeze(Object.defineProperty(n, Symbol.toStringTag, { value: "Module" }));
+}
 (function polyfill() {
   const relList = document.createElement("link").relList;
   if (relList && relList.supports && relList.supports("modulepreload")) {
@@ -4453,14 +4472,14 @@ const p = 2 * 1024, C = 100, v = new TextEncoder();
 function S(t) {
   return t << 5;
 }
-let o = new Uint8Array(p), r = new DataView(o.buffer), s = 0, O = [];
+let o = new Uint8Array(p), r$1 = new DataView(o.buffer), s = 0, O = [];
 function dt(t, n) {
   s = 0;
   const e = (n == null ? void 0 : n(t)) ?? t;
   return it(m, e, n), o.slice(0, s);
 }
 function _(t, n) {
-  if (s > o.length - C && (o = R(o, o.length * 2), r = new DataView(o.buffer)), t === false || t === true || t === null || t === void 0) {
+  if (s > o.length - C && (o = R(o, o.length * 2), r$1 = new DataView(o.buffer)), t === false || t === true || t === null || t === void 0) {
     et(t);
     return;
   }
@@ -4502,38 +4521,38 @@ function nt(t, n) {
 }
 function I(t, n) {
   if (n <= z) {
-    r.setUint8(
+    r$1.setUint8(
       s++,
       S(t) | Number(n)
     );
     return;
   }
   if (n <= Y) {
-    r.setUint8(
+    r$1.setUint8(
       s++,
       S(t) | d.OneByte
-    ), r.setUint8(s, Number(n)), s += 1;
+    ), r$1.setUint8(s, Number(n)), s += 1;
     return;
   }
   if (n <= G) {
-    r.setUint8(
+    r$1.setUint8(
       s++,
       S(t) | d.TwoBytes
-    ), r.setUint16(s, Number(n), h), s += 2;
+    ), r$1.setUint16(s, Number(n), h), s += 2;
     return;
   }
   if (n <= P) {
-    r.setUint8(
+    r$1.setUint8(
       s++,
       S(t) | d.FourBytes
-    ), r.setUint32(s, Number(n), h), s += 4;
+    ), r$1.setUint32(s, Number(n), h), s += 4;
     return;
   }
   if (n <= H) {
-    r.setUint8(
+    r$1.setUint8(
       s++,
       S(t) | d.EightBytes
-    ), r.setBigUint64(s, BigInt(n), h), s += 8;
+    ), r$1.setBigUint64(s, BigInt(n), h), s += 8;
     return;
   }
   throw new x(`Value too large to encode: ${n}`);
@@ -4553,7 +4572,7 @@ function st(t) {
   throw new x(`Unrecognized simple value: ${t.toString()}`);
 }
 function k(t, n) {
-  I(t, n.length), s > o.length - n.length && (o = R(o, o.length + n.length), r = new DataView(o.buffer)), o.set(n, s), s += n.length;
+  I(t, n.length), s > o.length - n.length && (o = R(o, o.length + n.length), r$1 = new DataView(o.buffer)), o.set(n, s), s += n.length;
 }
 function T(t, n) {
   I(t, n);
@@ -13806,7 +13825,7 @@ var react_production = {};
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-var REACT_ELEMENT_TYPE$1 = Symbol.for("react.transitional.element"), REACT_PORTAL_TYPE$2 = Symbol.for("react.portal"), REACT_FRAGMENT_TYPE$1 = Symbol.for("react.fragment"), REACT_STRICT_MODE_TYPE$1 = Symbol.for("react.strict_mode"), REACT_PROFILER_TYPE$1 = Symbol.for("react.profiler"), REACT_CONSUMER_TYPE$1 = Symbol.for("react.consumer"), REACT_CONTEXT_TYPE$1 = Symbol.for("react.context"), REACT_FORWARD_REF_TYPE$1 = Symbol.for("react.forward_ref"), REACT_SUSPENSE_TYPE$1 = Symbol.for("react.suspense"), REACT_MEMO_TYPE$1 = Symbol.for("react.memo"), REACT_LAZY_TYPE$1 = Symbol.for("react.lazy"), MAYBE_ITERATOR_SYMBOL$1 = Symbol.iterator;
+var REACT_ELEMENT_TYPE$1 = Symbol.for("react.transitional.element"), REACT_PORTAL_TYPE$2 = Symbol.for("react.portal"), REACT_FRAGMENT_TYPE$1 = Symbol.for("react.fragment"), REACT_STRICT_MODE_TYPE$1 = Symbol.for("react.strict_mode"), REACT_PROFILER_TYPE$1 = Symbol.for("react.profiler"), REACT_CONSUMER_TYPE$1 = Symbol.for("react.consumer"), REACT_CONTEXT_TYPE$1 = Symbol.for("react.context"), REACT_FORWARD_REF_TYPE$1 = Symbol.for("react.forward_ref"), REACT_SUSPENSE_TYPE$1 = Symbol.for("react.suspense"), REACT_MEMO_TYPE$1 = Symbol.for("react.memo"), REACT_LAZY_TYPE$2 = Symbol.for("react.lazy"), MAYBE_ITERATOR_SYMBOL$1 = Symbol.iterator;
 function getIteratorFn$1(maybeIterable) {
   if (null === maybeIterable || "object" !== typeof maybeIterable) return null;
   maybeIterable = MAYBE_ITERATOR_SYMBOL$1 && maybeIterable[MAYBE_ITERATOR_SYMBOL$1] || maybeIterable["@@iterator"];
@@ -13930,7 +13949,7 @@ function mapIntoArray(children, array, escapedPrefix, nameSoFar, callback) {
           case REACT_PORTAL_TYPE$2:
             invokeCallback = true;
             break;
-          case REACT_LAZY_TYPE$1:
+          case REACT_LAZY_TYPE$2:
             return invokeCallback = children._init, mapIntoArray(
               invokeCallback(children._payload),
               array,
@@ -14139,7 +14158,7 @@ react_production.forwardRef = function(render) {
 react_production.isValidElement = isValidElement;
 react_production.lazy = function(ctor) {
   return {
-    $$typeof: REACT_LAZY_TYPE$1,
+    $$typeof: REACT_LAZY_TYPE$2,
     _payload: { _status: -1, _result: ctor },
     _init: lazyInitializer
   };
@@ -14235,6 +14254,10 @@ react_production.version = "19.1.5";
 }
 var reactExports = react.exports;
 const React__default = /* @__PURE__ */ getDefaultExportFromCjs(reactExports);
+const React$4 = /* @__PURE__ */ _mergeNamespaces({
+  __proto__: null,
+  default: React__default
+}, [reactExports]);
 var QueryClientContext = reactExports.createContext(
   void 0
 );
@@ -16476,7 +16499,7 @@ function findCurrentHostFiberImpl(node) {
   }
   return null;
 }
-var assign = Object.assign, REACT_LEGACY_ELEMENT_TYPE = Symbol.for("react.element"), REACT_ELEMENT_TYPE = Symbol.for("react.transitional.element"), REACT_PORTAL_TYPE = Symbol.for("react.portal"), REACT_FRAGMENT_TYPE = Symbol.for("react.fragment"), REACT_STRICT_MODE_TYPE = Symbol.for("react.strict_mode"), REACT_PROFILER_TYPE = Symbol.for("react.profiler"), REACT_PROVIDER_TYPE = Symbol.for("react.provider"), REACT_CONSUMER_TYPE = Symbol.for("react.consumer"), REACT_CONTEXT_TYPE = Symbol.for("react.context"), REACT_FORWARD_REF_TYPE = Symbol.for("react.forward_ref"), REACT_SUSPENSE_TYPE = Symbol.for("react.suspense"), REACT_SUSPENSE_LIST_TYPE = Symbol.for("react.suspense_list"), REACT_MEMO_TYPE = Symbol.for("react.memo"), REACT_LAZY_TYPE = Symbol.for("react.lazy");
+var assign = Object.assign, REACT_LEGACY_ELEMENT_TYPE = Symbol.for("react.element"), REACT_ELEMENT_TYPE = Symbol.for("react.transitional.element"), REACT_PORTAL_TYPE = Symbol.for("react.portal"), REACT_FRAGMENT_TYPE = Symbol.for("react.fragment"), REACT_STRICT_MODE_TYPE = Symbol.for("react.strict_mode"), REACT_PROFILER_TYPE = Symbol.for("react.profiler"), REACT_PROVIDER_TYPE = Symbol.for("react.provider"), REACT_CONSUMER_TYPE = Symbol.for("react.consumer"), REACT_CONTEXT_TYPE = Symbol.for("react.context"), REACT_FORWARD_REF_TYPE = Symbol.for("react.forward_ref"), REACT_SUSPENSE_TYPE = Symbol.for("react.suspense"), REACT_SUSPENSE_LIST_TYPE = Symbol.for("react.suspense_list"), REACT_MEMO_TYPE = Symbol.for("react.memo"), REACT_LAZY_TYPE$1 = Symbol.for("react.lazy");
 var REACT_ACTIVITY_TYPE = Symbol.for("react.activity");
 var REACT_MEMO_CACHE_SENTINEL = Symbol.for("react.memo_cache_sentinel");
 var MAYBE_ITERATOR_SYMBOL = Symbol.iterator;
@@ -16520,7 +16543,7 @@ function getComponentNameFromType(type) {
         return type;
       case REACT_MEMO_TYPE:
         return innerType = type.displayName || null, null !== innerType ? innerType : getComponentNameFromType(type.type) || "Memo";
-      case REACT_LAZY_TYPE:
+      case REACT_LAZY_TYPE$1:
         innerType = type._payload;
         type = type._init;
         try {
@@ -18142,7 +18165,7 @@ function createFiberFromTypeAndProps(type, key, pendingProps, owner, mode, lanes
             case REACT_MEMO_TYPE:
               fiberTag = 14;
               break a;
-            case REACT_LAZY_TYPE:
+            case REACT_LAZY_TYPE$1:
               fiberTag = 16;
               owner = null;
               break a;
@@ -18987,7 +19010,7 @@ function useThenable(thenable) {
   null === (null === workInProgressHook ? index2.memoizedState : workInProgressHook.next) && (index2 = index2.alternate, ReactSharedInternals.H = null === index2 || null === index2.memoizedState ? HooksDispatcherOnMount : HooksDispatcherOnUpdate);
   return thenable;
 }
-function use(usable) {
+function use$1(usable) {
   if (null !== usable && "object" === typeof usable) {
     if ("function" === typeof usable.then) return useThenable(usable);
     if (usable.$$typeof === REACT_CONTEXT_TYPE) return readContext(usable);
@@ -19729,7 +19752,7 @@ function entangleTransitionUpdate(root2, queue, lane) {
 }
 var ContextOnlyDispatcher = {
   readContext,
-  use,
+  use: use$1,
   useCallback: throwInvalidHookError,
   useContext: throwInvalidHookError,
   useEffect: throwInvalidHookError,
@@ -19753,7 +19776,7 @@ var ContextOnlyDispatcher = {
   useCacheRefresh: throwInvalidHookError
 }, HooksDispatcherOnMount = {
   readContext,
-  use,
+  use: use$1,
   useCallback: function(callback, deps) {
     mountWorkInProgressHook().memoizedState = [
       callback,
@@ -19929,7 +19952,7 @@ var ContextOnlyDispatcher = {
   }
 }, HooksDispatcherOnUpdate = {
   readContext,
-  use,
+  use: use$1,
   useCallback: updateCallback,
   useContext: readContext,
   useEffect: updateEffect,
@@ -19972,7 +19995,7 @@ var ContextOnlyDispatcher = {
   useCacheRefresh: updateRefresh
 }, HooksDispatcherOnRerender = {
   readContext,
-  use,
+  use: use$1,
   useCallback: updateCallback,
   useContext: readContext,
   useEffect: updateEffect,
@@ -20097,7 +20120,7 @@ function createChildReconciler(shouldTrackSideEffects) {
         lanes,
         element.key
       );
-    if (null !== current && (current.elementType === elementType || "object" === typeof elementType && null !== elementType && elementType.$$typeof === REACT_LAZY_TYPE && resolveLazy(elementType) === current.type))
+    if (null !== current && (current.elementType === elementType || "object" === typeof elementType && null !== elementType && elementType.$$typeof === REACT_LAZY_TYPE$1 && resolveLazy(elementType) === current.type))
       return current = useFiber(current, element.props), coerceRef(current, element), current.return = returnFiber, current;
     current = createFiberFromTypeAndProps(
       element.type,
@@ -20154,7 +20177,7 @@ function createChildReconciler(shouldTrackSideEffects) {
             returnFiber.mode,
             lanes
           ), newChild.return = returnFiber, newChild;
-        case REACT_LAZY_TYPE:
+        case REACT_LAZY_TYPE$1:
           var init = newChild._init;
           newChild = init(newChild._payload);
           return createChild(returnFiber, newChild, lanes);
@@ -20188,7 +20211,7 @@ function createChildReconciler(shouldTrackSideEffects) {
           return newChild.key === key ? updateElement(returnFiber, oldFiber, newChild, lanes) : null;
         case REACT_PORTAL_TYPE:
           return newChild.key === key ? updatePortal(returnFiber, oldFiber, newChild, lanes) : null;
-        case REACT_LAZY_TYPE:
+        case REACT_LAZY_TYPE$1:
           return key = newChild._init, newChild = key(newChild._payload), updateSlot(returnFiber, oldFiber, newChild, lanes);
       }
       if (isArrayImpl(newChild) || getIteratorFn(newChild))
@@ -20224,7 +20247,7 @@ function createChildReconciler(shouldTrackSideEffects) {
           return existingChildren = existingChildren.get(
             null === newChild.key ? newIdx : newChild.key
           ) || null, updatePortal(returnFiber, existingChildren, newChild, lanes);
-        case REACT_LAZY_TYPE:
+        case REACT_LAZY_TYPE$1:
           var init = newChild._init;
           newChild = init(newChild._payload);
           return updateFromMap(
@@ -20362,7 +20385,7 @@ function createChildReconciler(shouldTrackSideEffects) {
                     returnFiber = lanes;
                     break a;
                   }
-                } else if (currentFirstChild.elementType === key || "object" === typeof key && null !== key && key.$$typeof === REACT_LAZY_TYPE && resolveLazy(key) === currentFirstChild.type) {
+                } else if (currentFirstChild.elementType === key || "object" === typeof key && null !== key && key.$$typeof === REACT_LAZY_TYPE$1 && resolveLazy(key) === currentFirstChild.type) {
                   deleteRemainingChildren(
                     returnFiber,
                     currentFirstChild.sibling
@@ -20418,7 +20441,7 @@ function createChildReconciler(shouldTrackSideEffects) {
             returnFiber = lanes;
           }
           return placeSingleChild(returnFiber);
-        case REACT_LAZY_TYPE:
+        case REACT_LAZY_TYPE$1:
           return key = newChild._init, newChild = key(newChild._payload), reconcileChildFibersImpl(
             returnFiber,
             currentFirstChild,
@@ -27500,6 +27523,7 @@ const en = {
   status_expired: "Expired",
   status_cancelled: "Cancelled",
   status_exception: "Exception",
+  status_fully_completed: "Fully Completed",
   // Driver statuses
   status_online: "Online",
   status_offline: "Offline",
@@ -27648,7 +27672,186 @@ const en = {
   match_driver: "Your Driver",
   match_zone: "Zone",
   match_size: "Size",
-  match_price: "Price"
+  match_price: "Price",
+  // Shift activation
+  shift_title: "Shift Activation",
+  shift_selectPeriod: "Select Shift Period",
+  shift_morning: "Morning Shift (6am - 6pm)",
+  shift_evening: "Evening Shift (6pm - 6am)",
+  shift_feeLabel: "Shift Fee: $1.00 via ZAAD",
+  shift_payNow: "Pay Now",
+  shift_paying: "Processing payment…",
+  shift_paymentSuccess: "Payment confirmed!",
+  shift_enterZNumber: "Enter your Z-Number",
+  shift_zNumberHint: "8-character code sent to your phone",
+  shift_submitZNumber: "Activate Shift",
+  shift_verifying: "Verifying…",
+  shift_activated: "Shift activated! You're online.",
+  shift_activeShift: "Active Shift",
+  shift_noActiveShift: "No active shift",
+  shift_startShift: "Start a Shift",
+  shift_shiftHistory: "Shift History",
+  // Driver registration
+  driver_register: "Driver Registration",
+  driver_fullName: "Full Name",
+  driver_phone: "Phone Number",
+  driver_pin: "4-Digit PIN",
+  driver_truckPlate: "Truck Plate / ID",
+  driver_registerBtn: "Register",
+  driver_alreadyRegistered: "Already registered? Sign in",
+  // Delivery confirmation
+  confirm_title: "Confirm Delivery",
+  confirm_driverBtn: "I Delivered the Water",
+  confirm_customerBtn: "I Received the Water",
+  confirm_waiting: "Waiting for both confirmations…",
+  confirm_bothConfirmed: "Delivery confirmed by both sides!",
+  confirm_driverConfirmed: "Driver confirmed delivery",
+  confirm_customerConfirmed: "Customer confirmed receipt",
+  // Availability
+  availability_title: "Available Water Trucks",
+  availability_zone: "Zone",
+  availability_distance: "km away",
+  availability_noTrucks: "No trucks available in this zone",
+  availability_estimatedTime: "Est. arrival",
+  availability_available: "Available",
+  availability_busy: "Busy",
+  availability_orderNow: "Order Now",
+  // Driver registration extras
+  driver_confirmPin: "Confirm PIN",
+  // Shift activation extras
+  shift_redirecting: "Redirecting to dashboard…",
+  // Auth page — role selection & forms
+  auth_role_title: "Welcome to BiyoFlow",
+  auth_role_subtitle: "Who are you?",
+  auth_role_resident: "I am a Resident",
+  auth_role_driver: "I am a Water Truck Driver",
+  auth_rc_login_title: "Resident Login",
+  auth_rc_register_title: "Create Account",
+  auth_wt_login_title: "Driver Login",
+  auth_admin_title: "Admin Access",
+  auth_name_label: "Full Name",
+  auth_phone_label: "Phone Number",
+  auth_pin_label: "PIN (4 digits)",
+  auth_email_label: "Email (optional)",
+  auth_login_btn: "Login",
+  auth_register_btn: "Register",
+  auth_no_account: "Don't have an account?",
+  auth_register_link: "Register",
+  auth_new_driver: "New driver?",
+  auth_register_here: "Register here",
+  auth_back: "Back",
+  auth_test_account: "Test Account",
+  auth_test_use_btn: "Use test account",
+  auth_logout: "Logout",
+  auth_hello: "Hello, {name}",
+  // Auth page — existing keys referenced in so.ts (keep in sync)
+  auth_welcome_sub: "Who are you?",
+  auth_rc_role: "I am a Resident",
+  auth_rc_role_sub: "Order water to your home",
+  auth_wt_role: "I am a Water Truck Driver",
+  auth_wt_role_sub: "Accept deliveries in your zone",
+  auth_rc_login_sub: "Login to order water",
+  auth_rc_register_sub: "Register to start ordering water",
+  auth_wt_login_sub: "Login to see available jobs",
+  auth_admin_sub: "Operations dashboard",
+  auth_admin_password: "Admin password",
+  auth_login_error: "Invalid credentials. Please try again.",
+  auth_register_error: "Registration failed. Phone may already be in use.",
+  auth_fill_required: "Please fill in all required fields.",
+  auth_no_account_register: "Don't have an account? Register",
+  auth_already_have_account: "Already have an account? Login",
+  auth_wt_new_driver: "New driver? Register here",
+  auth_back_role: "Back to role selection",
+  auth_back_login: "Back to login",
+  auth_optional: "optional",
+  auth_test_account_label: "Test Account",
+  auth_use_test_account: "Use test account",
+  // Admin dashboard
+  admin_title: "BiyoFlow Admin",
+  admin_tab_overview: "Overview",
+  admin_tab_orders: "Orders",
+  admin_tab_drivers: "Drivers",
+  admin_tab_settings: "Settings",
+  admin_stat_today: "Today's Orders",
+  admin_stat_active: "Active Orders",
+  admin_stat_online: "Online Drivers",
+  admin_stat_empty: "Empty Zones",
+  admin_payment_title: "Payment Mode",
+  admin_payment_success: "Always Success",
+  admin_payment_fail: "Always Fail",
+  admin_payment_random: "Random",
+  admin_reset_title: "Reset Demo Data",
+  admin_reset_confirm: "Are you sure? This will reset all data.",
+  admin_reset_btn: "Reset Demo",
+  admin_logout: "Logout",
+  // Admin dashboard — existing keys referenced in so.ts (keep in sync)
+  admin_dashboard_title: "Admin Dashboard",
+  admin_dashboard_sub: "BiyoFlow operations overview",
+  admin_stat_active_orders: "Active Orders",
+  admin_stat_online_drivers: "Online Drivers",
+  admin_stat_pending_shifts: "Pending Shifts",
+  admin_stat_total_zones: "Zones",
+  admin_zone_summary: "Zone Summary",
+  admin_col_zone: "Zone",
+  admin_col_drivers: "Online Drivers",
+  admin_col_pending: "Pending Orders",
+  admin_col_active: "Active Orders",
+  admin_access_note: "Admin access location",
+  admin_access_desc: "Button at bottom-right of login page (/auth). Login",
+  // Admin login form
+  admin_login_title: "Admin Login",
+  admin_login_hint: "Enter your admin password to continue",
+  admin_password_label: "Admin Password",
+  admin_login_error: "Invalid admin password. Please try again.",
+  admin_login_btn: "Login",
+  // Admin stats (aligned with AdminPage keys)
+  admin_stat_today_orders: "Today's Orders",
+  // Admin table columns
+  admin_col_status: "Status",
+  admin_col_size: "Size",
+  admin_col_name: "Name",
+  admin_col_phone: "Phone",
+  admin_col_active_order: "Active Order",
+  admin_col_driver: "Driver",
+  admin_col_customer: "Customer",
+  admin_col_created: "Created",
+  admin_col_online_drivers: "Online Drivers",
+  // Admin orders/drivers
+  admin_filter_status: "Filter by status",
+  admin_no_orders: "No orders found.",
+  admin_no_drivers: "No drivers registered yet.",
+  // Admin payment mode
+  admin_payment_mode_title: "Payment Mode",
+  admin_payment_mode_hint: "Current mode",
+  admin_payment_always_success: "Always Success",
+  admin_payment_always_fail: "Always Fail",
+  admin_mode_error: "Could not update payment mode.",
+  // Admin settings
+  admin_reset_hint: "Resets all orders and shifts to seed data.",
+  admin_reset_yes: "Yes, Reset",
+  admin_credentials_title: "Admin Credentials",
+  // Phone pre-population note (CustomerPage step 3)
+  phone_order_only_note: "Changes apply to this order only (we strongly encourage always using your registration number [{phone}])",
+  // Admin zone management
+  admin_zone_assign_title: "Zone Assignment",
+  admin_zone_assign_hint: "Assign zones to this driver",
+  admin_zone_max_label: "Max zones allowed",
+  admin_zone_save: "Save Zone",
+  admin_zone_saving: "Saving…",
+  admin_zone_saved: "Zone saved",
+  admin_zone_error: "Could not save zone assignment.",
+  admin_driver_active_label: "Active",
+  admin_driver_deactivate: "Deactivate",
+  admin_driver_activate: "Activate",
+  admin_override_order_status: "Override Status",
+  admin_override_saving: "Saving…",
+  admin_override_saved: "Status updated",
+  admin_override_error: "Could not update order status.",
+  // Shift activated — zone display
+  shift_assigned_zones: "Your assigned zones",
+  shift_no_zones: "No zones assigned yet. Contact admin.",
+  // WT test credentials
+  auth_wt_test_label: "Test Driver Account"
 };
 const so = {
   // App / Navigation
@@ -27723,6 +27926,7 @@ const so = {
   status_expired: "Wuu Dhacay",
   status_cancelled: "Wuu Baajinmay",
   status_exception: "Khalad",
+  status_fully_completed: "Si Buuxda Dhammaystay",
   status_online: "Internetka",
   status_offline: "Xidid",
   // Manual lookup
@@ -27870,7 +28074,186 @@ const so = {
   match_driver: "Darawalkaaga",
   match_zone: "Deegaan",
   match_size: "Xajmi",
-  match_price: "Qiimaha"
+  match_price: "Qiimaha",
+  // Shift activation
+  shift_title: "Hawlgalinta Wareegga",
+  shift_selectPeriod: "Dooro Muddada Wareegga",
+  shift_morning: "Wareegga Subaxnimada (6am - 6pm)",
+  shift_evening: "Wareegga Habeenkii (6pm - 6am)",
+  shift_feeLabel: "Kharashka Wareegga: $1.00 ZAAD",
+  shift_payNow: "Bixi Hadda",
+  shift_paying: "Lacagta waa la gelinayaa…",
+  shift_paymentSuccess: "Lacagta waa la xaqiijiyay!",
+  shift_enterZNumber: "Geli Z-Lambarka",
+  shift_zNumberHint: "8-xaraf oo lambarka lagugu soo diray",
+  shift_submitZNumber: "Hawlgeli Wareegga",
+  shift_verifying: "Waa la xaqiijinayaa…",
+  shift_activated: "Wareegga waa la hawlgeliyay! Waxaad online tahay.",
+  shift_activeShift: "Wareegga Socda",
+  shift_noActiveShift: "Wareeg ma jiro",
+  shift_startShift: "Bilow Wareeg",
+  shift_shiftHistory: "Taariikh Wareegyada",
+  // Driver registration
+  driver_register: "Diiwaangelinta Darawalka",
+  driver_fullName: "Magaca Oo Dhan",
+  driver_phone: "Lambarka Telefoonka",
+  driver_pin: "PIN 4 Lambar",
+  driver_truckPlate: "Lambarka Baabuurka",
+  driver_registerBtn: "Diiwaan Geli",
+  driver_alreadyRegistered: "Horay ma diiwaan gelisay? Soo gal",
+  // Delivery confirmation
+  confirm_title: "Xaqiiji Gaarsiinta",
+  confirm_driverBtn: "Biyaha Waan Gaarsiyay",
+  confirm_customerBtn: "Biyaha Waan Helaye",
+  confirm_waiting: "Sugitaanka labada xaqiijin…",
+  confirm_bothConfirmed: "Gaarsiintu labada dhinac ayay xaqiijiyeen!",
+  confirm_driverConfirmed: "Darawalka ayaa gaarsiinta xaqiijiyay",
+  confirm_customerConfirmed: "Macmiilku wuu xaqiijiyay helitaanka",
+  // Availability
+  availability_title: "Baabuurada Biyaha Diyaarsan",
+  availability_zone: "Deegaan",
+  availability_distance: "km fog",
+  availability_noTrucks: "Baabuur lama helin deegaankan",
+  availability_estimatedTime: "Waqtiga la filayo",
+  availability_available: "Diyaar",
+  availability_busy: "Mashquul",
+  availability_orderNow: "Dalbo Hadda",
+  // Driver registration extras
+  driver_confirmPin: "Xaqiiji PIN",
+  // Shift activation extras
+  shift_redirecting: "Waxaa lagu wareejinayaa xaashida…",
+  // Auth page — new keys
+  auth_role_title: "Ku soo dhawoow BiyoFlow",
+  auth_role_subtitle: "Cidda aad tahay?",
+  auth_role_resident: "Waxaan ahay Deggan",
+  auth_role_driver: "Waxaan ahay Wadaha Baabuurta Biyaha",
+  auth_name_label: "Magaca oo Dhamaystiran",
+  auth_phone_label: "Lambarka Telefoonka",
+  auth_pin_label: "PIN (4 lambar)",
+  auth_no_account: "Ma haysatid akoon?",
+  auth_register_link: "Diwaangeli",
+  auth_new_driver: "Wadaha cusub?",
+  auth_register_here: "Halkan Diwaangeli",
+  auth_back: "Dib u noqo",
+  auth_test_account: "Akoonka Tijaabada",
+  auth_test_use_btn: "Isticmaal akoonka tijaabada",
+  auth_hello: "Salaan, {name}",
+  // Admin dashboard — new keys
+  admin_title: "Maamulka BiyoFlow",
+  admin_tab_overview: "Guud ahaan",
+  admin_tab_orders: "Dalabka",
+  admin_tab_drivers: "Wadayaasha",
+  admin_tab_settings: "Goobaha",
+  admin_stat_today: "Dalabka Maanta",
+  admin_stat_active: "Dalabka Firfircoon",
+  admin_stat_online: "Wadayaasha Online",
+  admin_stat_empty: "Goobaha Madhan",
+  admin_payment_title: "Hab-Bixinta",
+  admin_payment_success: "Markasta Guul",
+  admin_payment_fail: "Markasta Fashil",
+  admin_payment_random: "Qaab Kasta",
+  admin_reset_title: "Dib u Deji Xogta",
+  admin_reset_confirm: "Ma hubtaa? Xogta oo dhan ayaa dib loo dejin doonaa.",
+  admin_reset_btn: "Dib u Deji",
+  admin_logout: "Ka Bax",
+  // Auth page — existing keys
+  auth_welcome_sub: "Cidda aad tahay?",
+  auth_rc_role: "Waxaan ahay Deggan",
+  auth_rc_role_sub: "Dalbo biyo gurigaaga",
+  auth_wt_role: "Waxaan ahay Wadaha Baabuurta Biyaha",
+  auth_wt_role_sub: "Aqbal shaqooyinka gaarsiinta deegaankaaga",
+  auth_rc_login_title: "Galitaanka Deganaanshaha",
+  auth_rc_login_sub: "Gal si aad u dalbanayso biyo",
+  auth_rc_register_title: "Abuur Akoon",
+  auth_rc_register_sub: "Diwaangeli si aad u bilowdo dalbaashada biyaha",
+  auth_wt_login_title: "Galitaanka Wadaha",
+  auth_wt_login_sub: "Gal si aad u aragto shaqooyinka diyaarsan",
+  auth_admin_title: "Galitaanka Maamulka",
+  auth_admin_sub: "Xaashida hawlgalka",
+  auth_admin_password: "Furaha sirta",
+  auth_login_btn: "Gal",
+  auth_register_btn: "Diwaangeli",
+  auth_login_error: "Aqoonsiga khalad ah. Isku day mar kale.",
+  auth_register_error: "Diiwaangelinta waxay guul darreysatay. Nambarka waxaa laga yaabaa in horay loo isticmaalay.",
+  auth_fill_required: "Fadlan buuxi dhammaan beelaha loo baahdo.",
+  auth_no_account_register: "Akoon ma lihid? Diiwaan Geli",
+  auth_already_have_account: "Akoon horay ma u lahayd? Gal",
+  auth_wt_new_driver: "Darawal cusub? Halkan ka diwaangeli",
+  auth_back_role: "Dib u noqo doorashada doorka",
+  auth_back_login: "Dib u noqo galitaanka",
+  auth_email_label: "Email",
+  auth_optional: "ikhtiyaari",
+  auth_test_account_label: "Test Account / Akoonka Tijaabada",
+  auth_use_test_account: "Isticmaal akoonka tijaabada",
+  auth_logout: "Ka bax",
+  // Admin dashboard
+  admin_dashboard_title: "Xaashida Maamulka",
+  admin_dashboard_sub: "Dulmarinta hawlgalka BiyoFlow",
+  admin_stat_active_orders: "Dalabadaha Firfircoon",
+  admin_stat_online_drivers: "Darawallada Online",
+  admin_stat_pending_shifts: "Wareegyada Sugaya",
+  admin_stat_total_zones: "Deegaannada",
+  admin_zone_summary: "Kooban Deegaannada",
+  admin_col_zone: "Deegaan",
+  admin_col_drivers: "Darawallada Online",
+  admin_col_pending: "Dalabadaha Sugaya",
+  admin_col_active: "Dalabadaha Firfircoon",
+  admin_access_note: "Goobta galitaanka maamulka",
+  admin_access_desc: "Badhanka: geeska hoose-midig ee bogga aqoonsiga (/auth). Gal",
+  // Admin login form
+  admin_login_title: "Galitaanka Maamulka",
+  admin_login_hint: "Geli furaha sirta maamulka si aad u sii waddo",
+  admin_password_label: "Furaha Sirta Maamulka",
+  admin_login_error: "Furaha sirta khalad ah. Isku day mar kale.",
+  admin_login_btn: "Gal",
+  // Admin stats (aligned with AdminPage keys)
+  admin_stat_today_orders: "Dalabadaha Maanta",
+  // Admin table columns
+  admin_col_status: "Xaaladda",
+  admin_col_size: "Xajmi",
+  admin_col_name: "Magaca",
+  admin_col_phone: "Telefoon",
+  admin_col_active_order: "Dalabka Firfircoon",
+  admin_col_driver: "Darawalka",
+  admin_col_customer: "Macmiilka",
+  admin_col_created: "La Abuuray",
+  admin_col_online_drivers: "Darawallada Online",
+  // Admin orders/drivers
+  admin_filter_status: "Shaandee xaaladda",
+  admin_no_orders: "Dalab lama helin.",
+  admin_no_drivers: "Darawal lama diiwaan gelin.",
+  // Admin payment mode
+  admin_payment_mode_title: "Hab-Bixinta",
+  admin_payment_mode_hint: "Habka hadda",
+  admin_payment_always_success: "Markasta Guul",
+  admin_payment_always_fail: "Markasta Fashil",
+  admin_mode_error: "Hab-bixinta lama cusbooneysiiyay karin.",
+  // Admin settings
+  admin_reset_hint: "Dib u deji dhammaan dalabadaha iyo wareegyada.",
+  admin_reset_yes: "Haa, Dib u Deji",
+  admin_credentials_title: "Aqoonsiga Maamulka",
+  // Phone pre-population note (CustomerPage step 3)
+  phone_order_only_note: "Isbeddellada waxay ku kooban tahay dalabkan oo keliya (si adag waxaan kugula talineynaa in aad had iyo jeer isticmaasho lambarka diiwaan gelintaada [{phone}])",
+  // Admin zone management
+  admin_zone_assign_title: "Xafiiska Deegaannada",
+  admin_zone_assign_hint: "Deegaannada darawalkan u xil saari",
+  admin_zone_max_label: "Tirada deegaannada ugu badan",
+  admin_zone_save: "Keydi Deegaanka",
+  admin_zone_saving: "Waa la keydiyaa…",
+  admin_zone_saved: "Deegaanka waa la keydiay",
+  admin_zone_error: "Deegaanka lama keydin karin.",
+  admin_driver_active_label: "Firfircoon",
+  admin_driver_deactivate: "Jooji",
+  admin_driver_activate: "Hawlgeli",
+  admin_override_order_status: "Xaaladda Bedel",
+  admin_override_saving: "Waa la keydiyaa…",
+  admin_override_saved: "Xaaladda waa la cusbooneysiiyay",
+  admin_override_error: "Xaaladda lama cusbooneysiiyay karin.",
+  // Shift activated — zone display
+  shift_assigned_zones: "Deegaannaadaada",
+  shift_no_zones: "Wali deegaan lama xil saarin. Maamulka la xiriir.",
+  // WT test credentials
+  auth_wt_test_label: "Akoonka Tijaabada Darawalka"
 };
 const STORAGE_KEY = "biyo_lang";
 const dictionaries = { en, so };
@@ -27885,6 +28268,8 @@ const LangContext = reactExports.createContext({
   lang: "en",
   setLang: () => {
   },
+  toggleLang: () => {
+  },
   t: (key) => key
 });
 function LangProvider({ children }) {
@@ -27896,6 +28281,9 @@ function LangProvider({ children }) {
     localStorage.setItem(STORAGE_KEY, l);
     setLangState(l);
   }, []);
+  const toggleLang = reactExports.useCallback(() => {
+    setLang(lang === "en" ? "so" : "en");
+  }, [lang, setLang]);
   const t = reactExports.useCallback(
     (key, vars) => {
       const dict = dictionaries[lang];
@@ -27909,20 +28297,16 @@ function LangProvider({ children }) {
   }, [lang]);
   return React__default.createElement(
     LangContext.Provider,
-    { value: { lang, setLang, t } },
+    { value: { lang, setLang, toggleLang, t } },
     children
   );
 }
 function useLang() {
   return reactExports.useContext(LangContext);
 }
-const TankSize$1 = Variant({
-  "large": Null,
-  "small": Null,
-  "medium": Null
-});
 const OrderStatus$1 = Variant({
   "pumping": Null,
+  "fully_completed": Null,
   "cancelled": Null,
   "expired": Null,
   "pending": Null,
@@ -27931,6 +28315,50 @@ const OrderStatus$1 = Variant({
   "en_route": Null,
   "matched": Null,
   "accepted": Null
+});
+const TankSize$1 = Variant({
+  "large": Null,
+  "small": Null,
+  "medium": Null
+});
+const ShiftStatus$1 = Variant({
+  "active": Null,
+  "expired": Null,
+  "pending_payment": Null,
+  "pending_verification": Null
+});
+const ShiftPeriod$1 = Variant({
+  "morning": Null,
+  "evening": Null
+});
+const Shift = Record({
+  "id": Nat,
+  "status": ShiftStatus$1,
+  "driverId": Nat,
+  "feePaidAt": Opt(Int),
+  "period": ShiftPeriod$1,
+  "activatedAt": Opt(Int),
+  "date": Text,
+  "zNumber": Opt(Text),
+  "paymentRef": Opt(Text),
+  "verifiedAt": Opt(Int)
+});
+const OrderSummary = Record({
+  "id": Nat,
+  "status": Text,
+  "customerPhone": Text,
+  "createdAt": Int,
+  "size": Text,
+  "zone": Text,
+  "driverName": Opt(Text)
+});
+const Customer = Record({
+  "id": Nat,
+  "pin": Text,
+  "name": Text,
+  "created_at": Int,
+  "email": Opt(Text),
+  "phone": Text
 });
 const PaymentStatus = Variant({
   "pending": Null,
@@ -27945,8 +28373,11 @@ const Order = Record({
   "size": TankSize$1,
   "created_at": Int,
   "payment_status": PaymentStatus,
+  "customer_id": Opt(Nat),
   "address_note": Text,
+  "customer_confirmed": Bool,
   "driver_id": Opt(Nat),
+  "driver_confirmed": Bool,
   "payment_ref": Text,
   "completed_at": Opt(Int),
   "matched_at": Opt(Int),
@@ -27967,11 +28398,27 @@ const Driver = Record({
   "id": Nat,
   "pin": Text,
   "status": DriverStatus$1,
+  "allowed_zone_ids": Vec(Nat),
   "name": Text,
   "current_order_id": Opt(Nat),
   "truck_plate": Text,
+  "is_active": Bool,
   "phone": Text,
   "zone_id": Nat
+});
+const DriverSummary = Record({
+  "id": Nat,
+  "status": Text,
+  "activeOrderId": Opt(Nat),
+  "name": Text,
+  "zone": Text,
+  "phone": Text
+});
+const ZoneSummary = Record({
+  "pendingOrders": Nat,
+  "onlineDrivers": Nat,
+  "zoneName": Text,
+  "activeOrders": Nat
 });
 const Zone = Record({
   "id": Nat,
@@ -27979,7 +28426,11 @@ const Zone = Record({
   "name": Text,
   "display_order": Nat
 });
-const PaymentMode = Variant({
+const PaymentResult = Record({
+  "zNumber": Text,
+  "paymentRef": Text
+});
+const PaymentMode$1 = Variant({
   "always_success": Null,
   "always_fail": Null,
   "random": Null
@@ -27990,8 +28441,33 @@ Service({
     [Variant({ "ok": Null, "err": Text })],
     []
   ),
+  "adminLogin": Func(
+    [Text],
+    [
+      Variant({
+        "ok": Record({ "token": Text, "role": Text }),
+        "err": Text
+      })
+    ],
+    []
+  ),
+  "adminSetDriverActive": Func(
+    [Nat, Bool],
+    [Variant({ "ok": Null, "err": Text })],
+    []
+  ),
+  "adminSetOrderStatus": Func(
+    [Nat, OrderStatus$1],
+    [Variant({ "ok": Null, "err": Text })],
+    []
+  ),
+  "confirmDelivery": Func(
+    [Nat, Text],
+    [Variant({ "ok": Text, "err": Text })],
+    []
+  ),
   "createOrder": Func(
-    [Nat, TankSize$1, Text, Text, Text],
+    [Nat, TankSize$1, Text, Text, Text, Opt(Nat)],
     [
       Variant({
         "ok": Record({ "payment_ref": Text, "order_id": Nat }),
@@ -28008,6 +28484,13 @@ Service({
         "err": Text
       })
     ],
+    []
+  ),
+  "getActiveShift": Func([Nat], [Opt(Shift)], ["query"]),
+  "getAllOrders": Func([], [Vec(OrderSummary)], ["query"]),
+  "getCustomerProfile": Func(
+    [Nat],
+    [Variant({ "ok": Customer, "err": Text })],
     []
   ),
   "getDriverEarnings": Func(
@@ -28027,9 +28510,31 @@ Service({
     [Opt(Record({ "prices": DriverPrices, "driver": Driver }))],
     ["query"]
   ),
+  "getDriverShifts": Func([Nat], [Vec(Shift)], ["query"]),
+  "getDriverStatusSummary": Func([], [Vec(DriverSummary)], ["query"]),
   "getIncomingOrders": Func([Nat], [Vec(Order)], []),
   "getOrder": Func([Nat, Text], [Opt(Order)], ["query"]),
+  "getZoneSummary": Func([], [Vec(ZoneSummary)], ["query"]),
   "getZones": Func([], [Vec(Zone)], ["query"]),
+  "loginCustomer": Func(
+    [Text, Text],
+    [
+      Variant({
+        "ok": Record({
+          "name": Text,
+          "customerId": Nat,
+          "phone": Text
+        }),
+        "err": Text
+      })
+    ],
+    []
+  ),
+  "payShiftFee": Func(
+    [Nat],
+    [Variant({ "ok": PaymentResult, "err": Text })],
+    []
+  ),
   "processPayment": Func(
     [Nat, Text],
     [
@@ -28043,9 +28548,19 @@ Service({
     ],
     []
   ),
+  "registerCustomer": Func(
+    [Text, Text, Text, Opt(Text)],
+    [Variant({ "ok": Customer, "err": Text })],
+    []
+  ),
   "rejectOrder": Func(
     [Nat, Nat],
     [Variant({ "ok": Null, "err": Text })],
+    []
+  ),
+  "requestShift": Func(
+    [Nat, ShiftPeriod$1, Text],
+    [Variant({ "ok": Shift, "err": Text })],
     []
   ),
   "resetDemo": Func([], [Variant({ "ok": Null })], []),
@@ -28064,9 +28579,19 @@ Service({
     [Variant({ "ok": Null, "err": Text })],
     []
   ),
+  "setDriverZones": Func(
+    [Nat, Vec(Nat)],
+    [Variant({ "ok": Null, "err": Text })],
+    []
+  ),
   "setPaymentMode": Func(
-    [PaymentMode],
+    [PaymentMode$1],
     [Variant({ "ok": Null })],
+    []
+  ),
+  "submitZNumber": Func(
+    [Nat, Text],
+    [Variant({ "ok": Shift, "err": Text })],
     []
   ),
   "updateOrderStatus": Func(
@@ -28076,13 +28601,9 @@ Service({
   )
 });
 const idlFactory = ({ IDL: IDL2 }) => {
-  const TankSize2 = IDL2.Variant({
-    "large": IDL2.Null,
-    "small": IDL2.Null,
-    "medium": IDL2.Null
-  });
   const OrderStatus2 = IDL2.Variant({
     "pumping": IDL2.Null,
+    "fully_completed": IDL2.Null,
     "cancelled": IDL2.Null,
     "expired": IDL2.Null,
     "pending": IDL2.Null,
@@ -28091,6 +28612,50 @@ const idlFactory = ({ IDL: IDL2 }) => {
     "en_route": IDL2.Null,
     "matched": IDL2.Null,
     "accepted": IDL2.Null
+  });
+  const TankSize2 = IDL2.Variant({
+    "large": IDL2.Null,
+    "small": IDL2.Null,
+    "medium": IDL2.Null
+  });
+  const ShiftStatus2 = IDL2.Variant({
+    "active": IDL2.Null,
+    "expired": IDL2.Null,
+    "pending_payment": IDL2.Null,
+    "pending_verification": IDL2.Null
+  });
+  const ShiftPeriod2 = IDL2.Variant({
+    "morning": IDL2.Null,
+    "evening": IDL2.Null
+  });
+  const Shift2 = IDL2.Record({
+    "id": IDL2.Nat,
+    "status": ShiftStatus2,
+    "driverId": IDL2.Nat,
+    "feePaidAt": IDL2.Opt(IDL2.Int),
+    "period": ShiftPeriod2,
+    "activatedAt": IDL2.Opt(IDL2.Int),
+    "date": IDL2.Text,
+    "zNumber": IDL2.Opt(IDL2.Text),
+    "paymentRef": IDL2.Opt(IDL2.Text),
+    "verifiedAt": IDL2.Opt(IDL2.Int)
+  });
+  const OrderSummary2 = IDL2.Record({
+    "id": IDL2.Nat,
+    "status": IDL2.Text,
+    "customerPhone": IDL2.Text,
+    "createdAt": IDL2.Int,
+    "size": IDL2.Text,
+    "zone": IDL2.Text,
+    "driverName": IDL2.Opt(IDL2.Text)
+  });
+  const Customer2 = IDL2.Record({
+    "id": IDL2.Nat,
+    "pin": IDL2.Text,
+    "name": IDL2.Text,
+    "created_at": IDL2.Int,
+    "email": IDL2.Opt(IDL2.Text),
+    "phone": IDL2.Text
   });
   const PaymentStatus2 = IDL2.Variant({
     "pending": IDL2.Null,
@@ -28105,8 +28670,11 @@ const idlFactory = ({ IDL: IDL2 }) => {
     "size": TankSize2,
     "created_at": IDL2.Int,
     "payment_status": PaymentStatus2,
+    "customer_id": IDL2.Opt(IDL2.Nat),
     "address_note": IDL2.Text,
+    "customer_confirmed": IDL2.Bool,
     "driver_id": IDL2.Opt(IDL2.Nat),
+    "driver_confirmed": IDL2.Bool,
     "payment_ref": IDL2.Text,
     "completed_at": IDL2.Opt(IDL2.Int),
     "matched_at": IDL2.Opt(IDL2.Int),
@@ -28127,17 +28695,37 @@ const idlFactory = ({ IDL: IDL2 }) => {
     "id": IDL2.Nat,
     "pin": IDL2.Text,
     "status": DriverStatus2,
+    "allowed_zone_ids": IDL2.Vec(IDL2.Nat),
     "name": IDL2.Text,
     "current_order_id": IDL2.Opt(IDL2.Nat),
     "truck_plate": IDL2.Text,
+    "is_active": IDL2.Bool,
     "phone": IDL2.Text,
     "zone_id": IDL2.Nat
+  });
+  const DriverSummary2 = IDL2.Record({
+    "id": IDL2.Nat,
+    "status": IDL2.Text,
+    "activeOrderId": IDL2.Opt(IDL2.Nat),
+    "name": IDL2.Text,
+    "zone": IDL2.Text,
+    "phone": IDL2.Text
+  });
+  const ZoneSummary2 = IDL2.Record({
+    "pendingOrders": IDL2.Nat,
+    "onlineDrivers": IDL2.Nat,
+    "zoneName": IDL2.Text,
+    "activeOrders": IDL2.Nat
   });
   const Zone2 = IDL2.Record({
     "id": IDL2.Nat,
     "city": IDL2.Text,
     "name": IDL2.Text,
     "display_order": IDL2.Nat
+  });
+  const PaymentResult2 = IDL2.Record({
+    "zNumber": IDL2.Text,
+    "paymentRef": IDL2.Text
   });
   const PaymentMode2 = IDL2.Variant({
     "always_success": IDL2.Null,
@@ -28150,8 +28738,33 @@ const idlFactory = ({ IDL: IDL2 }) => {
       [IDL2.Variant({ "ok": IDL2.Null, "err": IDL2.Text })],
       []
     ),
+    "adminLogin": IDL2.Func(
+      [IDL2.Text],
+      [
+        IDL2.Variant({
+          "ok": IDL2.Record({ "token": IDL2.Text, "role": IDL2.Text }),
+          "err": IDL2.Text
+        })
+      ],
+      []
+    ),
+    "adminSetDriverActive": IDL2.Func(
+      [IDL2.Nat, IDL2.Bool],
+      [IDL2.Variant({ "ok": IDL2.Null, "err": IDL2.Text })],
+      []
+    ),
+    "adminSetOrderStatus": IDL2.Func(
+      [IDL2.Nat, OrderStatus2],
+      [IDL2.Variant({ "ok": IDL2.Null, "err": IDL2.Text })],
+      []
+    ),
+    "confirmDelivery": IDL2.Func(
+      [IDL2.Nat, IDL2.Text],
+      [IDL2.Variant({ "ok": IDL2.Text, "err": IDL2.Text })],
+      []
+    ),
     "createOrder": IDL2.Func(
-      [IDL2.Nat, TankSize2, IDL2.Text, IDL2.Text, IDL2.Text],
+      [IDL2.Nat, TankSize2, IDL2.Text, IDL2.Text, IDL2.Text, IDL2.Opt(IDL2.Nat)],
       [
         IDL2.Variant({
           "ok": IDL2.Record({
@@ -28173,6 +28786,13 @@ const idlFactory = ({ IDL: IDL2 }) => {
       ],
       []
     ),
+    "getActiveShift": IDL2.Func([IDL2.Nat], [IDL2.Opt(Shift2)], ["query"]),
+    "getAllOrders": IDL2.Func([], [IDL2.Vec(OrderSummary2)], ["query"]),
+    "getCustomerProfile": IDL2.Func(
+      [IDL2.Nat],
+      [IDL2.Variant({ "ok": Customer2, "err": IDL2.Text })],
+      []
+    ),
     "getDriverEarnings": IDL2.Func(
       [IDL2.Nat, IDL2.Opt(IDL2.Int), IDL2.Opt(IDL2.Int)],
       [
@@ -28190,9 +28810,35 @@ const idlFactory = ({ IDL: IDL2 }) => {
       [IDL2.Opt(IDL2.Record({ "prices": DriverPrices2, "driver": Driver2 }))],
       ["query"]
     ),
+    "getDriverShifts": IDL2.Func([IDL2.Nat], [IDL2.Vec(Shift2)], ["query"]),
+    "getDriverStatusSummary": IDL2.Func(
+      [],
+      [IDL2.Vec(DriverSummary2)],
+      ["query"]
+    ),
     "getIncomingOrders": IDL2.Func([IDL2.Nat], [IDL2.Vec(Order2)], []),
     "getOrder": IDL2.Func([IDL2.Nat, IDL2.Text], [IDL2.Opt(Order2)], ["query"]),
+    "getZoneSummary": IDL2.Func([], [IDL2.Vec(ZoneSummary2)], ["query"]),
     "getZones": IDL2.Func([], [IDL2.Vec(Zone2)], ["query"]),
+    "loginCustomer": IDL2.Func(
+      [IDL2.Text, IDL2.Text],
+      [
+        IDL2.Variant({
+          "ok": IDL2.Record({
+            "name": IDL2.Text,
+            "customerId": IDL2.Nat,
+            "phone": IDL2.Text
+          }),
+          "err": IDL2.Text
+        })
+      ],
+      []
+    ),
+    "payShiftFee": IDL2.Func(
+      [IDL2.Nat],
+      [IDL2.Variant({ "ok": PaymentResult2, "err": IDL2.Text })],
+      []
+    ),
     "processPayment": IDL2.Func(
       [IDL2.Nat, IDL2.Text],
       [
@@ -28206,9 +28852,19 @@ const idlFactory = ({ IDL: IDL2 }) => {
       ],
       []
     ),
+    "registerCustomer": IDL2.Func(
+      [IDL2.Text, IDL2.Text, IDL2.Text, IDL2.Opt(IDL2.Text)],
+      [IDL2.Variant({ "ok": Customer2, "err": IDL2.Text })],
+      []
+    ),
     "rejectOrder": IDL2.Func(
       [IDL2.Nat, IDL2.Nat],
       [IDL2.Variant({ "ok": IDL2.Null, "err": IDL2.Text })],
+      []
+    ),
+    "requestShift": IDL2.Func(
+      [IDL2.Nat, ShiftPeriod2, IDL2.Text],
+      [IDL2.Variant({ "ok": Shift2, "err": IDL2.Text })],
       []
     ),
     "resetDemo": IDL2.Func([], [IDL2.Variant({ "ok": IDL2.Null })], []),
@@ -28227,9 +28883,19 @@ const idlFactory = ({ IDL: IDL2 }) => {
       [IDL2.Variant({ "ok": IDL2.Null, "err": IDL2.Text })],
       []
     ),
+    "setDriverZones": IDL2.Func(
+      [IDL2.Nat, IDL2.Vec(IDL2.Nat)],
+      [IDL2.Variant({ "ok": IDL2.Null, "err": IDL2.Text })],
+      []
+    ),
     "setPaymentMode": IDL2.Func(
       [PaymentMode2],
       [IDL2.Variant({ "ok": IDL2.Null })],
+      []
+    ),
+    "submitZNumber": IDL2.Func(
+      [IDL2.Nat, IDL2.Text],
+      [IDL2.Variant({ "ok": Shift2, "err": IDL2.Text })],
       []
     ),
     "updateOrderStatus": IDL2.Func(
@@ -28257,6 +28923,7 @@ var DriverStatus = /* @__PURE__ */ ((DriverStatus2) => {
 })(DriverStatus || {});
 var OrderStatus = /* @__PURE__ */ ((OrderStatus2) => {
   OrderStatus2["pumping"] = "pumping";
+  OrderStatus2["fully_completed"] = "fully_completed";
   OrderStatus2["cancelled"] = "cancelled";
   OrderStatus2["expired"] = "expired";
   OrderStatus2["pending"] = "pending";
@@ -28267,6 +28934,24 @@ var OrderStatus = /* @__PURE__ */ ((OrderStatus2) => {
   OrderStatus2["accepted"] = "accepted";
   return OrderStatus2;
 })(OrderStatus || {});
+var PaymentMode = /* @__PURE__ */ ((PaymentMode2) => {
+  PaymentMode2["always_success"] = "always_success";
+  PaymentMode2["always_fail"] = "always_fail";
+  PaymentMode2["random"] = "random";
+  return PaymentMode2;
+})(PaymentMode || {});
+var ShiftPeriod = /* @__PURE__ */ ((ShiftPeriod2) => {
+  ShiftPeriod2["morning"] = "morning";
+  ShiftPeriod2["evening"] = "evening";
+  return ShiftPeriod2;
+})(ShiftPeriod || {});
+var ShiftStatus = /* @__PURE__ */ ((ShiftStatus2) => {
+  ShiftStatus2["active"] = "active";
+  ShiftStatus2["expired"] = "expired";
+  ShiftStatus2["pending_payment"] = "pending_payment";
+  ShiftStatus2["pending_verification"] = "pending_verification";
+  return ShiftStatus2;
+})(ShiftStatus || {});
 var TankSize = /* @__PURE__ */ ((TankSize2) => {
   TankSize2["large"] = "large";
   TankSize2["small"] = "small";
@@ -28294,102 +28979,242 @@ class Backend {
       return from_candid_variant_n1(this._uploadFile, this._downloadFile, result);
     }
   }
-  async createOrder(arg0, arg1, arg2, arg3, arg4) {
+  async adminLogin(arg0) {
     if (this.processError) {
       try {
-        const result = await this.actor.createOrder(arg0, to_candid_TankSize_n2(this._uploadFile, this._downloadFile, arg1), arg2, arg3, arg4);
-        return from_candid_variant_n4(this._uploadFile, this._downloadFile, result);
+        const result = await this.actor.adminLogin(arg0);
+        return from_candid_variant_n2(this._uploadFile, this._downloadFile, result);
       } catch (e) {
         this.processError(e);
         throw new Error("unreachable");
       }
     } else {
-      const result = await this.actor.createOrder(arg0, to_candid_TankSize_n2(this._uploadFile, this._downloadFile, arg1), arg2, arg3, arg4);
-      return from_candid_variant_n4(this._uploadFile, this._downloadFile, result);
+      const result = await this.actor.adminLogin(arg0);
+      return from_candid_variant_n2(this._uploadFile, this._downloadFile, result);
     }
   }
-  async driverLogin(arg0, arg1) {
+  async adminSetDriverActive(arg0, arg1) {
     if (this.processError) {
       try {
-        const result = await this.actor.driverLogin(arg0, arg1);
+        const result = await this.actor.adminSetDriverActive(arg0, arg1);
+        return from_candid_variant_n1(this._uploadFile, this._downloadFile, result);
+      } catch (e) {
+        this.processError(e);
+        throw new Error("unreachable");
+      }
+    } else {
+      const result = await this.actor.adminSetDriverActive(arg0, arg1);
+      return from_candid_variant_n1(this._uploadFile, this._downloadFile, result);
+    }
+  }
+  async adminSetOrderStatus(arg0, arg1) {
+    if (this.processError) {
+      try {
+        const result = await this.actor.adminSetOrderStatus(arg0, to_candid_OrderStatus_n3(this._uploadFile, this._downloadFile, arg1));
+        return from_candid_variant_n1(this._uploadFile, this._downloadFile, result);
+      } catch (e) {
+        this.processError(e);
+        throw new Error("unreachable");
+      }
+    } else {
+      const result = await this.actor.adminSetOrderStatus(arg0, to_candid_OrderStatus_n3(this._uploadFile, this._downloadFile, arg1));
+      return from_candid_variant_n1(this._uploadFile, this._downloadFile, result);
+    }
+  }
+  async confirmDelivery(arg0, arg1) {
+    if (this.processError) {
+      try {
+        const result = await this.actor.confirmDelivery(arg0, arg1);
         return from_candid_variant_n5(this._uploadFile, this._downloadFile, result);
       } catch (e) {
         this.processError(e);
         throw new Error("unreachable");
       }
     } else {
-      const result = await this.actor.driverLogin(arg0, arg1);
+      const result = await this.actor.confirmDelivery(arg0, arg1);
       return from_candid_variant_n5(this._uploadFile, this._downloadFile, result);
     }
   }
-  async getDriverEarnings(arg0, arg1, arg2) {
+  async createOrder(arg0, arg1, arg2, arg3, arg4, arg5) {
     if (this.processError) {
       try {
-        const result = await this.actor.getDriverEarnings(arg0, to_candid_opt_n6(this._uploadFile, this._downloadFile, arg1), to_candid_opt_n6(this._uploadFile, this._downloadFile, arg2));
-        return from_candid_record_n7(this._uploadFile, this._downloadFile, result);
+        const result = await this.actor.createOrder(arg0, to_candid_TankSize_n6(this._uploadFile, this._downloadFile, arg1), arg2, arg3, arg4, to_candid_opt_n8(this._uploadFile, this._downloadFile, arg5));
+        return from_candid_variant_n9(this._uploadFile, this._downloadFile, result);
       } catch (e) {
         this.processError(e);
         throw new Error("unreachable");
       }
     } else {
-      const result = await this.actor.getDriverEarnings(arg0, to_candid_opt_n6(this._uploadFile, this._downloadFile, arg1), to_candid_opt_n6(this._uploadFile, this._downloadFile, arg2));
-      return from_candid_record_n7(this._uploadFile, this._downloadFile, result);
+      const result = await this.actor.createOrder(arg0, to_candid_TankSize_n6(this._uploadFile, this._downloadFile, arg1), arg2, arg3, arg4, to_candid_opt_n8(this._uploadFile, this._downloadFile, arg5));
+      return from_candid_variant_n9(this._uploadFile, this._downloadFile, result);
+    }
+  }
+  async driverLogin(arg0, arg1) {
+    if (this.processError) {
+      try {
+        const result = await this.actor.driverLogin(arg0, arg1);
+        return from_candid_variant_n10(this._uploadFile, this._downloadFile, result);
+      } catch (e) {
+        this.processError(e);
+        throw new Error("unreachable");
+      }
+    } else {
+      const result = await this.actor.driverLogin(arg0, arg1);
+      return from_candid_variant_n10(this._uploadFile, this._downloadFile, result);
+    }
+  }
+  async getActiveShift(arg0) {
+    if (this.processError) {
+      try {
+        const result = await this.actor.getActiveShift(arg0);
+        return from_candid_opt_n11(this._uploadFile, this._downloadFile, result);
+      } catch (e) {
+        this.processError(e);
+        throw new Error("unreachable");
+      }
+    } else {
+      const result = await this.actor.getActiveShift(arg0);
+      return from_candid_opt_n11(this._uploadFile, this._downloadFile, result);
+    }
+  }
+  async getAllOrders() {
+    if (this.processError) {
+      try {
+        const result = await this.actor.getAllOrders();
+        return from_candid_vec_n20(this._uploadFile, this._downloadFile, result);
+      } catch (e) {
+        this.processError(e);
+        throw new Error("unreachable");
+      }
+    } else {
+      const result = await this.actor.getAllOrders();
+      return from_candid_vec_n20(this._uploadFile, this._downloadFile, result);
+    }
+  }
+  async getCustomerProfile(arg0) {
+    if (this.processError) {
+      try {
+        const result = await this.actor.getCustomerProfile(arg0);
+        return from_candid_variant_n23(this._uploadFile, this._downloadFile, result);
+      } catch (e) {
+        this.processError(e);
+        throw new Error("unreachable");
+      }
+    } else {
+      const result = await this.actor.getCustomerProfile(arg0);
+      return from_candid_variant_n23(this._uploadFile, this._downloadFile, result);
+    }
+  }
+  async getDriverEarnings(arg0, arg1, arg2) {
+    if (this.processError) {
+      try {
+        const result = await this.actor.getDriverEarnings(arg0, to_candid_opt_n26(this._uploadFile, this._downloadFile, arg1), to_candid_opt_n26(this._uploadFile, this._downloadFile, arg2));
+        return from_candid_record_n27(this._uploadFile, this._downloadFile, result);
+      } catch (e) {
+        this.processError(e);
+        throw new Error("unreachable");
+      }
+    } else {
+      const result = await this.actor.getDriverEarnings(arg0, to_candid_opt_n26(this._uploadFile, this._downloadFile, arg1), to_candid_opt_n26(this._uploadFile, this._downloadFile, arg2));
+      return from_candid_record_n27(this._uploadFile, this._downloadFile, result);
     }
   }
   async getDriverHistory(arg0) {
     if (this.processError) {
       try {
         const result = await this.actor.getDriverHistory(arg0);
-        return from_candid_vec_n8(this._uploadFile, this._downloadFile, result);
+        return from_candid_vec_n28(this._uploadFile, this._downloadFile, result);
       } catch (e) {
         this.processError(e);
         throw new Error("unreachable");
       }
     } else {
       const result = await this.actor.getDriverHistory(arg0);
-      return from_candid_vec_n8(this._uploadFile, this._downloadFile, result);
+      return from_candid_vec_n28(this._uploadFile, this._downloadFile, result);
     }
   }
   async getDriverProfile(arg0) {
     if (this.processError) {
       try {
         const result = await this.actor.getDriverProfile(arg0);
-        return from_candid_opt_n19(this._uploadFile, this._downloadFile, result);
+        return from_candid_opt_n38(this._uploadFile, this._downloadFile, result);
       } catch (e) {
         this.processError(e);
         throw new Error("unreachable");
       }
     } else {
       const result = await this.actor.getDriverProfile(arg0);
-      return from_candid_opt_n19(this._uploadFile, this._downloadFile, result);
+      return from_candid_opt_n38(this._uploadFile, this._downloadFile, result);
+    }
+  }
+  async getDriverShifts(arg0) {
+    if (this.processError) {
+      try {
+        const result = await this.actor.getDriverShifts(arg0);
+        return from_candid_vec_n44(this._uploadFile, this._downloadFile, result);
+      } catch (e) {
+        this.processError(e);
+        throw new Error("unreachable");
+      }
+    } else {
+      const result = await this.actor.getDriverShifts(arg0);
+      return from_candid_vec_n44(this._uploadFile, this._downloadFile, result);
+    }
+  }
+  async getDriverStatusSummary() {
+    if (this.processError) {
+      try {
+        const result = await this.actor.getDriverStatusSummary();
+        return from_candid_vec_n45(this._uploadFile, this._downloadFile, result);
+      } catch (e) {
+        this.processError(e);
+        throw new Error("unreachable");
+      }
+    } else {
+      const result = await this.actor.getDriverStatusSummary();
+      return from_candid_vec_n45(this._uploadFile, this._downloadFile, result);
     }
   }
   async getIncomingOrders(arg0) {
     if (this.processError) {
       try {
         const result = await this.actor.getIncomingOrders(arg0);
-        return from_candid_vec_n8(this._uploadFile, this._downloadFile, result);
+        return from_candid_vec_n28(this._uploadFile, this._downloadFile, result);
       } catch (e) {
         this.processError(e);
         throw new Error("unreachable");
       }
     } else {
       const result = await this.actor.getIncomingOrders(arg0);
-      return from_candid_vec_n8(this._uploadFile, this._downloadFile, result);
+      return from_candid_vec_n28(this._uploadFile, this._downloadFile, result);
     }
   }
   async getOrder(arg0, arg1) {
     if (this.processError) {
       try {
         const result = await this.actor.getOrder(arg0, arg1);
-        return from_candid_opt_n25(this._uploadFile, this._downloadFile, result);
+        return from_candid_opt_n48(this._uploadFile, this._downloadFile, result);
       } catch (e) {
         this.processError(e);
         throw new Error("unreachable");
       }
     } else {
       const result = await this.actor.getOrder(arg0, arg1);
-      return from_candid_opt_n25(this._uploadFile, this._downloadFile, result);
+      return from_candid_opt_n48(this._uploadFile, this._downloadFile, result);
+    }
+  }
+  async getZoneSummary() {
+    if (this.processError) {
+      try {
+        const result = await this.actor.getZoneSummary();
+        return result;
+      } catch (e) {
+        this.processError(e);
+        throw new Error("unreachable");
+      }
+    } else {
+      const result = await this.actor.getZoneSummary();
+      return result;
     }
   }
   async getZones() {
@@ -28406,18 +29231,60 @@ class Backend {
       return result;
     }
   }
+  async loginCustomer(arg0, arg1) {
+    if (this.processError) {
+      try {
+        const result = await this.actor.loginCustomer(arg0, arg1);
+        return from_candid_variant_n49(this._uploadFile, this._downloadFile, result);
+      } catch (e) {
+        this.processError(e);
+        throw new Error("unreachable");
+      }
+    } else {
+      const result = await this.actor.loginCustomer(arg0, arg1);
+      return from_candid_variant_n49(this._uploadFile, this._downloadFile, result);
+    }
+  }
+  async payShiftFee(arg0) {
+    if (this.processError) {
+      try {
+        const result = await this.actor.payShiftFee(arg0);
+        return from_candid_variant_n50(this._uploadFile, this._downloadFile, result);
+      } catch (e) {
+        this.processError(e);
+        throw new Error("unreachable");
+      }
+    } else {
+      const result = await this.actor.payShiftFee(arg0);
+      return from_candid_variant_n50(this._uploadFile, this._downloadFile, result);
+    }
+  }
   async processPayment(arg0, arg1) {
     if (this.processError) {
       try {
         const result = await this.actor.processPayment(arg0, arg1);
-        return from_candid_variant_n26(this._uploadFile, this._downloadFile, result);
+        return from_candid_variant_n51(this._uploadFile, this._downloadFile, result);
       } catch (e) {
         this.processError(e);
         throw new Error("unreachable");
       }
     } else {
       const result = await this.actor.processPayment(arg0, arg1);
-      return from_candid_variant_n26(this._uploadFile, this._downloadFile, result);
+      return from_candid_variant_n51(this._uploadFile, this._downloadFile, result);
+    }
+  }
+  async registerCustomer(arg0, arg1, arg2, arg3) {
+    if (this.processError) {
+      try {
+        const result = await this.actor.registerCustomer(arg0, arg1, arg2, to_candid_opt_n53(this._uploadFile, this._downloadFile, arg3));
+        return from_candid_variant_n23(this._uploadFile, this._downloadFile, result);
+      } catch (e) {
+        this.processError(e);
+        throw new Error("unreachable");
+      }
+    } else {
+      const result = await this.actor.registerCustomer(arg0, arg1, arg2, to_candid_opt_n53(this._uploadFile, this._downloadFile, arg3));
+      return from_candid_variant_n23(this._uploadFile, this._downloadFile, result);
     }
   }
   async rejectOrder(arg0, arg1) {
@@ -28434,18 +29301,32 @@ class Backend {
       return from_candid_variant_n1(this._uploadFile, this._downloadFile, result);
     }
   }
+  async requestShift(arg0, arg1, arg2) {
+    if (this.processError) {
+      try {
+        const result = await this.actor.requestShift(arg0, to_candid_ShiftPeriod_n54(this._uploadFile, this._downloadFile, arg1), arg2);
+        return from_candid_variant_n56(this._uploadFile, this._downloadFile, result);
+      } catch (e) {
+        this.processError(e);
+        throw new Error("unreachable");
+      }
+    } else {
+      const result = await this.actor.requestShift(arg0, to_candid_ShiftPeriod_n54(this._uploadFile, this._downloadFile, arg1), arg2);
+      return from_candid_variant_n56(this._uploadFile, this._downloadFile, result);
+    }
+  }
   async resetDemo() {
     if (this.processError) {
       try {
         const result = await this.actor.resetDemo();
-        return from_candid_variant_n28(this._uploadFile, this._downloadFile, result);
+        return from_candid_variant_n57(this._uploadFile, this._downloadFile, result);
       } catch (e) {
         this.processError(e);
         throw new Error("unreachable");
       }
     } else {
       const result = await this.actor.resetDemo();
-      return from_candid_variant_n28(this._uploadFile, this._downloadFile, result);
+      return from_candid_variant_n57(this._uploadFile, this._downloadFile, result);
     }
   }
   async setDriverPrices(arg0, arg1) {
@@ -28465,14 +29346,14 @@ class Backend {
   async setDriverStatus(arg0, arg1, arg2) {
     if (this.processError) {
       try {
-        const result = await this.actor.setDriverStatus(arg0, to_candid_DriverStatus_n29(this._uploadFile, this._downloadFile, arg1), arg2);
+        const result = await this.actor.setDriverStatus(arg0, to_candid_DriverStatus_n58(this._uploadFile, this._downloadFile, arg1), arg2);
         return from_candid_variant_n1(this._uploadFile, this._downloadFile, result);
       } catch (e) {
         this.processError(e);
         throw new Error("unreachable");
       }
     } else {
-      const result = await this.actor.setDriverStatus(arg0, to_candid_DriverStatus_n29(this._uploadFile, this._downloadFile, arg1), arg2);
+      const result = await this.actor.setDriverStatus(arg0, to_candid_DriverStatus_n58(this._uploadFile, this._downloadFile, arg1), arg2);
       return from_candid_variant_n1(this._uploadFile, this._downloadFile, result);
     }
   }
@@ -28490,113 +29371,215 @@ class Backend {
       return from_candid_variant_n1(this._uploadFile, this._downloadFile, result);
     }
   }
-  async setPaymentMode(arg0) {
+  async setDriverZones(arg0, arg1) {
     if (this.processError) {
       try {
-        const result = await this.actor.setPaymentMode(to_candid_PaymentMode_n31(this._uploadFile, this._downloadFile, arg0));
-        return from_candid_variant_n28(this._uploadFile, this._downloadFile, result);
-      } catch (e) {
-        this.processError(e);
-        throw new Error("unreachable");
-      }
-    } else {
-      const result = await this.actor.setPaymentMode(to_candid_PaymentMode_n31(this._uploadFile, this._downloadFile, arg0));
-      return from_candid_variant_n28(this._uploadFile, this._downloadFile, result);
-    }
-  }
-  async updateOrderStatus(arg0, arg1, arg2) {
-    if (this.processError) {
-      try {
-        const result = await this.actor.updateOrderStatus(arg0, arg1, to_candid_OrderStatus_n33(this._uploadFile, this._downloadFile, arg2));
+        const result = await this.actor.setDriverZones(arg0, arg1);
         return from_candid_variant_n1(this._uploadFile, this._downloadFile, result);
       } catch (e) {
         this.processError(e);
         throw new Error("unreachable");
       }
     } else {
-      const result = await this.actor.updateOrderStatus(arg0, arg1, to_candid_OrderStatus_n33(this._uploadFile, this._downloadFile, arg2));
+      const result = await this.actor.setDriverZones(arg0, arg1);
+      return from_candid_variant_n1(this._uploadFile, this._downloadFile, result);
+    }
+  }
+  async setPaymentMode(arg0) {
+    if (this.processError) {
+      try {
+        const result = await this.actor.setPaymentMode(to_candid_PaymentMode_n60(this._uploadFile, this._downloadFile, arg0));
+        return from_candid_variant_n57(this._uploadFile, this._downloadFile, result);
+      } catch (e) {
+        this.processError(e);
+        throw new Error("unreachable");
+      }
+    } else {
+      const result = await this.actor.setPaymentMode(to_candid_PaymentMode_n60(this._uploadFile, this._downloadFile, arg0));
+      return from_candid_variant_n57(this._uploadFile, this._downloadFile, result);
+    }
+  }
+  async submitZNumber(arg0, arg1) {
+    if (this.processError) {
+      try {
+        const result = await this.actor.submitZNumber(arg0, arg1);
+        return from_candid_variant_n56(this._uploadFile, this._downloadFile, result);
+      } catch (e) {
+        this.processError(e);
+        throw new Error("unreachable");
+      }
+    } else {
+      const result = await this.actor.submitZNumber(arg0, arg1);
+      return from_candid_variant_n56(this._uploadFile, this._downloadFile, result);
+    }
+  }
+  async updateOrderStatus(arg0, arg1, arg2) {
+    if (this.processError) {
+      try {
+        const result = await this.actor.updateOrderStatus(arg0, arg1, to_candid_OrderStatus_n3(this._uploadFile, this._downloadFile, arg2));
+        return from_candid_variant_n1(this._uploadFile, this._downloadFile, result);
+      } catch (e) {
+        this.processError(e);
+        throw new Error("unreachable");
+      }
+    } else {
+      const result = await this.actor.updateOrderStatus(arg0, arg1, to_candid_OrderStatus_n3(this._uploadFile, this._downloadFile, arg2));
       return from_candid_variant_n1(this._uploadFile, this._downloadFile, result);
     }
   }
 }
-function from_candid_DriverStatus_n23(_uploadFile, _downloadFile, value) {
-  return from_candid_variant_n24(_uploadFile, _downloadFile, value);
+function from_candid_Customer_n24(_uploadFile, _downloadFile, value) {
+  return from_candid_record_n25(_uploadFile, _downloadFile, value);
 }
-function from_candid_Driver_n21(_uploadFile, _downloadFile, value) {
+function from_candid_DriverStatus_n42(_uploadFile, _downloadFile, value) {
+  return from_candid_variant_n43(_uploadFile, _downloadFile, value);
+}
+function from_candid_DriverSummary_n46(_uploadFile, _downloadFile, value) {
+  return from_candid_record_n47(_uploadFile, _downloadFile, value);
+}
+function from_candid_Driver_n40(_uploadFile, _downloadFile, value) {
+  return from_candid_record_n41(_uploadFile, _downloadFile, value);
+}
+function from_candid_OrderStatus_n31(_uploadFile, _downloadFile, value) {
+  return from_candid_variant_n32(_uploadFile, _downloadFile, value);
+}
+function from_candid_OrderSummary_n21(_uploadFile, _downloadFile, value) {
   return from_candid_record_n22(_uploadFile, _downloadFile, value);
 }
-function from_candid_OrderStatus_n11(_uploadFile, _downloadFile, value) {
-  return from_candid_variant_n12(_uploadFile, _downloadFile, value);
+function from_candid_Order_n29(_uploadFile, _downloadFile, value) {
+  return from_candid_record_n30(_uploadFile, _downloadFile, value);
 }
-function from_candid_Order_n9(_uploadFile, _downloadFile, value) {
-  return from_candid_record_n10(_uploadFile, _downloadFile, value);
+function from_candid_PaymentStatus_n35(_uploadFile, _downloadFile, value) {
+  return from_candid_variant_n36(_uploadFile, _downloadFile, value);
 }
-function from_candid_PaymentStatus_n15(_uploadFile, _downloadFile, value) {
-  return from_candid_variant_n16(_uploadFile, _downloadFile, value);
+function from_candid_ShiftPeriod_n17(_uploadFile, _downloadFile, value) {
+  return from_candid_variant_n18(_uploadFile, _downloadFile, value);
 }
-function from_candid_TankSize_n13(_uploadFile, _downloadFile, value) {
-  return from_candid_variant_n14(_uploadFile, _downloadFile, value);
+function from_candid_ShiftStatus_n14(_uploadFile, _downloadFile, value) {
+  return from_candid_variant_n15(_uploadFile, _downloadFile, value);
 }
-function from_candid_opt_n17(_uploadFile, _downloadFile, value) {
-  return value.length === 0 ? null : value[0];
+function from_candid_Shift_n12(_uploadFile, _downloadFile, value) {
+  return from_candid_record_n13(_uploadFile, _downloadFile, value);
 }
-function from_candid_opt_n18(_uploadFile, _downloadFile, value) {
+function from_candid_TankSize_n33(_uploadFile, _downloadFile, value) {
+  return from_candid_variant_n34(_uploadFile, _downloadFile, value);
+}
+function from_candid_opt_n11(_uploadFile, _downloadFile, value) {
+  return value.length === 0 ? null : from_candid_Shift_n12(_uploadFile, _downloadFile, value[0]);
+}
+function from_candid_opt_n16(_uploadFile, _downloadFile, value) {
   return value.length === 0 ? null : value[0];
 }
 function from_candid_opt_n19(_uploadFile, _downloadFile, value) {
-  return value.length === 0 ? null : from_candid_record_n20(_uploadFile, _downloadFile, value[0]);
+  return value.length === 0 ? null : value[0];
 }
-function from_candid_opt_n25(_uploadFile, _downloadFile, value) {
-  return value.length === 0 ? null : from_candid_Order_n9(_uploadFile, _downloadFile, value[0]);
+function from_candid_opt_n37(_uploadFile, _downloadFile, value) {
+  return value.length === 0 ? null : value[0];
 }
-function from_candid_record_n10(_uploadFile, _downloadFile, value) {
+function from_candid_opt_n38(_uploadFile, _downloadFile, value) {
+  return value.length === 0 ? null : from_candid_record_n39(_uploadFile, _downloadFile, value[0]);
+}
+function from_candid_opt_n48(_uploadFile, _downloadFile, value) {
+  return value.length === 0 ? null : from_candid_Order_n29(_uploadFile, _downloadFile, value[0]);
+}
+function from_candid_record_n13(_uploadFile, _downloadFile, value) {
   return {
     id: value.id,
-    status: from_candid_OrderStatus_n11(_uploadFile, _downloadFile, value.status),
-    help_flagged: value.help_flagged,
-    customer_phone: value.customer_phone,
-    size: from_candid_TankSize_n13(_uploadFile, _downloadFile, value.size),
-    created_at: value.created_at,
-    payment_status: from_candid_PaymentStatus_n15(_uploadFile, _downloadFile, value.payment_status),
-    address_note: value.address_note,
-    driver_id: record_opt_to_undefined(from_candid_opt_n17(_uploadFile, _downloadFile, value.driver_id)),
-    payment_ref: value.payment_ref,
-    completed_at: record_opt_to_undefined(from_candid_opt_n18(_uploadFile, _downloadFile, value.completed_at)),
-    matched_at: record_opt_to_undefined(from_candid_opt_n18(_uploadFile, _downloadFile, value.matched_at)),
-    zone_id: value.zone_id,
-    expired_at: record_opt_to_undefined(from_candid_opt_n18(_uploadFile, _downloadFile, value.expired_at)),
-    idempotency_key: value.idempotency_key
-  };
-}
-function from_candid_record_n20(_uploadFile, _downloadFile, value) {
-  return {
-    prices: value.prices,
-    driver: from_candid_Driver_n21(_uploadFile, _downloadFile, value.driver)
+    status: from_candid_ShiftStatus_n14(_uploadFile, _downloadFile, value.status),
+    driverId: value.driverId,
+    feePaidAt: record_opt_to_undefined(from_candid_opt_n16(_uploadFile, _downloadFile, value.feePaidAt)),
+    period: from_candid_ShiftPeriod_n17(_uploadFile, _downloadFile, value.period),
+    activatedAt: record_opt_to_undefined(from_candid_opt_n16(_uploadFile, _downloadFile, value.activatedAt)),
+    date: value.date,
+    zNumber: record_opt_to_undefined(from_candid_opt_n19(_uploadFile, _downloadFile, value.zNumber)),
+    paymentRef: record_opt_to_undefined(from_candid_opt_n19(_uploadFile, _downloadFile, value.paymentRef)),
+    verifiedAt: record_opt_to_undefined(from_candid_opt_n16(_uploadFile, _downloadFile, value.verifiedAt))
   };
 }
 function from_candid_record_n22(_uploadFile, _downloadFile, value) {
   return {
     id: value.id,
+    status: value.status,
+    customerPhone: value.customerPhone,
+    createdAt: value.createdAt,
+    size: value.size,
+    zone: value.zone,
+    driverName: record_opt_to_undefined(from_candid_opt_n19(_uploadFile, _downloadFile, value.driverName))
+  };
+}
+function from_candid_record_n25(_uploadFile, _downloadFile, value) {
+  return {
+    id: value.id,
     pin: value.pin,
-    status: from_candid_DriverStatus_n23(_uploadFile, _downloadFile, value.status),
     name: value.name,
-    current_order_id: record_opt_to_undefined(from_candid_opt_n17(_uploadFile, _downloadFile, value.current_order_id)),
-    truck_plate: value.truck_plate,
-    phone: value.phone,
-    zone_id: value.zone_id
+    created_at: value.created_at,
+    email: record_opt_to_undefined(from_candid_opt_n19(_uploadFile, _downloadFile, value.email)),
+    phone: value.phone
   };
 }
 function from_candid_record_n27(_uploadFile, _downloadFile, value) {
   return {
-    status: from_candid_PaymentStatus_n15(_uploadFile, _downloadFile, value.status),
-    payment_ref: value.payment_ref
-  };
-}
-function from_candid_record_n7(_uploadFile, _downloadFile, value) {
-  return {
-    orders: from_candid_vec_n8(_uploadFile, _downloadFile, value.orders),
+    orders: from_candid_vec_n28(_uploadFile, _downloadFile, value.orders),
     today_total: value.today_total,
     period_total: value.period_total
+  };
+}
+function from_candid_record_n30(_uploadFile, _downloadFile, value) {
+  return {
+    id: value.id,
+    status: from_candid_OrderStatus_n31(_uploadFile, _downloadFile, value.status),
+    help_flagged: value.help_flagged,
+    customer_phone: value.customer_phone,
+    size: from_candid_TankSize_n33(_uploadFile, _downloadFile, value.size),
+    created_at: value.created_at,
+    payment_status: from_candid_PaymentStatus_n35(_uploadFile, _downloadFile, value.payment_status),
+    customer_id: record_opt_to_undefined(from_candid_opt_n37(_uploadFile, _downloadFile, value.customer_id)),
+    address_note: value.address_note,
+    customer_confirmed: value.customer_confirmed,
+    driver_id: record_opt_to_undefined(from_candid_opt_n37(_uploadFile, _downloadFile, value.driver_id)),
+    driver_confirmed: value.driver_confirmed,
+    payment_ref: value.payment_ref,
+    completed_at: record_opt_to_undefined(from_candid_opt_n16(_uploadFile, _downloadFile, value.completed_at)),
+    matched_at: record_opt_to_undefined(from_candid_opt_n16(_uploadFile, _downloadFile, value.matched_at)),
+    zone_id: value.zone_id,
+    expired_at: record_opt_to_undefined(from_candid_opt_n16(_uploadFile, _downloadFile, value.expired_at)),
+    idempotency_key: value.idempotency_key
+  };
+}
+function from_candid_record_n39(_uploadFile, _downloadFile, value) {
+  return {
+    prices: value.prices,
+    driver: from_candid_Driver_n40(_uploadFile, _downloadFile, value.driver)
+  };
+}
+function from_candid_record_n41(_uploadFile, _downloadFile, value) {
+  return {
+    id: value.id,
+    pin: value.pin,
+    status: from_candid_DriverStatus_n42(_uploadFile, _downloadFile, value.status),
+    allowed_zone_ids: value.allowed_zone_ids,
+    name: value.name,
+    current_order_id: record_opt_to_undefined(from_candid_opt_n37(_uploadFile, _downloadFile, value.current_order_id)),
+    truck_plate: value.truck_plate,
+    is_active: value.is_active,
+    phone: value.phone,
+    zone_id: value.zone_id
+  };
+}
+function from_candid_record_n47(_uploadFile, _downloadFile, value) {
+  return {
+    id: value.id,
+    status: value.status,
+    activeOrderId: record_opt_to_undefined(from_candid_opt_n37(_uploadFile, _downloadFile, value.activeOrderId)),
+    name: value.name,
+    zone: value.zone,
+    phone: value.phone
+  };
+}
+function from_candid_record_n52(_uploadFile, _downloadFile, value) {
+  return {
+    status: from_candid_PaymentStatus_n35(_uploadFile, _downloadFile, value.status),
+    payment_ref: value.payment_ref
   };
 }
 function from_candid_variant_n1(_uploadFile, _downloadFile, value) {
@@ -28608,31 +29591,52 @@ function from_candid_variant_n1(_uploadFile, _downloadFile, value) {
     err: value.err
   } : value;
 }
-function from_candid_variant_n12(_uploadFile, _downloadFile, value) {
-  return "pumping" in value ? "pumping" : "cancelled" in value ? "cancelled" : "expired" in value ? "expired" : "pending" in value ? "pending" : "exception" in value ? "exception" : "completed" in value ? "completed" : "en_route" in value ? "en_route" : "matched" in value ? "matched" : "accepted" in value ? "accepted" : value;
-}
-function from_candid_variant_n14(_uploadFile, _downloadFile, value) {
-  return "large" in value ? "large" : "small" in value ? "small" : "medium" in value ? "medium" : value;
-}
-function from_candid_variant_n16(_uploadFile, _downloadFile, value) {
-  return "pending" in value ? "pending" : "success" in value ? "success" : "failed" in value ? "failed" : value;
-}
-function from_candid_variant_n24(_uploadFile, _downloadFile, value) {
-  return "offline" in value ? "offline" : "online" in value ? "online" : value;
-}
-function from_candid_variant_n26(_uploadFile, _downloadFile, value) {
+function from_candid_variant_n10(_uploadFile, _downloadFile, value) {
   return "ok" in value ? {
     __kind__: "ok",
-    ok: from_candid_record_n27(_uploadFile, _downloadFile, value.ok)
+    ok: value.ok
   } : "err" in value ? {
     __kind__: "err",
     err: value.err
   } : value;
 }
-function from_candid_variant_n28(_uploadFile, _downloadFile, value) {
-  return "ok" in value ? "ok" : value;
+function from_candid_variant_n15(_uploadFile, _downloadFile, value) {
+  return "active" in value ? "active" : "expired" in value ? "expired" : "pending_payment" in value ? "pending_payment" : "pending_verification" in value ? "pending_verification" : value;
 }
-function from_candid_variant_n4(_uploadFile, _downloadFile, value) {
+function from_candid_variant_n18(_uploadFile, _downloadFile, value) {
+  return "morning" in value ? "morning" : "evening" in value ? "evening" : value;
+}
+function from_candid_variant_n2(_uploadFile, _downloadFile, value) {
+  return "ok" in value ? {
+    __kind__: "ok",
+    ok: value.ok
+  } : "err" in value ? {
+    __kind__: "err",
+    err: value.err
+  } : value;
+}
+function from_candid_variant_n23(_uploadFile, _downloadFile, value) {
+  return "ok" in value ? {
+    __kind__: "ok",
+    ok: from_candid_Customer_n24(_uploadFile, _downloadFile, value.ok)
+  } : "err" in value ? {
+    __kind__: "err",
+    err: value.err
+  } : value;
+}
+function from_candid_variant_n32(_uploadFile, _downloadFile, value) {
+  return "pumping" in value ? "pumping" : "fully_completed" in value ? "fully_completed" : "cancelled" in value ? "cancelled" : "expired" in value ? "expired" : "pending" in value ? "pending" : "exception" in value ? "exception" : "completed" in value ? "completed" : "en_route" in value ? "en_route" : "matched" in value ? "matched" : "accepted" in value ? "accepted" : value;
+}
+function from_candid_variant_n34(_uploadFile, _downloadFile, value) {
+  return "large" in value ? "large" : "small" in value ? "small" : "medium" in value ? "medium" : value;
+}
+function from_candid_variant_n36(_uploadFile, _downloadFile, value) {
+  return "pending" in value ? "pending" : "success" in value ? "success" : "failed" in value ? "failed" : value;
+}
+function from_candid_variant_n43(_uploadFile, _downloadFile, value) {
+  return "offline" in value ? "offline" : "online" in value ? "online" : value;
+}
+function from_candid_variant_n49(_uploadFile, _downloadFile, value) {
   return "ok" in value ? {
     __kind__: "ok",
     ok: value.ok
@@ -28650,52 +29654,86 @@ function from_candid_variant_n5(_uploadFile, _downloadFile, value) {
     err: value.err
   } : value;
 }
-function from_candid_vec_n8(_uploadFile, _downloadFile, value) {
-  return value.map((x2) => from_candid_Order_n9(_uploadFile, _downloadFile, x2));
+function from_candid_variant_n50(_uploadFile, _downloadFile, value) {
+  return "ok" in value ? {
+    __kind__: "ok",
+    ok: value.ok
+  } : "err" in value ? {
+    __kind__: "err",
+    err: value.err
+  } : value;
 }
-function to_candid_DriverStatus_n29(_uploadFile, _downloadFile, value) {
-  return to_candid_variant_n30(_uploadFile, _downloadFile, value);
+function from_candid_variant_n51(_uploadFile, _downloadFile, value) {
+  return "ok" in value ? {
+    __kind__: "ok",
+    ok: from_candid_record_n52(_uploadFile, _downloadFile, value.ok)
+  } : "err" in value ? {
+    __kind__: "err",
+    err: value.err
+  } : value;
 }
-function to_candid_OrderStatus_n33(_uploadFile, _downloadFile, value) {
-  return to_candid_variant_n34(_uploadFile, _downloadFile, value);
+function from_candid_variant_n56(_uploadFile, _downloadFile, value) {
+  return "ok" in value ? {
+    __kind__: "ok",
+    ok: from_candid_Shift_n12(_uploadFile, _downloadFile, value.ok)
+  } : "err" in value ? {
+    __kind__: "err",
+    err: value.err
+  } : value;
 }
-function to_candid_PaymentMode_n31(_uploadFile, _downloadFile, value) {
-  return to_candid_variant_n32(_uploadFile, _downloadFile, value);
+function from_candid_variant_n57(_uploadFile, _downloadFile, value) {
+  return "ok" in value ? "ok" : value;
 }
-function to_candid_TankSize_n2(_uploadFile, _downloadFile, value) {
-  return to_candid_variant_n3(_uploadFile, _downloadFile, value);
+function from_candid_variant_n9(_uploadFile, _downloadFile, value) {
+  return "ok" in value ? {
+    __kind__: "ok",
+    ok: value.ok
+  } : "err" in value ? {
+    __kind__: "err",
+    err: value.err
+  } : value;
 }
-function to_candid_opt_n6(_uploadFile, _downloadFile, value) {
+function from_candid_vec_n20(_uploadFile, _downloadFile, value) {
+  return value.map((x2) => from_candid_OrderSummary_n21(_uploadFile, _downloadFile, x2));
+}
+function from_candid_vec_n28(_uploadFile, _downloadFile, value) {
+  return value.map((x2) => from_candid_Order_n29(_uploadFile, _downloadFile, x2));
+}
+function from_candid_vec_n44(_uploadFile, _downloadFile, value) {
+  return value.map((x2) => from_candid_Shift_n12(_uploadFile, _downloadFile, x2));
+}
+function from_candid_vec_n45(_uploadFile, _downloadFile, value) {
+  return value.map((x2) => from_candid_DriverSummary_n46(_uploadFile, _downloadFile, x2));
+}
+function to_candid_DriverStatus_n58(_uploadFile, _downloadFile, value) {
+  return to_candid_variant_n59(_uploadFile, _downloadFile, value);
+}
+function to_candid_OrderStatus_n3(_uploadFile, _downloadFile, value) {
+  return to_candid_variant_n4(_uploadFile, _downloadFile, value);
+}
+function to_candid_PaymentMode_n60(_uploadFile, _downloadFile, value) {
+  return to_candid_variant_n61(_uploadFile, _downloadFile, value);
+}
+function to_candid_ShiftPeriod_n54(_uploadFile, _downloadFile, value) {
+  return to_candid_variant_n55(_uploadFile, _downloadFile, value);
+}
+function to_candid_TankSize_n6(_uploadFile, _downloadFile, value) {
+  return to_candid_variant_n7(_uploadFile, _downloadFile, value);
+}
+function to_candid_opt_n26(_uploadFile, _downloadFile, value) {
   return value === null ? candid_none() : candid_some(value);
 }
-function to_candid_variant_n3(_uploadFile, _downloadFile, value) {
-  return value == "large" ? {
-    large: null
-  } : value == "small" ? {
-    small: null
-  } : value == "medium" ? {
-    medium: null
-  } : value;
+function to_candid_opt_n53(_uploadFile, _downloadFile, value) {
+  return value === null ? candid_none() : candid_some(value);
 }
-function to_candid_variant_n30(_uploadFile, _downloadFile, value) {
-  return value == "offline" ? {
-    offline: null
-  } : value == "online" ? {
-    online: null
-  } : value;
+function to_candid_opt_n8(_uploadFile, _downloadFile, value) {
+  return value === null ? candid_none() : candid_some(value);
 }
-function to_candid_variant_n32(_uploadFile, _downloadFile, value) {
-  return value == "always_success" ? {
-    always_success: null
-  } : value == "always_fail" ? {
-    always_fail: null
-  } : value == "random" ? {
-    random: null
-  } : value;
-}
-function to_candid_variant_n34(_uploadFile, _downloadFile, value) {
+function to_candid_variant_n4(_uploadFile, _downloadFile, value) {
   return value == "pumping" ? {
     pumping: null
+  } : value == "fully_completed" ? {
+    fully_completed: null
   } : value == "cancelled" ? {
     cancelled: null
   } : value == "expired" ? {
@@ -28714,6 +29752,38 @@ function to_candid_variant_n34(_uploadFile, _downloadFile, value) {
     accepted: null
   } : value;
 }
+function to_candid_variant_n55(_uploadFile, _downloadFile, value) {
+  return value == "morning" ? {
+    morning: null
+  } : value == "evening" ? {
+    evening: null
+  } : value;
+}
+function to_candid_variant_n59(_uploadFile, _downloadFile, value) {
+  return value == "offline" ? {
+    offline: null
+  } : value == "online" ? {
+    online: null
+  } : value;
+}
+function to_candid_variant_n61(_uploadFile, _downloadFile, value) {
+  return value == "always_success" ? {
+    always_success: null
+  } : value == "always_fail" ? {
+    always_fail: null
+  } : value == "random" ? {
+    random: null
+  } : value;
+}
+function to_candid_variant_n7(_uploadFile, _downloadFile, value) {
+  return value == "large" ? {
+    large: null
+  } : value == "small" ? {
+    small: null
+  } : value == "medium" ? {
+    medium: null
+  } : value;
+}
 function createActor(canisterId, _uploadFile, _downloadFile, options = {}) {
   const agent = options.agent || HttpAgent.createSync({
     ...options.agentOptions
@@ -28728,7 +29798,3999 @@ function createActor(canisterId, _uploadFile, _downloadFile, options = {}) {
   });
   return new Backend(actor, _uploadFile, _downloadFile, options.processError);
 }
-function Layout({ children, className = "" }) {
+function setRef(ref, value) {
+  if (typeof ref === "function") {
+    return ref(value);
+  } else if (ref !== null && ref !== void 0) {
+    ref.current = value;
+  }
+}
+function composeRefs(...refs) {
+  return (node) => {
+    let hasCleanup = false;
+    const cleanups = refs.map((ref) => {
+      const cleanup = setRef(ref, node);
+      if (!hasCleanup && typeof cleanup == "function") {
+        hasCleanup = true;
+      }
+      return cleanup;
+    });
+    if (hasCleanup) {
+      return () => {
+        for (let i = 0; i < cleanups.length; i++) {
+          const cleanup = cleanups[i];
+          if (typeof cleanup == "function") {
+            cleanup();
+          } else {
+            setRef(refs[i], null);
+          }
+        }
+      };
+    }
+  };
+}
+var REACT_LAZY_TYPE = Symbol.for("react.lazy");
+var use = React$4[" use ".trim().toString()];
+function isPromiseLike(value) {
+  return typeof value === "object" && value !== null && "then" in value;
+}
+function isLazyComponent(element) {
+  return element != null && typeof element === "object" && "$$typeof" in element && element.$$typeof === REACT_LAZY_TYPE && "_payload" in element && isPromiseLike(element._payload);
+}
+// @__NO_SIDE_EFFECTS__
+function createSlot(ownerName) {
+  const SlotClone = /* @__PURE__ */ createSlotClone(ownerName);
+  const Slot2 = reactExports.forwardRef((props, forwardedRef) => {
+    let { children, ...slotProps } = props;
+    if (isLazyComponent(children) && typeof use === "function") {
+      children = use(children._payload);
+    }
+    const childrenArray = reactExports.Children.toArray(children);
+    const slottable = childrenArray.find(isSlottable);
+    if (slottable) {
+      const newElement = slottable.props.children;
+      const newChildren = childrenArray.map((child) => {
+        if (child === slottable) {
+          if (reactExports.Children.count(newElement) > 1) return reactExports.Children.only(null);
+          return reactExports.isValidElement(newElement) ? newElement.props.children : null;
+        } else {
+          return child;
+        }
+      });
+      return /* @__PURE__ */ jsxRuntimeExports.jsx(SlotClone, { ...slotProps, ref: forwardedRef, children: reactExports.isValidElement(newElement) ? reactExports.cloneElement(newElement, void 0, newChildren) : null });
+    }
+    return /* @__PURE__ */ jsxRuntimeExports.jsx(SlotClone, { ...slotProps, ref: forwardedRef, children });
+  });
+  Slot2.displayName = `${ownerName}.Slot`;
+  return Slot2;
+}
+var Slot = /* @__PURE__ */ createSlot("Slot");
+// @__NO_SIDE_EFFECTS__
+function createSlotClone(ownerName) {
+  const SlotClone = reactExports.forwardRef((props, forwardedRef) => {
+    let { children, ...slotProps } = props;
+    if (isLazyComponent(children) && typeof use === "function") {
+      children = use(children._payload);
+    }
+    if (reactExports.isValidElement(children)) {
+      const childrenRef = getElementRef(children);
+      const props2 = mergeProps(slotProps, children.props);
+      if (children.type !== reactExports.Fragment) {
+        props2.ref = forwardedRef ? composeRefs(forwardedRef, childrenRef) : childrenRef;
+      }
+      return reactExports.cloneElement(children, props2);
+    }
+    return reactExports.Children.count(children) > 1 ? reactExports.Children.only(null) : null;
+  });
+  SlotClone.displayName = `${ownerName}.SlotClone`;
+  return SlotClone;
+}
+var SLOTTABLE_IDENTIFIER = Symbol("radix.slottable");
+function isSlottable(child) {
+  return reactExports.isValidElement(child) && typeof child.type === "function" && "__radixId" in child.type && child.type.__radixId === SLOTTABLE_IDENTIFIER;
+}
+function mergeProps(slotProps, childProps) {
+  const overrideProps = { ...childProps };
+  for (const propName in childProps) {
+    const slotPropValue = slotProps[propName];
+    const childPropValue = childProps[propName];
+    const isHandler = /^on[A-Z]/.test(propName);
+    if (isHandler) {
+      if (slotPropValue && childPropValue) {
+        overrideProps[propName] = (...args) => {
+          const result = childPropValue(...args);
+          slotPropValue(...args);
+          return result;
+        };
+      } else if (slotPropValue) {
+        overrideProps[propName] = slotPropValue;
+      }
+    } else if (propName === "style") {
+      overrideProps[propName] = { ...slotPropValue, ...childPropValue };
+    } else if (propName === "className") {
+      overrideProps[propName] = [slotPropValue, childPropValue].filter(Boolean).join(" ");
+    }
+  }
+  return { ...slotProps, ...overrideProps };
+}
+function getElementRef(element) {
+  var _a3, _b3;
+  let getter = (_a3 = Object.getOwnPropertyDescriptor(element.props, "ref")) == null ? void 0 : _a3.get;
+  let mayWarn = getter && "isReactWarning" in getter && getter.isReactWarning;
+  if (mayWarn) {
+    return element.ref;
+  }
+  getter = (_b3 = Object.getOwnPropertyDescriptor(element, "ref")) == null ? void 0 : _b3.get;
+  mayWarn = getter && "isReactWarning" in getter && getter.isReactWarning;
+  if (mayWarn) {
+    return element.props.ref;
+  }
+  return element.props.ref || element.ref;
+}
+function r(e) {
+  var t, f, n = "";
+  if ("string" == typeof e || "number" == typeof e) n += e;
+  else if ("object" == typeof e) if (Array.isArray(e)) {
+    var o2 = e.length;
+    for (t = 0; t < o2; t++) e[t] && (f = r(e[t])) && (n && (n += " "), n += f);
+  } else for (f in e) e[f] && (n && (n += " "), n += f);
+  return n;
+}
+function clsx() {
+  for (var e, t, f = 0, n = "", o2 = arguments.length; f < o2; f++) (e = arguments[f]) && (t = r(e)) && (n && (n += " "), n += t);
+  return n;
+}
+const falsyToString = (value) => typeof value === "boolean" ? `${value}` : value === 0 ? "0" : value;
+const cx = clsx;
+const cva = (base, config) => (props) => {
+  var _config_compoundVariants;
+  if ((config === null || config === void 0 ? void 0 : config.variants) == null) return cx(base, props === null || props === void 0 ? void 0 : props.class, props === null || props === void 0 ? void 0 : props.className);
+  const { variants, defaultVariants } = config;
+  const getVariantClassNames = Object.keys(variants).map((variant) => {
+    const variantProp = props === null || props === void 0 ? void 0 : props[variant];
+    const defaultVariantProp = defaultVariants === null || defaultVariants === void 0 ? void 0 : defaultVariants[variant];
+    if (variantProp === null) return null;
+    const variantKey = falsyToString(variantProp) || falsyToString(defaultVariantProp);
+    return variants[variant][variantKey];
+  });
+  const propsWithoutUndefined = props && Object.entries(props).reduce((acc, param) => {
+    let [key, value] = param;
+    if (value === void 0) {
+      return acc;
+    }
+    acc[key] = value;
+    return acc;
+  }, {});
+  const getCompoundVariantClassNames = config === null || config === void 0 ? void 0 : (_config_compoundVariants = config.compoundVariants) === null || _config_compoundVariants === void 0 ? void 0 : _config_compoundVariants.reduce((acc, param) => {
+    let { class: cvClass, className: cvClassName, ...compoundVariantOptions } = param;
+    return Object.entries(compoundVariantOptions).every((param2) => {
+      let [key, value] = param2;
+      return Array.isArray(value) ? value.includes({
+        ...defaultVariants,
+        ...propsWithoutUndefined
+      }[key]) : {
+        ...defaultVariants,
+        ...propsWithoutUndefined
+      }[key] === value;
+    }) ? [
+      ...acc,
+      cvClass,
+      cvClassName
+    ] : acc;
+  }, []);
+  return cx(base, getVariantClassNames, getCompoundVariantClassNames, props === null || props === void 0 ? void 0 : props.class, props === null || props === void 0 ? void 0 : props.className);
+};
+const CLASS_PART_SEPARATOR = "-";
+const createClassGroupUtils = (config) => {
+  const classMap = createClassMap(config);
+  const {
+    conflictingClassGroups,
+    conflictingClassGroupModifiers
+  } = config;
+  const getClassGroupId = (className) => {
+    const classParts = className.split(CLASS_PART_SEPARATOR);
+    if (classParts[0] === "" && classParts.length !== 1) {
+      classParts.shift();
+    }
+    return getGroupRecursive(classParts, classMap) || getGroupIdForArbitraryProperty(className);
+  };
+  const getConflictingClassGroupIds = (classGroupId, hasPostfixModifier) => {
+    const conflicts = conflictingClassGroups[classGroupId] || [];
+    if (hasPostfixModifier && conflictingClassGroupModifiers[classGroupId]) {
+      return [...conflicts, ...conflictingClassGroupModifiers[classGroupId]];
+    }
+    return conflicts;
+  };
+  return {
+    getClassGroupId,
+    getConflictingClassGroupIds
+  };
+};
+const getGroupRecursive = (classParts, classPartObject) => {
+  var _a3;
+  if (classParts.length === 0) {
+    return classPartObject.classGroupId;
+  }
+  const currentClassPart = classParts[0];
+  const nextClassPartObject = classPartObject.nextPart.get(currentClassPart);
+  const classGroupFromNextClassPart = nextClassPartObject ? getGroupRecursive(classParts.slice(1), nextClassPartObject) : void 0;
+  if (classGroupFromNextClassPart) {
+    return classGroupFromNextClassPart;
+  }
+  if (classPartObject.validators.length === 0) {
+    return void 0;
+  }
+  const classRest = classParts.join(CLASS_PART_SEPARATOR);
+  return (_a3 = classPartObject.validators.find(({
+    validator
+  }) => validator(classRest))) == null ? void 0 : _a3.classGroupId;
+};
+const arbitraryPropertyRegex = /^\[(.+)\]$/;
+const getGroupIdForArbitraryProperty = (className) => {
+  if (arbitraryPropertyRegex.test(className)) {
+    const arbitraryPropertyClassName = arbitraryPropertyRegex.exec(className)[1];
+    const property = arbitraryPropertyClassName == null ? void 0 : arbitraryPropertyClassName.substring(0, arbitraryPropertyClassName.indexOf(":"));
+    if (property) {
+      return "arbitrary.." + property;
+    }
+  }
+};
+const createClassMap = (config) => {
+  const {
+    theme,
+    prefix: prefix2
+  } = config;
+  const classMap = {
+    nextPart: /* @__PURE__ */ new Map(),
+    validators: []
+  };
+  const prefixedClassGroupEntries = getPrefixedClassGroupEntries(Object.entries(config.classGroups), prefix2);
+  prefixedClassGroupEntries.forEach(([classGroupId, classGroup]) => {
+    processClassesRecursively(classGroup, classMap, classGroupId, theme);
+  });
+  return classMap;
+};
+const processClassesRecursively = (classGroup, classPartObject, classGroupId, theme) => {
+  classGroup.forEach((classDefinition) => {
+    if (typeof classDefinition === "string") {
+      const classPartObjectToEdit = classDefinition === "" ? classPartObject : getPart(classPartObject, classDefinition);
+      classPartObjectToEdit.classGroupId = classGroupId;
+      return;
+    }
+    if (typeof classDefinition === "function") {
+      if (isThemeGetter(classDefinition)) {
+        processClassesRecursively(classDefinition(theme), classPartObject, classGroupId, theme);
+        return;
+      }
+      classPartObject.validators.push({
+        validator: classDefinition,
+        classGroupId
+      });
+      return;
+    }
+    Object.entries(classDefinition).forEach(([key, classGroup2]) => {
+      processClassesRecursively(classGroup2, getPart(classPartObject, key), classGroupId, theme);
+    });
+  });
+};
+const getPart = (classPartObject, path) => {
+  let currentClassPartObject = classPartObject;
+  path.split(CLASS_PART_SEPARATOR).forEach((pathPart) => {
+    if (!currentClassPartObject.nextPart.has(pathPart)) {
+      currentClassPartObject.nextPart.set(pathPart, {
+        nextPart: /* @__PURE__ */ new Map(),
+        validators: []
+      });
+    }
+    currentClassPartObject = currentClassPartObject.nextPart.get(pathPart);
+  });
+  return currentClassPartObject;
+};
+const isThemeGetter = (func) => func.isThemeGetter;
+const getPrefixedClassGroupEntries = (classGroupEntries, prefix2) => {
+  if (!prefix2) {
+    return classGroupEntries;
+  }
+  return classGroupEntries.map(([classGroupId, classGroup]) => {
+    const prefixedClassGroup = classGroup.map((classDefinition) => {
+      if (typeof classDefinition === "string") {
+        return prefix2 + classDefinition;
+      }
+      if (typeof classDefinition === "object") {
+        return Object.fromEntries(Object.entries(classDefinition).map(([key, value]) => [prefix2 + key, value]));
+      }
+      return classDefinition;
+    });
+    return [classGroupId, prefixedClassGroup];
+  });
+};
+const createLruCache = (maxCacheSize) => {
+  if (maxCacheSize < 1) {
+    return {
+      get: () => void 0,
+      set: () => {
+      }
+    };
+  }
+  let cacheSize = 0;
+  let cache = /* @__PURE__ */ new Map();
+  let previousCache = /* @__PURE__ */ new Map();
+  const update = (key, value) => {
+    cache.set(key, value);
+    cacheSize++;
+    if (cacheSize > maxCacheSize) {
+      cacheSize = 0;
+      previousCache = cache;
+      cache = /* @__PURE__ */ new Map();
+    }
+  };
+  return {
+    get(key) {
+      let value = cache.get(key);
+      if (value !== void 0) {
+        return value;
+      }
+      if ((value = previousCache.get(key)) !== void 0) {
+        update(key, value);
+        return value;
+      }
+    },
+    set(key, value) {
+      if (cache.has(key)) {
+        cache.set(key, value);
+      } else {
+        update(key, value);
+      }
+    }
+  };
+};
+const IMPORTANT_MODIFIER = "!";
+const createParseClassName = (config) => {
+  const {
+    separator,
+    experimentalParseClassName
+  } = config;
+  const isSeparatorSingleCharacter = separator.length === 1;
+  const firstSeparatorCharacter = separator[0];
+  const separatorLength = separator.length;
+  const parseClassName = (className) => {
+    const modifiers = [];
+    let bracketDepth = 0;
+    let modifierStart = 0;
+    let postfixModifierPosition;
+    for (let index2 = 0; index2 < className.length; index2++) {
+      let currentCharacter = className[index2];
+      if (bracketDepth === 0) {
+        if (currentCharacter === firstSeparatorCharacter && (isSeparatorSingleCharacter || className.slice(index2, index2 + separatorLength) === separator)) {
+          modifiers.push(className.slice(modifierStart, index2));
+          modifierStart = index2 + separatorLength;
+          continue;
+        }
+        if (currentCharacter === "/") {
+          postfixModifierPosition = index2;
+          continue;
+        }
+      }
+      if (currentCharacter === "[") {
+        bracketDepth++;
+      } else if (currentCharacter === "]") {
+        bracketDepth--;
+      }
+    }
+    const baseClassNameWithImportantModifier = modifiers.length === 0 ? className : className.substring(modifierStart);
+    const hasImportantModifier = baseClassNameWithImportantModifier.startsWith(IMPORTANT_MODIFIER);
+    const baseClassName = hasImportantModifier ? baseClassNameWithImportantModifier.substring(1) : baseClassNameWithImportantModifier;
+    const maybePostfixModifierPosition = postfixModifierPosition && postfixModifierPosition > modifierStart ? postfixModifierPosition - modifierStart : void 0;
+    return {
+      modifiers,
+      hasImportantModifier,
+      baseClassName,
+      maybePostfixModifierPosition
+    };
+  };
+  if (experimentalParseClassName) {
+    return (className) => experimentalParseClassName({
+      className,
+      parseClassName
+    });
+  }
+  return parseClassName;
+};
+const sortModifiers = (modifiers) => {
+  if (modifiers.length <= 1) {
+    return modifiers;
+  }
+  const sortedModifiers = [];
+  let unsortedModifiers = [];
+  modifiers.forEach((modifier) => {
+    const isArbitraryVariant = modifier[0] === "[";
+    if (isArbitraryVariant) {
+      sortedModifiers.push(...unsortedModifiers.sort(), modifier);
+      unsortedModifiers = [];
+    } else {
+      unsortedModifiers.push(modifier);
+    }
+  });
+  sortedModifiers.push(...unsortedModifiers.sort());
+  return sortedModifiers;
+};
+const createConfigUtils = (config) => ({
+  cache: createLruCache(config.cacheSize),
+  parseClassName: createParseClassName(config),
+  ...createClassGroupUtils(config)
+});
+const SPLIT_CLASSES_REGEX = /\s+/;
+const mergeClassList = (classList, configUtils) => {
+  const {
+    parseClassName,
+    getClassGroupId,
+    getConflictingClassGroupIds
+  } = configUtils;
+  const classGroupsInConflict = [];
+  const classNames = classList.trim().split(SPLIT_CLASSES_REGEX);
+  let result = "";
+  for (let index2 = classNames.length - 1; index2 >= 0; index2 -= 1) {
+    const originalClassName = classNames[index2];
+    const {
+      modifiers,
+      hasImportantModifier,
+      baseClassName,
+      maybePostfixModifierPosition
+    } = parseClassName(originalClassName);
+    let hasPostfixModifier = Boolean(maybePostfixModifierPosition);
+    let classGroupId = getClassGroupId(hasPostfixModifier ? baseClassName.substring(0, maybePostfixModifierPosition) : baseClassName);
+    if (!classGroupId) {
+      if (!hasPostfixModifier) {
+        result = originalClassName + (result.length > 0 ? " " + result : result);
+        continue;
+      }
+      classGroupId = getClassGroupId(baseClassName);
+      if (!classGroupId) {
+        result = originalClassName + (result.length > 0 ? " " + result : result);
+        continue;
+      }
+      hasPostfixModifier = false;
+    }
+    const variantModifier = sortModifiers(modifiers).join(":");
+    const modifierId = hasImportantModifier ? variantModifier + IMPORTANT_MODIFIER : variantModifier;
+    const classId = modifierId + classGroupId;
+    if (classGroupsInConflict.includes(classId)) {
+      continue;
+    }
+    classGroupsInConflict.push(classId);
+    const conflictGroups = getConflictingClassGroupIds(classGroupId, hasPostfixModifier);
+    for (let i = 0; i < conflictGroups.length; ++i) {
+      const group = conflictGroups[i];
+      classGroupsInConflict.push(modifierId + group);
+    }
+    result = originalClassName + (result.length > 0 ? " " + result : result);
+  }
+  return result;
+};
+function twJoin() {
+  let index2 = 0;
+  let argument;
+  let resolvedValue;
+  let string = "";
+  while (index2 < arguments.length) {
+    if (argument = arguments[index2++]) {
+      if (resolvedValue = toValue$1(argument)) {
+        string && (string += " ");
+        string += resolvedValue;
+      }
+    }
+  }
+  return string;
+}
+const toValue$1 = (mix) => {
+  if (typeof mix === "string") {
+    return mix;
+  }
+  let resolvedValue;
+  let string = "";
+  for (let k2 = 0; k2 < mix.length; k2++) {
+    if (mix[k2]) {
+      if (resolvedValue = toValue$1(mix[k2])) {
+        string && (string += " ");
+        string += resolvedValue;
+      }
+    }
+  }
+  return string;
+};
+function createTailwindMerge(createConfigFirst, ...createConfigRest) {
+  let configUtils;
+  let cacheGet;
+  let cacheSet;
+  let functionToCall = initTailwindMerge;
+  function initTailwindMerge(classList) {
+    const config = createConfigRest.reduce((previousConfig, createConfigCurrent) => createConfigCurrent(previousConfig), createConfigFirst());
+    configUtils = createConfigUtils(config);
+    cacheGet = configUtils.cache.get;
+    cacheSet = configUtils.cache.set;
+    functionToCall = tailwindMerge;
+    return tailwindMerge(classList);
+  }
+  function tailwindMerge(classList) {
+    const cachedResult = cacheGet(classList);
+    if (cachedResult) {
+      return cachedResult;
+    }
+    const result = mergeClassList(classList, configUtils);
+    cacheSet(classList, result);
+    return result;
+  }
+  return function callTailwindMerge() {
+    return functionToCall(twJoin.apply(null, arguments));
+  };
+}
+const fromTheme = (key) => {
+  const themeGetter = (theme) => theme[key] || [];
+  themeGetter.isThemeGetter = true;
+  return themeGetter;
+};
+const arbitraryValueRegex = /^\[(?:([a-z-]+):)?(.+)\]$/i;
+const fractionRegex = /^\d+\/\d+$/;
+const stringLengths = /* @__PURE__ */ new Set(["px", "full", "screen"]);
+const tshirtUnitRegex = /^(\d+(\.\d+)?)?(xs|sm|md|lg|xl)$/;
+const lengthUnitRegex = /\d+(%|px|r?em|[sdl]?v([hwib]|min|max)|pt|pc|in|cm|mm|cap|ch|ex|r?lh|cq(w|h|i|b|min|max))|\b(calc|min|max|clamp)\(.+\)|^0$/;
+const colorFunctionRegex = /^(rgba?|hsla?|hwb|(ok)?(lab|lch)|color-mix)\(.+\)$/;
+const shadowRegex = /^(inset_)?-?((\d+)?\.?(\d+)[a-z]+|0)_-?((\d+)?\.?(\d+)[a-z]+|0)/;
+const imageRegex = /^(url|image|image-set|cross-fade|element|(repeating-)?(linear|radial|conic)-gradient)\(.+\)$/;
+const isLength = (value) => isNumber(value) || stringLengths.has(value) || fractionRegex.test(value);
+const isArbitraryLength = (value) => getIsArbitraryValue(value, "length", isLengthOnly);
+const isNumber = (value) => Boolean(value) && !Number.isNaN(Number(value));
+const isArbitraryNumber = (value) => getIsArbitraryValue(value, "number", isNumber);
+const isInteger = (value) => Boolean(value) && Number.isInteger(Number(value));
+const isPercent = (value) => value.endsWith("%") && isNumber(value.slice(0, -1));
+const isArbitraryValue = (value) => arbitraryValueRegex.test(value);
+const isTshirtSize = (value) => tshirtUnitRegex.test(value);
+const sizeLabels = /* @__PURE__ */ new Set(["length", "size", "percentage"]);
+const isArbitrarySize = (value) => getIsArbitraryValue(value, sizeLabels, isNever);
+const isArbitraryPosition = (value) => getIsArbitraryValue(value, "position", isNever);
+const imageLabels = /* @__PURE__ */ new Set(["image", "url"]);
+const isArbitraryImage = (value) => getIsArbitraryValue(value, imageLabels, isImage);
+const isArbitraryShadow = (value) => getIsArbitraryValue(value, "", isShadow);
+const isAny = () => true;
+const getIsArbitraryValue = (value, label, testValue) => {
+  const result = arbitraryValueRegex.exec(value);
+  if (result) {
+    if (result[1]) {
+      return typeof label === "string" ? result[1] === label : label.has(result[1]);
+    }
+    return testValue(result[2]);
+  }
+  return false;
+};
+const isLengthOnly = (value) => (
+  // `colorFunctionRegex` check is necessary because color functions can have percentages in them which which would be incorrectly classified as lengths.
+  // For example, `hsl(0 0% 0%)` would be classified as a length without this check.
+  // I could also use lookbehind assertion in `lengthUnitRegex` but that isn't supported widely enough.
+  lengthUnitRegex.test(value) && !colorFunctionRegex.test(value)
+);
+const isNever = () => false;
+const isShadow = (value) => shadowRegex.test(value);
+const isImage = (value) => imageRegex.test(value);
+const getDefaultConfig = () => {
+  const colors = fromTheme("colors");
+  const spacing = fromTheme("spacing");
+  const blur = fromTheme("blur");
+  const brightness = fromTheme("brightness");
+  const borderColor = fromTheme("borderColor");
+  const borderRadius = fromTheme("borderRadius");
+  const borderSpacing = fromTheme("borderSpacing");
+  const borderWidth = fromTheme("borderWidth");
+  const contrast = fromTheme("contrast");
+  const grayscale = fromTheme("grayscale");
+  const hueRotate = fromTheme("hueRotate");
+  const invert2 = fromTheme("invert");
+  const gap = fromTheme("gap");
+  const gradientColorStops = fromTheme("gradientColorStops");
+  const gradientColorStopPositions = fromTheme("gradientColorStopPositions");
+  const inset = fromTheme("inset");
+  const margin = fromTheme("margin");
+  const opacity = fromTheme("opacity");
+  const padding = fromTheme("padding");
+  const saturate = fromTheme("saturate");
+  const scale = fromTheme("scale");
+  const sepia = fromTheme("sepia");
+  const skew = fromTheme("skew");
+  const space = fromTheme("space");
+  const translate = fromTheme("translate");
+  const getOverscroll = () => ["auto", "contain", "none"];
+  const getOverflow = () => ["auto", "hidden", "clip", "visible", "scroll"];
+  const getSpacingWithAutoAndArbitrary = () => ["auto", isArbitraryValue, spacing];
+  const getSpacingWithArbitrary = () => [isArbitraryValue, spacing];
+  const getLengthWithEmptyAndArbitrary = () => ["", isLength, isArbitraryLength];
+  const getNumberWithAutoAndArbitrary = () => ["auto", isNumber, isArbitraryValue];
+  const getPositions = () => ["bottom", "center", "left", "left-bottom", "left-top", "right", "right-bottom", "right-top", "top"];
+  const getLineStyles = () => ["solid", "dashed", "dotted", "double", "none"];
+  const getBlendModes = () => ["normal", "multiply", "screen", "overlay", "darken", "lighten", "color-dodge", "color-burn", "hard-light", "soft-light", "difference", "exclusion", "hue", "saturation", "color", "luminosity"];
+  const getAlign = () => ["start", "end", "center", "between", "around", "evenly", "stretch"];
+  const getZeroAndEmpty = () => ["", "0", isArbitraryValue];
+  const getBreaks = () => ["auto", "avoid", "all", "avoid-page", "page", "left", "right", "column"];
+  const getNumberAndArbitrary = () => [isNumber, isArbitraryValue];
+  return {
+    cacheSize: 500,
+    separator: ":",
+    theme: {
+      colors: [isAny],
+      spacing: [isLength, isArbitraryLength],
+      blur: ["none", "", isTshirtSize, isArbitraryValue],
+      brightness: getNumberAndArbitrary(),
+      borderColor: [colors],
+      borderRadius: ["none", "", "full", isTshirtSize, isArbitraryValue],
+      borderSpacing: getSpacingWithArbitrary(),
+      borderWidth: getLengthWithEmptyAndArbitrary(),
+      contrast: getNumberAndArbitrary(),
+      grayscale: getZeroAndEmpty(),
+      hueRotate: getNumberAndArbitrary(),
+      invert: getZeroAndEmpty(),
+      gap: getSpacingWithArbitrary(),
+      gradientColorStops: [colors],
+      gradientColorStopPositions: [isPercent, isArbitraryLength],
+      inset: getSpacingWithAutoAndArbitrary(),
+      margin: getSpacingWithAutoAndArbitrary(),
+      opacity: getNumberAndArbitrary(),
+      padding: getSpacingWithArbitrary(),
+      saturate: getNumberAndArbitrary(),
+      scale: getNumberAndArbitrary(),
+      sepia: getZeroAndEmpty(),
+      skew: getNumberAndArbitrary(),
+      space: getSpacingWithArbitrary(),
+      translate: getSpacingWithArbitrary()
+    },
+    classGroups: {
+      // Layout
+      /**
+       * Aspect Ratio
+       * @see https://tailwindcss.com/docs/aspect-ratio
+       */
+      aspect: [{
+        aspect: ["auto", "square", "video", isArbitraryValue]
+      }],
+      /**
+       * Container
+       * @see https://tailwindcss.com/docs/container
+       */
+      container: ["container"],
+      /**
+       * Columns
+       * @see https://tailwindcss.com/docs/columns
+       */
+      columns: [{
+        columns: [isTshirtSize]
+      }],
+      /**
+       * Break After
+       * @see https://tailwindcss.com/docs/break-after
+       */
+      "break-after": [{
+        "break-after": getBreaks()
+      }],
+      /**
+       * Break Before
+       * @see https://tailwindcss.com/docs/break-before
+       */
+      "break-before": [{
+        "break-before": getBreaks()
+      }],
+      /**
+       * Break Inside
+       * @see https://tailwindcss.com/docs/break-inside
+       */
+      "break-inside": [{
+        "break-inside": ["auto", "avoid", "avoid-page", "avoid-column"]
+      }],
+      /**
+       * Box Decoration Break
+       * @see https://tailwindcss.com/docs/box-decoration-break
+       */
+      "box-decoration": [{
+        "box-decoration": ["slice", "clone"]
+      }],
+      /**
+       * Box Sizing
+       * @see https://tailwindcss.com/docs/box-sizing
+       */
+      box: [{
+        box: ["border", "content"]
+      }],
+      /**
+       * Display
+       * @see https://tailwindcss.com/docs/display
+       */
+      display: ["block", "inline-block", "inline", "flex", "inline-flex", "table", "inline-table", "table-caption", "table-cell", "table-column", "table-column-group", "table-footer-group", "table-header-group", "table-row-group", "table-row", "flow-root", "grid", "inline-grid", "contents", "list-item", "hidden"],
+      /**
+       * Floats
+       * @see https://tailwindcss.com/docs/float
+       */
+      float: [{
+        float: ["right", "left", "none", "start", "end"]
+      }],
+      /**
+       * Clear
+       * @see https://tailwindcss.com/docs/clear
+       */
+      clear: [{
+        clear: ["left", "right", "both", "none", "start", "end"]
+      }],
+      /**
+       * Isolation
+       * @see https://tailwindcss.com/docs/isolation
+       */
+      isolation: ["isolate", "isolation-auto"],
+      /**
+       * Object Fit
+       * @see https://tailwindcss.com/docs/object-fit
+       */
+      "object-fit": [{
+        object: ["contain", "cover", "fill", "none", "scale-down"]
+      }],
+      /**
+       * Object Position
+       * @see https://tailwindcss.com/docs/object-position
+       */
+      "object-position": [{
+        object: [...getPositions(), isArbitraryValue]
+      }],
+      /**
+       * Overflow
+       * @see https://tailwindcss.com/docs/overflow
+       */
+      overflow: [{
+        overflow: getOverflow()
+      }],
+      /**
+       * Overflow X
+       * @see https://tailwindcss.com/docs/overflow
+       */
+      "overflow-x": [{
+        "overflow-x": getOverflow()
+      }],
+      /**
+       * Overflow Y
+       * @see https://tailwindcss.com/docs/overflow
+       */
+      "overflow-y": [{
+        "overflow-y": getOverflow()
+      }],
+      /**
+       * Overscroll Behavior
+       * @see https://tailwindcss.com/docs/overscroll-behavior
+       */
+      overscroll: [{
+        overscroll: getOverscroll()
+      }],
+      /**
+       * Overscroll Behavior X
+       * @see https://tailwindcss.com/docs/overscroll-behavior
+       */
+      "overscroll-x": [{
+        "overscroll-x": getOverscroll()
+      }],
+      /**
+       * Overscroll Behavior Y
+       * @see https://tailwindcss.com/docs/overscroll-behavior
+       */
+      "overscroll-y": [{
+        "overscroll-y": getOverscroll()
+      }],
+      /**
+       * Position
+       * @see https://tailwindcss.com/docs/position
+       */
+      position: ["static", "fixed", "absolute", "relative", "sticky"],
+      /**
+       * Top / Right / Bottom / Left
+       * @see https://tailwindcss.com/docs/top-right-bottom-left
+       */
+      inset: [{
+        inset: [inset]
+      }],
+      /**
+       * Right / Left
+       * @see https://tailwindcss.com/docs/top-right-bottom-left
+       */
+      "inset-x": [{
+        "inset-x": [inset]
+      }],
+      /**
+       * Top / Bottom
+       * @see https://tailwindcss.com/docs/top-right-bottom-left
+       */
+      "inset-y": [{
+        "inset-y": [inset]
+      }],
+      /**
+       * Start
+       * @see https://tailwindcss.com/docs/top-right-bottom-left
+       */
+      start: [{
+        start: [inset]
+      }],
+      /**
+       * End
+       * @see https://tailwindcss.com/docs/top-right-bottom-left
+       */
+      end: [{
+        end: [inset]
+      }],
+      /**
+       * Top
+       * @see https://tailwindcss.com/docs/top-right-bottom-left
+       */
+      top: [{
+        top: [inset]
+      }],
+      /**
+       * Right
+       * @see https://tailwindcss.com/docs/top-right-bottom-left
+       */
+      right: [{
+        right: [inset]
+      }],
+      /**
+       * Bottom
+       * @see https://tailwindcss.com/docs/top-right-bottom-left
+       */
+      bottom: [{
+        bottom: [inset]
+      }],
+      /**
+       * Left
+       * @see https://tailwindcss.com/docs/top-right-bottom-left
+       */
+      left: [{
+        left: [inset]
+      }],
+      /**
+       * Visibility
+       * @see https://tailwindcss.com/docs/visibility
+       */
+      visibility: ["visible", "invisible", "collapse"],
+      /**
+       * Z-Index
+       * @see https://tailwindcss.com/docs/z-index
+       */
+      z: [{
+        z: ["auto", isInteger, isArbitraryValue]
+      }],
+      // Flexbox and Grid
+      /**
+       * Flex Basis
+       * @see https://tailwindcss.com/docs/flex-basis
+       */
+      basis: [{
+        basis: getSpacingWithAutoAndArbitrary()
+      }],
+      /**
+       * Flex Direction
+       * @see https://tailwindcss.com/docs/flex-direction
+       */
+      "flex-direction": [{
+        flex: ["row", "row-reverse", "col", "col-reverse"]
+      }],
+      /**
+       * Flex Wrap
+       * @see https://tailwindcss.com/docs/flex-wrap
+       */
+      "flex-wrap": [{
+        flex: ["wrap", "wrap-reverse", "nowrap"]
+      }],
+      /**
+       * Flex
+       * @see https://tailwindcss.com/docs/flex
+       */
+      flex: [{
+        flex: ["1", "auto", "initial", "none", isArbitraryValue]
+      }],
+      /**
+       * Flex Grow
+       * @see https://tailwindcss.com/docs/flex-grow
+       */
+      grow: [{
+        grow: getZeroAndEmpty()
+      }],
+      /**
+       * Flex Shrink
+       * @see https://tailwindcss.com/docs/flex-shrink
+       */
+      shrink: [{
+        shrink: getZeroAndEmpty()
+      }],
+      /**
+       * Order
+       * @see https://tailwindcss.com/docs/order
+       */
+      order: [{
+        order: ["first", "last", "none", isInteger, isArbitraryValue]
+      }],
+      /**
+       * Grid Template Columns
+       * @see https://tailwindcss.com/docs/grid-template-columns
+       */
+      "grid-cols": [{
+        "grid-cols": [isAny]
+      }],
+      /**
+       * Grid Column Start / End
+       * @see https://tailwindcss.com/docs/grid-column
+       */
+      "col-start-end": [{
+        col: ["auto", {
+          span: ["full", isInteger, isArbitraryValue]
+        }, isArbitraryValue]
+      }],
+      /**
+       * Grid Column Start
+       * @see https://tailwindcss.com/docs/grid-column
+       */
+      "col-start": [{
+        "col-start": getNumberWithAutoAndArbitrary()
+      }],
+      /**
+       * Grid Column End
+       * @see https://tailwindcss.com/docs/grid-column
+       */
+      "col-end": [{
+        "col-end": getNumberWithAutoAndArbitrary()
+      }],
+      /**
+       * Grid Template Rows
+       * @see https://tailwindcss.com/docs/grid-template-rows
+       */
+      "grid-rows": [{
+        "grid-rows": [isAny]
+      }],
+      /**
+       * Grid Row Start / End
+       * @see https://tailwindcss.com/docs/grid-row
+       */
+      "row-start-end": [{
+        row: ["auto", {
+          span: [isInteger, isArbitraryValue]
+        }, isArbitraryValue]
+      }],
+      /**
+       * Grid Row Start
+       * @see https://tailwindcss.com/docs/grid-row
+       */
+      "row-start": [{
+        "row-start": getNumberWithAutoAndArbitrary()
+      }],
+      /**
+       * Grid Row End
+       * @see https://tailwindcss.com/docs/grid-row
+       */
+      "row-end": [{
+        "row-end": getNumberWithAutoAndArbitrary()
+      }],
+      /**
+       * Grid Auto Flow
+       * @see https://tailwindcss.com/docs/grid-auto-flow
+       */
+      "grid-flow": [{
+        "grid-flow": ["row", "col", "dense", "row-dense", "col-dense"]
+      }],
+      /**
+       * Grid Auto Columns
+       * @see https://tailwindcss.com/docs/grid-auto-columns
+       */
+      "auto-cols": [{
+        "auto-cols": ["auto", "min", "max", "fr", isArbitraryValue]
+      }],
+      /**
+       * Grid Auto Rows
+       * @see https://tailwindcss.com/docs/grid-auto-rows
+       */
+      "auto-rows": [{
+        "auto-rows": ["auto", "min", "max", "fr", isArbitraryValue]
+      }],
+      /**
+       * Gap
+       * @see https://tailwindcss.com/docs/gap
+       */
+      gap: [{
+        gap: [gap]
+      }],
+      /**
+       * Gap X
+       * @see https://tailwindcss.com/docs/gap
+       */
+      "gap-x": [{
+        "gap-x": [gap]
+      }],
+      /**
+       * Gap Y
+       * @see https://tailwindcss.com/docs/gap
+       */
+      "gap-y": [{
+        "gap-y": [gap]
+      }],
+      /**
+       * Justify Content
+       * @see https://tailwindcss.com/docs/justify-content
+       */
+      "justify-content": [{
+        justify: ["normal", ...getAlign()]
+      }],
+      /**
+       * Justify Items
+       * @see https://tailwindcss.com/docs/justify-items
+       */
+      "justify-items": [{
+        "justify-items": ["start", "end", "center", "stretch"]
+      }],
+      /**
+       * Justify Self
+       * @see https://tailwindcss.com/docs/justify-self
+       */
+      "justify-self": [{
+        "justify-self": ["auto", "start", "end", "center", "stretch"]
+      }],
+      /**
+       * Align Content
+       * @see https://tailwindcss.com/docs/align-content
+       */
+      "align-content": [{
+        content: ["normal", ...getAlign(), "baseline"]
+      }],
+      /**
+       * Align Items
+       * @see https://tailwindcss.com/docs/align-items
+       */
+      "align-items": [{
+        items: ["start", "end", "center", "baseline", "stretch"]
+      }],
+      /**
+       * Align Self
+       * @see https://tailwindcss.com/docs/align-self
+       */
+      "align-self": [{
+        self: ["auto", "start", "end", "center", "stretch", "baseline"]
+      }],
+      /**
+       * Place Content
+       * @see https://tailwindcss.com/docs/place-content
+       */
+      "place-content": [{
+        "place-content": [...getAlign(), "baseline"]
+      }],
+      /**
+       * Place Items
+       * @see https://tailwindcss.com/docs/place-items
+       */
+      "place-items": [{
+        "place-items": ["start", "end", "center", "baseline", "stretch"]
+      }],
+      /**
+       * Place Self
+       * @see https://tailwindcss.com/docs/place-self
+       */
+      "place-self": [{
+        "place-self": ["auto", "start", "end", "center", "stretch"]
+      }],
+      // Spacing
+      /**
+       * Padding
+       * @see https://tailwindcss.com/docs/padding
+       */
+      p: [{
+        p: [padding]
+      }],
+      /**
+       * Padding X
+       * @see https://tailwindcss.com/docs/padding
+       */
+      px: [{
+        px: [padding]
+      }],
+      /**
+       * Padding Y
+       * @see https://tailwindcss.com/docs/padding
+       */
+      py: [{
+        py: [padding]
+      }],
+      /**
+       * Padding Start
+       * @see https://tailwindcss.com/docs/padding
+       */
+      ps: [{
+        ps: [padding]
+      }],
+      /**
+       * Padding End
+       * @see https://tailwindcss.com/docs/padding
+       */
+      pe: [{
+        pe: [padding]
+      }],
+      /**
+       * Padding Top
+       * @see https://tailwindcss.com/docs/padding
+       */
+      pt: [{
+        pt: [padding]
+      }],
+      /**
+       * Padding Right
+       * @see https://tailwindcss.com/docs/padding
+       */
+      pr: [{
+        pr: [padding]
+      }],
+      /**
+       * Padding Bottom
+       * @see https://tailwindcss.com/docs/padding
+       */
+      pb: [{
+        pb: [padding]
+      }],
+      /**
+       * Padding Left
+       * @see https://tailwindcss.com/docs/padding
+       */
+      pl: [{
+        pl: [padding]
+      }],
+      /**
+       * Margin
+       * @see https://tailwindcss.com/docs/margin
+       */
+      m: [{
+        m: [margin]
+      }],
+      /**
+       * Margin X
+       * @see https://tailwindcss.com/docs/margin
+       */
+      mx: [{
+        mx: [margin]
+      }],
+      /**
+       * Margin Y
+       * @see https://tailwindcss.com/docs/margin
+       */
+      my: [{
+        my: [margin]
+      }],
+      /**
+       * Margin Start
+       * @see https://tailwindcss.com/docs/margin
+       */
+      ms: [{
+        ms: [margin]
+      }],
+      /**
+       * Margin End
+       * @see https://tailwindcss.com/docs/margin
+       */
+      me: [{
+        me: [margin]
+      }],
+      /**
+       * Margin Top
+       * @see https://tailwindcss.com/docs/margin
+       */
+      mt: [{
+        mt: [margin]
+      }],
+      /**
+       * Margin Right
+       * @see https://tailwindcss.com/docs/margin
+       */
+      mr: [{
+        mr: [margin]
+      }],
+      /**
+       * Margin Bottom
+       * @see https://tailwindcss.com/docs/margin
+       */
+      mb: [{
+        mb: [margin]
+      }],
+      /**
+       * Margin Left
+       * @see https://tailwindcss.com/docs/margin
+       */
+      ml: [{
+        ml: [margin]
+      }],
+      /**
+       * Space Between X
+       * @see https://tailwindcss.com/docs/space
+       */
+      "space-x": [{
+        "space-x": [space]
+      }],
+      /**
+       * Space Between X Reverse
+       * @see https://tailwindcss.com/docs/space
+       */
+      "space-x-reverse": ["space-x-reverse"],
+      /**
+       * Space Between Y
+       * @see https://tailwindcss.com/docs/space
+       */
+      "space-y": [{
+        "space-y": [space]
+      }],
+      /**
+       * Space Between Y Reverse
+       * @see https://tailwindcss.com/docs/space
+       */
+      "space-y-reverse": ["space-y-reverse"],
+      // Sizing
+      /**
+       * Width
+       * @see https://tailwindcss.com/docs/width
+       */
+      w: [{
+        w: ["auto", "min", "max", "fit", "svw", "lvw", "dvw", isArbitraryValue, spacing]
+      }],
+      /**
+       * Min-Width
+       * @see https://tailwindcss.com/docs/min-width
+       */
+      "min-w": [{
+        "min-w": [isArbitraryValue, spacing, "min", "max", "fit"]
+      }],
+      /**
+       * Max-Width
+       * @see https://tailwindcss.com/docs/max-width
+       */
+      "max-w": [{
+        "max-w": [isArbitraryValue, spacing, "none", "full", "min", "max", "fit", "prose", {
+          screen: [isTshirtSize]
+        }, isTshirtSize]
+      }],
+      /**
+       * Height
+       * @see https://tailwindcss.com/docs/height
+       */
+      h: [{
+        h: [isArbitraryValue, spacing, "auto", "min", "max", "fit", "svh", "lvh", "dvh"]
+      }],
+      /**
+       * Min-Height
+       * @see https://tailwindcss.com/docs/min-height
+       */
+      "min-h": [{
+        "min-h": [isArbitraryValue, spacing, "min", "max", "fit", "svh", "lvh", "dvh"]
+      }],
+      /**
+       * Max-Height
+       * @see https://tailwindcss.com/docs/max-height
+       */
+      "max-h": [{
+        "max-h": [isArbitraryValue, spacing, "min", "max", "fit", "svh", "lvh", "dvh"]
+      }],
+      /**
+       * Size
+       * @see https://tailwindcss.com/docs/size
+       */
+      size: [{
+        size: [isArbitraryValue, spacing, "auto", "min", "max", "fit"]
+      }],
+      // Typography
+      /**
+       * Font Size
+       * @see https://tailwindcss.com/docs/font-size
+       */
+      "font-size": [{
+        text: ["base", isTshirtSize, isArbitraryLength]
+      }],
+      /**
+       * Font Smoothing
+       * @see https://tailwindcss.com/docs/font-smoothing
+       */
+      "font-smoothing": ["antialiased", "subpixel-antialiased"],
+      /**
+       * Font Style
+       * @see https://tailwindcss.com/docs/font-style
+       */
+      "font-style": ["italic", "not-italic"],
+      /**
+       * Font Weight
+       * @see https://tailwindcss.com/docs/font-weight
+       */
+      "font-weight": [{
+        font: ["thin", "extralight", "light", "normal", "medium", "semibold", "bold", "extrabold", "black", isArbitraryNumber]
+      }],
+      /**
+       * Font Family
+       * @see https://tailwindcss.com/docs/font-family
+       */
+      "font-family": [{
+        font: [isAny]
+      }],
+      /**
+       * Font Variant Numeric
+       * @see https://tailwindcss.com/docs/font-variant-numeric
+       */
+      "fvn-normal": ["normal-nums"],
+      /**
+       * Font Variant Numeric
+       * @see https://tailwindcss.com/docs/font-variant-numeric
+       */
+      "fvn-ordinal": ["ordinal"],
+      /**
+       * Font Variant Numeric
+       * @see https://tailwindcss.com/docs/font-variant-numeric
+       */
+      "fvn-slashed-zero": ["slashed-zero"],
+      /**
+       * Font Variant Numeric
+       * @see https://tailwindcss.com/docs/font-variant-numeric
+       */
+      "fvn-figure": ["lining-nums", "oldstyle-nums"],
+      /**
+       * Font Variant Numeric
+       * @see https://tailwindcss.com/docs/font-variant-numeric
+       */
+      "fvn-spacing": ["proportional-nums", "tabular-nums"],
+      /**
+       * Font Variant Numeric
+       * @see https://tailwindcss.com/docs/font-variant-numeric
+       */
+      "fvn-fraction": ["diagonal-fractions", "stacked-fractions"],
+      /**
+       * Letter Spacing
+       * @see https://tailwindcss.com/docs/letter-spacing
+       */
+      tracking: [{
+        tracking: ["tighter", "tight", "normal", "wide", "wider", "widest", isArbitraryValue]
+      }],
+      /**
+       * Line Clamp
+       * @see https://tailwindcss.com/docs/line-clamp
+       */
+      "line-clamp": [{
+        "line-clamp": ["none", isNumber, isArbitraryNumber]
+      }],
+      /**
+       * Line Height
+       * @see https://tailwindcss.com/docs/line-height
+       */
+      leading: [{
+        leading: ["none", "tight", "snug", "normal", "relaxed", "loose", isLength, isArbitraryValue]
+      }],
+      /**
+       * List Style Image
+       * @see https://tailwindcss.com/docs/list-style-image
+       */
+      "list-image": [{
+        "list-image": ["none", isArbitraryValue]
+      }],
+      /**
+       * List Style Type
+       * @see https://tailwindcss.com/docs/list-style-type
+       */
+      "list-style-type": [{
+        list: ["none", "disc", "decimal", isArbitraryValue]
+      }],
+      /**
+       * List Style Position
+       * @see https://tailwindcss.com/docs/list-style-position
+       */
+      "list-style-position": [{
+        list: ["inside", "outside"]
+      }],
+      /**
+       * Placeholder Color
+       * @deprecated since Tailwind CSS v3.0.0
+       * @see https://tailwindcss.com/docs/placeholder-color
+       */
+      "placeholder-color": [{
+        placeholder: [colors]
+      }],
+      /**
+       * Placeholder Opacity
+       * @see https://tailwindcss.com/docs/placeholder-opacity
+       */
+      "placeholder-opacity": [{
+        "placeholder-opacity": [opacity]
+      }],
+      /**
+       * Text Alignment
+       * @see https://tailwindcss.com/docs/text-align
+       */
+      "text-alignment": [{
+        text: ["left", "center", "right", "justify", "start", "end"]
+      }],
+      /**
+       * Text Color
+       * @see https://tailwindcss.com/docs/text-color
+       */
+      "text-color": [{
+        text: [colors]
+      }],
+      /**
+       * Text Opacity
+       * @see https://tailwindcss.com/docs/text-opacity
+       */
+      "text-opacity": [{
+        "text-opacity": [opacity]
+      }],
+      /**
+       * Text Decoration
+       * @see https://tailwindcss.com/docs/text-decoration
+       */
+      "text-decoration": ["underline", "overline", "line-through", "no-underline"],
+      /**
+       * Text Decoration Style
+       * @see https://tailwindcss.com/docs/text-decoration-style
+       */
+      "text-decoration-style": [{
+        decoration: [...getLineStyles(), "wavy"]
+      }],
+      /**
+       * Text Decoration Thickness
+       * @see https://tailwindcss.com/docs/text-decoration-thickness
+       */
+      "text-decoration-thickness": [{
+        decoration: ["auto", "from-font", isLength, isArbitraryLength]
+      }],
+      /**
+       * Text Underline Offset
+       * @see https://tailwindcss.com/docs/text-underline-offset
+       */
+      "underline-offset": [{
+        "underline-offset": ["auto", isLength, isArbitraryValue]
+      }],
+      /**
+       * Text Decoration Color
+       * @see https://tailwindcss.com/docs/text-decoration-color
+       */
+      "text-decoration-color": [{
+        decoration: [colors]
+      }],
+      /**
+       * Text Transform
+       * @see https://tailwindcss.com/docs/text-transform
+       */
+      "text-transform": ["uppercase", "lowercase", "capitalize", "normal-case"],
+      /**
+       * Text Overflow
+       * @see https://tailwindcss.com/docs/text-overflow
+       */
+      "text-overflow": ["truncate", "text-ellipsis", "text-clip"],
+      /**
+       * Text Wrap
+       * @see https://tailwindcss.com/docs/text-wrap
+       */
+      "text-wrap": [{
+        text: ["wrap", "nowrap", "balance", "pretty"]
+      }],
+      /**
+       * Text Indent
+       * @see https://tailwindcss.com/docs/text-indent
+       */
+      indent: [{
+        indent: getSpacingWithArbitrary()
+      }],
+      /**
+       * Vertical Alignment
+       * @see https://tailwindcss.com/docs/vertical-align
+       */
+      "vertical-align": [{
+        align: ["baseline", "top", "middle", "bottom", "text-top", "text-bottom", "sub", "super", isArbitraryValue]
+      }],
+      /**
+       * Whitespace
+       * @see https://tailwindcss.com/docs/whitespace
+       */
+      whitespace: [{
+        whitespace: ["normal", "nowrap", "pre", "pre-line", "pre-wrap", "break-spaces"]
+      }],
+      /**
+       * Word Break
+       * @see https://tailwindcss.com/docs/word-break
+       */
+      break: [{
+        break: ["normal", "words", "all", "keep"]
+      }],
+      /**
+       * Hyphens
+       * @see https://tailwindcss.com/docs/hyphens
+       */
+      hyphens: [{
+        hyphens: ["none", "manual", "auto"]
+      }],
+      /**
+       * Content
+       * @see https://tailwindcss.com/docs/content
+       */
+      content: [{
+        content: ["none", isArbitraryValue]
+      }],
+      // Backgrounds
+      /**
+       * Background Attachment
+       * @see https://tailwindcss.com/docs/background-attachment
+       */
+      "bg-attachment": [{
+        bg: ["fixed", "local", "scroll"]
+      }],
+      /**
+       * Background Clip
+       * @see https://tailwindcss.com/docs/background-clip
+       */
+      "bg-clip": [{
+        "bg-clip": ["border", "padding", "content", "text"]
+      }],
+      /**
+       * Background Opacity
+       * @deprecated since Tailwind CSS v3.0.0
+       * @see https://tailwindcss.com/docs/background-opacity
+       */
+      "bg-opacity": [{
+        "bg-opacity": [opacity]
+      }],
+      /**
+       * Background Origin
+       * @see https://tailwindcss.com/docs/background-origin
+       */
+      "bg-origin": [{
+        "bg-origin": ["border", "padding", "content"]
+      }],
+      /**
+       * Background Position
+       * @see https://tailwindcss.com/docs/background-position
+       */
+      "bg-position": [{
+        bg: [...getPositions(), isArbitraryPosition]
+      }],
+      /**
+       * Background Repeat
+       * @see https://tailwindcss.com/docs/background-repeat
+       */
+      "bg-repeat": [{
+        bg: ["no-repeat", {
+          repeat: ["", "x", "y", "round", "space"]
+        }]
+      }],
+      /**
+       * Background Size
+       * @see https://tailwindcss.com/docs/background-size
+       */
+      "bg-size": [{
+        bg: ["auto", "cover", "contain", isArbitrarySize]
+      }],
+      /**
+       * Background Image
+       * @see https://tailwindcss.com/docs/background-image
+       */
+      "bg-image": [{
+        bg: ["none", {
+          "gradient-to": ["t", "tr", "r", "br", "b", "bl", "l", "tl"]
+        }, isArbitraryImage]
+      }],
+      /**
+       * Background Color
+       * @see https://tailwindcss.com/docs/background-color
+       */
+      "bg-color": [{
+        bg: [colors]
+      }],
+      /**
+       * Gradient Color Stops From Position
+       * @see https://tailwindcss.com/docs/gradient-color-stops
+       */
+      "gradient-from-pos": [{
+        from: [gradientColorStopPositions]
+      }],
+      /**
+       * Gradient Color Stops Via Position
+       * @see https://tailwindcss.com/docs/gradient-color-stops
+       */
+      "gradient-via-pos": [{
+        via: [gradientColorStopPositions]
+      }],
+      /**
+       * Gradient Color Stops To Position
+       * @see https://tailwindcss.com/docs/gradient-color-stops
+       */
+      "gradient-to-pos": [{
+        to: [gradientColorStopPositions]
+      }],
+      /**
+       * Gradient Color Stops From
+       * @see https://tailwindcss.com/docs/gradient-color-stops
+       */
+      "gradient-from": [{
+        from: [gradientColorStops]
+      }],
+      /**
+       * Gradient Color Stops Via
+       * @see https://tailwindcss.com/docs/gradient-color-stops
+       */
+      "gradient-via": [{
+        via: [gradientColorStops]
+      }],
+      /**
+       * Gradient Color Stops To
+       * @see https://tailwindcss.com/docs/gradient-color-stops
+       */
+      "gradient-to": [{
+        to: [gradientColorStops]
+      }],
+      // Borders
+      /**
+       * Border Radius
+       * @see https://tailwindcss.com/docs/border-radius
+       */
+      rounded: [{
+        rounded: [borderRadius]
+      }],
+      /**
+       * Border Radius Start
+       * @see https://tailwindcss.com/docs/border-radius
+       */
+      "rounded-s": [{
+        "rounded-s": [borderRadius]
+      }],
+      /**
+       * Border Radius End
+       * @see https://tailwindcss.com/docs/border-radius
+       */
+      "rounded-e": [{
+        "rounded-e": [borderRadius]
+      }],
+      /**
+       * Border Radius Top
+       * @see https://tailwindcss.com/docs/border-radius
+       */
+      "rounded-t": [{
+        "rounded-t": [borderRadius]
+      }],
+      /**
+       * Border Radius Right
+       * @see https://tailwindcss.com/docs/border-radius
+       */
+      "rounded-r": [{
+        "rounded-r": [borderRadius]
+      }],
+      /**
+       * Border Radius Bottom
+       * @see https://tailwindcss.com/docs/border-radius
+       */
+      "rounded-b": [{
+        "rounded-b": [borderRadius]
+      }],
+      /**
+       * Border Radius Left
+       * @see https://tailwindcss.com/docs/border-radius
+       */
+      "rounded-l": [{
+        "rounded-l": [borderRadius]
+      }],
+      /**
+       * Border Radius Start Start
+       * @see https://tailwindcss.com/docs/border-radius
+       */
+      "rounded-ss": [{
+        "rounded-ss": [borderRadius]
+      }],
+      /**
+       * Border Radius Start End
+       * @see https://tailwindcss.com/docs/border-radius
+       */
+      "rounded-se": [{
+        "rounded-se": [borderRadius]
+      }],
+      /**
+       * Border Radius End End
+       * @see https://tailwindcss.com/docs/border-radius
+       */
+      "rounded-ee": [{
+        "rounded-ee": [borderRadius]
+      }],
+      /**
+       * Border Radius End Start
+       * @see https://tailwindcss.com/docs/border-radius
+       */
+      "rounded-es": [{
+        "rounded-es": [borderRadius]
+      }],
+      /**
+       * Border Radius Top Left
+       * @see https://tailwindcss.com/docs/border-radius
+       */
+      "rounded-tl": [{
+        "rounded-tl": [borderRadius]
+      }],
+      /**
+       * Border Radius Top Right
+       * @see https://tailwindcss.com/docs/border-radius
+       */
+      "rounded-tr": [{
+        "rounded-tr": [borderRadius]
+      }],
+      /**
+       * Border Radius Bottom Right
+       * @see https://tailwindcss.com/docs/border-radius
+       */
+      "rounded-br": [{
+        "rounded-br": [borderRadius]
+      }],
+      /**
+       * Border Radius Bottom Left
+       * @see https://tailwindcss.com/docs/border-radius
+       */
+      "rounded-bl": [{
+        "rounded-bl": [borderRadius]
+      }],
+      /**
+       * Border Width
+       * @see https://tailwindcss.com/docs/border-width
+       */
+      "border-w": [{
+        border: [borderWidth]
+      }],
+      /**
+       * Border Width X
+       * @see https://tailwindcss.com/docs/border-width
+       */
+      "border-w-x": [{
+        "border-x": [borderWidth]
+      }],
+      /**
+       * Border Width Y
+       * @see https://tailwindcss.com/docs/border-width
+       */
+      "border-w-y": [{
+        "border-y": [borderWidth]
+      }],
+      /**
+       * Border Width Start
+       * @see https://tailwindcss.com/docs/border-width
+       */
+      "border-w-s": [{
+        "border-s": [borderWidth]
+      }],
+      /**
+       * Border Width End
+       * @see https://tailwindcss.com/docs/border-width
+       */
+      "border-w-e": [{
+        "border-e": [borderWidth]
+      }],
+      /**
+       * Border Width Top
+       * @see https://tailwindcss.com/docs/border-width
+       */
+      "border-w-t": [{
+        "border-t": [borderWidth]
+      }],
+      /**
+       * Border Width Right
+       * @see https://tailwindcss.com/docs/border-width
+       */
+      "border-w-r": [{
+        "border-r": [borderWidth]
+      }],
+      /**
+       * Border Width Bottom
+       * @see https://tailwindcss.com/docs/border-width
+       */
+      "border-w-b": [{
+        "border-b": [borderWidth]
+      }],
+      /**
+       * Border Width Left
+       * @see https://tailwindcss.com/docs/border-width
+       */
+      "border-w-l": [{
+        "border-l": [borderWidth]
+      }],
+      /**
+       * Border Opacity
+       * @see https://tailwindcss.com/docs/border-opacity
+       */
+      "border-opacity": [{
+        "border-opacity": [opacity]
+      }],
+      /**
+       * Border Style
+       * @see https://tailwindcss.com/docs/border-style
+       */
+      "border-style": [{
+        border: [...getLineStyles(), "hidden"]
+      }],
+      /**
+       * Divide Width X
+       * @see https://tailwindcss.com/docs/divide-width
+       */
+      "divide-x": [{
+        "divide-x": [borderWidth]
+      }],
+      /**
+       * Divide Width X Reverse
+       * @see https://tailwindcss.com/docs/divide-width
+       */
+      "divide-x-reverse": ["divide-x-reverse"],
+      /**
+       * Divide Width Y
+       * @see https://tailwindcss.com/docs/divide-width
+       */
+      "divide-y": [{
+        "divide-y": [borderWidth]
+      }],
+      /**
+       * Divide Width Y Reverse
+       * @see https://tailwindcss.com/docs/divide-width
+       */
+      "divide-y-reverse": ["divide-y-reverse"],
+      /**
+       * Divide Opacity
+       * @see https://tailwindcss.com/docs/divide-opacity
+       */
+      "divide-opacity": [{
+        "divide-opacity": [opacity]
+      }],
+      /**
+       * Divide Style
+       * @see https://tailwindcss.com/docs/divide-style
+       */
+      "divide-style": [{
+        divide: getLineStyles()
+      }],
+      /**
+       * Border Color
+       * @see https://tailwindcss.com/docs/border-color
+       */
+      "border-color": [{
+        border: [borderColor]
+      }],
+      /**
+       * Border Color X
+       * @see https://tailwindcss.com/docs/border-color
+       */
+      "border-color-x": [{
+        "border-x": [borderColor]
+      }],
+      /**
+       * Border Color Y
+       * @see https://tailwindcss.com/docs/border-color
+       */
+      "border-color-y": [{
+        "border-y": [borderColor]
+      }],
+      /**
+       * Border Color S
+       * @see https://tailwindcss.com/docs/border-color
+       */
+      "border-color-s": [{
+        "border-s": [borderColor]
+      }],
+      /**
+       * Border Color E
+       * @see https://tailwindcss.com/docs/border-color
+       */
+      "border-color-e": [{
+        "border-e": [borderColor]
+      }],
+      /**
+       * Border Color Top
+       * @see https://tailwindcss.com/docs/border-color
+       */
+      "border-color-t": [{
+        "border-t": [borderColor]
+      }],
+      /**
+       * Border Color Right
+       * @see https://tailwindcss.com/docs/border-color
+       */
+      "border-color-r": [{
+        "border-r": [borderColor]
+      }],
+      /**
+       * Border Color Bottom
+       * @see https://tailwindcss.com/docs/border-color
+       */
+      "border-color-b": [{
+        "border-b": [borderColor]
+      }],
+      /**
+       * Border Color Left
+       * @see https://tailwindcss.com/docs/border-color
+       */
+      "border-color-l": [{
+        "border-l": [borderColor]
+      }],
+      /**
+       * Divide Color
+       * @see https://tailwindcss.com/docs/divide-color
+       */
+      "divide-color": [{
+        divide: [borderColor]
+      }],
+      /**
+       * Outline Style
+       * @see https://tailwindcss.com/docs/outline-style
+       */
+      "outline-style": [{
+        outline: ["", ...getLineStyles()]
+      }],
+      /**
+       * Outline Offset
+       * @see https://tailwindcss.com/docs/outline-offset
+       */
+      "outline-offset": [{
+        "outline-offset": [isLength, isArbitraryValue]
+      }],
+      /**
+       * Outline Width
+       * @see https://tailwindcss.com/docs/outline-width
+       */
+      "outline-w": [{
+        outline: [isLength, isArbitraryLength]
+      }],
+      /**
+       * Outline Color
+       * @see https://tailwindcss.com/docs/outline-color
+       */
+      "outline-color": [{
+        outline: [colors]
+      }],
+      /**
+       * Ring Width
+       * @see https://tailwindcss.com/docs/ring-width
+       */
+      "ring-w": [{
+        ring: getLengthWithEmptyAndArbitrary()
+      }],
+      /**
+       * Ring Width Inset
+       * @see https://tailwindcss.com/docs/ring-width
+       */
+      "ring-w-inset": ["ring-inset"],
+      /**
+       * Ring Color
+       * @see https://tailwindcss.com/docs/ring-color
+       */
+      "ring-color": [{
+        ring: [colors]
+      }],
+      /**
+       * Ring Opacity
+       * @see https://tailwindcss.com/docs/ring-opacity
+       */
+      "ring-opacity": [{
+        "ring-opacity": [opacity]
+      }],
+      /**
+       * Ring Offset Width
+       * @see https://tailwindcss.com/docs/ring-offset-width
+       */
+      "ring-offset-w": [{
+        "ring-offset": [isLength, isArbitraryLength]
+      }],
+      /**
+       * Ring Offset Color
+       * @see https://tailwindcss.com/docs/ring-offset-color
+       */
+      "ring-offset-color": [{
+        "ring-offset": [colors]
+      }],
+      // Effects
+      /**
+       * Box Shadow
+       * @see https://tailwindcss.com/docs/box-shadow
+       */
+      shadow: [{
+        shadow: ["", "inner", "none", isTshirtSize, isArbitraryShadow]
+      }],
+      /**
+       * Box Shadow Color
+       * @see https://tailwindcss.com/docs/box-shadow-color
+       */
+      "shadow-color": [{
+        shadow: [isAny]
+      }],
+      /**
+       * Opacity
+       * @see https://tailwindcss.com/docs/opacity
+       */
+      opacity: [{
+        opacity: [opacity]
+      }],
+      /**
+       * Mix Blend Mode
+       * @see https://tailwindcss.com/docs/mix-blend-mode
+       */
+      "mix-blend": [{
+        "mix-blend": [...getBlendModes(), "plus-lighter", "plus-darker"]
+      }],
+      /**
+       * Background Blend Mode
+       * @see https://tailwindcss.com/docs/background-blend-mode
+       */
+      "bg-blend": [{
+        "bg-blend": getBlendModes()
+      }],
+      // Filters
+      /**
+       * Filter
+       * @deprecated since Tailwind CSS v3.0.0
+       * @see https://tailwindcss.com/docs/filter
+       */
+      filter: [{
+        filter: ["", "none"]
+      }],
+      /**
+       * Blur
+       * @see https://tailwindcss.com/docs/blur
+       */
+      blur: [{
+        blur: [blur]
+      }],
+      /**
+       * Brightness
+       * @see https://tailwindcss.com/docs/brightness
+       */
+      brightness: [{
+        brightness: [brightness]
+      }],
+      /**
+       * Contrast
+       * @see https://tailwindcss.com/docs/contrast
+       */
+      contrast: [{
+        contrast: [contrast]
+      }],
+      /**
+       * Drop Shadow
+       * @see https://tailwindcss.com/docs/drop-shadow
+       */
+      "drop-shadow": [{
+        "drop-shadow": ["", "none", isTshirtSize, isArbitraryValue]
+      }],
+      /**
+       * Grayscale
+       * @see https://tailwindcss.com/docs/grayscale
+       */
+      grayscale: [{
+        grayscale: [grayscale]
+      }],
+      /**
+       * Hue Rotate
+       * @see https://tailwindcss.com/docs/hue-rotate
+       */
+      "hue-rotate": [{
+        "hue-rotate": [hueRotate]
+      }],
+      /**
+       * Invert
+       * @see https://tailwindcss.com/docs/invert
+       */
+      invert: [{
+        invert: [invert2]
+      }],
+      /**
+       * Saturate
+       * @see https://tailwindcss.com/docs/saturate
+       */
+      saturate: [{
+        saturate: [saturate]
+      }],
+      /**
+       * Sepia
+       * @see https://tailwindcss.com/docs/sepia
+       */
+      sepia: [{
+        sepia: [sepia]
+      }],
+      /**
+       * Backdrop Filter
+       * @deprecated since Tailwind CSS v3.0.0
+       * @see https://tailwindcss.com/docs/backdrop-filter
+       */
+      "backdrop-filter": [{
+        "backdrop-filter": ["", "none"]
+      }],
+      /**
+       * Backdrop Blur
+       * @see https://tailwindcss.com/docs/backdrop-blur
+       */
+      "backdrop-blur": [{
+        "backdrop-blur": [blur]
+      }],
+      /**
+       * Backdrop Brightness
+       * @see https://tailwindcss.com/docs/backdrop-brightness
+       */
+      "backdrop-brightness": [{
+        "backdrop-brightness": [brightness]
+      }],
+      /**
+       * Backdrop Contrast
+       * @see https://tailwindcss.com/docs/backdrop-contrast
+       */
+      "backdrop-contrast": [{
+        "backdrop-contrast": [contrast]
+      }],
+      /**
+       * Backdrop Grayscale
+       * @see https://tailwindcss.com/docs/backdrop-grayscale
+       */
+      "backdrop-grayscale": [{
+        "backdrop-grayscale": [grayscale]
+      }],
+      /**
+       * Backdrop Hue Rotate
+       * @see https://tailwindcss.com/docs/backdrop-hue-rotate
+       */
+      "backdrop-hue-rotate": [{
+        "backdrop-hue-rotate": [hueRotate]
+      }],
+      /**
+       * Backdrop Invert
+       * @see https://tailwindcss.com/docs/backdrop-invert
+       */
+      "backdrop-invert": [{
+        "backdrop-invert": [invert2]
+      }],
+      /**
+       * Backdrop Opacity
+       * @see https://tailwindcss.com/docs/backdrop-opacity
+       */
+      "backdrop-opacity": [{
+        "backdrop-opacity": [opacity]
+      }],
+      /**
+       * Backdrop Saturate
+       * @see https://tailwindcss.com/docs/backdrop-saturate
+       */
+      "backdrop-saturate": [{
+        "backdrop-saturate": [saturate]
+      }],
+      /**
+       * Backdrop Sepia
+       * @see https://tailwindcss.com/docs/backdrop-sepia
+       */
+      "backdrop-sepia": [{
+        "backdrop-sepia": [sepia]
+      }],
+      // Tables
+      /**
+       * Border Collapse
+       * @see https://tailwindcss.com/docs/border-collapse
+       */
+      "border-collapse": [{
+        border: ["collapse", "separate"]
+      }],
+      /**
+       * Border Spacing
+       * @see https://tailwindcss.com/docs/border-spacing
+       */
+      "border-spacing": [{
+        "border-spacing": [borderSpacing]
+      }],
+      /**
+       * Border Spacing X
+       * @see https://tailwindcss.com/docs/border-spacing
+       */
+      "border-spacing-x": [{
+        "border-spacing-x": [borderSpacing]
+      }],
+      /**
+       * Border Spacing Y
+       * @see https://tailwindcss.com/docs/border-spacing
+       */
+      "border-spacing-y": [{
+        "border-spacing-y": [borderSpacing]
+      }],
+      /**
+       * Table Layout
+       * @see https://tailwindcss.com/docs/table-layout
+       */
+      "table-layout": [{
+        table: ["auto", "fixed"]
+      }],
+      /**
+       * Caption Side
+       * @see https://tailwindcss.com/docs/caption-side
+       */
+      caption: [{
+        caption: ["top", "bottom"]
+      }],
+      // Transitions and Animation
+      /**
+       * Tranisition Property
+       * @see https://tailwindcss.com/docs/transition-property
+       */
+      transition: [{
+        transition: ["none", "all", "", "colors", "opacity", "shadow", "transform", isArbitraryValue]
+      }],
+      /**
+       * Transition Duration
+       * @see https://tailwindcss.com/docs/transition-duration
+       */
+      duration: [{
+        duration: getNumberAndArbitrary()
+      }],
+      /**
+       * Transition Timing Function
+       * @see https://tailwindcss.com/docs/transition-timing-function
+       */
+      ease: [{
+        ease: ["linear", "in", "out", "in-out", isArbitraryValue]
+      }],
+      /**
+       * Transition Delay
+       * @see https://tailwindcss.com/docs/transition-delay
+       */
+      delay: [{
+        delay: getNumberAndArbitrary()
+      }],
+      /**
+       * Animation
+       * @see https://tailwindcss.com/docs/animation
+       */
+      animate: [{
+        animate: ["none", "spin", "ping", "pulse", "bounce", isArbitraryValue]
+      }],
+      // Transforms
+      /**
+       * Transform
+       * @see https://tailwindcss.com/docs/transform
+       */
+      transform: [{
+        transform: ["", "gpu", "none"]
+      }],
+      /**
+       * Scale
+       * @see https://tailwindcss.com/docs/scale
+       */
+      scale: [{
+        scale: [scale]
+      }],
+      /**
+       * Scale X
+       * @see https://tailwindcss.com/docs/scale
+       */
+      "scale-x": [{
+        "scale-x": [scale]
+      }],
+      /**
+       * Scale Y
+       * @see https://tailwindcss.com/docs/scale
+       */
+      "scale-y": [{
+        "scale-y": [scale]
+      }],
+      /**
+       * Rotate
+       * @see https://tailwindcss.com/docs/rotate
+       */
+      rotate: [{
+        rotate: [isInteger, isArbitraryValue]
+      }],
+      /**
+       * Translate X
+       * @see https://tailwindcss.com/docs/translate
+       */
+      "translate-x": [{
+        "translate-x": [translate]
+      }],
+      /**
+       * Translate Y
+       * @see https://tailwindcss.com/docs/translate
+       */
+      "translate-y": [{
+        "translate-y": [translate]
+      }],
+      /**
+       * Skew X
+       * @see https://tailwindcss.com/docs/skew
+       */
+      "skew-x": [{
+        "skew-x": [skew]
+      }],
+      /**
+       * Skew Y
+       * @see https://tailwindcss.com/docs/skew
+       */
+      "skew-y": [{
+        "skew-y": [skew]
+      }],
+      /**
+       * Transform Origin
+       * @see https://tailwindcss.com/docs/transform-origin
+       */
+      "transform-origin": [{
+        origin: ["center", "top", "top-right", "right", "bottom-right", "bottom", "bottom-left", "left", "top-left", isArbitraryValue]
+      }],
+      // Interactivity
+      /**
+       * Accent Color
+       * @see https://tailwindcss.com/docs/accent-color
+       */
+      accent: [{
+        accent: ["auto", colors]
+      }],
+      /**
+       * Appearance
+       * @see https://tailwindcss.com/docs/appearance
+       */
+      appearance: [{
+        appearance: ["none", "auto"]
+      }],
+      /**
+       * Cursor
+       * @see https://tailwindcss.com/docs/cursor
+       */
+      cursor: [{
+        cursor: ["auto", "default", "pointer", "wait", "text", "move", "help", "not-allowed", "none", "context-menu", "progress", "cell", "crosshair", "vertical-text", "alias", "copy", "no-drop", "grab", "grabbing", "all-scroll", "col-resize", "row-resize", "n-resize", "e-resize", "s-resize", "w-resize", "ne-resize", "nw-resize", "se-resize", "sw-resize", "ew-resize", "ns-resize", "nesw-resize", "nwse-resize", "zoom-in", "zoom-out", isArbitraryValue]
+      }],
+      /**
+       * Caret Color
+       * @see https://tailwindcss.com/docs/just-in-time-mode#caret-color-utilities
+       */
+      "caret-color": [{
+        caret: [colors]
+      }],
+      /**
+       * Pointer Events
+       * @see https://tailwindcss.com/docs/pointer-events
+       */
+      "pointer-events": [{
+        "pointer-events": ["none", "auto"]
+      }],
+      /**
+       * Resize
+       * @see https://tailwindcss.com/docs/resize
+       */
+      resize: [{
+        resize: ["none", "y", "x", ""]
+      }],
+      /**
+       * Scroll Behavior
+       * @see https://tailwindcss.com/docs/scroll-behavior
+       */
+      "scroll-behavior": [{
+        scroll: ["auto", "smooth"]
+      }],
+      /**
+       * Scroll Margin
+       * @see https://tailwindcss.com/docs/scroll-margin
+       */
+      "scroll-m": [{
+        "scroll-m": getSpacingWithArbitrary()
+      }],
+      /**
+       * Scroll Margin X
+       * @see https://tailwindcss.com/docs/scroll-margin
+       */
+      "scroll-mx": [{
+        "scroll-mx": getSpacingWithArbitrary()
+      }],
+      /**
+       * Scroll Margin Y
+       * @see https://tailwindcss.com/docs/scroll-margin
+       */
+      "scroll-my": [{
+        "scroll-my": getSpacingWithArbitrary()
+      }],
+      /**
+       * Scroll Margin Start
+       * @see https://tailwindcss.com/docs/scroll-margin
+       */
+      "scroll-ms": [{
+        "scroll-ms": getSpacingWithArbitrary()
+      }],
+      /**
+       * Scroll Margin End
+       * @see https://tailwindcss.com/docs/scroll-margin
+       */
+      "scroll-me": [{
+        "scroll-me": getSpacingWithArbitrary()
+      }],
+      /**
+       * Scroll Margin Top
+       * @see https://tailwindcss.com/docs/scroll-margin
+       */
+      "scroll-mt": [{
+        "scroll-mt": getSpacingWithArbitrary()
+      }],
+      /**
+       * Scroll Margin Right
+       * @see https://tailwindcss.com/docs/scroll-margin
+       */
+      "scroll-mr": [{
+        "scroll-mr": getSpacingWithArbitrary()
+      }],
+      /**
+       * Scroll Margin Bottom
+       * @see https://tailwindcss.com/docs/scroll-margin
+       */
+      "scroll-mb": [{
+        "scroll-mb": getSpacingWithArbitrary()
+      }],
+      /**
+       * Scroll Margin Left
+       * @see https://tailwindcss.com/docs/scroll-margin
+       */
+      "scroll-ml": [{
+        "scroll-ml": getSpacingWithArbitrary()
+      }],
+      /**
+       * Scroll Padding
+       * @see https://tailwindcss.com/docs/scroll-padding
+       */
+      "scroll-p": [{
+        "scroll-p": getSpacingWithArbitrary()
+      }],
+      /**
+       * Scroll Padding X
+       * @see https://tailwindcss.com/docs/scroll-padding
+       */
+      "scroll-px": [{
+        "scroll-px": getSpacingWithArbitrary()
+      }],
+      /**
+       * Scroll Padding Y
+       * @see https://tailwindcss.com/docs/scroll-padding
+       */
+      "scroll-py": [{
+        "scroll-py": getSpacingWithArbitrary()
+      }],
+      /**
+       * Scroll Padding Start
+       * @see https://tailwindcss.com/docs/scroll-padding
+       */
+      "scroll-ps": [{
+        "scroll-ps": getSpacingWithArbitrary()
+      }],
+      /**
+       * Scroll Padding End
+       * @see https://tailwindcss.com/docs/scroll-padding
+       */
+      "scroll-pe": [{
+        "scroll-pe": getSpacingWithArbitrary()
+      }],
+      /**
+       * Scroll Padding Top
+       * @see https://tailwindcss.com/docs/scroll-padding
+       */
+      "scroll-pt": [{
+        "scroll-pt": getSpacingWithArbitrary()
+      }],
+      /**
+       * Scroll Padding Right
+       * @see https://tailwindcss.com/docs/scroll-padding
+       */
+      "scroll-pr": [{
+        "scroll-pr": getSpacingWithArbitrary()
+      }],
+      /**
+       * Scroll Padding Bottom
+       * @see https://tailwindcss.com/docs/scroll-padding
+       */
+      "scroll-pb": [{
+        "scroll-pb": getSpacingWithArbitrary()
+      }],
+      /**
+       * Scroll Padding Left
+       * @see https://tailwindcss.com/docs/scroll-padding
+       */
+      "scroll-pl": [{
+        "scroll-pl": getSpacingWithArbitrary()
+      }],
+      /**
+       * Scroll Snap Align
+       * @see https://tailwindcss.com/docs/scroll-snap-align
+       */
+      "snap-align": [{
+        snap: ["start", "end", "center", "align-none"]
+      }],
+      /**
+       * Scroll Snap Stop
+       * @see https://tailwindcss.com/docs/scroll-snap-stop
+       */
+      "snap-stop": [{
+        snap: ["normal", "always"]
+      }],
+      /**
+       * Scroll Snap Type
+       * @see https://tailwindcss.com/docs/scroll-snap-type
+       */
+      "snap-type": [{
+        snap: ["none", "x", "y", "both"]
+      }],
+      /**
+       * Scroll Snap Type Strictness
+       * @see https://tailwindcss.com/docs/scroll-snap-type
+       */
+      "snap-strictness": [{
+        snap: ["mandatory", "proximity"]
+      }],
+      /**
+       * Touch Action
+       * @see https://tailwindcss.com/docs/touch-action
+       */
+      touch: [{
+        touch: ["auto", "none", "manipulation"]
+      }],
+      /**
+       * Touch Action X
+       * @see https://tailwindcss.com/docs/touch-action
+       */
+      "touch-x": [{
+        "touch-pan": ["x", "left", "right"]
+      }],
+      /**
+       * Touch Action Y
+       * @see https://tailwindcss.com/docs/touch-action
+       */
+      "touch-y": [{
+        "touch-pan": ["y", "up", "down"]
+      }],
+      /**
+       * Touch Action Pinch Zoom
+       * @see https://tailwindcss.com/docs/touch-action
+       */
+      "touch-pz": ["touch-pinch-zoom"],
+      /**
+       * User Select
+       * @see https://tailwindcss.com/docs/user-select
+       */
+      select: [{
+        select: ["none", "text", "all", "auto"]
+      }],
+      /**
+       * Will Change
+       * @see https://tailwindcss.com/docs/will-change
+       */
+      "will-change": [{
+        "will-change": ["auto", "scroll", "contents", "transform", isArbitraryValue]
+      }],
+      // SVG
+      /**
+       * Fill
+       * @see https://tailwindcss.com/docs/fill
+       */
+      fill: [{
+        fill: [colors, "none"]
+      }],
+      /**
+       * Stroke Width
+       * @see https://tailwindcss.com/docs/stroke-width
+       */
+      "stroke-w": [{
+        stroke: [isLength, isArbitraryLength, isArbitraryNumber]
+      }],
+      /**
+       * Stroke
+       * @see https://tailwindcss.com/docs/stroke
+       */
+      stroke: [{
+        stroke: [colors, "none"]
+      }],
+      // Accessibility
+      /**
+       * Screen Readers
+       * @see https://tailwindcss.com/docs/screen-readers
+       */
+      sr: ["sr-only", "not-sr-only"],
+      /**
+       * Forced Color Adjust
+       * @see https://tailwindcss.com/docs/forced-color-adjust
+       */
+      "forced-color-adjust": [{
+        "forced-color-adjust": ["auto", "none"]
+      }]
+    },
+    conflictingClassGroups: {
+      overflow: ["overflow-x", "overflow-y"],
+      overscroll: ["overscroll-x", "overscroll-y"],
+      inset: ["inset-x", "inset-y", "start", "end", "top", "right", "bottom", "left"],
+      "inset-x": ["right", "left"],
+      "inset-y": ["top", "bottom"],
+      flex: ["basis", "grow", "shrink"],
+      gap: ["gap-x", "gap-y"],
+      p: ["px", "py", "ps", "pe", "pt", "pr", "pb", "pl"],
+      px: ["pr", "pl"],
+      py: ["pt", "pb"],
+      m: ["mx", "my", "ms", "me", "mt", "mr", "mb", "ml"],
+      mx: ["mr", "ml"],
+      my: ["mt", "mb"],
+      size: ["w", "h"],
+      "font-size": ["leading"],
+      "fvn-normal": ["fvn-ordinal", "fvn-slashed-zero", "fvn-figure", "fvn-spacing", "fvn-fraction"],
+      "fvn-ordinal": ["fvn-normal"],
+      "fvn-slashed-zero": ["fvn-normal"],
+      "fvn-figure": ["fvn-normal"],
+      "fvn-spacing": ["fvn-normal"],
+      "fvn-fraction": ["fvn-normal"],
+      "line-clamp": ["display", "overflow"],
+      rounded: ["rounded-s", "rounded-e", "rounded-t", "rounded-r", "rounded-b", "rounded-l", "rounded-ss", "rounded-se", "rounded-ee", "rounded-es", "rounded-tl", "rounded-tr", "rounded-br", "rounded-bl"],
+      "rounded-s": ["rounded-ss", "rounded-es"],
+      "rounded-e": ["rounded-se", "rounded-ee"],
+      "rounded-t": ["rounded-tl", "rounded-tr"],
+      "rounded-r": ["rounded-tr", "rounded-br"],
+      "rounded-b": ["rounded-br", "rounded-bl"],
+      "rounded-l": ["rounded-tl", "rounded-bl"],
+      "border-spacing": ["border-spacing-x", "border-spacing-y"],
+      "border-w": ["border-w-s", "border-w-e", "border-w-t", "border-w-r", "border-w-b", "border-w-l"],
+      "border-w-x": ["border-w-r", "border-w-l"],
+      "border-w-y": ["border-w-t", "border-w-b"],
+      "border-color": ["border-color-s", "border-color-e", "border-color-t", "border-color-r", "border-color-b", "border-color-l"],
+      "border-color-x": ["border-color-r", "border-color-l"],
+      "border-color-y": ["border-color-t", "border-color-b"],
+      "scroll-m": ["scroll-mx", "scroll-my", "scroll-ms", "scroll-me", "scroll-mt", "scroll-mr", "scroll-mb", "scroll-ml"],
+      "scroll-mx": ["scroll-mr", "scroll-ml"],
+      "scroll-my": ["scroll-mt", "scroll-mb"],
+      "scroll-p": ["scroll-px", "scroll-py", "scroll-ps", "scroll-pe", "scroll-pt", "scroll-pr", "scroll-pb", "scroll-pl"],
+      "scroll-px": ["scroll-pr", "scroll-pl"],
+      "scroll-py": ["scroll-pt", "scroll-pb"],
+      touch: ["touch-x", "touch-y", "touch-pz"],
+      "touch-x": ["touch"],
+      "touch-y": ["touch"],
+      "touch-pz": ["touch"]
+    },
+    conflictingClassGroupModifiers: {
+      "font-size": ["leading"]
+    }
+  };
+};
+const twMerge = /* @__PURE__ */ createTailwindMerge(getDefaultConfig);
+function cn(...inputs) {
+  return twMerge(clsx(inputs));
+}
+const badgeVariants = cva(
+  "inline-flex items-center justify-center rounded-md border px-2 py-0.5 text-xs font-medium w-fit whitespace-nowrap shrink-0 [&>svg]:size-3 gap-1 [&>svg]:pointer-events-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive transition-[color,box-shadow] overflow-hidden",
+  {
+    variants: {
+      variant: {
+        default: "border-transparent bg-primary text-primary-foreground [a&]:hover:bg-primary/90",
+        secondary: "border-transparent bg-secondary text-secondary-foreground [a&]:hover:bg-secondary/90",
+        destructive: "border-transparent bg-destructive text-destructive-foreground [a&]:hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60",
+        outline: "text-foreground [a&]:hover:bg-accent [a&]:hover:text-accent-foreground"
+      }
+    },
+    defaultVariants: {
+      variant: "default"
+    }
+  }
+);
+function Badge({
+  className,
+  variant,
+  asChild = false,
+  ...props
+}) {
+  const Comp = asChild ? Slot : "span";
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(
+    Comp,
+    {
+      "data-slot": "badge",
+      className: cn(badgeVariants({ variant }), className),
+      ...props
+    }
+  );
+}
+const buttonVariants = cva(
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive",
+  {
+    variants: {
+      variant: {
+        default: "bg-primary text-primary-foreground shadow-xs hover:bg-primary/90",
+        destructive: "bg-destructive text-destructive-foreground shadow-xs hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60",
+        outline: "border bg-background shadow-xs hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50",
+        secondary: "bg-secondary text-secondary-foreground shadow-xs hover:bg-secondary/80",
+        ghost: "hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50",
+        link: "text-primary underline-offset-4 hover:underline"
+      },
+      size: {
+        default: "h-9 px-4 py-2 has-[>svg]:px-3",
+        sm: "h-8 rounded-md gap-1.5 px-3 has-[>svg]:px-2.5",
+        lg: "h-10 rounded-md px-6 has-[>svg]:px-4",
+        icon: "size-9"
+      }
+    },
+    defaultVariants: {
+      variant: "default",
+      size: "default"
+    }
+  }
+);
+function Button({
+  className,
+  variant,
+  size,
+  asChild = false,
+  ...props
+}) {
+  const Comp = asChild ? Slot : "button";
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(
+    Comp,
+    {
+      "data-slot": "button",
+      className: cn(buttonVariants({ variant, size, className })),
+      ...props
+    }
+  );
+}
+function Card({ className, ...props }) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(
+    "div",
+    {
+      "data-slot": "card",
+      className: cn(
+        "bg-card text-card-foreground flex flex-col gap-6 rounded-xl border py-6 shadow-sm",
+        className
+      ),
+      ...props
+    }
+  );
+}
+function CardHeader({ className, ...props }) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(
+    "div",
+    {
+      "data-slot": "card-header",
+      className: cn(
+        "@container/card-header grid auto-rows-min grid-rows-[auto_auto] items-start gap-1.5 px-6 has-data-[slot=card-action]:grid-cols-[1fr_auto] [.border-b]:pb-6",
+        className
+      ),
+      ...props
+    }
+  );
+}
+function CardTitle({ className, ...props }) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(
+    "div",
+    {
+      "data-slot": "card-title",
+      className: cn("leading-none font-semibold", className),
+      ...props
+    }
+  );
+}
+function CardContent({ className, ...props }) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(
+    "div",
+    {
+      "data-slot": "card-content",
+      className: cn("px-6", className),
+      ...props
+    }
+  );
+}
+function Input({ className, type, ...props }) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(
+    "input",
+    {
+      type,
+      "data-slot": "input",
+      className: cn(
+        "file:text-foreground placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground dark:bg-input/30 border-input flex h-9 w-full min-w-0 rounded-md border bg-transparent px-3 py-1 text-base shadow-xs transition-[color,box-shadow] outline-none file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm",
+        "focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]",
+        "aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive",
+        className
+      ),
+      ...props
+    }
+  );
+}
+var NODES = [
+  "a",
+  "button",
+  "div",
+  "form",
+  "h2",
+  "h3",
+  "img",
+  "input",
+  "label",
+  "li",
+  "nav",
+  "ol",
+  "p",
+  "select",
+  "span",
+  "svg",
+  "ul"
+];
+var Primitive = NODES.reduce((primitive, node) => {
+  const Slot2 = /* @__PURE__ */ createSlot(`Primitive.${node}`);
+  const Node = reactExports.forwardRef((props, forwardedRef) => {
+    const { asChild, ...primitiveProps } = props;
+    const Comp = asChild ? Slot2 : node;
+    if (typeof window !== "undefined") {
+      window[Symbol.for("radix-ui")] = true;
+    }
+    return /* @__PURE__ */ jsxRuntimeExports.jsx(Comp, { ...primitiveProps, ref: forwardedRef });
+  });
+  Node.displayName = `Primitive.${node}`;
+  return { ...primitive, [node]: Node };
+}, {});
+var NAME = "Label";
+var Label$1 = reactExports.forwardRef((props, forwardedRef) => {
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(
+    Primitive.label,
+    {
+      ...props,
+      ref: forwardedRef,
+      onMouseDown: (event) => {
+        var _a3;
+        const target = event.target;
+        if (target.closest("button, input, select, textarea")) return;
+        (_a3 = props.onMouseDown) == null ? void 0 : _a3.call(props, event);
+        if (!event.defaultPrevented && event.detail > 1) event.preventDefault();
+      }
+    }
+  );
+});
+Label$1.displayName = NAME;
+var Root = Label$1;
+function Label({
+  className,
+  ...props
+}) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(
+    Root,
+    {
+      "data-slot": "label",
+      className: cn(
+        "flex items-center gap-2 text-sm leading-none font-medium select-none group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50 peer-disabled:cursor-not-allowed peer-disabled:opacity-50",
+        className
+      ),
+      ...props
+    }
+  );
+}
+function Skeleton({ className, ...props }) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(
+    "div",
+    {
+      "data-slot": "skeleton",
+      className: cn("bg-accent animate-pulse rounded-md", className),
+      ...props
+    }
+  );
+}
+function useZones() {
+  const { actor, isFetching } = useActor(createActor);
+  return useQuery({
+    queryKey: ["zones"],
+    queryFn: async () => {
+      if (!actor) return [];
+      const result = await actor.getZones();
+      return [...result].sort(
+        (a2, b2) => Number(a2.display_order) - Number(b2.display_order)
+      );
+    },
+    enabled: !!actor && !isFetching,
+    staleTime: 6e4
+  });
+}
+function useGetOrder(orderId, phone_last4, enabled) {
+  const { actor, isFetching } = useActor(createActor);
+  return useQuery({
+    queryKey: ["order", orderId == null ? void 0 : orderId.toString()],
+    queryFn: async () => {
+      if (!actor || !orderId) return null;
+      return actor.getOrder(orderId, phone_last4);
+    },
+    enabled: !!actor && !isFetching && enabled && !!orderId,
+    refetchInterval: false,
+    // polling handled by usePolling hook
+    staleTime: 0
+  });
+}
+function useCreateOrder() {
+  const { actor } = useActor(createActor);
+  return useMutation({
+    mutationFn: async (params) => {
+      if (!actor) throw new Error("Actor not ready");
+      const result = await actor.createOrder(
+        params.zone_id,
+        params.size,
+        params.customer_phone,
+        params.address_note,
+        params.idempotency_key,
+        params.customer_id ?? null
+      );
+      if (result.__kind__ === "err") throw new Error(result.err);
+      return result.ok;
+    }
+  });
+}
+function useProcessPayment() {
+  const { actor } = useActor(createActor);
+  const queryClient2 = useQueryClient();
+  return useMutation({
+    mutationFn: async (params) => {
+      if (!actor) throw new Error("Actor not ready");
+      const result = await actor.processPayment(
+        params.order_id,
+        params.idempotency_key
+      );
+      if (result.__kind__ === "err") throw new Error(result.err);
+      return result.ok;
+    },
+    onSuccess: (_data, vars) => {
+      void queryClient2.invalidateQueries({
+        queryKey: ["order", vars.order_id.toString()]
+      });
+    }
+  });
+}
+function useRequestShift() {
+  const { actor } = useActor(createActor);
+  const queryClient2 = useQueryClient();
+  return useMutation({
+    mutationFn: async (params) => {
+      if (!actor) throw new Error("Actor not ready");
+      const result = await actor.requestShift(
+        params.driverId,
+        params.period,
+        params.date
+      );
+      if (result.__kind__ === "err") throw new Error(result.err);
+      return result.ok;
+    },
+    onSuccess: (_data, vars) => {
+      void queryClient2.invalidateQueries({
+        queryKey: ["activeShift", vars.driverId.toString()]
+      });
+      void queryClient2.invalidateQueries({
+        queryKey: ["driverShifts", vars.driverId.toString()]
+      });
+    }
+  });
+}
+function usePayShiftFee() {
+  const { actor } = useActor(createActor);
+  const queryClient2 = useQueryClient();
+  return useMutation({
+    mutationFn: async (params) => {
+      if (!actor) throw new Error("Actor not ready");
+      const result = await actor.payShiftFee(params.shiftId);
+      if (result.__kind__ === "err") throw new Error(result.err);
+      return result.ok;
+    },
+    onSuccess: (_data, vars) => {
+      void queryClient2.invalidateQueries({
+        queryKey: ["activeShift", vars.driverId.toString()]
+      });
+    }
+  });
+}
+function useSubmitZNumber() {
+  const { actor } = useActor(createActor);
+  const queryClient2 = useQueryClient();
+  return useMutation({
+    mutationFn: async (params) => {
+      if (!actor) throw new Error("Actor not ready");
+      const result = await actor.submitZNumber(params.shiftId, params.zNumber);
+      if (result.__kind__ === "err") throw new Error(result.err);
+      return result.ok;
+    },
+    onSuccess: (_data, vars) => {
+      void queryClient2.invalidateQueries({
+        queryKey: ["activeShift", vars.driverId.toString()]
+      });
+      void queryClient2.invalidateQueries({
+        queryKey: ["driverShifts", vars.driverId.toString()]
+      });
+    }
+  });
+}
+function useGetActiveShift(driverId) {
+  const { actor, isFetching } = useActor(createActor);
+  return useQuery({
+    queryKey: ["activeShift", driverId == null ? void 0 : driverId.toString()],
+    queryFn: async () => {
+      if (!actor || !driverId) return null;
+      return actor.getActiveShift(driverId);
+    },
+    enabled: !!actor && !isFetching && !!driverId,
+    staleTime: 1e4,
+    refetchInterval: 15e3
+  });
+}
+function useRegisterCustomer() {
+  const { actor } = useActor(createActor);
+  return useMutation({
+    mutationFn: async (params) => {
+      if (!actor) throw new Error("Actor not ready");
+      const result = await actor.registerCustomer(
+        params.name,
+        params.phone,
+        params.pin,
+        params.email
+      );
+      if (result.__kind__ === "err") throw new Error(result.err);
+      return result.ok;
+    }
+  });
+}
+function useLoginCustomer() {
+  const { actor } = useActor(createActor);
+  return useMutation({
+    mutationFn: async (params) => {
+      if (!actor) throw new Error("Actor not ready");
+      const result = await actor.loginCustomer(params.phone, params.pin);
+      if (result.__kind__ === "err") throw new Error(result.err);
+      return result.ok;
+    }
+  });
+}
+function useAdminLogin() {
+  const { actor } = useActor(createActor);
+  return useMutation({
+    mutationFn: async (params) => {
+      if (!actor) throw new Error("Actor not ready");
+      const result = await actor.adminLogin(params.password);
+      if (result.__kind__ === "err") throw new Error(result.err);
+      return result.ok;
+    }
+  });
+}
+function useGetAllOrders() {
+  const { actor, isFetching } = useActor(createActor);
+  return useQuery({
+    queryKey: ["admin", "orders"],
+    queryFn: async () => {
+      if (!actor) return [];
+      return actor.getAllOrders();
+    },
+    enabled: !!actor && !isFetching,
+    staleTime: 1e4,
+    refetchInterval: 15e3
+  });
+}
+function useGetDriverStatusSummary() {
+  const { actor, isFetching } = useActor(createActor);
+  return useQuery({
+    queryKey: ["admin", "drivers"],
+    queryFn: async () => {
+      if (!actor) return [];
+      return actor.getDriverStatusSummary();
+    },
+    enabled: !!actor && !isFetching,
+    staleTime: 1e4,
+    refetchInterval: 15e3
+  });
+}
+function useGetZoneSummary() {
+  const { actor, isFetching } = useActor(createActor);
+  return useQuery({
+    queryKey: ["admin", "zones"],
+    queryFn: async () => {
+      if (!actor) return [];
+      return actor.getZoneSummary();
+    },
+    enabled: !!actor && !isFetching,
+    staleTime: 1e4,
+    refetchInterval: 15e3
+  });
+}
+function useResetDemo() {
+  const { actor } = useActor(createActor);
+  const queryClient2 = useQueryClient();
+  return useMutation({
+    mutationFn: async () => {
+      if (!actor) throw new Error("Actor not ready");
+      return actor.resetDemo();
+    },
+    onSuccess: () => void queryClient2.invalidateQueries()
+  });
+}
+function useSetPaymentMode() {
+  const { actor } = useActor(createActor);
+  return useMutation({
+    mutationFn: async (mode) => {
+      if (!actor) throw new Error("Actor not ready");
+      return actor.setPaymentMode(mode);
+    }
+  });
+}
+function useAdminSetDriverZones() {
+  const { actor } = useActor(createActor);
+  const queryClient2 = useQueryClient();
+  return useMutation({
+    mutationFn: async (params) => {
+      if (!actor) throw new Error("Actor not ready");
+      const result = await actor.setDriverZones(
+        params.driverId,
+        params.zoneIds
+      );
+      if (result.__kind__ === "err") throw new Error(result.err);
+      return result.ok;
+    },
+    onSuccess: () => {
+      void queryClient2.invalidateQueries({ queryKey: ["admin", "drivers"] });
+    }
+  });
+}
+function useConfirmDelivery() {
+  const { actor } = useActor(createActor);
+  const queryClient2 = useQueryClient();
+  return useMutation({
+    mutationFn: async (params) => {
+      if (!actor) throw new Error("Actor not ready");
+      const result = await actor.confirmDelivery(params.orderId, params.role);
+      if (result.__kind__ === "err") throw new Error(result.err);
+      return result.ok;
+    },
+    onSuccess: (_data, vars) => {
+      void queryClient2.invalidateQueries({
+        queryKey: ["order", vars.orderId.toString()]
+      });
+    }
+  });
+}
+/**
+ * @license lucide-react v0.511.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const toKebabCase = (string) => string.replace(/([a-z0-9])([A-Z])/g, "$1-$2").toLowerCase();
+const toCamelCase = (string) => string.replace(
+  /^([A-Z])|[\s-_]+(\w)/g,
+  (match, p1, p2) => p2 ? p2.toUpperCase() : p1.toLowerCase()
+);
+const toPascalCase = (string) => {
+  const camelCase = toCamelCase(string);
+  return camelCase.charAt(0).toUpperCase() + camelCase.slice(1);
+};
+const mergeClasses = (...classes) => classes.filter((className, index2, array) => {
+  return Boolean(className) && className.trim() !== "" && array.indexOf(className) === index2;
+}).join(" ").trim();
+const hasA11yProp = (props) => {
+  for (const prop in props) {
+    if (prop.startsWith("aria-") || prop === "role" || prop === "title") {
+      return true;
+    }
+  }
+};
+/**
+ * @license lucide-react v0.511.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+var defaultAttributes = {
+  xmlns: "http://www.w3.org/2000/svg",
+  width: 24,
+  height: 24,
+  viewBox: "0 0 24 24",
+  fill: "none",
+  stroke: "currentColor",
+  strokeWidth: 2,
+  strokeLinecap: "round",
+  strokeLinejoin: "round"
+};
+/**
+ * @license lucide-react v0.511.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const Icon = reactExports.forwardRef(
+  ({
+    color = "currentColor",
+    size = 24,
+    strokeWidth = 2,
+    absoluteStrokeWidth,
+    className = "",
+    children,
+    iconNode,
+    ...rest
+  }, ref) => reactExports.createElement(
+    "svg",
+    {
+      ref,
+      ...defaultAttributes,
+      width: size,
+      height: size,
+      stroke: color,
+      strokeWidth: absoluteStrokeWidth ? Number(strokeWidth) * 24 / Number(size) : strokeWidth,
+      className: mergeClasses("lucide", className),
+      ...!children && !hasA11yProp(rest) && { "aria-hidden": "true" },
+      ...rest
+    },
+    [
+      ...iconNode.map(([tag, attrs]) => reactExports.createElement(tag, attrs)),
+      ...Array.isArray(children) ? children : [children]
+    ]
+  )
+);
+/**
+ * @license lucide-react v0.511.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const createLucideIcon = (iconName, iconNode) => {
+  const Component2 = reactExports.forwardRef(
+    ({ className, ...props }, ref) => reactExports.createElement(Icon, {
+      ref,
+      iconNode,
+      className: mergeClasses(
+        `lucide-${toKebabCase(toPascalCase(iconName))}`,
+        `lucide-${iconName}`,
+        className
+      ),
+      ...props
+    })
+  );
+  Component2.displayName = toPascalCase(iconName);
+  return Component2;
+};
+/**
+ * @license lucide-react v0.511.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const __iconNode$8 = [
+  [
+    "path",
+    {
+      d: "M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2",
+      key: "169zse"
+    }
+  ]
+];
+const Activity = createLucideIcon("activity", __iconNode$8);
+/**
+ * @license lucide-react v0.511.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const __iconNode$7 = [
+  ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
+  ["path", { d: "M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20", key: "13o1zl" }],
+  ["path", { d: "M2 12h20", key: "9i4pu4" }]
+];
+const Globe = createLucideIcon("globe", __iconNode$7);
+/**
+ * @license lucide-react v0.511.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const __iconNode$6 = [
+  ["rect", { width: "7", height: "9", x: "3", y: "3", rx: "1", key: "10lvy0" }],
+  ["rect", { width: "7", height: "5", x: "14", y: "3", rx: "1", key: "16une8" }],
+  ["rect", { width: "7", height: "9", x: "14", y: "12", rx: "1", key: "1hutg5" }],
+  ["rect", { width: "7", height: "5", x: "3", y: "16", rx: "1", key: "ldoo1y" }]
+];
+const LayoutDashboard = createLucideIcon("layout-dashboard", __iconNode$6);
+/**
+ * @license lucide-react v0.511.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const __iconNode$5 = [
+  ["path", { d: "m16 17 5-5-5-5", key: "1bji2h" }],
+  ["path", { d: "M21 12H9", key: "dn1m92" }],
+  ["path", { d: "M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4", key: "1uf3rs" }]
+];
+const LogOut = createLucideIcon("log-out", __iconNode$5);
+/**
+ * @license lucide-react v0.511.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const __iconNode$4 = [
+  [
+    "path",
+    {
+      d: "M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73z",
+      key: "1a0edw"
+    }
+  ],
+  ["path", { d: "M12 22V12", key: "d0xqtd" }],
+  ["polyline", { points: "3.29 7 12 12 20.71 7", key: "ousv84" }],
+  ["path", { d: "m7.5 4.27 9 5.15", key: "1c824w" }]
+];
+const Package = createLucideIcon("package", __iconNode$4);
+/**
+ * @license lucide-react v0.511.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const __iconNode$3 = [
+  ["path", { d: "M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8", key: "v9h5vc" }],
+  ["path", { d: "M21 3v5h-5", key: "1q7to0" }],
+  ["path", { d: "M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16", key: "3uifl3" }],
+  ["path", { d: "M8 16H3v5", key: "1cv678" }]
+];
+const RefreshCw = createLucideIcon("refresh-cw", __iconNode$3);
+/**
+ * @license lucide-react v0.511.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const __iconNode$2 = [
+  [
+    "path",
+    {
+      d: "M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z",
+      key: "1qme2f"
+    }
+  ],
+  ["circle", { cx: "12", cy: "12", r: "3", key: "1v7zrd" }]
+];
+const Settings = createLucideIcon("settings", __iconNode$2);
+/**
+ * @license lucide-react v0.511.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const __iconNode$1 = [
+  [
+    "path",
+    {
+      d: "m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3",
+      key: "wmoenq"
+    }
+  ],
+  ["path", { d: "M12 9v4", key: "juzpu7" }],
+  ["path", { d: "M12 17h.01", key: "p32p05" }]
+];
+const TriangleAlert = createLucideIcon("triangle-alert", __iconNode$1);
+/**
+ * @license lucide-react v0.511.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const __iconNode = [
+  ["path", { d: "M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2", key: "wrbu53" }],
+  ["path", { d: "M15 18H9", key: "1lyqi6" }],
+  [
+    "path",
+    {
+      d: "M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14",
+      key: "lysw3i"
+    }
+  ],
+  ["circle", { cx: "17", cy: "18", r: "2", key: "332jqn" }],
+  ["circle", { cx: "7", cy: "18", r: "2", key: "19iecd" }]
+];
+const Truck = createLucideIcon("truck", __iconNode);
+function StatusBadge$1({ status }) {
+  const colors = {
+    pending: "bg-yellow-500/20 text-yellow-700 border-yellow-500/40",
+    matched: "bg-primary/20 text-primary border-primary/40",
+    accepted: "bg-primary/20 text-primary border-primary/40",
+    en_route: "bg-primary/25 text-primary border-primary/50",
+    pumping: "bg-secondary/20 text-secondary-foreground border-secondary/40",
+    completed: "bg-emerald-500/20 text-emerald-700 border-emerald-500/40",
+    fully_completed: "bg-accent/25 text-accent-foreground border-accent/50",
+    expired: "bg-red-500/20 text-red-700 border-red-500/40",
+    cancelled: "bg-red-500/20 text-red-700 border-red-500/40",
+    exception: "bg-red-600/20 text-red-800 border-red-600/40",
+    online: "bg-emerald-500/20 text-emerald-700 border-emerald-500/40",
+    offline: "bg-muted text-muted-foreground border-border"
+  };
+  const cls = colors[status] ?? "bg-muted text-muted-foreground border-border";
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(
+    "span",
+    {
+      className: `inline-flex items-center rounded-full border px-2 py-0.5 text-xs font-medium ${cls}`,
+      children: status.replace(/_/g, " ")
+    }
+  );
+}
+function formatDate$1(ns) {
+  return new Date(Number(ns) / 1e6).toLocaleString();
+}
+function AdminLoginForm({
+  onSuccess
+}) {
+  const { t } = useLang();
+  const [password, setPassword] = reactExports.useState("");
+  const login = useAdminLogin();
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    login.mutate(
+      { password },
+      {
+        onSuccess: (session) => {
+          localStorage.setItem("admin_session", JSON.stringify(session));
+          onSuccess(session);
+        }
+      }
+    );
+  };
+  return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "min-h-screen bg-background flex items-center justify-center p-4", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { className: "w-full max-w-sm shadow-lg border-border", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs(CardHeader, { className: "text-center pb-2", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mx-auto mb-3 w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center", children: /* @__PURE__ */ jsxRuntimeExports.jsx(LayoutDashboard, { className: "w-6 h-6 text-primary" }) }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(CardTitle, { className: "text-xl font-display", children: t("admin_login_title") }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground", children: t("admin_login_hint") })
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs(CardContent, { children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("form", { onSubmit: handleSubmit, className: "space-y-4", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-1.5", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(Label, { htmlFor: "admin-password", children: t("admin_password_label") }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            Input,
+            {
+              id: "admin-password",
+              type: "password",
+              value: password,
+              onChange: (e) => setPassword(e.target.value),
+              placeholder: "••••••••",
+              "data-ocid": "admin.password_input",
+              autoFocus: true
+            }
+          )
+        ] }),
+        login.isError && /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "p",
+          {
+            className: "text-sm text-destructive",
+            "data-ocid": "admin.login_error_state",
+            children: t("admin_login_error")
+          }
+        ),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(
+          Button,
+          {
+            type: "submit",
+            className: "w-full",
+            disabled: !password || login.isPending,
+            "data-ocid": "admin.login_submit_button",
+            children: login.isPending ? t("loading") : t("admin_login_btn")
+          }
+        )
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-4 text-center text-xs text-muted-foreground", children: t("admin_access_note") })
+    ] })
+  ] }) });
+}
+function OverviewTab() {
+  const { t } = useLang();
+  const zoneSummary = useGetZoneSummary();
+  const driverSummary = useGetDriverStatusSummary();
+  const allOrders = useGetAllOrders();
+  const today = (/* @__PURE__ */ new Date()).toDateString();
+  const todayOrders = (allOrders.data ?? []).filter(
+    (o2) => new Date(Number(o2.createdAt) / 1e6).toDateString() === today
+  ).length;
+  const activeOrders = (allOrders.data ?? []).filter(
+    (o2) => ["accepted", "en_route", "pumping", "matched"].includes(o2.status)
+  ).length;
+  const onlineDrivers = (driverSummary.data ?? []).filter(
+    (d2) => d2.status === "online"
+  ).length;
+  const emptyZones = (zoneSummary.data ?? []).filter(
+    (z2) => z2.onlineDrivers === 0n
+  ).length;
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-6", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid grid-cols-2 gap-3 sm:grid-cols-4", children: [
+      {
+        label: t("admin_stat_today_orders"),
+        value: todayOrders,
+        icon: Package,
+        color: "text-primary",
+        ocid: "admin.stat_today_orders"
+      },
+      {
+        label: t("admin_stat_active_orders"),
+        value: activeOrders,
+        icon: Activity,
+        color: "text-primary",
+        ocid: "admin.stat_active_orders"
+      },
+      {
+        label: t("admin_stat_online_drivers"),
+        value: onlineDrivers,
+        icon: Truck,
+        color: "text-accent-foreground",
+        ocid: "admin.stat_online_drivers"
+      },
+      {
+        label: t("admin_stat_empty"),
+        value: emptyZones,
+        icon: TriangleAlert,
+        color: emptyZones > 0 ? "text-destructive" : "text-muted-foreground",
+        ocid: "admin.stat_empty_zones"
+      }
+    ].map(({ label, value, icon: Icon2, color, ocid }) => /* @__PURE__ */ jsxRuntimeExports.jsx(Card, { "data-ocid": ocid, className: "border-border", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardContent, { className: "p-4", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2 mb-1", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(Icon2, { className: `w-4 h-4 ${color}` }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-xs text-muted-foreground truncate", children: label })
+      ] }),
+      allOrders.isLoading || driverSummary.isLoading ? /* @__PURE__ */ jsxRuntimeExports.jsx(Skeleton, { className: "h-7 w-10" }) : /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: `text-2xl font-bold font-display ${color}`, children: value })
+    ] }) }, ocid)) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { className: "border-border", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(CardHeader, { className: "pb-3", children: /* @__PURE__ */ jsxRuntimeExports.jsx(CardTitle, { className: "text-base", children: t("admin_zone_summary") }) }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(CardContent, { className: "p-0", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "overflow-x-auto", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("table", { className: "w-full text-sm", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("thead", { children: /* @__PURE__ */ jsxRuntimeExports.jsxs("tr", { className: "border-b border-border bg-muted/40", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("th", { className: "text-left px-4 py-2 font-medium text-muted-foreground", children: t("admin_col_zone") }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("th", { className: "text-right px-4 py-2 font-medium text-muted-foreground", children: t("admin_col_online_drivers") }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("th", { className: "text-right px-4 py-2 font-medium text-muted-foreground", children: t("admin_col_pending") }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("th", { className: "text-right px-4 py-2 font-medium text-muted-foreground", children: t("admin_col_active") })
+        ] }) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("tbody", { children: zoneSummary.isLoading ? Array.from({ length: 5 }).map((_2, i) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "tr",
+          {
+            className: "border-b border-border",
+            children: [1, 2, 3, 4].map((c2) => /* @__PURE__ */ jsxRuntimeExports.jsx("td", { className: "px-4 py-3", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Skeleton, { className: "h-4 w-full" }) }, c2))
+          },
+          `skel-zone-${i}`
+        )) : (zoneSummary.data ?? []).map((z2, i) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+          "tr",
+          {
+            "data-ocid": `admin.zone_row.item.${i + 1}`,
+            className: "border-b border-border last:border-0 hover:bg-muted/30 transition-colors",
+            children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("td", { className: "px-4 py-3 font-medium", children: z2.zoneName }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("td", { className: "px-4 py-3 text-right", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+                "span",
+                {
+                  className: z2.onlineDrivers === 0n ? "text-destructive font-medium" : "text-primary font-medium",
+                  children: String(z2.onlineDrivers)
+                }
+              ) }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("td", { className: "px-4 py-3 text-right text-muted-foreground", children: String(z2.pendingOrders) }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("td", { className: "px-4 py-3 text-right text-muted-foreground", children: String(z2.activeOrders) })
+            ]
+          },
+          z2.zoneName
+        )) })
+      ] }) }) })
+    ] })
+  ] });
+}
+function OrdersTab() {
+  const { t } = useLang();
+  const { data: orders, isLoading } = useGetAllOrders();
+  const [filterStatus, setFilterStatus] = reactExports.useState("all");
+  const statuses = [
+    "all",
+    "pending",
+    "matched",
+    "accepted",
+    "en_route",
+    "pumping",
+    "completed",
+    "expired",
+    "exception"
+  ];
+  const filtered = (orders ?? []).filter((o2) => filterStatus === "all" || o2.status === filterStatus).sort((a2, b2) => Number(b2.createdAt) - Number(a2.createdAt));
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-4", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-wrap gap-2 items-center", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "text-sm text-muted-foreground", children: [
+        t("admin_filter_status"),
+        ":"
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex flex-wrap gap-1.5", "data-ocid": "admin.status_filter", children: statuses.map((s2) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+        "button",
+        {
+          type: "button",
+          onClick: () => setFilterStatus(s2),
+          "data-ocid": `admin.filter_tab.${s2}`,
+          className: `px-2.5 py-1 rounded-full text-xs font-medium border transition-colors ${filterStatus === s2 ? "bg-primary text-primary-foreground border-primary" : "bg-card border-border text-muted-foreground hover:bg-muted"}`,
+          children: s2.replace(/_/g, " ")
+        },
+        s2
+      )) })
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(Card, { className: "border-border", children: /* @__PURE__ */ jsxRuntimeExports.jsx(CardContent, { className: "p-0", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "overflow-x-auto", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("table", { className: "w-full text-sm", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("thead", { children: /* @__PURE__ */ jsxRuntimeExports.jsxs("tr", { className: "border-b border-border bg-muted/40", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("th", { className: "text-left px-4 py-2 font-medium text-muted-foreground", children: "ID" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("th", { className: "text-left px-4 py-2 font-medium text-muted-foreground", children: t("admin_col_zone") }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("th", { className: "text-left px-4 py-2 font-medium text-muted-foreground", children: t("admin_col_size") }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("th", { className: "text-left px-4 py-2 font-medium text-muted-foreground", children: t("admin_col_status") }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("th", { className: "text-left px-4 py-2 font-medium text-muted-foreground hidden sm:table-cell", children: t("admin_col_driver") }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("th", { className: "text-left px-4 py-2 font-medium text-muted-foreground hidden md:table-cell", children: t("admin_col_customer") }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("th", { className: "text-left px-4 py-2 font-medium text-muted-foreground hidden lg:table-cell", children: t("admin_col_created") })
+      ] }) }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("tbody", { children: isLoading ? Array.from({ length: 6 }).map((_2, i) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+        "tr",
+        {
+          className: "border-b border-border",
+          children: [1, 2, 3, 4, 5, 6, 7].map((c2) => /* @__PURE__ */ jsxRuntimeExports.jsx("td", { className: "px-4 py-3", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Skeleton, { className: "h-4 w-full" }) }, c2))
+        },
+        `skel-order-${i}`
+      )) : filtered.length === 0 ? /* @__PURE__ */ jsxRuntimeExports.jsx("tr", { children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+        "td",
+        {
+          colSpan: 7,
+          className: "px-4 py-8 text-center text-muted-foreground",
+          "data-ocid": "admin.orders_empty_state",
+          children: t("admin_no_orders")
+        }
+      ) }) : filtered.map((o2, i) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+        "tr",
+        {
+          "data-ocid": `admin.order_row.item.${i + 1}`,
+          className: "border-b border-border last:border-0 hover:bg-muted/30 transition-colors",
+          children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("td", { className: "px-4 py-3 font-mono text-xs text-muted-foreground", children: [
+              "#",
+              String(o2.id)
+            ] }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("td", { className: "px-4 py-3", children: o2.zone }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("td", { className: "px-4 py-3 capitalize", children: o2.size }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("td", { className: "px-4 py-3", children: /* @__PURE__ */ jsxRuntimeExports.jsx(StatusBadge$1, { status: o2.status }) }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("td", { className: "px-4 py-3 hidden sm:table-cell text-muted-foreground", children: o2.driverName ?? "—" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("td", { className: "px-4 py-3 hidden md:table-cell text-muted-foreground", children: o2.customerPhone }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("td", { className: "px-4 py-3 hidden lg:table-cell text-muted-foreground text-xs", children: formatDate$1(o2.createdAt) })
+          ]
+        },
+        String(o2.id)
+      )) })
+    ] }) }) }) })
+  ] });
+}
+function DriverZoneSelect({
+  driverId,
+  currentZoneName
+}) {
+  var _a3;
+  const { data: zones = [] } = useZones();
+  const setZones = useAdminSetDriverZones();
+  const defaultZoneId = (_a3 = zones.find((z2) => z2.name === currentZoneName)) == null ? void 0 : _a3.id;
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(
+    "select",
+    {
+      defaultValue: defaultZoneId !== void 0 ? String(defaultZoneId) : "",
+      onChange: (e) => setZones.mutate({ driverId, zoneIds: [BigInt(e.target.value)] }),
+      className: "text-sm bg-background border border-input rounded px-2 py-1 w-full",
+      children: zones.map((z2) => /* @__PURE__ */ jsxRuntimeExports.jsx("option", { value: String(z2.id), children: z2.name }, String(z2.id)))
+    }
+  );
+}
+function DriversTab() {
+  const { t } = useLang();
+  const { data: drivers, isLoading } = useGetDriverStatusSummary();
+  const sorted = (drivers ?? []).sort((a2, b2) => {
+    if (a2.status === "online" && b2.status !== "online") return -1;
+    if (a2.status !== "online" && b2.status === "online") return 1;
+    return a2.name.localeCompare(b2.name);
+  });
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(Card, { className: "border-border", children: /* @__PURE__ */ jsxRuntimeExports.jsx(CardContent, { className: "p-0", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "overflow-x-auto", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("table", { className: "w-full text-sm", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("thead", { children: /* @__PURE__ */ jsxRuntimeExports.jsxs("tr", { className: "border-b border-border bg-muted/40", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("th", { className: "text-left px-4 py-2 font-medium text-muted-foreground", children: t("admin_col_name") }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("th", { className: "text-left px-4 py-2 font-medium text-muted-foreground", children: t("admin_col_zone") }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("th", { className: "text-left px-4 py-2 font-medium text-muted-foreground", children: t("admin_col_status") }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("th", { className: "text-left px-4 py-2 font-medium text-muted-foreground hidden sm:table-cell", children: t("admin_col_phone") }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("th", { className: "text-left px-4 py-2 font-medium text-muted-foreground hidden md:table-cell", children: t("admin_col_active_order") })
+    ] }) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("tbody", { children: isLoading ? Array.from({ length: 8 }).map((_2, i) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "tr",
+      {
+        className: "border-b border-border",
+        children: [1, 2, 3, 4, 5].map((c2) => /* @__PURE__ */ jsxRuntimeExports.jsx("td", { className: "px-4 py-3", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Skeleton, { className: "h-4 w-full" }) }, c2))
+      },
+      `skel-driver-${i}`
+    )) : sorted.length === 0 ? /* @__PURE__ */ jsxRuntimeExports.jsx("tr", { children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "td",
+      {
+        colSpan: 5,
+        className: "px-4 py-8 text-center text-muted-foreground",
+        "data-ocid": "admin.drivers_empty_state",
+        children: t("admin_no_drivers")
+      }
+    ) }) : sorted.map((d2, i) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+      "tr",
+      {
+        "data-ocid": `admin.driver_row.item.${i + 1}`,
+        className: `border-b border-border last:border-0 transition-colors ${d2.status === "online" ? "bg-primary/5 hover:bg-primary/10" : "hover:bg-muted/30"}`,
+        children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("td", { className: "px-4 py-3 font-medium", children: d2.name }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("td", { className: "px-4 py-3", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+            DriverZoneSelect,
+            {
+              driverId: d2.id,
+              currentZoneName: d2.zone
+            }
+          ) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("td", { className: "px-4 py-3", children: /* @__PURE__ */ jsxRuntimeExports.jsx(StatusBadge$1, { status: d2.status }) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("td", { className: "px-4 py-3 hidden sm:table-cell text-muted-foreground", children: d2.phone }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("td", { className: "px-4 py-3 hidden md:table-cell text-muted-foreground font-mono text-xs", children: d2.activeOrderId != null ? `#${String(d2.activeOrderId)}` : "—" })
+        ]
+      },
+      String(d2.id)
+    )) })
+  ] }) }) }) });
+}
+function SettingsTab() {
+  const { t } = useLang();
+  const setPaymentMode = useSetPaymentMode();
+  const resetDemo = useResetDemo();
+  const [confirmReset, setConfirmReset] = reactExports.useState(false);
+  const [currentMode, setCurrentMode] = reactExports.useState("always_success");
+  const [resetSuccess, setResetSuccess] = reactExports.useState(false);
+  const modes = [
+    {
+      value: PaymentMode.always_success,
+      label: t("admin_payment_always_success")
+    },
+    { value: PaymentMode.always_fail, label: t("admin_payment_always_fail") },
+    { value: PaymentMode.random, label: t("admin_payment_random") }
+  ];
+  const handleSetMode = (mode) => {
+    setPaymentMode.mutate(mode, {
+      onSuccess: () => setCurrentMode(mode)
+    });
+  };
+  const handleReset = () => {
+    resetDemo.mutate(void 0, {
+      onSuccess: () => {
+        setConfirmReset(false);
+        setResetSuccess(true);
+        setTimeout(() => setResetSuccess(false), 3e3);
+      }
+    });
+  };
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-6 max-w-lg", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { className: "border-border", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs(CardHeader, { className: "pb-3", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(CardTitle, { className: "text-base", children: t("admin_payment_mode_title") }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-sm text-muted-foreground", children: [
+          t("admin_payment_mode_hint"),
+          ":",
+          " ",
+          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-semibold text-foreground", children: currentMode.replace(/_/g, " ") })
+        ] })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs(CardContent, { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "div",
+          {
+            className: "flex flex-wrap gap-2",
+            "data-ocid": "admin.payment_mode_toggle",
+            children: modes.map(({ value, label }) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+              Button,
+              {
+                type: "button",
+                variant: currentMode === value ? "default" : "outline",
+                size: "sm",
+                onClick: () => handleSetMode(value),
+                disabled: setPaymentMode.isPending,
+                "data-ocid": `admin.payment_mode_${value}_button`,
+                children: label
+              },
+              value
+            ))
+          }
+        ),
+        setPaymentMode.isError && /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "p",
+          {
+            className: "mt-2 text-sm text-destructive",
+            "data-ocid": "admin.payment_mode_error_state",
+            children: t("admin_mode_error")
+          }
+        )
+      ] })
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { className: "border-border", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs(CardHeader, { className: "pb-3", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(CardTitle, { className: "text-base", children: t("demo_reset") }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground", children: t("admin_reset_hint") })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs(CardContent, { className: "space-y-3", children: [
+        resetSuccess && /* @__PURE__ */ jsxRuntimeExports.jsxs(
+          "p",
+          {
+            className: "text-sm text-primary font-medium",
+            "data-ocid": "admin.reset_success_state",
+            children: [
+              "✓ ",
+              t("demo_reset_success")
+            ]
+          }
+        ),
+        !confirmReset ? /* @__PURE__ */ jsxRuntimeExports.jsx(
+          Button,
+          {
+            type: "button",
+            variant: "destructive",
+            size: "sm",
+            onClick: () => setConfirmReset(true),
+            "data-ocid": "admin.reset_open_modal_button",
+            children: t("demo_reset")
+          }
+        ) : /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2 p-3 rounded-lg bg-destructive/10 border border-destructive/30", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-destructive flex-1", children: t("demo_reset_confirm") }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            Button,
+            {
+              type: "button",
+              variant: "destructive",
+              size: "sm",
+              onClick: handleReset,
+              disabled: resetDemo.isPending,
+              "data-ocid": "admin.reset_confirm_button",
+              children: resetDemo.isPending ? t("loading") : t("admin_reset_yes")
+            }
+          ),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            Button,
+            {
+              type: "button",
+              variant: "outline",
+              size: "sm",
+              onClick: () => setConfirmReset(false),
+              "data-ocid": "admin.reset_cancel_button",
+              children: t("btn_close")
+            }
+          )
+        ] })
+      ] })
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { className: "border-border bg-muted/30", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(CardHeader, { className: "pb-2", children: /* @__PURE__ */ jsxRuntimeExports.jsx(CardTitle, { className: "text-sm text-muted-foreground", children: t("admin_credentials_title") }) }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(CardContent, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-1 font-mono text-xs", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-muted-foreground", children: "Password:" }),
+          " ",
+          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-foreground", children: "BiyoAdmin2024!" })
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-muted-foreground", children: "Token:" }),
+          " ",
+          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-foreground", children: "admin-session-token-2024" })
+        ] })
+      ] }) })
+    ] })
+  ] });
+}
+const TABS = [
+  { id: "overview", labelKey: "admin_tab_overview", Icon: LayoutDashboard },
+  { id: "orders", labelKey: "admin_tab_orders", Icon: Package },
+  { id: "drivers", labelKey: "admin_tab_drivers", Icon: Truck },
+  { id: "settings", labelKey: "admin_tab_settings", Icon: Settings }
+];
+function AdminDashboard({
+  session,
+  onLogout
+}) {
+  var _a3;
+  const { t, toggleLang } = useLang();
+  const [activeTab, setActiveTab] = reactExports.useState("overview");
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "min-h-screen bg-background flex flex-col", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("header", { className: "bg-card border-b border-border sticky top-0 z-10 shadow-sm", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-6xl mx-auto px-4 h-14 flex items-center justify-between gap-3", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(LayoutDashboard, { className: "w-5 h-5 text-primary" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "font-display font-bold text-foreground text-base sm:text-lg", children: t("admin_dashboard_title") }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(
+          Badge,
+          {
+            variant: "secondary",
+            className: "hidden sm:inline-flex text-xs",
+            children: session.role
+          }
+        )
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs(
+          Button,
+          {
+            type: "button",
+            variant: "ghost",
+            size: "sm",
+            onClick: toggleLang,
+            "data-ocid": "admin.lang_toggle",
+            className: "hidden sm:flex gap-1",
+            children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx(Globe, { className: "w-4 h-4" }),
+              t("lang_toggle")
+            ]
+          }
+        ),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs(
+          Button,
+          {
+            type: "button",
+            variant: "ghost",
+            size: "sm",
+            onClick: onLogout,
+            "data-ocid": "admin.logout_button",
+            className: "gap-1 text-muted-foreground hover:text-destructive",
+            children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx(LogOut, { className: "w-4 h-4" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "hidden sm:inline", children: t("nav_logout") })
+            ]
+          }
+        )
+      ] })
+    ] }) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex-1 flex max-w-6xl mx-auto w-full", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("aside", { className: "hidden md:flex flex-col w-52 border-r border-border bg-card/50 py-4 gap-1 shrink-0", children: TABS.map(({ id, labelKey, Icon: Icon2 }) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+        "button",
+        {
+          type: "button",
+          onClick: () => setActiveTab(id),
+          "data-ocid": `admin.tab_${id}`,
+          className: `flex items-center gap-2.5 px-4 py-2.5 text-sm rounded-md mx-2 transition-colors ${activeTab === id ? "bg-primary text-primary-foreground font-medium" : "text-muted-foreground hover:bg-muted hover:text-foreground"}`,
+          children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx(Icon2, { className: "w-4 h-4" }),
+            t(labelKey)
+          ]
+        },
+        id
+      )) }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("main", { className: "flex-1 p-4 sm:p-6 pb-24 md:pb-6 overflow-hidden", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-between mb-5", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "font-display font-semibold text-lg text-foreground", children: t(
+            ((_a3 = TABS.find((tab) => tab.id === activeTab)) == null ? void 0 : _a3.labelKey) ?? "admin_tab_overview"
+          ) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "button",
+            {
+              type: "button",
+              onClick: () => window.location.reload(),
+              "aria-label": "Refresh",
+              className: "text-muted-foreground hover:text-foreground transition-colors",
+              "data-ocid": "admin.refresh_button",
+              children: /* @__PURE__ */ jsxRuntimeExports.jsx(RefreshCw, { className: "w-4 h-4" })
+            }
+          )
+        ] }),
+        activeTab === "overview" && /* @__PURE__ */ jsxRuntimeExports.jsx(OverviewTab, {}),
+        activeTab === "orders" && /* @__PURE__ */ jsxRuntimeExports.jsx(OrdersTab, {}),
+        activeTab === "drivers" && /* @__PURE__ */ jsxRuntimeExports.jsx(DriversTab, {}),
+        activeTab === "settings" && /* @__PURE__ */ jsxRuntimeExports.jsx(SettingsTab, {})
+      ] })
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("nav", { className: "md:hidden fixed bottom-0 left-0 right-0 bg-card border-t border-border flex items-stretch z-10", children: TABS.map(({ id, labelKey, Icon: Icon2 }) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+      "button",
+      {
+        type: "button",
+        onClick: () => setActiveTab(id),
+        "data-ocid": `admin.mobile_tab_${id}`,
+        className: `flex-1 flex flex-col items-center gap-0.5 py-2 text-xs transition-colors ${activeTab === id ? "text-primary" : "text-muted-foreground"}`,
+        children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(Icon2, { className: "w-5 h-5" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: t(labelKey) })
+        ]
+      },
+      id
+    )) })
+  ] });
+}
+function AdminPage() {
+  const [session, setSession] = reactExports.useState(null);
+  reactExports.useEffect(() => {
+    const stored = localStorage.getItem("admin_session");
+    if (stored) {
+      try {
+        const parsed = JSON.parse(stored);
+        if (parsed.token && parsed.role) setSession(parsed);
+      } catch {
+        localStorage.removeItem("admin_session");
+      }
+    }
+  }, []);
+  const handleLogout = reactExports.useCallback(() => {
+    localStorage.removeItem("admin_session");
+    setSession(null);
+  }, []);
+  if (!session) {
+    return /* @__PURE__ */ jsxRuntimeExports.jsx(AdminLoginForm, { onSuccess: setSession });
+  }
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(AdminDashboard, { session, onLogout: handleLogout });
+}
+function Layout({
+  children,
+  className = "",
+  hideFooter = false
+}) {
   const { t, lang, setLang } = useLang();
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "min-h-screen flex flex-col bg-background", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("header", { className: "bg-card border-b border-border sticky top-0 z-30", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-[480px] mx-auto px-4 py-3 flex items-center justify-between", children: [
@@ -28758,7 +33820,7 @@ function Layout({ children, className = "" }) {
       )
     ] }) }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("main", { className: `flex-1 ${className}`, children }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("footer", { className: "bg-muted/40 border-t border-border py-3", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "max-w-[480px] mx-auto px-4 text-center", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-xs text-muted-foreground", children: [
+    !hideFooter && /* @__PURE__ */ jsxRuntimeExports.jsx("footer", { className: "bg-muted/40 border-t border-border py-3", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "max-w-[480px] mx-auto px-4 text-center", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-xs text-muted-foreground", children: [
       "© ",
       (/* @__PURE__ */ new Date()).getFullYear(),
       ".",
@@ -28774,1945 +33836,6 @@ function Layout({ children, className = "" }) {
         }
       )
     ] }) }) })
-  ] });
-}
-function LoadingSpinner({ label, size = "md" }) {
-  const dim = size === "sm" ? "w-4 h-4" : "w-6 h-6";
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "inline-flex items-center gap-2 text-muted-foreground", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsxs(
-      "svg",
-      {
-        className: `${dim} animate-spin`,
-        xmlns: "http://www.w3.org/2000/svg",
-        fill: "none",
-        viewBox: "0 0 24 24",
-        "aria-hidden": "true",
-        children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx(
-            "circle",
-            {
-              className: "opacity-25",
-              cx: "12",
-              cy: "12",
-              r: "10",
-              stroke: "currentColor",
-              strokeWidth: "4"
-            }
-          ),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(
-            "path",
-            {
-              className: "opacity-75",
-              fill: "currentColor",
-              d: "M4 12a8 8 0 018-8v8H4z"
-            }
-          )
-        ]
-      }
-    ),
-    label && /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-sm", children: label })
-  ] });
-}
-const STATUS_CLASSES = {
-  // OrderStatus
-  [OrderStatus.pending]: "bg-muted text-muted-foreground",
-  [OrderStatus.matched]: "bg-primary/10 text-primary border border-primary/30",
-  [OrderStatus.accepted]: "bg-primary/10 text-primary border border-primary/30",
-  [OrderStatus.en_route]: "bg-secondary/20 text-secondary-foreground border border-secondary/40",
-  [OrderStatus.pumping]: "bg-accent/20 text-accent-foreground border border-accent/40",
-  [OrderStatus.completed]: "bg-chart-5/20 text-foreground border border-chart-5/40",
-  [OrderStatus.expired]: "bg-muted text-muted-foreground line-through",
-  [OrderStatus.cancelled]: "bg-destructive/10 text-destructive border border-destructive/30",
-  [OrderStatus.exception]: "bg-destructive/10 text-destructive border border-destructive/30",
-  // DriverStatus
-  [DriverStatus.online]: "bg-primary/10 text-primary border border-primary/30",
-  [DriverStatus.offline]: "bg-muted text-muted-foreground"
-};
-const STATUS_KEY_MAP = {
-  // OrderStatus
-  [OrderStatus.pending]: "status_pending",
-  [OrderStatus.matched]: "status_matched",
-  [OrderStatus.accepted]: "status_accepted",
-  [OrderStatus.en_route]: "status_en_route",
-  [OrderStatus.pumping]: "status_pumping",
-  [OrderStatus.completed]: "status_completed",
-  [OrderStatus.expired]: "status_expired",
-  [OrderStatus.cancelled]: "status_cancelled",
-  [OrderStatus.exception]: "status_exception",
-  // DriverStatus
-  [DriverStatus.online]: "status_online",
-  [DriverStatus.offline]: "status_offline"
-};
-function StatusBadge({ status }) {
-  const { t } = useLang();
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(
-    "span",
-    {
-      className: `inline-flex items-center px-2 py-0.5 rounded text-xs font-mono font-medium ${STATUS_CLASSES[status]}`,
-      children: t(STATUS_KEY_MAP[status])
-    }
-  );
-}
-function StepIndicator({ current, total }) {
-  const { t } = useLang();
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs(
-    "div",
-    {
-      className: "flex items-center gap-3 mb-4",
-      "aria-label": t("step_of", { current, total }),
-      children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-xs font-mono text-muted-foreground shrink-0", children: t("step_of", { current, total }) }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex-1 h-1 bg-muted rounded-full overflow-hidden", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
-          "div",
-          {
-            className: "h-full bg-primary transition-all duration-300 rounded-full",
-            style: { width: `${current / total * 100}%` }
-          }
-        ) })
-      ]
-    }
-  );
-}
-const ORDER_KEY = "biyo_order_id";
-const PHONE_KEY = "biyo_order_phone";
-function useLocalOrder() {
-  const [localOrder, setLocalOrder] = reactExports.useState(() => {
-    try {
-      const id = localStorage.getItem(ORDER_KEY);
-      const phone = localStorage.getItem(PHONE_KEY);
-      if (id && phone) return { orderId: BigInt(id), phone };
-    } catch {
-    }
-    return null;
-  });
-  const saveOrder = reactExports.useCallback((orderId, phone) => {
-    localStorage.setItem(ORDER_KEY, orderId.toString());
-    localStorage.setItem(PHONE_KEY, phone);
-    setLocalOrder({ orderId, phone });
-  }, []);
-  const clearOrder = reactExports.useCallback(() => {
-    localStorage.removeItem(ORDER_KEY);
-    localStorage.removeItem(PHONE_KEY);
-    setLocalOrder(null);
-  }, []);
-  return { localOrder, saveOrder, clearOrder };
-}
-function usePolling(fn, { intervalMs = 5e3, active }) {
-  const fnRef = reactExports.useRef(fn);
-  reactExports.useEffect(() => {
-    fnRef.current = fn;
-  });
-  reactExports.useEffect(() => {
-    if (!active) return;
-    const id = setInterval(() => {
-      void fnRef.current();
-    }, intervalMs);
-    return () => clearInterval(id);
-  }, [active, intervalMs]);
-  const runNow = reactExports.useCallback(() => {
-    void fnRef.current();
-  }, []);
-  reactExports.useEffect(() => {
-    if (active) runNow();
-  }, [active, runNow]);
-}
-function useZones() {
-  const { actor, isFetching } = useActor(createActor);
-  return useQuery({
-    queryKey: ["zones"],
-    queryFn: async () => {
-      if (!actor) return [];
-      const result = await actor.getZones();
-      return [...result].sort(
-        (a2, b2) => Number(a2.display_order) - Number(b2.display_order)
-      );
-    },
-    enabled: !!actor && !isFetching,
-    staleTime: 6e4
-  });
-}
-function useCreateOrder() {
-  const { actor } = useActor(createActor);
-  return useMutation({
-    mutationFn: async (params) => {
-      if (!actor) throw new Error("Actor not ready");
-      const result = await actor.createOrder(
-        params.zone_id,
-        params.size,
-        params.customer_phone,
-        params.address_note,
-        params.idempotency_key
-      );
-      if (result.__kind__ === "err") throw new Error(result.err);
-      return result.ok;
-    }
-  });
-}
-function useProcessPayment() {
-  const { actor } = useActor(createActor);
-  const queryClient2 = useQueryClient();
-  return useMutation({
-    mutationFn: async (params) => {
-      if (!actor) throw new Error("Actor not ready");
-      const result = await actor.processPayment(
-        params.order_id,
-        params.idempotency_key
-      );
-      if (result.__kind__ === "err") throw new Error(result.err);
-      return result.ok;
-    },
-    onSuccess: (_data, vars) => {
-      void queryClient2.invalidateQueries({
-        queryKey: ["order", vars.order_id.toString()]
-      });
-    }
-  });
-}
-const ZONE_LAST_KEY = "biyo_last_zone";
-const TOTAL_STEPS = 7;
-const SIZE_OPTIONS = [
-  { value: TankSize.small, labelKey: "size_small" },
-  { value: TankSize.medium, labelKey: "size_medium" },
-  { value: TankSize.large, labelKey: "size_large" }
-];
-const MATCHED_OR_BEYOND = [
-  OrderStatus.matched,
-  OrderStatus.accepted,
-  OrderStatus.en_route,
-  OrderStatus.pumping,
-  OrderStatus.completed
-];
-function fmtElapsed(seconds) {
-  const m2 = Math.floor(seconds / 60);
-  const s2 = seconds % 60;
-  return `${String(m2).padStart(2, "0")}:${String(s2).padStart(2, "0")}`;
-}
-const inputCls = "w-full bg-background border border-input rounded-lg px-4 py-3 text-foreground text-lg font-mono focus:outline-none focus:ring-2 focus:ring-ring";
-function OptionRow({
-  num,
-  label,
-  selected
-}) {
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs(
-    "div",
-    {
-      className: `flex items-center gap-3 px-4 py-3 rounded-lg border transition-colors duration-150 ${selected ? "border-primary bg-primary/10 text-primary" : "border-border bg-background text-foreground"}`,
-      children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "font-mono font-bold text-lg w-6 shrink-0", children: [
-          num,
-          "."
-        ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-base", children: label })
-      ]
-    }
-  );
-}
-function StepCard({ children }) {
-  return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "bg-card border border-border rounded-xl p-5 space-y-4 shadow-sm", children });
-}
-function BackBtn({ onClick, label }) {
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(
-    "button",
-    {
-      type: "button",
-      "data-ocid": "customer.back_button",
-      onClick,
-      className: "text-sm text-muted-foreground hover:text-foreground transition-colors",
-      children: label
-    }
-  );
-}
-function PrimaryBtn({
-  onClick,
-  disabled,
-  children,
-  dataOcid
-}) {
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(
-    "button",
-    {
-      type: "button",
-      "data-ocid": dataOcid ?? "customer.primary_button",
-      disabled,
-      onClick,
-      className: "w-full bg-primary text-primary-foreground font-bold py-4 rounded-xl text-base transition-smooth active:scale-95 disabled:opacity-50",
-      children
-    }
-  );
-}
-function CustomerPage() {
-  const { t } = useLang();
-  const { actor } = useActor(createActor);
-  const zonesQuery = useZones();
-  const zones = zonesQuery.data ?? [];
-  const [step, setStep] = reactExports.useState(1);
-  const [zoneInput, setZoneInput] = reactExports.useState("");
-  const [zoneError, setZoneError] = reactExports.useState("");
-  const [selectedZone, setSelectedZone] = reactExports.useState(null);
-  const [sizeInput, setSizeInput] = reactExports.useState("");
-  const [sizeError, setSizeError] = reactExports.useState("");
-  const [selectedSize, setSelectedSize] = reactExports.useState(null);
-  const [phone, setPhone] = reactExports.useState("");
-  const [phoneError, setPhoneError] = reactExports.useState("");
-  const [note, setNote] = reactExports.useState("");
-  const NOTE_MAX = 120;
-  const idempotencyKey = reactExports.useRef(crypto.randomUUID());
-  const [payState, setPayState] = reactExports.useState(
-    "idle"
-  );
-  const [payError, setPayError] = reactExports.useState("");
-  const createOrder = useCreateOrder();
-  const processPayment = useProcessPayment();
-  const { localOrder, saveOrder, clearOrder } = useLocalOrder();
-  const [trackedOrder, setTrackedOrder] = reactExports.useState(null);
-  const [pollingActive, setPollingActive] = reactExports.useState(false);
-  const [elapsedSecs, setElapsedSecs] = reactExports.useState(0);
-  const elapsedRef = reactExports.useRef(null);
-  const [lookupOpen, setLookupOpen] = reactExports.useState(false);
-  const [lookupOrderId, setLookupOrderId] = reactExports.useState("");
-  const [lookupLast4, setLookupLast4] = reactExports.useState("");
-  const [lookupResult, setLookupResult] = reactExports.useState(null);
-  reactExports.useEffect(() => {
-    if (localOrder) {
-      setStep(6);
-      setPollingActive(true);
-    }
-  }, [localOrder]);
-  reactExports.useEffect(() => {
-    const lastId = localStorage.getItem(ZONE_LAST_KEY);
-    if (lastId && zones.length > 0) {
-      const found = zones.find((z2) => String(z2.id) === lastId);
-      if (found) setSelectedZone(found);
-    }
-  }, [zones]);
-  reactExports.useEffect(() => {
-    if (step === 7) {
-      elapsedRef.current = setInterval(
-        () => setElapsedSecs((s2) => s2 + 1),
-        1e3
-      );
-    } else {
-      if (elapsedRef.current) clearInterval(elapsedRef.current);
-      setElapsedSecs(0);
-    }
-    return () => {
-      if (elapsedRef.current) clearInterval(elapsedRef.current);
-    };
-  }, [step]);
-  const activeOrderId = (localOrder == null ? void 0 : localOrder.orderId) ?? null;
-  const activeLast4 = (localOrder == null ? void 0 : localOrder.phone.slice(-4)) ?? "";
-  usePolling(
-    async () => {
-      if (!actor || !activeOrderId) return;
-      const order = await actor.getOrder(activeOrderId, activeLast4);
-      if (!order) return;
-      setTrackedOrder(order);
-      if (MATCHED_OR_BEYOND.includes(order.status) && step === 6) {
-        setStep(7);
-      }
-    },
-    { active: pollingActive && !!actor && !!activeOrderId }
-  );
-  reactExports.useEffect(() => {
-    if (!trackedOrder) return;
-    const terminal = [
-      OrderStatus.completed,
-      OrderStatus.expired,
-      OrderStatus.cancelled
-    ];
-    if (terminal.includes(trackedOrder.status)) {
-      setPollingActive(false);
-    }
-  }, [trackedOrder]);
-  function handleZoneSubmit() {
-    const num = Number.parseInt(zoneInput, 10);
-    if (Number.isNaN(num) || num < 1 || num > zones.length) {
-      setZoneError(t("zone_invalid", { max: zones.length }));
-      return;
-    }
-    const zone = zones[num - 1];
-    setSelectedZone(zone);
-    localStorage.setItem(ZONE_LAST_KEY, String(zone.id));
-    setZoneError("");
-    setStep(2);
-  }
-  function handleSizeSubmit() {
-    const num = Number.parseInt(sizeInput, 10);
-    if (num < 1 || num > 3) {
-      setSizeError(t("size_invalid"));
-      return;
-    }
-    setSelectedSize(SIZE_OPTIONS[num - 1].value);
-    setSizeError("");
-    setStep(3);
-  }
-  function handlePhoneSubmit() {
-    if (phone.trim().length < 6) {
-      setPhoneError(t("phone_invalid"));
-      return;
-    }
-    setPhoneError("");
-    setStep(4);
-  }
-  function handleNoteSubmit(skip) {
-    if (!skip && note.length > NOTE_MAX) return;
-    setStep(5);
-  }
-  async function handlePay() {
-    if (!actor || !selectedZone || !selectedSize) return;
-    setPayState("processing");
-    setPayError("");
-    try {
-      const createRes = await createOrder.mutateAsync({
-        zone_id: selectedZone.id,
-        size: selectedSize,
-        customer_phone: phone.trim(),
-        address_note: note.trim(),
-        idempotency_key: idempotencyKey.current
-      });
-      const orderId = createRes.order_id;
-      const payRes = await processPayment.mutateAsync({
-        order_id: orderId,
-        idempotency_key: idempotencyKey.current
-      });
-      if (payRes.status === "failed" || payRes.status === "failed") {
-        setPayState("failed");
-        setPayError(t("payment_failed"));
-        return;
-      }
-      saveOrder(orderId, phone.trim());
-      setPayState("idle");
-      setStep(6);
-      setPollingActive(true);
-    } catch {
-      setPayState("failed");
-      setPayError(t("payment_failed"));
-    }
-  }
-  async function handleLookup() {
-    if (!actor || !lookupOrderId.trim() || lookupLast4.length < 4) return;
-    setLookupResult("loading");
-    try {
-      const order = await actor.getOrder(
-        BigInt(lookupOrderId.trim()),
-        lookupLast4.trim()
-      );
-      setLookupResult(order ?? "not_found");
-    } catch {
-      setLookupResult("not_found");
-    }
-  }
-  const sizeLabelFor = (size) => {
-    if (size === TankSize.small) return t("size_small");
-    if (size === TankSize.medium) return t("size_medium");
-    return t("size_large");
-  };
-  function renderStep1() {
-    return /* @__PURE__ */ jsxRuntimeExports.jsxs(StepCard, { children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "font-display font-bold text-xl text-foreground", children: t("zone_title") }),
-      zonesQuery.isLoading && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "py-4 flex justify-center", children: /* @__PURE__ */ jsxRuntimeExports.jsx(LoadingSpinner, { label: t("zone_loading") }) }),
-      zonesQuery.isError && /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-destructive", children: t("zone_error") }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "space-y-2", children: zones.map((z2, i) => /* @__PURE__ */ jsxRuntimeExports.jsx(
-        OptionRow,
-        {
-          num: i + 1,
-          label: z2.name,
-          selected: (selectedZone == null ? void 0 : selectedZone.id) === z2.id
-        },
-        String(z2.id)
-      )) }),
-      selectedZone && /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-muted-foreground", children: t("zone_remembered", { name: selectedZone.name }) }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground", children: t("zone_hint") }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(
-        "input",
-        {
-          "data-ocid": "customer.zone_input",
-          type: "number",
-          inputMode: "numeric",
-          min: 1,
-          max: zones.length,
-          className: inputCls,
-          placeholder: `1–${zones.length}`,
-          value: zoneInput,
-          onChange: (e) => {
-            setZoneInput(e.target.value);
-            setZoneError("");
-          },
-          onKeyDown: (e) => e.key === "Enter" && handleZoneSubmit(),
-          "aria-label": t("zone_hint")
-        }
-      ),
-      zoneError && /* @__PURE__ */ jsxRuntimeExports.jsx(
-        "p",
-        {
-          "data-ocid": "customer.zone_error",
-          className: "text-sm text-destructive",
-          children: zoneError
-        }
-      ),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(
-        PrimaryBtn,
-        {
-          dataOcid: "customer.zone_next_button",
-          onClick: handleZoneSubmit,
-          disabled: zonesQuery.isLoading || zones.length === 0,
-          children: t("btn_next")
-        }
-      )
-    ] });
-  }
-  function renderStep2() {
-    return /* @__PURE__ */ jsxRuntimeExports.jsxs(StepCard, { children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "font-display font-bold text-xl text-foreground", children: t("size_title") }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "space-y-2", children: SIZE_OPTIONS.map((opt, i) => /* @__PURE__ */ jsxRuntimeExports.jsx(
-        OptionRow,
-        {
-          num: i + 1,
-          label: t(opt.labelKey),
-          selected: selectedSize === opt.value
-        },
-        opt.value
-      )) }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground", children: t("size_hint") }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(
-        "input",
-        {
-          "data-ocid": "customer.size_input",
-          type: "number",
-          inputMode: "numeric",
-          min: 1,
-          max: 3,
-          className: inputCls,
-          placeholder: "1–3",
-          value: sizeInput,
-          onChange: (e) => {
-            setSizeInput(e.target.value);
-            setSizeError("");
-          },
-          onKeyDown: (e) => e.key === "Enter" && handleSizeSubmit(),
-          "aria-label": t("size_hint")
-        }
-      ),
-      sizeError && /* @__PURE__ */ jsxRuntimeExports.jsx(
-        "p",
-        {
-          "data-ocid": "customer.size_error",
-          className: "text-sm text-destructive",
-          children: sizeError
-        }
-      ),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(
-        PrimaryBtn,
-        {
-          dataOcid: "customer.size_next_button",
-          onClick: handleSizeSubmit,
-          children: t("btn_next")
-        }
-      ),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(BackBtn, { onClick: () => setStep(1), label: t("btn_back") })
-    ] });
-  }
-  function renderStep3() {
-    return /* @__PURE__ */ jsxRuntimeExports.jsxs(StepCard, { children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "font-display font-bold text-xl text-foreground", children: t("phone_title") }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(
-        "label",
-        {
-          className: "text-sm font-medium text-foreground",
-          htmlFor: "phone-input",
-          children: t("phone_label")
-        }
-      ),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(
-        "input",
-        {
-          id: "phone-input",
-          "data-ocid": "customer.phone_input",
-          type: "tel",
-          className: inputCls,
-          placeholder: t("phone_placeholder"),
-          value: phone,
-          onChange: (e) => {
-            setPhone(e.target.value);
-            setPhoneError("");
-          },
-          onKeyDown: (e) => e.key === "Enter" && handlePhoneSubmit()
-        }
-      ),
-      phoneError && /* @__PURE__ */ jsxRuntimeExports.jsx(
-        "p",
-        {
-          "data-ocid": "customer.phone_error",
-          className: "text-sm text-destructive",
-          children: phoneError
-        }
-      ),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(
-        PrimaryBtn,
-        {
-          dataOcid: "customer.phone_next_button",
-          onClick: handlePhoneSubmit,
-          children: t("btn_next")
-        }
-      ),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(BackBtn, { onClick: () => setStep(2), label: t("btn_back") })
-    ] });
-  }
-  function renderStep4() {
-    return /* @__PURE__ */ jsxRuntimeExports.jsxs(StepCard, { children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "font-display font-bold text-xl text-foreground", children: t("note_title") }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(
-        "label",
-        {
-          className: "text-sm font-medium text-foreground",
-          htmlFor: "note-input",
-          children: t("note_label")
-        }
-      ),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(
-        "textarea",
-        {
-          id: "note-input",
-          "data-ocid": "customer.note_input",
-          className: "w-full bg-background border border-input rounded-lg px-4 py-3 text-foreground text-base resize-none focus:outline-none focus:ring-2 focus:ring-ring",
-          rows: 3,
-          maxLength: NOTE_MAX,
-          placeholder: t("note_placeholder"),
-          value: note,
-          onChange: (e) => setNote(e.target.value)
-        }
-      ),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-muted-foreground text-right", children: t("note_hint", { remaining: NOTE_MAX - note.length }) }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex gap-3", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx(
-          "button",
-          {
-            type: "button",
-            "data-ocid": "customer.note_skip_button",
-            onClick: () => handleNoteSubmit(true),
-            className: "flex-1 bg-muted text-foreground font-semibold py-3 rounded-xl text-sm",
-            children: t("note_skip")
-          }
-        ),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(
-          PrimaryBtn,
-          {
-            dataOcid: "customer.note_next_button",
-            onClick: () => handleNoteSubmit(false),
-            children: t("note_next")
-          }
-        )
-      ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(BackBtn, { onClick: () => setStep(3), label: t("btn_back") })
-    ] });
-  }
-  function renderStep5() {
-    return /* @__PURE__ */ jsxRuntimeExports.jsxs(StepCard, { children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "font-display font-bold text-xl text-foreground", children: t("payment_title") }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs(
-        "div",
-        {
-          "data-ocid": "customer.payment_summary",
-          className: "bg-background border border-border rounded-lg p-4 space-y-2 text-sm",
-          children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex justify-between", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-muted-foreground", children: t("payment_summary_zone") }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-semibold text-foreground", children: selectedZone == null ? void 0 : selectedZone.name })
-            ] }),
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex justify-between", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-muted-foreground", children: t("payment_summary_size") }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-semibold text-foreground", children: selectedSize ? sizeLabelFor(selectedSize) : "" })
-            ] }),
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex justify-between", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-muted-foreground", children: t("payment_summary_phone") }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-semibold text-foreground", children: phone })
-            ] })
-          ]
-        }
-      ),
-      payError && /* @__PURE__ */ jsxRuntimeExports.jsx(
-        "p",
-        {
-          "data-ocid": "customer.payment_error",
-          className: "text-sm text-destructive",
-          children: payError
-        }
-      ),
-      payState === "processing" ? /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex justify-center py-2", children: /* @__PURE__ */ jsxRuntimeExports.jsx(LoadingSpinner, { label: t("payment_processing") }) }) : payState === "failed" ? /* @__PURE__ */ jsxRuntimeExports.jsx(
-        PrimaryBtn,
-        {
-          dataOcid: "customer.payment_retry_button",
-          onClick: handlePay,
-          children: t("payment_retry")
-        }
-      ) : /* @__PURE__ */ jsxRuntimeExports.jsx(
-        PrimaryBtn,
-        {
-          dataOcid: "customer.payment_confirm_button",
-          onClick: handlePay,
-          disabled: !actor,
-          children: t("payment_confirm_btn")
-        }
-      ),
-      payState === "idle" && /* @__PURE__ */ jsxRuntimeExports.jsx(BackBtn, { onClick: () => setStep(4), label: t("btn_back") })
-    ] });
-  }
-  function renderStep6() {
-    const isExpired = (trackedOrder == null ? void 0 : trackedOrder.status) === OrderStatus.expired;
-    const isException = (trackedOrder == null ? void 0 : trackedOrder.status) === OrderStatus.exception;
-    return /* @__PURE__ */ jsxRuntimeExports.jsxs(StepCard, { children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "font-display font-bold text-xl text-foreground", children: t("matching_title") }),
-      isExpired ? /* @__PURE__ */ jsxRuntimeExports.jsxs(
-        "div",
-        {
-          "data-ocid": "customer.finding_expired",
-          className: "text-center space-y-3 py-4",
-          children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-4xl", children: "⏱" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-destructive text-sm font-medium", children: t("matching_expired") }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx(
-              "button",
-              {
-                type: "button",
-                "data-ocid": "customer.start_over_button",
-                onClick: () => {
-                  clearOrder();
-                  setStep(1);
-                  setTrackedOrder(null);
-                },
-                className: "text-sm text-primary underline",
-                children: t("btn_back")
-              }
-            )
-          ]
-        }
-      ) : isException ? /* @__PURE__ */ jsxRuntimeExports.jsx("div", { "data-ocid": "customer.finding_exception", className: "space-y-2", children: /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-destructive text-sm", children: t("matching_exception") }) }) : /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "text-center space-y-4 py-4", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx(LoadingSpinner, { size: "md" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-base font-medium text-foreground", children: t("matching_searching") }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-muted-foreground font-mono", children: localOrder ? t("tracking_order_id", { id: String(localOrder.orderId) }) : "" })
-      ] })
-    ] });
-  }
-  function renderStep7() {
-    const order = trackedOrder;
-    if (!order) {
-      return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex justify-center py-8", children: /* @__PURE__ */ jsxRuntimeExports.jsx(LoadingSpinner, { label: t("loading") }) });
-    }
-    const isCompleted = order.status === OrderStatus.completed;
-    const isException = order.status === OrderStatus.exception;
-    const timelineSteps = [
-      { status: OrderStatus.matched, label: t("status_matched") },
-      { status: OrderStatus.accepted, label: t("status_accepted") },
-      { status: OrderStatus.en_route, label: t("status_en_route") },
-      { status: OrderStatus.pumping, label: t("status_pumping") },
-      { status: OrderStatus.completed, label: t("status_completed") }
-    ];
-    const statusOrder = [
-      OrderStatus.matched,
-      OrderStatus.accepted,
-      OrderStatus.en_route,
-      OrderStatus.pumping,
-      OrderStatus.completed
-    ];
-    const currentIdx = statusOrder.indexOf(order.status);
-    return /* @__PURE__ */ jsxRuntimeExports.jsxs(StepCard, { children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-between", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "font-display font-bold text-xl text-foreground", children: t("tracking_title") }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(StatusBadge, { status: order.status })
-      ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs font-mono text-muted-foreground", children: t("tracking_order_id", { id: String(order.id) }) }),
-      isCompleted && /* @__PURE__ */ jsxRuntimeExports.jsxs(
-        "div",
-        {
-          "data-ocid": "customer.tracking_complete",
-          className: "bg-primary/10 border border-primary/30 rounded-lg p-4 text-center",
-          children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-2xl mb-1", children: "✅" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-semibold text-primary", children: t("tracking_completed") })
-          ]
-        }
-      ),
-      isException && /* @__PURE__ */ jsxRuntimeExports.jsx(
-        "div",
-        {
-          "data-ocid": "customer.tracking_exception",
-          className: "bg-destructive/10 border border-destructive/30 rounded-lg p-3",
-          children: /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-destructive", children: t("tracking_exception") })
-        }
-      ),
-      !isCompleted && !isException && /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground", children: t("tracking_elapsed", { time: fmtElapsed(elapsedSecs) }) }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "space-y-2 pt-1", children: timelineSteps.map((ts, i) => {
-        const done = i <= currentIdx;
-        return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-3", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx(
-            "div",
-            {
-              className: `w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold shrink-0 ${done ? "bg-primary text-primary-foreground" : "bg-muted text-muted-foreground border border-border"}`,
-              children: done ? "✓" : i + 1
-            }
-          ),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(
-            "span",
-            {
-              className: `text-sm ${done ? "text-foreground font-medium" : "text-muted-foreground"}`,
-              children: ts.label
-            }
-          )
-        ] }, ts.status);
-      }) }),
-      order.driver_id && /* @__PURE__ */ jsxRuntimeExports.jsxs(
-        "div",
-        {
-          "data-ocid": "customer.driver_info",
-          className: "bg-background border border-border rounded-lg p-3 text-sm space-y-1",
-          children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-semibold text-foreground text-xs uppercase tracking-wide text-muted-foreground", children: t("tracking_driver_info") }),
-            order.help_flagged && /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-destructive", children: t("tracking_help_flagged") })
-          ]
-        }
-      ),
-      isCompleted && /* @__PURE__ */ jsxRuntimeExports.jsx(
-        "button",
-        {
-          type: "button",
-          "data-ocid": "customer.new_order_button",
-          onClick: () => {
-            clearOrder();
-            setStep(1);
-            setTrackedOrder(null);
-            setPollingActive(false);
-          },
-          className: "w-full bg-muted text-foreground font-semibold py-3 rounded-xl text-sm",
-          children: t("btn_continue")
-        }
-      )
-    ] });
-  }
-  function renderLookup() {
-    return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-card border border-border rounded-xl overflow-hidden", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsxs(
-        "button",
-        {
-          type: "button",
-          "data-ocid": "customer.lookup_toggle",
-          className: "w-full flex items-center justify-between px-5 py-4 text-left",
-          onClick: () => setLookupOpen((o2) => !o2),
-          children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-medium text-foreground text-sm", children: t("lookup_title") }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-muted-foreground text-xs", children: lookupOpen ? "▲" : "▼" })
-          ]
-        }
-      ),
-      lookupOpen && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "px-5 pb-5 space-y-3 border-t border-border", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-1 pt-3", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx(
-            "label",
-            {
-              htmlFor: "lookup-order-id",
-              className: "text-xs font-medium text-foreground",
-              children: t("lookup_order_id_label")
-            }
-          ),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(
-            "input",
-            {
-              id: "lookup-order-id",
-              "data-ocid": "customer.lookup_order_id_input",
-              type: "number",
-              inputMode: "numeric",
-              className: "w-full bg-background border border-input rounded-lg px-3 py-2 text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-ring",
-              placeholder: t("lookup_order_id_placeholder"),
-              value: lookupOrderId,
-              onChange: (e) => setLookupOrderId(e.target.value)
-            }
-          )
-        ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-1", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx(
-            "label",
-            {
-              htmlFor: "lookup-phone4",
-              className: "text-xs font-medium text-foreground",
-              children: t("lookup_phone4_label")
-            }
-          ),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(
-            "input",
-            {
-              id: "lookup-phone4",
-              "data-ocid": "customer.lookup_phone4_input",
-              type: "number",
-              inputMode: "numeric",
-              maxLength: 4,
-              className: "w-full bg-background border border-input rounded-lg px-3 py-2 text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-ring",
-              placeholder: t("lookup_phone4_placeholder"),
-              value: lookupLast4,
-              onChange: (e) => setLookupLast4(e.target.value.slice(0, 4))
-            }
-          )
-        ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(
-          "button",
-          {
-            type: "button",
-            "data-ocid": "customer.lookup_submit_button",
-            onClick: handleLookup,
-            disabled: !actor || lookupResult === "loading",
-            className: "w-full bg-primary text-primary-foreground font-semibold py-2 rounded-lg text-sm disabled:opacity-50",
-            children: lookupResult === "loading" ? t("lookup_loading") : t("lookup_btn")
-          }
-        ),
-        lookupResult === "not_found" && /* @__PURE__ */ jsxRuntimeExports.jsx(
-          "p",
-          {
-            "data-ocid": "customer.lookup_not_found",
-            className: "text-sm text-destructive",
-            children: t("lookup_not_found")
-          }
-        ),
-        lookupResult !== null && lookupResult !== "not_found" && lookupResult !== "loading" && /* @__PURE__ */ jsxRuntimeExports.jsxs(
-          "div",
-          {
-            "data-ocid": "customer.lookup_result",
-            className: "bg-background border border-border rounded-lg p-3 text-sm space-y-1",
-            children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-between", children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-muted-foreground", children: t("tracking_order_id", { id: String(lookupResult.id) }) }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx(StatusBadge, { status: lookupResult.status })
-              ] }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-muted-foreground", children: new Date(Number(lookupResult.created_at)).toLocaleString() })
-            ]
-          }
-        )
-      ] })
-    ] });
-  }
-  const currentStep = step;
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(Layout, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-[480px] mx-auto px-4 py-6 space-y-4", children: [
-    step <= 7 && /* @__PURE__ */ jsxRuntimeExports.jsx(StepIndicator, { current: currentStep, total: TOTAL_STEPS }),
-    step === 1 && renderStep1(),
-    step === 2 && renderStep2(),
-    step === 3 && renderStep3(),
-    step === 4 && renderStep4(),
-    step === 5 && renderStep5(),
-    step === 6 && renderStep6(),
-    step === 7 && renderStep7(),
-    renderLookup()
-  ] }) });
-}
-function fmtSlsh$1(val) {
-  return Number(val).toLocaleString();
-}
-function phoneLast4$1(phone) {
-  return `…${phone.slice(-4)}`;
-}
-const POLL_MS = 5e3;
-const DELIVERY_STEPS = [
-  OrderStatus.accepted,
-  OrderStatus.en_route,
-  OrderStatus.pumping,
-  OrderStatus.completed
-];
-function DashboardView({
-  driver,
-  prices: initPrices,
-  zones,
-  onDriverUpdate
-}) {
-  const { t } = useLang();
-  const { actor } = useActor(createActor);
-  const [plate, setPlate] = reactExports.useState(driver.truck_plate || "");
-  const [plateErr, setPlateErr] = reactExports.useState("");
-  const [statusBusy, setStatusBusy] = reactExports.useState(false);
-  const isOnline = driver.status === DriverStatus.online;
-  const [zoneId, setZoneId] = reactExports.useState(driver.zone_id);
-  const [zoneBusy, setZoneBusy] = reactExports.useState(false);
-  const [zoneMsg, setZoneMsg] = reactExports.useState("");
-  const [prices, setPrices] = reactExports.useState(initPrices);
-  const [editPrices, setEditPrices] = reactExports.useState(false);
-  const [draftPrices, setDraftPrices] = reactExports.useState(initPrices);
-  const [pricesBusy, setPricesBusy] = reactExports.useState(false);
-  const [pricesMsg, setPricesMsg] = reactExports.useState("");
-  const [incoming, setIncoming] = reactExports.useState([]);
-  const [orderBusy, setOrderBusy] = reactExports.useState(null);
-  const pollRef = reactExports.useRef(null);
-  const [activeOrder, setActiveOrder] = reactExports.useState(null);
-  const [advanceBusy, setAdvanceBusy] = reactExports.useState(false);
-  reactExports.useEffect(() => {
-    if (!actor || !driver.current_order_id) {
-      setActiveOrder(null);
-      return;
-    }
-    actor.getIncomingOrders(driver.id).then((orders) => {
-      const active = orders.find(
-        (o2) => o2.id === driver.current_order_id && [
-          OrderStatus.accepted,
-          OrderStatus.en_route,
-          OrderStatus.pumping,
-          OrderStatus.exception
-        ].includes(o2.status)
-      );
-      setActiveOrder(active ?? null);
-    });
-  }, [actor, driver.current_order_id, driver.id]);
-  reactExports.useEffect(() => {
-    if (!actor || !isOnline || driver.current_order_id) {
-      setIncoming([]);
-      if (pollRef.current) clearInterval(pollRef.current);
-      return;
-    }
-    const poll = async () => {
-      const orders = await actor.getIncomingOrders(driver.id);
-      setIncoming(orders);
-    };
-    poll();
-    pollRef.current = setInterval(poll, POLL_MS);
-    return () => {
-      if (pollRef.current) clearInterval(pollRef.current);
-    };
-  }, [actor, isOnline, driver.current_order_id, driver.id]);
-  async function toggleStatus() {
-    if (!actor) return;
-    if (!isOnline && !plate.trim()) {
-      setPlateErr(t("dash_truck_required"));
-      return;
-    }
-    setPlateErr("");
-    setStatusBusy(true);
-    const newStatus = isOnline ? DriverStatus.offline : DriverStatus.online;
-    await actor.setDriverStatus(driver.id, newStatus, plate.trim());
-    setStatusBusy(false);
-    onDriverUpdate();
-  }
-  async function switchZone(id) {
-    if (!actor) return;
-    setZoneId(id);
-    setZoneBusy(true);
-    setZoneMsg("");
-    await actor.setDriverZone(driver.id, id);
-    setZoneBusy(false);
-    setZoneMsg(t("dash_zone_saved"));
-    onDriverUpdate();
-  }
-  async function savePrices() {
-    if (!actor) return;
-    setPricesBusy(true);
-    setPricesMsg("");
-    const res = await actor.setDriverPrices(driver.id, draftPrices);
-    setPricesBusy(false);
-    if (res.__kind__ === "ok") {
-      setPrices(draftPrices);
-      setEditPrices(false);
-      setPricesMsg(t("prices_saved"));
-    } else {
-      setPricesMsg(t("prices_error"));
-    }
-  }
-  async function handleAccept(order) {
-    if (!actor) return;
-    setOrderBusy("accept");
-    const res = await actor.acceptOrder(driver.id, order.id);
-    setOrderBusy(null);
-    if (res.__kind__ === "ok") {
-      setIncoming([]);
-      if (pollRef.current) clearInterval(pollRef.current);
-      setActiveOrder({ ...order, status: OrderStatus.accepted });
-      onDriverUpdate();
-    }
-  }
-  async function handleReject(order) {
-    if (!actor) return;
-    setOrderBusy("reject");
-    await actor.rejectOrder(driver.id, order.id);
-    setOrderBusy(null);
-    setIncoming([]);
-  }
-  async function advanceStatus(order) {
-    if (!actor) return;
-    const idx = DELIVERY_STEPS.indexOf(order.status);
-    const next = DELIVERY_STEPS[idx + 1];
-    if (!next) return;
-    setAdvanceBusy(true);
-    const res = await actor.updateOrderStatus(driver.id, order.id, next);
-    setAdvanceBusy(false);
-    if (res.__kind__ === "ok") {
-      if (next === OrderStatus.completed) {
-        setActiveOrder(null);
-        onDriverUpdate();
-      } else {
-        setActiveOrder({ ...order, status: next });
-      }
-    }
-  }
-  const firstIncoming = incoming[0];
-  const incomingZone = firstIncoming ? zones.find((z2) => z2.id === firstIncoming.zone_id) : null;
-  const sizeLabel = (s2) => t(`size_${s2}`);
-  const priceForSize = (o2) => {
-    if (o2.size === TankSize.small) return prices.small;
-    if (o2.size === TankSize.medium) return prices.medium;
-    return prices.large;
-  };
-  const nextStatusLabel = (o2) => {
-    if (o2.status === OrderStatus.accepted) return t("active_btn_en_route");
-    if (o2.status === OrderStatus.en_route) return t("active_btn_pumping");
-    if (o2.status === OrderStatus.pumping) return t("active_btn_completed");
-    return "";
-  };
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-4 pb-4", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-card border border-border rounded-xl p-4 space-y-3", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-between", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-sm font-medium text-muted-foreground", children: t("dash_zone") }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(StatusBadge, { status: driver.status })
-      ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx(
-          "select",
-          {
-            "data-ocid": "dash.zone_select",
-            className: "flex-1 bg-background border border-input rounded-lg px-3 py-2 text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-ring",
-            value: String(zoneId),
-            onChange: (e) => switchZone(BigInt(e.target.value)),
-            disabled: zoneBusy,
-            children: zones.map((z2) => /* @__PURE__ */ jsxRuntimeExports.jsx("option", { value: String(z2.id), children: z2.name }, String(z2.id)))
-          }
-        ),
-        zoneBusy && /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-xs text-muted-foreground", children: t("dash_saving_zone") }),
-        zoneMsg && /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-xs text-green-600", children: zoneMsg })
-      ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-1", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx(
-          "label",
-          {
-            htmlFor: "dash-truck-plate",
-            className: "text-sm font-medium text-foreground",
-            children: t("dash_truck_plate")
-          }
-        ),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(
-          "input",
-          {
-            id: "dash-truck-plate",
-            "data-ocid": "dash.truck_plate_input",
-            type: "text",
-            className: "w-full bg-background border border-input rounded-lg px-3 py-2 text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-ring uppercase",
-            placeholder: t("dash_truck_placeholder"),
-            value: plate,
-            onChange: (e) => {
-              setPlate(e.target.value.toUpperCase());
-              setPlateErr("");
-            }
-          }
-        ),
-        plateErr && /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-destructive", children: plateErr })
-      ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(
-        "button",
-        {
-          "data-ocid": "dash.status_toggle",
-          type: "button",
-          disabled: statusBusy,
-          onClick: toggleStatus,
-          className: `w-full py-4 rounded-xl font-bold text-lg transition-smooth active:scale-95 disabled:opacity-60 ${isOnline ? "bg-destructive text-destructive-foreground" : "bg-primary text-primary-foreground"}`,
-          children: statusBusy ? isOnline ? t("dash_going_offline") : t("dash_going_online") : isOnline ? t("dash_go_offline") : t("dash_go_online")
-        }
-      )
-    ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-card border border-border rounded-xl p-4 space-y-3", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-between", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "font-semibold text-foreground", children: t("prices_title") }),
-        !editPrices && /* @__PURE__ */ jsxRuntimeExports.jsx(
-          "button",
-          {
-            "data-ocid": "prices.edit_button",
-            type: "button",
-            onClick: () => {
-              setDraftPrices(prices);
-              setEditPrices(true);
-              setPricesMsg("");
-            },
-            className: "text-sm text-primary font-medium",
-            children: t("prices_edit")
-          }
-        )
-      ] }),
-      pricesMsg && /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-green-700", children: pricesMsg }),
-      editPrices ? /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-2", children: [
-        ["small", "medium", "large"].map((sz) => /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-3", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-sm text-muted-foreground w-28", children: t(`prices_${sz}`) }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(
-            "input",
-            {
-              "data-ocid": `prices.${sz}_input`,
-              type: "number",
-              min: "0",
-              className: "flex-1 bg-background border border-input rounded-lg px-3 py-2 text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-ring",
-              value: String(draftPrices[sz]),
-              onChange: (e) => setDraftPrices((p2) => ({
-                ...p2,
-                [sz]: BigInt(e.target.value || 0)
-              }))
-            }
-          )
-        ] }, sz)),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex gap-2 pt-1", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx(
-            "button",
-            {
-              "data-ocid": "prices.save_button",
-              type: "button",
-              disabled: pricesBusy,
-              onClick: savePrices,
-              className: "flex-1 bg-primary text-primary-foreground py-2 rounded-lg text-sm font-semibold disabled:opacity-50",
-              children: pricesBusy ? t("prices_saving") : t("prices_save")
-            }
-          ),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(
-            "button",
-            {
-              "data-ocid": "prices.cancel_button",
-              type: "button",
-              onClick: () => {
-                setEditPrices(false);
-                setPricesMsg("");
-              },
-              className: "flex-1 bg-muted text-foreground py-2 rounded-lg text-sm font-semibold",
-              children: t("prices_cancel")
-            }
-          )
-        ] })
-      ] }) : /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid grid-cols-3 gap-2", children: ["small", "medium", "large"].map((sz) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
-        "div",
-        {
-          className: "bg-background border border-border rounded-lg p-2 text-center",
-          children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-muted-foreground", children: t(`prices_${sz}`) }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-bold text-foreground", children: fmtSlsh$1(prices[sz]) })
-          ]
-        },
-        sz
-      )) })
-    ] }),
-    (activeOrder == null ? void 0 : activeOrder.status) === OrderStatus.exception && /* @__PURE__ */ jsxRuntimeExports.jsxs(
-      "div",
-      {
-        "data-ocid": "active.exception_card",
-        className: "bg-destructive/10 border border-destructive/30 rounded-xl p-4 space-y-2",
-        children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "text-destructive font-bold text-sm", children: [
-              "⚠ ",
-              t("exception_title")
-            ] }),
-            activeOrder.help_flagged && /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-xs bg-destructive/20 text-destructive px-2 py-0.5 rounded-full", children: t("exception_flagged") })
-          ] }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-destructive", children: t("exception_body") })
-        ]
-      }
-    ),
-    activeOrder && activeOrder.status !== OrderStatus.exception && /* @__PURE__ */ jsxRuntimeExports.jsxs(
-      "div",
-      {
-        "data-ocid": "active.delivery_card",
-        className: "bg-card border border-border rounded-xl p-4 space-y-4",
-        children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "font-semibold text-foreground", children: t("active_title") }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid grid-cols-2 gap-2 text-sm", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-muted-foreground text-xs", children: t("active_customer") }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-medium", children: phoneLast4$1(activeOrder.customer_phone) })
-            ] }),
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-muted-foreground text-xs", children: t("active_size") }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-medium", children: sizeLabel(activeOrder.size) })
-            ] }),
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-muted-foreground text-xs", children: t("active_price") }),
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "font-medium", children: [
-                fmtSlsh$1(priceForSize(activeOrder)),
-                " SLSh"
-              ] })
-            ] }),
-            activeOrder.address_note && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "col-span-2", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-muted-foreground text-xs", children: t("active_address") }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-medium text-foreground break-words", children: activeOrder.address_note })
-            ] })
-          ] }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex items-center justify-between", children: DELIVERY_STEPS.map((step, i) => {
-            const stepLabels = [
-              t("active_step_accepted"),
-              t("active_step_en_route"),
-              t("active_step_pumping"),
-              t("active_step_completed")
-            ];
-            const currentIdx = DELIVERY_STEPS.indexOf(activeOrder.status);
-            const done = i <= currentIdx;
-            return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col items-center flex-1", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx(
-                "div",
-                {
-                  className: `w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold border-2 ${done ? "bg-primary border-primary text-primary-foreground" : "bg-background border-border text-muted-foreground"}`,
-                  children: i + 1
-                }
-              ),
-              /* @__PURE__ */ jsxRuntimeExports.jsx(
-                "p",
-                {
-                  className: `text-xs mt-1 text-center leading-tight ${done ? "text-primary font-semibold" : "text-muted-foreground"}`,
-                  children: stepLabels[i]
-                }
-              ),
-              i < DELIVERY_STEPS.length - 1 && /* @__PURE__ */ jsxRuntimeExports.jsx(
-                "div",
-                {
-                  className: "absolute hidden"
-                }
-              )
-            ] }, step);
-          }) }),
-          activeOrder.status !== OrderStatus.completed && /* @__PURE__ */ jsxRuntimeExports.jsx(
-            "button",
-            {
-              "data-ocid": "active.advance_button",
-              type: "button",
-              disabled: advanceBusy,
-              onClick: () => advanceStatus(activeOrder),
-              className: "w-full bg-primary text-primary-foreground py-3 rounded-xl font-bold text-base transition-smooth active:scale-95 disabled:opacity-60",
-              children: advanceBusy ? t("active_advancing") : nextStatusLabel(activeOrder)
-            }
-          )
-        ]
-      }
-    ),
-    !activeOrder && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-card border border-border rounded-xl p-4 space-y-3", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "font-semibold text-foreground", children: t("incoming_title") }),
-      !isOnline ? /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground text-center py-4", children: t("incoming_offline_hint") }) : firstIncoming ? /* @__PURE__ */ jsxRuntimeExports.jsxs(
-        "div",
-        {
-          "data-ocid": "incoming.order_card",
-          className: "bg-background border border-border rounded-lg p-3 space-y-3",
-          children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid grid-cols-2 gap-2 text-sm", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-muted-foreground text-xs", children: t("incoming_zone") }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-semibold", children: (incomingZone == null ? void 0 : incomingZone.name) ?? "-" })
-              ] }),
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-muted-foreground text-xs", children: t("incoming_size") }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-semibold", children: sizeLabel(firstIncoming.size) })
-              ] }),
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-muted-foreground text-xs", children: t("incoming_phone") }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-semibold", children: phoneLast4$1(firstIncoming.customer_phone) })
-              ] }),
-              firstIncoming.address_note && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "col-span-2", children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-muted-foreground text-xs", children: t("incoming_note") }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "break-words", children: firstIncoming.address_note })
-              ] })
-            ] }),
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid grid-cols-2 gap-2", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx(
-                "button",
-                {
-                  "data-ocid": "incoming.reject_button",
-                  type: "button",
-                  disabled: orderBusy !== null,
-                  onClick: () => handleReject(firstIncoming),
-                  className: "py-3 rounded-xl bg-destructive text-destructive-foreground font-bold text-base transition-smooth active:scale-95 disabled:opacity-60",
-                  children: orderBusy === "reject" ? t("incoming_rejecting") : t("incoming_reject")
-                }
-              ),
-              /* @__PURE__ */ jsxRuntimeExports.jsx(
-                "button",
-                {
-                  "data-ocid": "incoming.accept_button",
-                  type: "button",
-                  disabled: orderBusy !== null,
-                  onClick: () => handleAccept(firstIncoming),
-                  className: "py-3 rounded-xl bg-green-600 text-white font-bold text-base transition-smooth active:scale-95 disabled:opacity-60",
-                  children: orderBusy === "accept" ? t("incoming_accepting") : t("incoming_accept")
-                }
-              )
-            ] })
-          ]
-        }
-      ) : /* @__PURE__ */ jsxRuntimeExports.jsx(
-        "p",
-        {
-          "data-ocid": "incoming.empty_state",
-          className: "text-sm text-muted-foreground text-center py-6",
-          children: t("incoming_waiting")
-        }
-      )
-    ] })
-  ] });
-}
-function fmtSlsh(val) {
-  return Number(val).toLocaleString();
-}
-function fmtDate(ts) {
-  return new Date(Number(ts)).toLocaleDateString();
-}
-function EarningsView({ driverId, zones }) {
-  const { t } = useLang();
-  const { actor, isFetching } = useActor(createActor);
-  const todayQuery = useQuery({
-    queryKey: ["driver-earnings-today", String(driverId)],
-    queryFn: async () => {
-      if (!actor) return null;
-      return actor.getDriverEarnings(driverId, null, null);
-    },
-    enabled: !!actor && !isFetching
-  });
-  const today = (/* @__PURE__ */ new Date()).toISOString().split("T")[0];
-  const [startDate, setStartDate] = reactExports.useState(today);
-  const [endDate, setEndDate] = reactExports.useState(today);
-  const [rangeKey, setRangeKey] = reactExports.useState(0);
-  const rangeQuery = useQuery({
-    queryKey: [
-      "driver-earnings-range",
-      String(driverId),
-      startDate,
-      endDate,
-      rangeKey
-    ],
-    queryFn: async () => {
-      if (!actor) return null;
-      const startMs = BigInt(new Date(startDate).getTime());
-      const endMs = BigInt((/* @__PURE__ */ new Date(`${endDate}T23:59:59`)).getTime());
-      return actor.getDriverEarnings(driverId, startMs, endMs);
-    },
-    enabled: !!actor && !isFetching && rangeKey > 0
-  });
-  const todayData = todayQuery.data;
-  const rangeData = rangeQuery.data;
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-4 pb-4", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-card border border-border rounded-xl p-4", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "font-semibold text-foreground mb-3", children: t("earnings_today") }),
-      todayQuery.isLoading ? /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground", children: t("earnings_loading") }) : /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid grid-cols-2 gap-3", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-background border border-border rounded-lg p-3 text-center", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-muted-foreground", children: t("earnings_today_orders") }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-2xl font-bold text-foreground", children: (todayData == null ? void 0 : todayData.orders.length) ?? 0 })
-        ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-background border border-border rounded-lg p-3 text-center", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-muted-foreground", children: t("earnings_today_total") }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-xl font-bold text-primary", children: [
-            fmtSlsh((todayData == null ? void 0 : todayData.today_total) ?? 0n),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-xs font-normal text-muted-foreground ml-1", children: t("earnings_slsh") })
-          ] })
-        ] })
-      ] })
-    ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-card border border-border rounded-xl p-4 space-y-3", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "font-semibold text-foreground", children: t("earnings_period") }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid grid-cols-2 gap-2", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-1", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx(
-            "label",
-            {
-              htmlFor: "earnings-start",
-              className: "text-xs text-muted-foreground",
-              children: t("earnings_start")
-            }
-          ),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(
-            "input",
-            {
-              id: "earnings-start",
-              "data-ocid": "earnings.start_input",
-              type: "date",
-              className: "w-full bg-background border border-input rounded-lg px-3 py-2 text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-ring",
-              value: startDate,
-              onChange: (e) => setStartDate(e.target.value)
-            }
-          )
-        ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-1", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx(
-            "label",
-            {
-              htmlFor: "earnings-end",
-              className: "text-xs text-muted-foreground",
-              children: t("earnings_end")
-            }
-          ),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(
-            "input",
-            {
-              id: "earnings-end",
-              "data-ocid": "earnings.end_input",
-              type: "date",
-              className: "w-full bg-background border border-input rounded-lg px-3 py-2 text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-ring",
-              value: endDate,
-              onChange: (e) => setEndDate(e.target.value)
-            }
-          )
-        ] })
-      ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(
-        "button",
-        {
-          "data-ocid": "earnings.view_button",
-          type: "button",
-          onClick: () => setRangeKey((k2) => k2 + 1),
-          className: "w-full bg-primary text-primary-foreground py-2 rounded-lg text-sm font-semibold",
-          children: t("earnings_view")
-        }
-      ),
-      rangeQuery.isLoading && /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground", children: t("earnings_loading") }),
-      rangeData && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-2", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex justify-between items-center py-2 border-t border-border", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-sm font-medium text-foreground", children: t("earnings_period_total") }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "font-bold text-primary", children: [
-            fmtSlsh(rangeData.period_total),
-            " ",
-            t("earnings_slsh")
-          ] })
-        ] }),
-        rangeData.orders.length === 0 ? /* @__PURE__ */ jsxRuntimeExports.jsx(
-          "p",
-          {
-            "data-ocid": "earnings.empty_state",
-            className: "text-sm text-muted-foreground text-center py-4",
-            children: t("earnings_no_orders")
-          }
-        ) : /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "space-y-2", children: rangeData.orders.map((order, i) => {
-          const zone = zones.find((z2) => z2.id === order.zone_id);
-          return /* @__PURE__ */ jsxRuntimeExports.jsxs(
-            "div",
-            {
-              "data-ocid": `earnings.item.${i + 1}`,
-              className: "flex items-center justify-between bg-background border border-border rounded-lg px-3 py-2",
-              children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-sm font-medium text-foreground", children: [
-                    (zone == null ? void 0 : zone.name) ?? "-",
-                    " · ",
-                    order.size
-                  ] }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-muted-foreground", children: fmtDate(order.created_at) })
-                ] }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex items-center gap-2", children: /* @__PURE__ */ jsxRuntimeExports.jsx(StatusBadge, { status: order.status }) })
-              ]
-            },
-            String(order.id)
-          );
-        }) })
-      ] })
-    ] })
-  ] });
-}
-function fmtDateTime(ts) {
-  return new Date(Number(ts)).toLocaleString();
-}
-function phoneLast4(phone) {
-  return `…${phone.slice(-4)}`;
-}
-function HistoryView({ driverId, zones }) {
-  const { t } = useLang();
-  const { actor, isFetching } = useActor(createActor);
-  const [expanded, setExpanded] = reactExports.useState(/* @__PURE__ */ new Set());
-  const historyQuery = useQuery({
-    queryKey: ["driver-history", String(driverId)],
-    queryFn: async () => {
-      if (!actor) return [];
-      return actor.getDriverHistory(driverId);
-    },
-    enabled: !!actor && !isFetching
-  });
-  function toggleExpand(id) {
-    setExpanded((prev) => {
-      const next = new Set(prev);
-      if (next.has(id)) next.delete(id);
-      else next.add(id);
-      return next;
-    });
-  }
-  const orders = historyQuery.data ?? [];
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-2 pb-4", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-base font-semibold text-foreground px-1", children: t("history_title") }),
-    historyQuery.isLoading && /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground text-center py-8", children: t("history_loading") }),
-    !historyQuery.isLoading && orders.length === 0 && /* @__PURE__ */ jsxRuntimeExports.jsx(
-      "p",
-      {
-        "data-ocid": "history.empty_state",
-        className: "text-sm text-muted-foreground text-center py-10",
-        children: t("history_empty")
-      }
-    ),
-    orders.map((order, i) => {
-      const id = String(order.id);
-      const zone = zones.find((z2) => z2.id === order.zone_id);
-      const isExpanded = expanded.has(id);
-      return /* @__PURE__ */ jsxRuntimeExports.jsxs(
-        "div",
-        {
-          "data-ocid": `history.item.${i + 1}`,
-          className: "bg-card border border-border rounded-xl overflow-hidden",
-          children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsxs(
-              "button",
-              {
-                type: "button",
-                className: "w-full flex items-center justify-between px-4 py-3 text-left",
-                onClick: () => toggleExpand(id),
-                "data-ocid": `history.expand_button.${i + 1}`,
-                children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex-1 min-w-0", children: [
-                    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2", children: [
-                      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-sm font-semibold text-foreground", children: (zone == null ? void 0 : zone.name) ?? "-" }),
-                      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-xs text-muted-foreground", children: "·" }),
-                      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-xs text-muted-foreground", children: order.size })
-                    ] }),
-                    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-xs text-muted-foreground mt-0.5", children: [
-                      new Date(Number(order.created_at)).toLocaleDateString(),
-                      " · ",
-                      phoneLast4(order.customer_phone)
-                    ] })
-                  ] }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2 ml-2 flex-shrink-0", children: [
-                    /* @__PURE__ */ jsxRuntimeExports.jsx(StatusBadge, { status: order.status }),
-                    /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-muted-foreground text-xs", children: isExpanded ? "▲" : "▼" })
-                  ] })
-                ]
-              }
-            ),
-            isExpanded && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "bg-background border-t border-border px-4 py-3 space-y-2", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid grid-cols-2 gap-2 text-sm", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-muted-foreground", children: t("history_date") }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-medium", children: fmtDateTime(order.created_at) })
-              ] }),
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-muted-foreground", children: t("history_customer") }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-medium", children: phoneLast4(order.customer_phone) })
-              ] }),
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-muted-foreground", children: t("history_zone") }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-medium", children: (zone == null ? void 0 : zone.name) ?? "-" })
-              ] }),
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-muted-foreground", children: t("history_size") }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-medium", children: order.size })
-              ] }),
-              order.address_note && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "col-span-2", children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-muted-foreground", children: t("active_address") }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-medium break-words", children: order.address_note })
-              ] }),
-              order.completed_at && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "col-span-2", children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-muted-foreground", children: t("active_step_completed") }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-medium", children: fmtDateTime(order.completed_at) })
-              ] })
-            ] }) })
-          ]
-        },
-        id
-      );
-    })
-  ] });
-}
-function LoginView({ onLogin }) {
-  const { t } = useLang();
-  const { actor } = useActor(createActor);
-  const [phone, setPhone] = reactExports.useState("");
-  const [pin, setPin] = reactExports.useState("");
-  const [loading, setLoading] = reactExports.useState(false);
-  const [error, setError] = reactExports.useState("");
-  async function handleLogin() {
-    if (!actor || !phone.trim() || pin.length !== 4) return;
-    setLoading(true);
-    setError("");
-    try {
-      const res = await actor.driverLogin(phone.trim(), pin);
-      if (res.__kind__ === "ok") {
-        localStorage.setItem("biyo_driver_id", String(res.ok.driver_id));
-        onLogin(res.ok.driver_id, res.ok.name);
-      } else {
-        setError(t("login_error_invalid"));
-      }
-    } catch {
-      setError(t("login_error_generic"));
-    } finally {
-      setLoading(false);
-    }
-  }
-  return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "min-h-screen bg-background flex items-center justify-center p-4", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "w-full max-w-sm", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "text-center mb-8", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-4xl mb-2", children: "💧" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "text-2xl font-bold text-foreground", children: t("app_name") })
-    ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-card border border-border rounded-xl p-6 space-y-4 shadow-sm", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-lg font-semibold text-foreground", children: t("login_title") }),
-      error && /* @__PURE__ */ jsxRuntimeExports.jsx(
-        "div",
-        {
-          "data-ocid": "login.error_state",
-          className: "bg-destructive/10 border border-destructive/30 text-destructive text-sm rounded-lg px-3 py-2",
-          children: error
-        }
-      ),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-1", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx(
-          "label",
-          {
-            htmlFor: "login-phone",
-            className: "text-sm font-medium text-foreground",
-            children: t("login_phone")
-          }
-        ),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(
-          "input",
-          {
-            id: "login-phone",
-            "data-ocid": "login.phone_input",
-            type: "tel",
-            className: "w-full bg-background border border-input rounded-lg px-3 py-3 text-foreground text-base focus:outline-none focus:ring-2 focus:ring-ring",
-            placeholder: "063 XXXXXXX",
-            value: phone,
-            onChange: (e) => setPhone(e.target.value),
-            onKeyDown: (e) => e.key === "Enter" && handleLogin()
-          }
-        )
-      ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-1", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx(
-          "label",
-          {
-            htmlFor: "login-pin",
-            className: "text-sm font-medium text-foreground",
-            children: t("login_pin")
-          }
-        ),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(
-          "input",
-          {
-            id: "login-pin",
-            "data-ocid": "login.pin_input",
-            type: "password",
-            inputMode: "numeric",
-            maxLength: 4,
-            className: "w-full bg-background border border-input rounded-lg px-3 py-3 text-foreground text-base tracking-widest focus:outline-none focus:ring-2 focus:ring-ring",
-            placeholder: "••••",
-            value: pin,
-            onChange: (e) => setPin(e.target.value.replace(/\D/g, "").slice(0, 4)),
-            onKeyDown: (e) => e.key === "Enter" && handleLogin()
-          }
-        )
-      ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(
-        "button",
-        {
-          "data-ocid": "login.submit_button",
-          type: "button",
-          disabled: loading || !actor,
-          onClick: handleLogin,
-          className: "w-full bg-primary text-primary-foreground font-semibold py-3 rounded-lg transition-smooth disabled:opacity-50 active:scale-95 text-base",
-          children: loading ? t("loading") : t("login_button")
-        }
-      )
-    ] })
-  ] }) });
-}
-const DRIVER_ID_KEY = "biyo_driver_id";
-function DriverPage() {
-  const { t, lang, setLang } = useLang();
-  const { actor } = useActor(createActor);
-  const queryClient2 = useQueryClient();
-  const [session, setSession] = reactExports.useState(() => {
-    const stored = localStorage.getItem(DRIVER_ID_KEY);
-    if (!stored) return null;
-    return { driverId: BigInt(stored), name: "" };
-  });
-  const [activeTab, setActiveTab] = reactExports.useState("dashboard");
-  const [resetMsg, setResetMsg] = reactExports.useState("");
-  const profileQuery = useQuery({
-    queryKey: ["driver-profile", session ? String(session.driverId) : null],
-    queryFn: async () => {
-      if (!actor || !session) return null;
-      return actor.getDriverProfile(session.driverId);
-    },
-    enabled: !!actor && !!session,
-    staleTime: 5e3
-  });
-  const zonesQuery = useQuery({
-    queryKey: ["zones"],
-    queryFn: async () => {
-      if (!actor) return [];
-      const result = await actor.getZones();
-      return [...result].sort(
-        (a2, b2) => Number(a2.display_order) - Number(b2.display_order)
-      );
-    },
-    enabled: !!actor,
-    staleTime: 6e4
-  });
-  const zones = zonesQuery.data ?? [];
-  reactExports.useEffect(() => {
-    var _a3;
-    if (((_a3 = profileQuery.data) == null ? void 0 : _a3.driver) && session) {
-      const name = profileQuery.data.driver.name;
-      if (name && session.name !== name) {
-        setSession((s2) => s2 ? { ...s2, name } : s2);
-      }
-    }
-  }, [profileQuery.data, session]);
-  function handleLogin(driverId, name) {
-    localStorage.setItem(DRIVER_ID_KEY, String(driverId));
-    setSession({ driverId, name });
-  }
-  function handleLogout() {
-    localStorage.removeItem(DRIVER_ID_KEY);
-    setSession(null);
-    void queryClient2.clear();
-  }
-  const refreshProfile = reactExports.useCallback(() => {
-    if (session) {
-      void queryClient2.invalidateQueries({
-        queryKey: ["driver-profile", String(session.driverId)]
-      });
-    }
-  }, [queryClient2, session]);
-  async function handleDemoReset() {
-    if (!actor) return;
-    if (!window.confirm(t("demo_reset_confirm"))) return;
-    await actor.resetDemo();
-    setResetMsg(t("demo_reset_success"));
-    void queryClient2.clear();
-    setTimeout(() => setResetMsg(""), 3e3);
-  }
-  if (!session) {
-    return /* @__PURE__ */ jsxRuntimeExports.jsx(LoginView, { onLogin: handleLogin });
-  }
-  const profile = profileQuery.data;
-  if (!profile && profileQuery.isLoading) {
-    return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "min-h-screen bg-background flex items-center justify-center", children: /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground font-mono", children: t("loading") }) });
-  }
-  if (!profile && !profileQuery.isLoading) {
-    handleLogout();
-    return null;
-  }
-  const driver = profile.driver;
-  const prices = profile.prices;
-  const isOnline = driver.status === DriverStatus.online;
-  function renderTab() {
-    if (!profile) return null;
-    switch (activeTab) {
-      case "dashboard":
-        return /* @__PURE__ */ jsxRuntimeExports.jsx(
-          DashboardView,
-          {
-            driver,
-            prices,
-            zones,
-            onDriverUpdate: refreshProfile
-          }
-        );
-      case "earnings":
-        return /* @__PURE__ */ jsxRuntimeExports.jsx(EarningsView, { driverId: session.driverId, zones });
-      case "history":
-        return /* @__PURE__ */ jsxRuntimeExports.jsx(HistoryView, { driverId: session.driverId, zones });
-    }
-  }
-  const tabs = [
-    { id: "dashboard", label: t("nav_dashboard") },
-    { id: "earnings", label: t("nav_earnings") },
-    { id: "history", label: t("nav_history") }
-  ];
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "min-h-screen flex flex-col bg-background", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("header", { className: "bg-card border-b border-border sticky top-0 z-30", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-[480px] mx-auto px-4 py-3 space-y-2", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-between", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-primary text-lg", children: "💧" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-display font-bold text-base text-foreground", children: t("app_name") })
-        ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx(
-            "button",
-            {
-              type: "button",
-              "data-ocid": "driver.lang_toggle",
-              onClick: () => setLang(lang === "en" ? "so" : "en"),
-              className: "text-xs font-mono text-muted-foreground hover:text-foreground border border-border rounded px-2 py-1 transition-colors duration-200",
-              "aria-label": `Switch to ${lang === "en" ? "Somali" : "English"}`,
-              children: t("lang_toggle")
-            }
-          ),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(
-            "button",
-            {
-              type: "button",
-              "data-ocid": "driver.logout_button",
-              onClick: handleLogout,
-              className: "text-xs text-destructive font-medium border border-destructive/30 rounded px-2 py-1 hover:bg-destructive/10 transition-colors",
-              children: t("nav_logout")
-            }
-          )
-        ] })
-      ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-sm font-semibold text-foreground truncate", children: session.name || driver.name }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(
-          "span",
-          {
-            className: `text-xs font-mono px-2 py-0.5 rounded-full border ${isOnline ? "bg-primary/10 text-primary border-primary/30" : "bg-muted text-muted-foreground border-border"}`,
-            children: isOnline ? "● Online" : "○ Offline"
-          }
-        )
-      ] })
-    ] }) }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(
-      "nav",
-      {
-        className: "bg-card border-b border-border",
-        "aria-label": "Driver navigation",
-        children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "max-w-[480px] mx-auto flex", children: tabs.map((tab) => /* @__PURE__ */ jsxRuntimeExports.jsx(
-          "button",
-          {
-            type: "button",
-            "data-ocid": `driver.${tab.id}_tab`,
-            onClick: () => setActiveTab(tab.id),
-            className: `flex-1 py-3 text-sm font-medium transition-colors duration-150 border-b-2 ${activeTab === tab.id ? "border-primary text-primary" : "border-transparent text-muted-foreground hover:text-foreground"}`,
-            children: tab.label
-          },
-          tab.id
-        )) })
-      }
-    ),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("main", { className: "flex-1 max-w-[480px] mx-auto w-full px-4 pt-4", children: renderTab() }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("footer", { className: "bg-muted/40 border-t border-border py-4", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-[480px] mx-auto px-4 space-y-2", children: [
-      resetMsg && /* @__PURE__ */ jsxRuntimeExports.jsx(
-        "p",
-        {
-          "data-ocid": "driver.reset_success",
-          className: "text-xs text-primary text-center font-mono",
-          children: resetMsg
-        }
-      ),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(
-        "button",
-        {
-          type: "button",
-          "data-ocid": "driver.demo_reset_button",
-          onClick: handleDemoReset,
-          className: "w-full text-xs text-muted-foreground border border-border rounded-lg py-2 hover:bg-destructive/5 hover:text-destructive hover:border-destructive/30 transition-colors",
-          children: t("demo_reset")
-        }
-      ),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-xs text-muted-foreground text-center", children: [
-        "© ",
-        (/* @__PURE__ */ new Date()).getFullYear(),
-        ".",
-        " ",
-        /* @__PURE__ */ jsxRuntimeExports.jsx(
-          "a",
-          {
-            href: `https://caffeine.ai?utm_source=caffeine-footer&utm_medium=referral&utm_content=${encodeURIComponent(typeof window !== "undefined" ? window.location.hostname : "")}`,
-            target: "_blank",
-            rel: "noopener noreferrer",
-            className: "underline hover:text-foreground transition-colors",
-            children: "Built with love using caffeine.ai"
-          }
-        )
-      ] })
-    ] }) })
   ] });
 }
 var prefix = "Invariant failed";
@@ -35928,13 +39051,3924 @@ function RouterContextProvider({
 function RouterProvider({ router: router2, ...rest }) {
   return /* @__PURE__ */ jsxRuntimeExports.jsx(RouterContextProvider, { router: router2, ...rest, children: /* @__PURE__ */ jsxRuntimeExports.jsx(Matches, {}) });
 }
+const inputCls$1 = "w-full bg-background border border-input rounded-lg px-4 py-3 text-foreground text-base focus:outline-none focus:ring-2 focus:ring-ring transition-colors";
+function FieldGroup({
+  label,
+  children
+}) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-1.5", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("label", { className: "block text-sm font-medium text-foreground", children: label }),
+    children
+  ] });
+}
+function PrimaryBtn$1({
+  children,
+  disabled,
+  dataOcid,
+  onClick
+}) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(
+    "button",
+    {
+      type: "button",
+      "data-ocid": dataOcid,
+      disabled,
+      onClick,
+      className: "w-full bg-primary text-primary-foreground font-bold py-4 rounded-xl text-base transition-smooth active:scale-95 disabled:opacity-50",
+      children
+    }
+  );
+}
+function BackLink({
+  onClick,
+  label
+}) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(
+    "button",
+    {
+      type: "button",
+      onClick,
+      className: "text-sm text-muted-foreground hover:text-foreground transition-colors mt-1",
+      children: [
+        "← ",
+        label
+      ]
+    }
+  );
+}
+function AuthPage() {
+  const { t } = useLang();
+  const navigate = useNavigate();
+  const [view, setView] = reactExports.useState("role");
+  const [rcPhone, setRcPhone] = reactExports.useState("");
+  const [rcPin, setRcPin] = reactExports.useState("");
+  const [rcError, setRcError] = reactExports.useState("");
+  const [rcLoading, setRcLoading] = reactExports.useState(false);
+  const [regName, setRegName] = reactExports.useState("");
+  const [regPhone, setRegPhone] = reactExports.useState("");
+  const [regPin, setRegPin] = reactExports.useState("");
+  const [regEmail, setRegEmail] = reactExports.useState("");
+  const [regError, setRegError] = reactExports.useState("");
+  const [regLoading, setRegLoading] = reactExports.useState(false);
+  const [wtPhone, setWtPhone] = reactExports.useState("");
+  const [wtPin, setWtPin] = reactExports.useState("");
+  const [wtError, setWtError] = reactExports.useState("");
+  const [wtLoading, setWtLoading] = reactExports.useState(false);
+  const loginCustomer = useLoginCustomer();
+  const registerCustomer = useRegisterCustomer();
+  function fillTestAccount() {
+    setView("rc_login");
+    setRcPhone("06XTEST01");
+    setRcPin("1234");
+  }
+  function fillWtTestAccount() {
+    setWtPhone("06WTEST01");
+    setWtPin("1234");
+  }
+  async function handleRcLogin() {
+    if (!rcPhone.trim() || rcPin.length < 4) {
+      setRcError(t("phone_invalid"));
+      return;
+    }
+    setRcLoading(true);
+    setRcError("");
+    try {
+      const res = await loginCustomer.mutateAsync({
+        phone: rcPhone.trim(),
+        pin: rcPin
+      });
+      localStorage.setItem(
+        "rc_session",
+        JSON.stringify({
+          customerId: String(res.customerId),
+          name: res.name,
+          phone: res.phone
+        })
+      );
+      void navigate({ to: "/customer" });
+    } catch {
+      setRcError(t("auth_login_error"));
+    } finally {
+      setRcLoading(false);
+    }
+  }
+  async function handleRcRegister() {
+    if (!regName.trim() || !regPhone.trim() || regPin.length < 4) {
+      setRegError(t("auth_fill_required"));
+      return;
+    }
+    setRegLoading(true);
+    setRegError("");
+    try {
+      const registered = await registerCustomer.mutateAsync({
+        name: regName.trim(),
+        phone: regPhone.trim(),
+        pin: regPin,
+        email: regEmail.trim() || null
+      });
+      localStorage.setItem(
+        "rc_session",
+        JSON.stringify({
+          customerId: String(registered.id),
+          name: registered.name,
+          phone: registered.phone
+        })
+      );
+      void navigate({ to: "/customer" });
+    } catch {
+      setRegError(t("auth_register_error"));
+    } finally {
+      setRegLoading(false);
+    }
+  }
+  async function handleWtLogin() {
+    if (!wtPhone.trim() || wtPin.length < 4) {
+      setWtError(t("login_error_invalid"));
+      return;
+    }
+    setWtLoading(true);
+    setWtError("");
+    try {
+      localStorage.setItem(
+        "wt_pending_login",
+        JSON.stringify({ phone: wtPhone.trim(), pin: wtPin })
+      );
+      void navigate({ to: "/driver" });
+    } catch {
+      setWtError(t("login_error_generic"));
+    } finally {
+      setWtLoading(false);
+    }
+  }
+  function renderRoleSelection() {
+    return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-6", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "text-center space-y-2", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-5xl mb-2", children: "💧" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "font-display font-bold text-3xl text-foreground", children: t("app_name") }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-muted-foreground text-base", children: t("auth_welcome_sub") })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-3", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs(
+          "button",
+          {
+            type: "button",
+            "data-ocid": "auth.rc_role_button",
+            onClick: () => setView("rc_login"),
+            className: "w-full flex items-center gap-4 bg-card border-2 border-primary/30 hover:border-primary/60 hover:bg-primary/5 rounded-2xl px-5 py-5 transition-smooth active:scale-95 text-left",
+            children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-4xl", children: "🏠" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-bold text-foreground text-lg", children: t("auth_rc_role") }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-muted-foreground text-sm", children: t("auth_rc_role_sub") })
+              ] })
+            ]
+          }
+        ),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs(
+          "button",
+          {
+            type: "button",
+            "data-ocid": "auth.wt_role_button",
+            onClick: () => setView("wt_login"),
+            className: "w-full flex items-center gap-4 bg-card border-2 border-accent/30 hover:border-accent/60 hover:bg-accent/5 rounded-2xl px-5 py-5 transition-smooth active:scale-95 text-left",
+            children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-4xl", children: "🚛" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-bold text-foreground text-lg", children: t("auth_wt_role") }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-muted-foreground text-sm", children: t("auth_wt_role_sub") })
+              ] })
+            ]
+          }
+        )
+      ] })
+    ] });
+  }
+  function renderRcLogin() {
+    return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-5", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-1", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "font-display font-bold text-2xl text-foreground", children: t("auth_rc_login_title") }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-muted-foreground text-sm", children: t("auth_rc_login_sub") })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-4", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(FieldGroup, { label: t("phone_label"), children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "input",
+          {
+            "data-ocid": "auth.rc_phone_input",
+            type: "tel",
+            className: inputCls$1,
+            placeholder: "e.g. 063 4123456",
+            value: rcPhone,
+            onChange: (e) => {
+              setRcPhone(e.target.value);
+              setRcError("");
+            }
+          }
+        ) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(FieldGroup, { label: t("login_pin"), children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "input",
+          {
+            "data-ocid": "auth.rc_pin_input",
+            type: "password",
+            inputMode: "numeric",
+            maxLength: 4,
+            className: inputCls$1,
+            placeholder: "••••",
+            value: rcPin,
+            onChange: (e) => {
+              setRcPin(e.target.value.slice(0, 4));
+              setRcError("");
+            }
+          }
+        ) })
+      ] }),
+      rcError && /* @__PURE__ */ jsxRuntimeExports.jsx(
+        "p",
+        {
+          "data-ocid": "auth.rc_login_error",
+          className: "text-sm text-destructive",
+          children: rcError
+        }
+      ),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(
+        PrimaryBtn$1,
+        {
+          dataOcid: "auth.rc_login_button",
+          disabled: rcLoading,
+          onClick: handleRcLogin,
+          children: rcLoading ? t("loading") : t("auth_login_btn")
+        }
+      ),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-center", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+        "button",
+        {
+          type: "button",
+          "data-ocid": "auth.rc_go_register",
+          onClick: () => setView("rc_register"),
+          className: "text-sm text-primary hover:underline",
+          children: t("auth_no_account_register")
+        }
+      ) }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs(
+        "div",
+        {
+          "data-ocid": "auth.test_account_box",
+          className: "bg-primary/5 border border-primary/20 rounded-xl p-4 space-y-3",
+          children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs font-semibold uppercase tracking-wide text-primary mb-2", children: t("auth_test_account_label") }),
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "text-sm text-foreground space-y-1", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "text-muted-foreground", children: [
+                    t("phone_label"),
+                    ":"
+                  ] }),
+                  " ",
+                  "06XTEST01"
+                ] }),
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-muted-foreground", children: "PIN:" }),
+                  " 1234"
+                ] })
+              ] })
+            ] }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "button",
+              {
+                type: "button",
+                "data-ocid": "auth.use_test_account_button",
+                onClick: fillTestAccount,
+                className: "w-full bg-primary/10 hover:bg-primary/20 text-primary font-semibold py-2 rounded-lg text-sm transition-colors",
+                children: t("auth_use_test_account")
+              }
+            )
+          ]
+        }
+      ),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(BackLink, { onClick: () => setView("role"), label: t("auth_back_role") })
+    ] });
+  }
+  function renderRcRegister() {
+    return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-5", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-1", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "font-display font-bold text-2xl text-foreground", children: t("auth_rc_register_title") }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-muted-foreground text-sm", children: t("auth_rc_register_sub") })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-4", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(FieldGroup, { label: t("driver_fullName"), children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "input",
+          {
+            "data-ocid": "auth.reg_name_input",
+            type: "text",
+            className: inputCls$1,
+            placeholder: "e.g. Faadumo Hashi",
+            value: regName,
+            onChange: (e) => {
+              setRegName(e.target.value);
+              setRegError("");
+            }
+          }
+        ) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(FieldGroup, { label: t("phone_label"), children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "input",
+          {
+            "data-ocid": "auth.reg_phone_input",
+            type: "tel",
+            className: inputCls$1,
+            placeholder: "e.g. 063 4123456",
+            value: regPhone,
+            onChange: (e) => {
+              setRegPhone(e.target.value);
+              setRegError("");
+            }
+          }
+        ) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(FieldGroup, { label: t("login_pin"), children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "input",
+          {
+            "data-ocid": "auth.reg_pin_input",
+            type: "password",
+            inputMode: "numeric",
+            maxLength: 4,
+            className: inputCls$1,
+            placeholder: "••••",
+            value: regPin,
+            onChange: (e) => {
+              setRegPin(e.target.value.slice(0, 4));
+              setRegError("");
+            }
+          }
+        ) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(
+          FieldGroup,
+          {
+            label: `${t("auth_email_label")} (${t("auth_optional")})`,
+            children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "input",
+              {
+                "data-ocid": "auth.reg_email_input",
+                type: "email",
+                className: inputCls$1,
+                placeholder: "e.g. faadumo@email.com",
+                value: regEmail,
+                onChange: (e) => setRegEmail(e.target.value)
+              }
+            )
+          }
+        )
+      ] }),
+      regError && /* @__PURE__ */ jsxRuntimeExports.jsx("p", { "data-ocid": "auth.reg_error", className: "text-sm text-destructive", children: regError }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(
+        PrimaryBtn$1,
+        {
+          dataOcid: "auth.reg_submit_button",
+          disabled: regLoading,
+          onClick: handleRcRegister,
+          children: regLoading ? t("loading") : t("auth_register_btn")
+        }
+      ),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-center", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+        "button",
+        {
+          type: "button",
+          "data-ocid": "auth.reg_go_login",
+          onClick: () => setView("rc_login"),
+          className: "text-sm text-primary hover:underline",
+          children: t("auth_already_have_account")
+        }
+      ) }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs(
+        "div",
+        {
+          "data-ocid": "auth.test_account_box",
+          className: "bg-primary/5 border border-primary/20 rounded-xl p-4 space-y-3",
+          children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs font-semibold uppercase tracking-wide text-primary mb-2", children: t("auth_test_account_label") }),
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "text-sm text-foreground space-y-1", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "text-muted-foreground", children: [
+                    t("driver_fullName"),
+                    ":"
+                  ] }),
+                  " ",
+                  "Faadumo Test"
+                ] }),
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "text-muted-foreground", children: [
+                    t("phone_label"),
+                    ":"
+                  ] }),
+                  " ",
+                  "06XTEST01"
+                ] }),
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-muted-foreground", children: "PIN:" }),
+                  " 1234"
+                ] })
+              ] })
+            ] }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "button",
+              {
+                type: "button",
+                "data-ocid": "auth.use_test_account_button",
+                onClick: fillTestAccount,
+                className: "w-full bg-primary/10 hover:bg-primary/20 text-primary font-semibold py-2 rounded-lg text-sm transition-colors",
+                children: t("auth_use_test_account")
+              }
+            )
+          ]
+        }
+      ),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(
+        BackLink,
+        {
+          onClick: () => setView("rc_login"),
+          label: t("auth_back_login")
+        }
+      )
+    ] });
+  }
+  function renderWtLogin() {
+    return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-5", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-1", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "font-display font-bold text-2xl text-foreground", children: t("auth_wt_login_title") }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-muted-foreground text-sm", children: t("auth_wt_login_sub") })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-4", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(FieldGroup, { label: t("phone_label"), children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "input",
+          {
+            "data-ocid": "auth.wt_phone_input",
+            type: "tel",
+            className: inputCls$1,
+            placeholder: "e.g. 063 4123456",
+            value: wtPhone,
+            onChange: (e) => {
+              setWtPhone(e.target.value);
+              setWtError("");
+            }
+          }
+        ) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(FieldGroup, { label: t("login_pin"), children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "input",
+          {
+            "data-ocid": "auth.wt_pin_input",
+            type: "password",
+            inputMode: "numeric",
+            maxLength: 4,
+            className: inputCls$1,
+            placeholder: "••••",
+            value: wtPin,
+            onChange: (e) => {
+              setWtPin(e.target.value.slice(0, 4));
+              setWtError("");
+            }
+          }
+        ) })
+      ] }),
+      wtError && /* @__PURE__ */ jsxRuntimeExports.jsx(
+        "p",
+        {
+          "data-ocid": "auth.wt_login_error",
+          className: "text-sm text-destructive",
+          children: wtError
+        }
+      ),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(
+        PrimaryBtn$1,
+        {
+          dataOcid: "auth.wt_login_button",
+          disabled: wtLoading,
+          onClick: handleWtLogin,
+          children: wtLoading ? t("loading") : t("auth_login_btn")
+        }
+      ),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-center", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+        "button",
+        {
+          type: "button",
+          "data-ocid": "auth.wt_go_register",
+          onClick: () => void navigate({ to: "/driver/register" }),
+          className: "text-sm text-primary hover:underline",
+          children: t("auth_wt_new_driver")
+        }
+      ) }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(BackLink, { onClick: () => setView("role"), label: t("auth_back_role") }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-accent/10 border border-accent/30 rounded-lg p-3 mt-3 text-sm", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-semibold text-accent-foreground mb-1", children: "Test WT Account" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-muted-foreground mb-2", children: "Phone: 06WTEST01 | PIN: 1234" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "button",
+          {
+            type: "button",
+            "data-ocid": "auth.wt_fill_test_button",
+            onClick: fillWtTestAccount,
+            className: "text-xs bg-accent/20 hover:bg-accent/30 text-accent-foreground px-3 py-1 rounded transition-colors",
+            children: "Fill Test Credentials"
+          }
+        )
+      ] })
+    ] });
+  }
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(Layout, { hideFooter: true, children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-[440px] mx-auto px-4 py-8 relative", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-card border border-border rounded-2xl p-6 shadow-sm", children: [
+      view === "role" && renderRoleSelection(),
+      view === "rc_login" && renderRcLogin(),
+      view === "rc_register" && renderRcRegister(),
+      view === "wt_login" && renderWtLogin()
+    ] }),
+    view === "role" && /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "button",
+      {
+        type: "button",
+        "data-ocid": "auth.admin_access_button",
+        onClick: () => void navigate({ to: "/admin" }),
+        className: "absolute bottom-10 right-4 text-xs text-muted-foreground/50 hover:text-muted-foreground transition-colors flex items-center gap-1",
+        "aria-label": "Admin access",
+        children: "🔒 Admin"
+      }
+    )
+  ] }) });
+}
+const ZONE_CENTERS = {
+  "Kood-Buur": { lat: 9.56, lng: 44.065 },
+  "Ahmed Dhagax": { lat: 9.555, lng: 44.058 },
+  "Ibrahim Kod": { lat: 9.55, lng: 44.07 },
+  Boodhair: { lat: 9.545, lng: 44.062 },
+  Mahabot: { lat: 9.565, lng: 44.07 },
+  Daami: { lat: 9.57, lng: 44.06 },
+  "Gabiley Road": { lat: 9.575, lng: 44.05 },
+  "Arabsiyo Road": { lat: 9.58, lng: 44.045 },
+  "Xamar Haato": { lat: 9.535, lng: 44.075 },
+  Shacabka: { lat: 9.54, lng: 44.08 }
+};
+const MOCK_DRIVERS = [
+  { name: "Axmed", zone: "Kood-Buur", available: true, minPrice: 14e3 },
+  { name: "Cabdulahi", zone: "Kood-Buur", available: false, minPrice: 15e3 },
+  { name: "Maxamed", zone: "Ahmed Dhagax", available: true, minPrice: 13500 },
+  { name: "Xasan", zone: "Ahmed Dhagax", available: true, minPrice: 14500 },
+  { name: "Cumar", zone: "Ibrahim Kod", available: false, minPrice: 15500 },
+  { name: "Faarax", zone: "Boodhair", available: true, minPrice: 13e3 },
+  { name: "Idiris", zone: "Mahabot", available: true, minPrice: 16e3 },
+  { name: "Nuur", zone: "Daami", available: true, minPrice: 14e3 },
+  { name: "Daahir", zone: "Gabiley Road", available: false, minPrice: 15e3 },
+  { name: "Saciid", zone: "Arabsiyo Road", available: true, minPrice: 14e3 },
+  { name: "Cali", zone: "Xamar Haato", available: true, minPrice: 13e3 },
+  { name: "Muuse", zone: "Shacabka", available: false, minPrice: 15500 }
+];
+function haversine(lat1, lng1, lat2, lng2) {
+  const R2 = 6371;
+  const dLat = (lat2 - lat1) * Math.PI / 180;
+  const dLng = (lng2 - lng1) * Math.PI / 180;
+  const a2 = Math.sin(dLat / 2) ** 2 + Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * Math.sin(dLng / 2) ** 2;
+  return R2 * 2 * Math.atan2(Math.sqrt(a2), Math.sqrt(1 - a2));
+}
+function LangToggle$1() {
+  const { lang, setLang, t } = useLang();
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(
+    "button",
+    {
+      type: "button",
+      onClick: () => setLang(lang === "en" ? "so" : "en"),
+      className: "text-sm font-medium text-muted-foreground hover:text-foreground transition-colors",
+      "data-ocid": "availability.lang_toggle",
+      children: t("lang_toggle")
+    }
+  );
+}
+function DriverCard({
+  name,
+  zone,
+  available,
+  minPrice,
+  distanceKm,
+  index: index2,
+  onOrder
+}) {
+  const { t } = useLang();
+  const etaMinutes = distanceKm !== null ? Math.max(5, Math.round(distanceKm * 2)) : null;
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(
+    "div",
+    {
+      className: "bg-card border border-border rounded-xl p-4 shadow-sm flex flex-col gap-3",
+      "data-ocid": `availability.driver_card.${index2}`,
+      children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-between", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center", children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-primary font-semibold text-sm", children: name[0] }) }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-semibold text-foreground text-sm", children: name }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-muted-foreground", children: zone })
+            ] })
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            Badge,
+            {
+              className: available ? "bg-accent/20 text-accent-foreground border-accent/30" : "bg-destructive/15 text-destructive border-destructive/25",
+              children: available ? t("availability_available") : t("availability_busy")
+            }
+          )
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid grid-cols-3 gap-2 text-center", children: [
+          distanceKm !== null && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-muted/50 rounded-lg py-2 px-1", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-muted-foreground", children: t("availability_distance") }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "font-bold text-foreground text-sm", children: [
+              distanceKm.toFixed(1),
+              " km"
+            ] })
+          ] }),
+          etaMinutes !== null && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-muted/50 rounded-lg py-2 px-1", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-muted-foreground", children: t("availability_estimatedTime") }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "font-bold text-foreground text-sm", children: [
+              etaMinutes,
+              " min"
+            ] })
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs(
+            "div",
+            {
+              className: `bg-muted/50 rounded-lg py-2 px-1 ${distanceKm !== null ? "" : "col-span-3"}`,
+              children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-muted-foreground", children: "From" }),
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "font-bold text-foreground text-sm", children: [
+                  minPrice.toLocaleString(),
+                  " ",
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-xs font-normal", children: "SLSh" })
+                ] })
+              ]
+            }
+          )
+        ] }),
+        available && /* @__PURE__ */ jsxRuntimeExports.jsx(
+          Button,
+          {
+            type: "button",
+            className: "w-full",
+            size: "sm",
+            onClick: onOrder,
+            "data-ocid": `availability.order_btn.${index2}`,
+            children: t("availability_orderNow")
+          }
+        )
+      ]
+    }
+  );
+}
+function EmptyState({ zone }) {
+  const { t } = useLang();
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(
+    "div",
+    {
+      className: "flex flex-col items-center justify-center gap-3 py-16 text-center",
+      "data-ocid": "availability.empty_state",
+      children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-16 h-16 rounded-full bg-muted flex items-center justify-center text-3xl", children: "🚛" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-semibold text-foreground", children: t("availability_noTrucks") }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground", children: zone })
+      ]
+    }
+  );
+}
+function GpsBanner({
+  gpsState,
+  onRequest
+}) {
+  if (gpsState === "granted") return null;
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(
+    "div",
+    {
+      className: "bg-secondary/10 border border-secondary/30 rounded-lg px-4 py-3 flex items-center justify-between gap-3",
+      "data-ocid": "availability.gps_banner",
+      children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-medium text-foreground", children: gpsState === "denied" ? "Location access denied" : "Enable location for distance info" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-muted-foreground", children: gpsState === "denied" ? "Showing all zones without distance." : "We'll show how far each truck is from you." })
+        ] }),
+        gpsState !== "denied" && /* @__PURE__ */ jsxRuntimeExports.jsx(
+          Button,
+          {
+            type: "button",
+            size: "sm",
+            variant: "outline",
+            onClick: onRequest,
+            disabled: gpsState === "requesting",
+            "data-ocid": "availability.gps_request_btn",
+            children: gpsState === "requesting" ? "Locating…" : "Allow"
+          }
+        )
+      ]
+    }
+  );
+}
+function AvailabilityPage() {
+  const { t } = useLang();
+  const navigate = useNavigate();
+  const { data: zones = [], isLoading: zonesLoading } = useZones();
+  const [gpsState, setGpsState] = reactExports.useState("idle");
+  const [userPos, setUserPos] = reactExports.useState(
+    null
+  );
+  const [activeZone, setActiveZone] = reactExports.useState("all");
+  const [countdown, setCountdown] = reactExports.useState(30);
+  const [lastRefresh, setLastRefresh] = reactExports.useState(/* @__PURE__ */ new Date());
+  const timerRef = reactExports.useRef(null);
+  const requestGps = reactExports.useCallback(() => {
+    if (!navigator.geolocation) {
+      setGpsState("denied");
+      return;
+    }
+    setGpsState("requesting");
+    navigator.geolocation.getCurrentPosition(
+      (pos) => {
+        setUserPos({ lat: pos.coords.latitude, lng: pos.coords.longitude });
+        setGpsState("granted");
+      },
+      () => setGpsState("denied"),
+      { timeout: 8e3 }
+    );
+  }, []);
+  reactExports.useEffect(() => {
+    requestGps();
+  }, [requestGps]);
+  reactExports.useEffect(() => {
+    if (timerRef.current) clearInterval(timerRef.current);
+    timerRef.current = setInterval(() => {
+      setCountdown((c2) => {
+        if (c2 <= 1) {
+          setLastRefresh(/* @__PURE__ */ new Date());
+          return 30;
+        }
+        return c2 - 1;
+      });
+    }, 1e3);
+    return () => {
+      if (timerRef.current) clearInterval(timerRef.current);
+    };
+  }, []);
+  reactExports.useEffect(() => {
+    if (userPos && activeZone === "all" && zones.length > 0) {
+      let nearest = "";
+      let minDist = Number.POSITIVE_INFINITY;
+      for (const z2 of zones) {
+        const center = ZONE_CENTERS[z2.name];
+        if (!center) continue;
+        const d2 = haversine(userPos.lat, userPos.lng, center.lat, center.lng);
+        if (d2 < minDist) {
+          minDist = d2;
+          nearest = z2.name;
+        }
+      }
+      if (nearest) setActiveZone(nearest);
+    }
+  }, [userPos, zones, activeZone]);
+  const distanceForZone = reactExports.useCallback(
+    (zoneName) => {
+      if (!userPos) return null;
+      const center = ZONE_CENTERS[zoneName];
+      if (!center) return null;
+      return haversine(userPos.lat, userPos.lng, center.lat, center.lng);
+    },
+    [userPos]
+  );
+  const filteredDrivers = MOCK_DRIVERS.filter(
+    (d2) => activeZone === "all" || d2.zone === activeZone
+  );
+  const handleManualRefresh = () => {
+    setLastRefresh(/* @__PURE__ */ new Date());
+    setCountdown(30);
+  };
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(
+    "div",
+    {
+      className: "min-h-screen bg-background flex flex-col",
+      "data-ocid": "availability.page",
+      children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("header", { className: "bg-card border-b border-border sticky top-0 z-10", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-lg mx-auto px-4 py-3 flex items-center justify-between", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-primary text-xl", children: "💧" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "font-display font-bold text-foreground text-lg", children: t("app_name") })
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(LangToggle$1, {})
+        ] }) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "bg-primary/5 border-b border-border", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-lg mx-auto px-4 py-4", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "font-display font-bold text-foreground text-xl", children: t("availability_title") }),
+          gpsState === "granted" && userPos && /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-sm text-muted-foreground mt-1", children: [
+            "📍 ",
+            activeZone !== "all" ? activeZone : "Detecting zone…"
+          ] })
+        ] }) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-lg mx-auto w-full px-4 py-4 flex flex-col gap-4 flex-1", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(GpsBanner, { gpsState, onRequest: requestGps }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs(
+            "div",
+            {
+              className: "flex gap-2 overflow-x-auto pb-1 -mx-1 px-1",
+              "data-ocid": "availability.zone_filter",
+              style: { scrollbarWidth: "none" },
+              children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  "button",
+                  {
+                    type: "button",
+                    onClick: () => setActiveZone("all"),
+                    className: `flex-shrink-0 px-3 py-1.5 rounded-full text-xs font-medium transition-colors ${activeZone === "all" ? "bg-primary text-primary-foreground" : "bg-muted text-muted-foreground hover:bg-muted/70"}`,
+                    "data-ocid": "availability.zone_all_tab",
+                    children: "All"
+                  }
+                ),
+                zonesLoading ? ["a", "b", "c", "d"].map((id) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  Skeleton,
+                  {
+                    className: "h-7 w-24 rounded-full flex-shrink-0"
+                  },
+                  `skeleton-zone-${id}`
+                )) : zones.map((z2) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  "button",
+                  {
+                    type: "button",
+                    onClick: () => setActiveZone(z2.name),
+                    className: `flex-shrink-0 px-3 py-1.5 rounded-full text-xs font-medium transition-colors ${activeZone === z2.name ? "bg-primary text-primary-foreground" : "bg-muted text-muted-foreground hover:bg-muted/70"}`,
+                    "data-ocid": `availability.zone_tab.${Number(z2.display_order)}`,
+                    children: z2.name
+                  },
+                  z2.id.toString()
+                ))
+              ]
+            }
+          ),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-between", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-xs text-muted-foreground", children: [
+              "Refreshes in ",
+              countdown,
+              "s"
+            ] }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs(
+              Button,
+              {
+                type: "button",
+                variant: "ghost",
+                size: "sm",
+                onClick: handleManualRefresh,
+                className: "h-7 text-xs",
+                "data-ocid": "availability.refresh_btn",
+                children: [
+                  t("btn_refresh"),
+                  " ↺"
+                ]
+              }
+            )
+          ] }),
+          filteredDrivers.length === 0 ? /* @__PURE__ */ jsxRuntimeExports.jsx(EmptyState, { zone: activeZone === "all" ? "any zone" : activeZone }) : /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex flex-col gap-3", children: filteredDrivers.map((driver, i) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+            DriverCard,
+            {
+              name: driver.name,
+              zone: driver.zone,
+              available: driver.available,
+              minPrice: driver.minPrice,
+              distanceKm: distanceForZone(driver.zone),
+              index: i + 1,
+              onOrder: () => void navigate({ to: "/customer" })
+            },
+            `${driver.zone}-${driver.name}`
+          )) })
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("footer", { className: "bg-card border-t border-border mt-auto", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-lg mx-auto px-4 py-4 flex flex-col gap-2", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex gap-4 justify-center", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "button",
+              {
+                type: "button",
+                onClick: () => void navigate({ to: "/customer" }),
+                className: "text-sm text-primary font-medium hover:underline",
+                "data-ocid": "availability.order_water_link",
+                children: "Order Water"
+              }
+            ),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "button",
+              {
+                type: "button",
+                onClick: () => void navigate({ to: "/driver" }),
+                className: "text-sm text-muted-foreground hover:text-foreground transition-colors",
+                "data-ocid": "availability.driver_link",
+                children: "Driver Login"
+              }
+            )
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-center text-xs text-muted-foreground", children: [
+            "© ",
+            (/* @__PURE__ */ new Date()).getFullYear(),
+            ".",
+            " ",
+            /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "a",
+              {
+                href: `https://caffeine.ai?utm_source=caffeine-footer&utm_medium=referral&utm_content=${encodeURIComponent(window.location.hostname)}`,
+                target: "_blank",
+                rel: "noreferrer",
+                className: "hover:underline",
+                children: "Built with love using caffeine.ai"
+              }
+            )
+          ] })
+        ] }) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "hidden", "aria-hidden": true, children: lastRefresh.toISOString() })
+      ]
+    }
+  );
+}
+function LoadingSpinner({ label, size = "md" }) {
+  const dim = size === "sm" ? "w-4 h-4" : "w-6 h-6";
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "inline-flex items-center gap-2 text-muted-foreground", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs(
+      "svg",
+      {
+        className: `${dim} animate-spin`,
+        xmlns: "http://www.w3.org/2000/svg",
+        fill: "none",
+        viewBox: "0 0 24 24",
+        "aria-hidden": "true",
+        children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "circle",
+            {
+              className: "opacity-25",
+              cx: "12",
+              cy: "12",
+              r: "10",
+              stroke: "currentColor",
+              strokeWidth: "4"
+            }
+          ),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "path",
+            {
+              className: "opacity-75",
+              fill: "currentColor",
+              d: "M4 12a8 8 0 018-8v8H4z"
+            }
+          )
+        ]
+      }
+    ),
+    label && /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-sm", children: label })
+  ] });
+}
+const STATUS_CLASSES = {
+  // OrderStatus
+  [OrderStatus.pending]: "bg-muted text-muted-foreground",
+  [OrderStatus.matched]: "bg-primary/10 text-primary border border-primary/30",
+  [OrderStatus.accepted]: "bg-primary/10 text-primary border border-primary/30",
+  [OrderStatus.en_route]: "bg-secondary/20 text-secondary-foreground border border-secondary/40",
+  [OrderStatus.pumping]: "bg-accent/20 text-accent-foreground border border-accent/40",
+  [OrderStatus.completed]: "bg-chart-5/20 text-foreground border border-chart-5/40",
+  [OrderStatus.expired]: "bg-muted text-muted-foreground line-through",
+  [OrderStatus.cancelled]: "bg-destructive/10 text-destructive border border-destructive/30",
+  [OrderStatus.exception]: "bg-destructive/10 text-destructive border border-destructive/30",
+  [OrderStatus.fully_completed]: "bg-muted text-muted-foreground border border-border",
+  // DriverStatus
+  [DriverStatus.online]: "bg-primary/10 text-primary border border-primary/30",
+  [DriverStatus.offline]: "bg-muted text-muted-foreground"
+};
+const STATUS_KEY_MAP = {
+  // OrderStatus
+  [OrderStatus.pending]: "status_pending",
+  [OrderStatus.matched]: "status_matched",
+  [OrderStatus.accepted]: "status_accepted",
+  [OrderStatus.en_route]: "status_en_route",
+  [OrderStatus.pumping]: "status_pumping",
+  [OrderStatus.completed]: "status_completed",
+  [OrderStatus.expired]: "status_expired",
+  [OrderStatus.cancelled]: "status_cancelled",
+  [OrderStatus.exception]: "status_exception",
+  [OrderStatus.fully_completed]: "status_fully_completed",
+  // DriverStatus
+  [DriverStatus.online]: "status_online",
+  [DriverStatus.offline]: "status_offline"
+};
+function StatusBadge({ status }) {
+  const { t } = useLang();
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(
+    "span",
+    {
+      className: `inline-flex items-center px-2 py-0.5 rounded text-xs font-mono font-medium ${STATUS_CLASSES[status]}`,
+      children: t(STATUS_KEY_MAP[status])
+    }
+  );
+}
+function StepIndicator$1({ current, total }) {
+  const { t } = useLang();
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(
+    "div",
+    {
+      className: "flex items-center gap-3 mb-4",
+      "aria-label": t("step_of", { current, total }),
+      children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-xs font-mono text-muted-foreground shrink-0", children: t("step_of", { current, total }) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex-1 h-1 bg-muted rounded-full overflow-hidden", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "div",
+          {
+            className: "h-full bg-primary transition-all duration-300 rounded-full",
+            style: { width: `${current / total * 100}%` }
+          }
+        ) })
+      ]
+    }
+  );
+}
+const ORDER_KEY = "biyo_order_id";
+const PHONE_KEY = "biyo_order_phone";
+function useLocalOrder() {
+  const [localOrder, setLocalOrder] = reactExports.useState(() => {
+    try {
+      const id = localStorage.getItem(ORDER_KEY);
+      const phone = localStorage.getItem(PHONE_KEY);
+      if (id && phone) return { orderId: BigInt(id), phone };
+    } catch {
+    }
+    return null;
+  });
+  const saveOrder = reactExports.useCallback((orderId, phone) => {
+    localStorage.setItem(ORDER_KEY, orderId.toString());
+    localStorage.setItem(PHONE_KEY, phone);
+    setLocalOrder({ orderId, phone });
+  }, []);
+  const clearOrder = reactExports.useCallback(() => {
+    localStorage.removeItem(ORDER_KEY);
+    localStorage.removeItem(PHONE_KEY);
+    setLocalOrder(null);
+  }, []);
+  return { localOrder, saveOrder, clearOrder };
+}
+function usePolling(fn, { intervalMs = 5e3, active }) {
+  const fnRef = reactExports.useRef(fn);
+  reactExports.useEffect(() => {
+    fnRef.current = fn;
+  });
+  reactExports.useEffect(() => {
+    if (!active) return;
+    const id = setInterval(() => {
+      void fnRef.current();
+    }, intervalMs);
+    return () => clearInterval(id);
+  }, [active, intervalMs]);
+  const runNow = reactExports.useCallback(() => {
+    void fnRef.current();
+  }, []);
+  reactExports.useEffect(() => {
+    if (active) runNow();
+  }, [active, runNow]);
+}
+const ZONE_LAST_KEY = "biyo_last_zone";
+const TOTAL_STEPS$1 = 7;
+[
+  { value: TankSize.small, labelKey: "size_small" },
+  { value: TankSize.medium, labelKey: "size_medium" },
+  { value: TankSize.large, labelKey: "size_large" }
+];
+const MATCHED_OR_BEYOND = [
+  OrderStatus.matched,
+  OrderStatus.accepted,
+  OrderStatus.en_route,
+  OrderStatus.pumping,
+  OrderStatus.completed
+];
+function fmtElapsed(seconds) {
+  const m2 = Math.floor(seconds / 60);
+  const s2 = seconds % 60;
+  return `${String(m2).padStart(2, "0")}:${String(s2).padStart(2, "0")}`;
+}
+const inputCls = "w-full bg-background border border-input rounded-lg px-4 py-3 text-foreground text-lg font-mono focus:outline-none focus:ring-2 focus:ring-ring";
+function StepCard({ children }) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "bg-card border border-border rounded-xl p-5 space-y-4 shadow-sm", children });
+}
+function BackBtn({ onClick, label }) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(
+    "button",
+    {
+      type: "button",
+      "data-ocid": "customer.back_button",
+      onClick,
+      className: "text-sm text-muted-foreground hover:text-foreground transition-colors",
+      children: label
+    }
+  );
+}
+function PrimaryBtn({
+  onClick,
+  disabled,
+  children,
+  dataOcid
+}) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(
+    "button",
+    {
+      type: "button",
+      "data-ocid": dataOcid ?? "customer.primary_button",
+      disabled,
+      onClick,
+      className: "w-full bg-primary text-primary-foreground font-bold py-4 rounded-xl text-base transition-smooth active:scale-95 disabled:opacity-50",
+      children
+    }
+  );
+}
+function CustomerPage() {
+  const { t } = useLang();
+  const { actor } = useActor(createActor);
+  const navigate = useNavigate();
+  const rcSession = reactExports.useMemo(() => {
+    try {
+      return JSON.parse(localStorage.getItem("rc_session") || "");
+    } catch {
+      return null;
+    }
+  }, []);
+  reactExports.useEffect(() => {
+    if (!rcSession) {
+      void navigate({ to: "/auth" });
+    }
+  }, [rcSession, navigate]);
+  const [step, setStep] = reactExports.useState(1);
+  reactExports.useEffect(() => {
+    if (step === 3) {
+      setPhone((rcSession == null ? void 0 : rcSession.phone) ?? "");
+    }
+  }, [step, rcSession]);
+  const zonesQuery = useZones();
+  const zones = zonesQuery.data ?? [];
+  const [zoneError, setZoneError] = reactExports.useState("");
+  const [selectedZone, setSelectedZone] = reactExports.useState(null);
+  const [sizeError, setSizeError] = reactExports.useState("");
+  const [selectedSize, setSelectedSize] = reactExports.useState(null);
+  const [phone, setPhone] = reactExports.useState("");
+  const [phoneError, setPhoneError] = reactExports.useState("");
+  const [note, setNote] = reactExports.useState("");
+  const NOTE_MAX = 120;
+  const idempotencyKey = reactExports.useRef(crypto.randomUUID());
+  const [payState, setPayState] = reactExports.useState(
+    "idle"
+  );
+  const [payError, setPayError] = reactExports.useState("");
+  const createOrder = useCreateOrder();
+  const processPayment = useProcessPayment();
+  const { localOrder, saveOrder, clearOrder } = useLocalOrder();
+  const [trackedOrder, setTrackedOrder] = reactExports.useState(null);
+  const [pollingActive, setPollingActive] = reactExports.useState(false);
+  const [elapsedSecs, setElapsedSecs] = reactExports.useState(0);
+  const elapsedRef = reactExports.useRef(null);
+  const [lookupOpen, setLookupOpen] = reactExports.useState(false);
+  const [lookupOrderId, setLookupOrderId] = reactExports.useState("");
+  const [lookupLast4, setLookupLast4] = reactExports.useState("");
+  const [lookupResult, setLookupResult] = reactExports.useState(null);
+  reactExports.useEffect(() => {
+    if (localOrder) {
+      setStep(6);
+      setPollingActive(true);
+    }
+  }, [localOrder]);
+  reactExports.useEffect(() => {
+    const lastId = localStorage.getItem(ZONE_LAST_KEY);
+    if (lastId && zones.length > 0) {
+      const found = zones.find((z2) => String(z2.id) === lastId);
+      if (found) setSelectedZone(found);
+    }
+  }, [zones]);
+  reactExports.useEffect(() => {
+    if (step === 7) {
+      elapsedRef.current = setInterval(
+        () => setElapsedSecs((s2) => s2 + 1),
+        1e3
+      );
+    } else {
+      if (elapsedRef.current) clearInterval(elapsedRef.current);
+      setElapsedSecs(0);
+    }
+    return () => {
+      if (elapsedRef.current) clearInterval(elapsedRef.current);
+    };
+  }, [step]);
+  const activeOrderId = (localOrder == null ? void 0 : localOrder.orderId) ?? null;
+  const activeLast4 = (localOrder == null ? void 0 : localOrder.phone.slice(-4)) ?? "";
+  usePolling(
+    async () => {
+      if (!actor || !activeOrderId) return;
+      const order = await actor.getOrder(activeOrderId, activeLast4);
+      if (!order) return;
+      setTrackedOrder(order);
+      if (MATCHED_OR_BEYOND.includes(order.status) && step === 6) {
+        setStep(7);
+      }
+    },
+    { active: pollingActive && !!actor && !!activeOrderId }
+  );
+  reactExports.useEffect(() => {
+    if (!trackedOrder) return;
+    const terminal = [
+      OrderStatus.completed,
+      OrderStatus.expired,
+      OrderStatus.cancelled
+    ];
+    if (terminal.includes(trackedOrder.status)) {
+      setPollingActive(false);
+    }
+  }, [trackedOrder]);
+  function handlePhoneSubmit() {
+    if (phone.trim().length < 6) {
+      setPhoneError(t("phone_invalid"));
+      return;
+    }
+    setPhoneError("");
+    setStep(4);
+  }
+  function handleNoteSubmit(skip) {
+    if (!skip && note.length > NOTE_MAX) return;
+    setStep(5);
+  }
+  async function handlePay() {
+    if (!actor || !selectedZone || !selectedSize) return;
+    setPayState("processing");
+    setPayError("");
+    try {
+      const createRes = await createOrder.mutateAsync({
+        zone_id: selectedZone.id,
+        size: selectedSize,
+        customer_phone: phone.trim(),
+        address_note: note.trim(),
+        idempotency_key: idempotencyKey.current,
+        customer_id: rcSession ? BigInt(rcSession.customerId) : null
+      });
+      const orderId = createRes.order_id;
+      const payRes = await processPayment.mutateAsync({
+        order_id: orderId,
+        idempotency_key: idempotencyKey.current
+      });
+      if (payRes.status === "failed" || payRes.status === "failed") {
+        setPayState("failed");
+        setPayError(t("payment_failed"));
+        return;
+      }
+      saveOrder(orderId, phone.trim());
+      setPayState("idle");
+      setStep(6);
+      setPollingActive(true);
+    } catch {
+      setPayState("failed");
+      setPayError(t("payment_failed"));
+    }
+  }
+  async function handleLookup() {
+    if (!actor || !lookupOrderId.trim() || lookupLast4.length < 4) return;
+    setLookupResult("loading");
+    try {
+      const order = await actor.getOrder(
+        BigInt(lookupOrderId.trim()),
+        lookupLast4.trim()
+      );
+      setLookupResult(order ?? "not_found");
+    } catch {
+      setLookupResult("not_found");
+    }
+  }
+  const sizeLabelFor = (size) => {
+    if (size === TankSize.small) return t("size_small");
+    if (size === TankSize.medium) return t("size_medium");
+    return t("size_large");
+  };
+  function renderStep1() {
+    return /* @__PURE__ */ jsxRuntimeExports.jsxs(StepCard, { children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "font-display font-bold text-xl text-foreground", children: t("zone_title") }),
+      zonesQuery.isLoading && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "py-4 flex justify-center", children: /* @__PURE__ */ jsxRuntimeExports.jsx(LoadingSpinner, { label: t("zone_loading") }) }),
+      zonesQuery.isError && /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-destructive", children: t("zone_error") }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid grid-cols-2 gap-3", children: zones.map((zone) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+        "button",
+        {
+          type: "button",
+          "data-ocid": `customer.zone_button.${zone.name.toLowerCase().replace(/\s+/g, "_")}`,
+          onClick: () => {
+            setSelectedZone(zone);
+            localStorage.setItem(ZONE_LAST_KEY, String(zone.id));
+            setZoneError("");
+            setStep(2);
+          },
+          className: `p-3 rounded-xl border-2 text-left font-medium transition-all ${(selectedZone == null ? void 0 : selectedZone.id) === zone.id ? "border-primary bg-primary/10 text-primary" : "border-border hover:border-primary/50"}`,
+          children: zone.name
+        },
+        String(zone.id)
+      )) }),
+      selectedZone && /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-muted-foreground", children: t("zone_remembered", { name: selectedZone.name }) }),
+      zoneError && /* @__PURE__ */ jsxRuntimeExports.jsx(
+        "p",
+        {
+          "data-ocid": "customer.zone_error",
+          className: "text-sm text-destructive",
+          children: zoneError
+        }
+      )
+    ] });
+  }
+  function renderStep2() {
+    const sizeCards = [
+      {
+        value: TankSize.small,
+        label: t("size_small"),
+        liters: "1,000L",
+        icon: "🪣"
+      },
+      {
+        value: TankSize.medium,
+        label: t("size_medium"),
+        liters: "2,000L",
+        icon: "🛢️"
+      },
+      {
+        value: TankSize.large,
+        label: t("size_large"),
+        liters: "5,000L",
+        icon: "🚛"
+      }
+    ];
+    return /* @__PURE__ */ jsxRuntimeExports.jsxs(StepCard, { children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "font-display font-bold text-xl text-foreground", children: t("size_title") }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "space-y-3", children: sizeCards.map((size) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+        "button",
+        {
+          type: "button",
+          "data-ocid": `customer.size_button.${size.value}`,
+          onClick: () => {
+            setSelectedSize(size.value);
+            setSizeError("");
+            setStep(3);
+          },
+          className: `w-full p-4 rounded-xl border-2 text-left flex items-center gap-4 transition-all ${selectedSize === size.value ? "border-primary bg-primary/10" : "border-border hover:border-primary/50"}`,
+          children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-3xl", children: size.icon }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-semibold text-foreground", children: size.label }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground", children: size.liters })
+            ] })
+          ]
+        },
+        size.value
+      )) }),
+      sizeError && /* @__PURE__ */ jsxRuntimeExports.jsx(
+        "p",
+        {
+          "data-ocid": "customer.size_error",
+          className: "text-sm text-destructive",
+          children: sizeError
+        }
+      ),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(BackBtn, { onClick: () => setStep(1), label: t("btn_back") })
+    ] });
+  }
+  function renderStep3() {
+    return /* @__PURE__ */ jsxRuntimeExports.jsxs(StepCard, { children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "font-display font-bold text-xl text-foreground", children: t("phone_title") }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(
+        "label",
+        {
+          className: "text-sm font-medium text-foreground",
+          htmlFor: "phone-input",
+          children: t("phone_label")
+        }
+      ),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(
+        "input",
+        {
+          id: "phone-input",
+          "data-ocid": "customer.phone_input",
+          type: "tel",
+          className: inputCls,
+          placeholder: t("phone_placeholder"),
+          value: phone,
+          onChange: (e) => {
+            setPhone(e.target.value);
+            setPhoneError("");
+          },
+          onKeyDown: (e) => e.key === "Enter" && handlePhoneSubmit()
+        }
+      ),
+      phoneError && /* @__PURE__ */ jsxRuntimeExports.jsx(
+        "p",
+        {
+          "data-ocid": "customer.phone_error",
+          className: "text-sm text-destructive",
+          children: phoneError
+        }
+      ),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-muted-foreground mt-1", children: "Changes apply to this order only. We strongly encourage using your registration number (the number you signed up with)." }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(
+        PrimaryBtn,
+        {
+          dataOcid: "customer.phone_next_button",
+          onClick: handlePhoneSubmit,
+          children: t("btn_next")
+        }
+      ),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(BackBtn, { onClick: () => setStep(2), label: t("btn_back") })
+    ] });
+  }
+  function renderStep4() {
+    return /* @__PURE__ */ jsxRuntimeExports.jsxs(StepCard, { children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "font-display font-bold text-xl text-foreground", children: t("note_title") }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(
+        "label",
+        {
+          className: "text-sm font-medium text-foreground",
+          htmlFor: "note-input",
+          children: t("note_label")
+        }
+      ),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(
+        "textarea",
+        {
+          id: "note-input",
+          "data-ocid": "customer.note_input",
+          className: "w-full bg-background border border-input rounded-lg px-4 py-3 text-foreground text-base resize-none focus:outline-none focus:ring-2 focus:ring-ring",
+          rows: 3,
+          maxLength: NOTE_MAX,
+          placeholder: t("note_placeholder"),
+          value: note,
+          onChange: (e) => setNote(e.target.value)
+        }
+      ),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-muted-foreground text-right", children: t("note_hint", { remaining: NOTE_MAX - note.length }) }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex gap-3", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "button",
+          {
+            type: "button",
+            "data-ocid": "customer.note_skip_button",
+            onClick: () => handleNoteSubmit(true),
+            className: "flex-1 bg-muted text-foreground font-semibold py-3 rounded-xl text-sm",
+            children: t("note_skip")
+          }
+        ),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(
+          PrimaryBtn,
+          {
+            dataOcid: "customer.note_next_button",
+            onClick: () => handleNoteSubmit(false),
+            children: t("note_next")
+          }
+        )
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(BackBtn, { onClick: () => setStep(3), label: t("btn_back") })
+    ] });
+  }
+  function renderStep5() {
+    return /* @__PURE__ */ jsxRuntimeExports.jsxs(StepCard, { children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "font-display font-bold text-xl text-foreground", children: t("payment_title") }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs(
+        "div",
+        {
+          "data-ocid": "customer.payment_summary",
+          className: "bg-background border border-border rounded-lg p-4 space-y-2 text-sm",
+          children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex justify-between", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-muted-foreground", children: t("payment_summary_zone") }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-semibold text-foreground", children: selectedZone == null ? void 0 : selectedZone.name })
+            ] }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex justify-between", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-muted-foreground", children: t("payment_summary_size") }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-semibold text-foreground", children: selectedSize ? sizeLabelFor(selectedSize) : "" })
+            ] }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex justify-between", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-muted-foreground", children: t("payment_summary_phone") }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-semibold text-foreground", children: phone })
+            ] })
+          ]
+        }
+      ),
+      payError && /* @__PURE__ */ jsxRuntimeExports.jsx(
+        "p",
+        {
+          "data-ocid": "customer.payment_error",
+          className: "text-sm text-destructive",
+          children: payError
+        }
+      ),
+      payState === "processing" ? /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex justify-center py-2", children: /* @__PURE__ */ jsxRuntimeExports.jsx(LoadingSpinner, { label: t("payment_processing") }) }) : payState === "failed" ? /* @__PURE__ */ jsxRuntimeExports.jsx(
+        PrimaryBtn,
+        {
+          dataOcid: "customer.payment_retry_button",
+          onClick: handlePay,
+          children: t("payment_retry")
+        }
+      ) : /* @__PURE__ */ jsxRuntimeExports.jsx(
+        PrimaryBtn,
+        {
+          dataOcid: "customer.payment_confirm_button",
+          onClick: handlePay,
+          disabled: !actor,
+          children: t("payment_confirm_btn")
+        }
+      ),
+      payState === "idle" && /* @__PURE__ */ jsxRuntimeExports.jsx(BackBtn, { onClick: () => setStep(4), label: t("btn_back") })
+    ] });
+  }
+  function renderStep6() {
+    const isExpired = (trackedOrder == null ? void 0 : trackedOrder.status) === OrderStatus.expired;
+    const isException = (trackedOrder == null ? void 0 : trackedOrder.status) === OrderStatus.exception;
+    return /* @__PURE__ */ jsxRuntimeExports.jsxs(StepCard, { children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "font-display font-bold text-xl text-foreground", children: t("matching_title") }),
+      isExpired ? /* @__PURE__ */ jsxRuntimeExports.jsxs(
+        "div",
+        {
+          "data-ocid": "customer.finding_expired",
+          className: "text-center space-y-3 py-4",
+          children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-4xl", children: "⏱" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-destructive text-sm font-medium", children: t("matching_expired") }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "button",
+              {
+                type: "button",
+                "data-ocid": "customer.start_over_button",
+                onClick: () => {
+                  clearOrder();
+                  setStep(1);
+                  setTrackedOrder(null);
+                },
+                className: "text-sm text-primary underline",
+                children: t("btn_back")
+              }
+            )
+          ]
+        }
+      ) : isException ? /* @__PURE__ */ jsxRuntimeExports.jsx("div", { "data-ocid": "customer.finding_exception", className: "space-y-2", children: /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-destructive text-sm", children: t("matching_exception") }) }) : /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "text-center space-y-4 py-4", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(LoadingSpinner, { size: "md" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-base font-medium text-foreground", children: t("matching_searching") }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-muted-foreground font-mono", children: localOrder ? t("tracking_order_id", { id: String(localOrder.orderId) }) : "" })
+      ] })
+    ] });
+  }
+  function renderStep7() {
+    const order = trackedOrder;
+    if (!order) {
+      return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex justify-center py-8", children: /* @__PURE__ */ jsxRuntimeExports.jsx(LoadingSpinner, { label: t("loading") }) });
+    }
+    const isCompleted = order.status === OrderStatus.completed;
+    const isException = order.status === OrderStatus.exception;
+    const phone4 = (localOrder == null ? void 0 : localOrder.phone.slice(-4)) ?? "";
+    const timelineSteps = [
+      { status: OrderStatus.matched, label: t("status_matched") },
+      { status: OrderStatus.accepted, label: t("status_accepted") },
+      { status: OrderStatus.en_route, label: t("status_en_route") },
+      { status: OrderStatus.pumping, label: t("status_pumping") },
+      { status: OrderStatus.completed, label: t("status_completed") }
+    ];
+    const statusOrder = [
+      OrderStatus.matched,
+      OrderStatus.accepted,
+      OrderStatus.en_route,
+      OrderStatus.pumping,
+      OrderStatus.completed
+    ];
+    const currentIdx = statusOrder.indexOf(order.status);
+    return /* @__PURE__ */ jsxRuntimeExports.jsxs(StepCard, { children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex items-center justify-between mb-1", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
+        Link,
+        {
+          "data-ocid": "customer.availability_link",
+          to: "/availability",
+          className: "text-xs text-primary hover:underline transition-colors flex items-center gap-1",
+          children: [
+            "🚛 ",
+            t("availability_title")
+          ]
+        }
+      ) }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-between", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "font-display font-bold text-xl text-foreground", children: t("tracking_title") }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(StatusBadge, { status: order.status })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs font-mono text-muted-foreground", children: t("tracking_order_id", { id: String(order.id) }) }),
+      isCompleted && !order.customer_confirmed && /* @__PURE__ */ jsxRuntimeExports.jsxs(
+        "div",
+        {
+          "data-ocid": "customer.tracking_complete",
+          className: "bg-primary/10 border border-primary/30 rounded-lg p-4 space-y-3",
+          children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "text-center", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-2xl mb-1", children: "🚛" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-semibold text-primary text-sm", children: "The driver has confirmed delivery. Have you received your water?" })
+            ] }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(
+              Link,
+              {
+                "data-ocid": "customer.confirm_receipt_button",
+                to: "/confirm",
+                search: {
+                  orderId: String(order.id),
+                  role: "customer",
+                  phone: phone4
+                },
+                className: "block w-full text-center bg-primary text-primary-foreground font-bold py-3 rounded-xl text-sm transition-smooth active:scale-95",
+                children: t("confirm_customerBtn")
+              }
+            )
+          ]
+        }
+      ),
+      isCompleted && order.customer_confirmed && /* @__PURE__ */ jsxRuntimeExports.jsxs(
+        "div",
+        {
+          "data-ocid": "customer.tracking_complete",
+          className: "bg-primary/10 border border-primary/30 rounded-lg p-4 text-center",
+          children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-2xl mb-1", children: "✅" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-semibold text-primary", children: t("tracking_completed") })
+          ]
+        }
+      ),
+      isException && /* @__PURE__ */ jsxRuntimeExports.jsx(
+        "div",
+        {
+          "data-ocid": "customer.tracking_exception",
+          className: "bg-destructive/10 border border-destructive/30 rounded-lg p-3",
+          children: /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-destructive", children: t("tracking_exception") })
+        }
+      ),
+      !isCompleted && !isException && /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground", children: t("tracking_elapsed", { time: fmtElapsed(elapsedSecs) }) }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "space-y-2 pt-1", children: timelineSteps.map((ts, i) => {
+        const done = i <= currentIdx;
+        return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-3", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "div",
+            {
+              className: `w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold shrink-0 ${done ? "bg-primary text-primary-foreground" : "bg-muted text-muted-foreground border border-border"}`,
+              children: done ? "✓" : i + 1
+            }
+          ),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "span",
+            {
+              className: `text-sm ${done ? "text-foreground font-medium" : "text-muted-foreground"}`,
+              children: ts.label
+            }
+          )
+        ] }, ts.status);
+      }) }),
+      order.driver_id && /* @__PURE__ */ jsxRuntimeExports.jsxs(
+        "div",
+        {
+          "data-ocid": "customer.driver_info",
+          className: "bg-background border border-border rounded-lg p-3 text-sm space-y-1",
+          children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-semibold text-foreground text-xs uppercase tracking-wide text-muted-foreground", children: t("tracking_driver_info") }),
+            order.help_flagged && /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-destructive", children: t("tracking_help_flagged") })
+          ]
+        }
+      ),
+      isCompleted && /* @__PURE__ */ jsxRuntimeExports.jsx(
+        "button",
+        {
+          type: "button",
+          "data-ocid": "customer.new_order_button",
+          onClick: () => {
+            clearOrder();
+            setStep(1);
+            setTrackedOrder(null);
+            setPollingActive(false);
+          },
+          className: "w-full bg-muted text-foreground font-semibold py-3 rounded-xl text-sm",
+          children: t("btn_continue")
+        }
+      )
+    ] });
+  }
+  function renderLookup() {
+    return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-card border border-border rounded-xl overflow-hidden", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs(
+        "button",
+        {
+          type: "button",
+          "data-ocid": "customer.lookup_toggle",
+          className: "w-full flex items-center justify-between px-5 py-4 text-left",
+          onClick: () => setLookupOpen((o2) => !o2),
+          children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-medium text-foreground text-sm", children: t("lookup_title") }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-muted-foreground text-xs", children: lookupOpen ? "▲" : "▼" })
+          ]
+        }
+      ),
+      lookupOpen && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "px-5 pb-5 space-y-3 border-t border-border", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-1 pt-3", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "label",
+            {
+              htmlFor: "lookup-order-id",
+              className: "text-xs font-medium text-foreground",
+              children: t("lookup_order_id_label")
+            }
+          ),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "input",
+            {
+              id: "lookup-order-id",
+              "data-ocid": "customer.lookup_order_id_input",
+              type: "number",
+              inputMode: "numeric",
+              className: "w-full bg-background border border-input rounded-lg px-3 py-2 text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-ring",
+              placeholder: t("lookup_order_id_placeholder"),
+              value: lookupOrderId,
+              onChange: (e) => setLookupOrderId(e.target.value)
+            }
+          )
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-1", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "label",
+            {
+              htmlFor: "lookup-phone4",
+              className: "text-xs font-medium text-foreground",
+              children: t("lookup_phone4_label")
+            }
+          ),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "input",
+            {
+              id: "lookup-phone4",
+              "data-ocid": "customer.lookup_phone4_input",
+              type: "number",
+              inputMode: "numeric",
+              maxLength: 4,
+              className: "w-full bg-background border border-input rounded-lg px-3 py-2 text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-ring",
+              placeholder: t("lookup_phone4_placeholder"),
+              value: lookupLast4,
+              onChange: (e) => setLookupLast4(e.target.value.slice(0, 4))
+            }
+          )
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "button",
+          {
+            type: "button",
+            "data-ocid": "customer.lookup_submit_button",
+            onClick: handleLookup,
+            disabled: !actor || lookupResult === "loading",
+            className: "w-full bg-primary text-primary-foreground font-semibold py-2 rounded-lg text-sm disabled:opacity-50",
+            children: lookupResult === "loading" ? t("lookup_loading") : t("lookup_btn")
+          }
+        ),
+        lookupResult === "not_found" && /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "p",
+          {
+            "data-ocid": "customer.lookup_not_found",
+            className: "text-sm text-destructive",
+            children: t("lookup_not_found")
+          }
+        ),
+        lookupResult !== null && lookupResult !== "not_found" && lookupResult !== "loading" && /* @__PURE__ */ jsxRuntimeExports.jsxs(
+          "div",
+          {
+            "data-ocid": "customer.lookup_result",
+            className: "bg-background border border-border rounded-lg p-3 text-sm space-y-1",
+            children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-between", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-muted-foreground", children: t("tracking_order_id", { id: String(lookupResult.id) }) }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx(StatusBadge, { status: lookupResult.status })
+              ] }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-muted-foreground", children: new Date(Number(lookupResult.created_at)).toLocaleString() })
+            ]
+          }
+        )
+      ] })
+    ] });
+  }
+  const currentStep = step;
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(Layout, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-[480px] mx-auto px-4 py-6 space-y-4", children: [
+    rcSession && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-between bg-card border border-border rounded-xl px-4 py-3", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "text-sm font-medium text-foreground", children: [
+        "👋 ",
+        t("auth_hello", { name: rcSession.name ?? "Guest" })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(
+        "button",
+        {
+          type: "button",
+          "data-ocid": "customer.logout_button",
+          onClick: () => {
+            localStorage.removeItem("rc_session");
+            void navigate({ to: "/auth" });
+          },
+          className: "text-xs text-muted-foreground hover:text-destructive transition-colors",
+          children: t("auth_logout")
+        }
+      )
+    ] }),
+    step <= 7 && /* @__PURE__ */ jsxRuntimeExports.jsx(StepIndicator$1, { current: currentStep, total: TOTAL_STEPS$1 }),
+    step === 1 && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex justify-end", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
+      Link,
+      {
+        to: "/availability",
+        "data-ocid": "customer.see_trucks_link",
+        className: "inline-flex items-center gap-1.5 text-xs font-medium text-primary bg-primary/8 border border-primary/20 px-3 py-1.5 rounded-full hover:bg-primary/15 transition-colors",
+        children: [
+          "🚛 ",
+          t("availability_title")
+        ]
+      }
+    ) }),
+    step === 1 && renderStep1(),
+    step === 2 && renderStep2(),
+    step === 3 && renderStep3(),
+    step === 4 && renderStep4(),
+    step === 5 && renderStep5(),
+    step === 6 && renderStep6(),
+    step === 7 && renderStep7(),
+    renderLookup()
+  ] }) });
+}
+function sizeLabel(size) {
+  if (size === "small") return "Small (1,000 L)";
+  if (size === "medium") return "Medium (2,000 L)";
+  if (size === "large") return "Large (5,000 L)";
+  return size;
+}
+function statusFlags(order) {
+  const o2 = order;
+  if (!o2)
+    return {
+      driverConfirmed: false,
+      customerConfirmed: false,
+      bothConfirmed: false
+    };
+  const both = String(o2.status) === "completed";
+  const dc = both || (o2.driver_confirmed ?? false);
+  const cc = both || (o2.customer_confirmed ?? false);
+  return { driverConfirmed: dc, customerConfirmed: cc, bothConfirmed: both };
+}
+function LangToggle() {
+  const { lang, setLang, t } = useLang();
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(
+    "button",
+    {
+      type: "button",
+      onClick: () => setLang(lang === "en" ? "so" : "en"),
+      className: "text-sm font-medium text-muted-foreground hover:text-foreground transition-colors",
+      "data-ocid": "confirm.lang_toggle",
+      children: t("lang_toggle")
+    }
+  );
+}
+function CelebrationState() {
+  const { t } = useLang();
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(
+    "div",
+    {
+      className: "flex flex-col items-center justify-center gap-4 py-12 text-center",
+      "data-ocid": "confirm.success_state",
+      children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-20 h-20 rounded-full bg-accent/20 flex items-center justify-center text-4xl animate-bounce", children: "✅" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "font-display font-bold text-foreground text-xl", children: t("confirm_bothConfirmed") }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground max-w-xs", children: "Both sides have confirmed. The delivery is complete!" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex gap-2 flex-wrap justify-center", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs(Badge, { className: "bg-accent/20 text-accent-foreground border-accent/30", children: [
+            "✓ ",
+            t("confirm_driverConfirmed")
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs(Badge, { className: "bg-primary/15 text-primary border-primary/30", children: [
+            "✓ ",
+            t("confirm_customerConfirmed")
+          ] })
+        ] })
+      ]
+    }
+  );
+}
+function OrderSummaryCard({ order }) {
+  const size = typeof order.size === "object" && order.size !== null ? Object.keys(order.size)[0] : String(order.size);
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-muted/30 rounded-xl border border-border p-4 flex flex-col gap-2", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-between", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-xs text-muted-foreground font-medium uppercase tracking-wide", children: "Order" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "font-mono text-sm text-foreground", children: [
+        "#",
+        order.id.toString()
+      ] })
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid grid-cols-2 gap-2 text-sm", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-muted-foreground", children: "Zone" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "font-medium text-foreground", children: [
+          "Zone ",
+          order.zone_id.toString()
+        ] })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-muted-foreground", children: "Size" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-medium text-foreground", children: sizeLabel(size) })
+      ] })
+    ] })
+  ] });
+}
+function DeliveryConfirmPage() {
+  const { t } = useLang();
+  const navigate = useNavigate();
+  const search = useSearch({ strict: false });
+  const orderIdRaw = search.orderId ?? "";
+  const role = search.role === "driver" || search.role === "customer" ? search.role : "customer";
+  const phone4 = search.phone ?? "0000";
+  const orderId = orderIdRaw ? BigInt(orderIdRaw) : null;
+  const { data: order, isLoading } = useGetOrder(orderId, phone4, !!orderId);
+  const [pollTick, setPollTick] = reactExports.useState(0);
+  const pollRef = reactExports.useRef(null);
+  reactExports.useEffect(() => {
+    pollRef.current = setInterval(() => setPollTick((n) => n + 1), 5e3);
+    return () => {
+      if (pollRef.current) clearInterval(pollRef.current);
+    };
+  }, []);
+  const confirmMutation = useConfirmDelivery();
+  const [localConfirmed, setLocalConfirmed] = reactExports.useState(false);
+  const { driverConfirmed, customerConfirmed, bothConfirmed } = statusFlags(
+    order ?? null
+  );
+  const iHaveConfirmed = role === "driver" && (driverConfirmed || localConfirmed) || role === "customer" && (customerConfirmed || localConfirmed);
+  const otherConfirmed = role === "driver" ? customerConfirmed : driverConfirmed;
+  const handleConfirm = () => {
+    if (!orderId || confirmMutation.isPending) return;
+    confirmMutation.mutate(
+      { orderId, role },
+      { onSuccess: () => setLocalConfirmed(true) }
+    );
+  };
+  if (!orderIdRaw) {
+    return /* @__PURE__ */ jsxRuntimeExports.jsxs(
+      "div",
+      {
+        className: "min-h-screen bg-background flex flex-col items-center justify-center gap-4 px-4",
+        "data-ocid": "confirm.error_state",
+        children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-14 h-14 rounded-full bg-destructive/10 flex items-center justify-center text-2xl", children: "⚠️" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-semibold text-foreground text-center", children: "Missing order information." }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground text-center", children: "Please go back and try again." }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            Button,
+            {
+              type: "button",
+              variant: "outline",
+              onClick: () => void navigate({ to: "/" }),
+              "data-ocid": "confirm.back_btn",
+              children: t("btn_back")
+            }
+          )
+        ]
+      }
+    );
+  }
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(
+    "div",
+    {
+      className: "min-h-screen bg-background flex flex-col",
+      "data-ocid": "confirm.page",
+      children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("header", { className: "bg-card border-b border-border sticky top-0 z-10", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-lg mx-auto px-4 py-3 flex items-center justify-between", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-primary text-xl", children: "💧" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "font-display font-bold text-foreground text-lg", children: t("app_name") })
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(LangToggle, {})
+        ] }) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "bg-primary/5 border-b border-border", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-lg mx-auto px-4 py-4 flex items-center gap-3", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-xl", children: role === "driver" ? "🚛" : "🏠" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "font-display font-bold text-foreground text-lg", children: t("confirm_title") }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-xs text-muted-foreground capitalize", children: [
+              role,
+              " view · Order #",
+              orderIdRaw
+            ] })
+          ] })
+        ] }) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-lg mx-auto w-full px-4 py-6 flex flex-col gap-6 flex-1", children: [
+          isLoading ? /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "div",
+            {
+              className: "flex flex-col gap-2",
+              "data-ocid": "confirm.loading_state",
+              children: /* @__PURE__ */ jsxRuntimeExports.jsx(Skeleton, { className: "h-24 w-full rounded-xl" })
+            }
+          ) : order ? /* @__PURE__ */ jsxRuntimeExports.jsx(OrderSummaryCard, { order }) : /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "div",
+            {
+              className: "bg-destructive/5 border border-destructive/20 rounded-xl p-4 text-sm text-destructive",
+              "data-ocid": "confirm.error_state",
+              children: "Could not load order details."
+            }
+          ),
+          bothConfirmed && /* @__PURE__ */ jsxRuntimeExports.jsx(CelebrationState, {}),
+          !bothConfirmed && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col gap-3", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsxs(
+              "div",
+              {
+                className: `flex items-center gap-3 rounded-xl border p-4 ${driverConfirmed ? "bg-accent/10 border-accent/30" : "bg-card border-border"}`,
+                "data-ocid": "confirm.driver_status",
+                children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-2xl", children: driverConfirmed ? "✅" : "⏳" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-medium text-foreground text-sm", children: driverConfirmed ? t("confirm_driverConfirmed") : "Waiting for driver…" }),
+                    !driverConfirmed && /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-muted-foreground", children: "Driver has not confirmed yet" })
+                  ] })
+                ]
+              }
+            ),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs(
+              "div",
+              {
+                className: `flex items-center gap-3 rounded-xl border p-4 ${customerConfirmed ? "bg-primary/10 border-primary/30" : "bg-card border-border"}`,
+                "data-ocid": "confirm.customer_status",
+                children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-2xl", children: customerConfirmed ? "✅" : "⏳" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-medium text-foreground text-sm", children: customerConfirmed ? t("confirm_customerConfirmed") : "Waiting for customer…" }),
+                    !customerConfirmed && /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-muted-foreground", children: "Customer has not confirmed yet" })
+                  ] })
+                ]
+              }
+            )
+          ] }),
+          !bothConfirmed && !iHaveConfirmed && /* @__PURE__ */ jsxRuntimeExports.jsx(
+            Button,
+            {
+              type: "button",
+              size: "lg",
+              className: "w-full h-14 text-base font-semibold",
+              onClick: handleConfirm,
+              disabled: confirmMutation.isPending || !orderId,
+              "data-ocid": "confirm.primary_button",
+              children: confirmMutation.isPending ? "Confirming…" : role === "driver" ? t("confirm_driverBtn") : t("confirm_customerBtn")
+            }
+          ),
+          !bothConfirmed && iHaveConfirmed && /* @__PURE__ */ jsxRuntimeExports.jsxs(
+            "div",
+            {
+              className: "bg-muted/50 rounded-xl border border-border p-4 text-center",
+              "data-ocid": "confirm.waiting_state",
+              children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-medium text-foreground", children: t("confirm_waiting") }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-muted-foreground mt-1", children: otherConfirmed ? "Both sides confirmed!" : role === "driver" ? "Waiting for customer to confirm receipt…" : "Waiting for driver to confirm delivery…" }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-3 flex justify-center", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-6 h-6 border-2 border-primary/50 border-t-primary rounded-full animate-spin" }) })
+              ]
+            }
+          ),
+          confirmMutation.isError && /* @__PURE__ */ jsxRuntimeExports.jsxs(
+            "div",
+            {
+              className: "bg-destructive/5 border border-destructive/20 rounded-xl p-3 text-sm text-destructive text-center",
+              "data-ocid": "confirm.error_state",
+              children: [
+                confirmMutation.error instanceof Error ? confirmMutation.error.message : "Something went wrong. Please try again.",
+                /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  "button",
+                  {
+                    type: "button",
+                    className: "ml-2 underline",
+                    onClick: () => confirmMutation.reset(),
+                    children: "Dismiss"
+                  }
+                )
+              ]
+            }
+          ),
+          bothConfirmed && /* @__PURE__ */ jsxRuntimeExports.jsx(
+            Button,
+            {
+              type: "button",
+              variant: "outline",
+              className: "w-full",
+              onClick: () => void navigate({ to: "/" }),
+              "data-ocid": "confirm.back_home_btn",
+              children: "Back to Home"
+            }
+          )
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("footer", { className: "bg-card border-t border-border mt-auto", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "max-w-lg mx-auto px-4 py-4", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-center text-xs text-muted-foreground", children: [
+          "© ",
+          (/* @__PURE__ */ new Date()).getFullYear(),
+          ".",
+          " ",
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "a",
+            {
+              href: `https://caffeine.ai?utm_source=caffeine-footer&utm_medium=referral&utm_content=${encodeURIComponent(window.location.hostname)}`,
+              target: "_blank",
+              rel: "noreferrer",
+              className: "hover:underline",
+              children: "Built with love using caffeine.ai"
+            }
+          )
+        ] }) }) })
+      ]
+    }
+  );
+}
+function fmtSlsh$1(val) {
+  return Number(val).toLocaleString();
+}
+function phoneLast4$1(phone) {
+  return `…${phone.slice(-4)}`;
+}
+const POLL_MS = 5e3;
+const DELIVERY_STEPS = [
+  OrderStatus.accepted,
+  OrderStatus.en_route,
+  OrderStatus.pumping,
+  OrderStatus.completed
+];
+function DashboardView({
+  driver,
+  prices: initPrices,
+  zones,
+  onDriverUpdate
+}) {
+  const { t } = useLang();
+  const { actor } = useActor(createActor);
+  const [plate, setPlate] = reactExports.useState(driver.truck_plate || "");
+  const [plateErr, setPlateErr] = reactExports.useState("");
+  const [statusBusy, setStatusBusy] = reactExports.useState(false);
+  const isOnline = driver.status === DriverStatus.online;
+  const [zoneId, setZoneId] = reactExports.useState(driver.zone_id);
+  const [zoneBusy, setZoneBusy] = reactExports.useState(false);
+  const [zoneMsg, setZoneMsg] = reactExports.useState("");
+  const [prices, setPrices] = reactExports.useState(initPrices);
+  const [editPrices, setEditPrices] = reactExports.useState(false);
+  const [draftPrices, setDraftPrices] = reactExports.useState(initPrices);
+  const [pricesBusy, setPricesBusy] = reactExports.useState(false);
+  const [pricesMsg, setPricesMsg] = reactExports.useState("");
+  const [incoming, setIncoming] = reactExports.useState([]);
+  const [orderBusy, setOrderBusy] = reactExports.useState(null);
+  const pollRef = reactExports.useRef(null);
+  const [activeOrder, setActiveOrder] = reactExports.useState(null);
+  const [advanceBusy, setAdvanceBusy] = reactExports.useState(false);
+  reactExports.useEffect(() => {
+    if (!actor || !driver.current_order_id) {
+      setActiveOrder(null);
+      return;
+    }
+    actor.getIncomingOrders(driver.id).then((orders) => {
+      const active = orders.find(
+        (o2) => o2.id === driver.current_order_id && [
+          OrderStatus.accepted,
+          OrderStatus.en_route,
+          OrderStatus.pumping,
+          OrderStatus.exception
+        ].includes(o2.status)
+      );
+      setActiveOrder(active ?? null);
+    });
+  }, [actor, driver.current_order_id, driver.id]);
+  reactExports.useEffect(() => {
+    if (!actor || !isOnline || driver.current_order_id) {
+      setIncoming([]);
+      if (pollRef.current) clearInterval(pollRef.current);
+      return;
+    }
+    const poll = async () => {
+      const orders = await actor.getIncomingOrders(driver.id);
+      setIncoming(orders);
+    };
+    poll();
+    pollRef.current = setInterval(poll, POLL_MS);
+    return () => {
+      if (pollRef.current) clearInterval(pollRef.current);
+    };
+  }, [actor, isOnline, driver.current_order_id, driver.id]);
+  async function toggleStatus() {
+    if (!actor) return;
+    if (!isOnline && !plate.trim()) {
+      setPlateErr(t("dash_truck_required"));
+      return;
+    }
+    setPlateErr("");
+    setStatusBusy(true);
+    const newStatus = isOnline ? DriverStatus.offline : DriverStatus.online;
+    await actor.setDriverStatus(driver.id, newStatus, plate.trim());
+    setStatusBusy(false);
+    onDriverUpdate();
+  }
+  async function switchZone(id) {
+    if (!actor) return;
+    setZoneId(id);
+    setZoneBusy(true);
+    setZoneMsg("");
+    await actor.setDriverZone(driver.id, id);
+    setZoneBusy(false);
+    setZoneMsg(t("dash_zone_saved"));
+    onDriverUpdate();
+  }
+  async function savePrices() {
+    if (!actor) return;
+    setPricesBusy(true);
+    setPricesMsg("");
+    const res = await actor.setDriverPrices(driver.id, draftPrices);
+    setPricesBusy(false);
+    if (res.__kind__ === "ok") {
+      setPrices(draftPrices);
+      setEditPrices(false);
+      setPricesMsg(t("prices_saved"));
+    } else {
+      setPricesMsg(t("prices_error"));
+    }
+  }
+  async function handleAccept(order) {
+    if (!actor) return;
+    setOrderBusy("accept");
+    const res = await actor.acceptOrder(driver.id, order.id);
+    setOrderBusy(null);
+    if (res.__kind__ === "ok") {
+      setIncoming([]);
+      if (pollRef.current) clearInterval(pollRef.current);
+      setActiveOrder({ ...order, status: OrderStatus.accepted });
+      onDriverUpdate();
+    }
+  }
+  async function handleReject(order) {
+    if (!actor) return;
+    setOrderBusy("reject");
+    await actor.rejectOrder(driver.id, order.id);
+    setOrderBusy(null);
+    setIncoming([]);
+  }
+  async function advanceStatus(order) {
+    if (!actor) return;
+    const idx = DELIVERY_STEPS.indexOf(order.status);
+    const next = DELIVERY_STEPS[idx + 1];
+    if (!next) return;
+    setAdvanceBusy(true);
+    const res = await actor.updateOrderStatus(driver.id, order.id, next);
+    setAdvanceBusy(false);
+    if (res.__kind__ === "ok") {
+      if (next === OrderStatus.completed) {
+        setActiveOrder(null);
+        onDriverUpdate();
+      } else {
+        setActiveOrder({ ...order, status: next });
+      }
+    }
+  }
+  const firstIncoming = incoming[0];
+  const incomingZone = firstIncoming ? zones.find((z2) => z2.id === firstIncoming.zone_id) : null;
+  const sizeLabel2 = (s2) => t(`size_${s2}`);
+  const priceForSize = (o2) => {
+    if (o2.size === TankSize.small) return prices.small;
+    if (o2.size === TankSize.medium) return prices.medium;
+    return prices.large;
+  };
+  const nextStatusLabel = (o2) => {
+    if (o2.status === OrderStatus.accepted) return t("active_btn_en_route");
+    if (o2.status === OrderStatus.en_route) return t("active_btn_pumping");
+    if (o2.status === OrderStatus.pumping) return t("active_btn_completed");
+    return "";
+  };
+  const navigate = useNavigate();
+  const shiftQuery = useGetActiveShift(driver.id);
+  const activeShift = shiftQuery.data ?? null;
+  const shiftIsActive = (activeShift == null ? void 0 : activeShift.status) === ShiftStatus.active;
+  function shiftTimeRemaining(shift) {
+    if (!shift.activatedAt) return "";
+    const activatedMs = Number(shift.activatedAt) / 1e6;
+    const shiftDurationMs = 12 * 60 * 60 * 1e3;
+    const endsAt = activatedMs + shiftDurationMs;
+    const remainingMs = endsAt - Date.now();
+    if (remainingMs <= 0) return "Shift ended";
+    const h2 = Math.floor(remainingMs / 36e5);
+    const m2 = Math.floor(remainingMs % 36e5 / 6e4);
+    return `${h2}h ${m2}m remaining`;
+  }
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-4 pb-4", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs(
+      "div",
+      {
+        "data-ocid": "shift.status_card",
+        className: `rounded-xl p-4 space-y-3 border ${shiftIsActive ? "bg-secondary/10 border-secondary/40" : "bg-muted/40 border-border"}`,
+        children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-between", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2", children: [
+              shiftIsActive ? /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "w-2.5 h-2.5 rounded-full bg-secondary animate-pulse" }) : /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "w-2.5 h-2.5 rounded-full bg-muted-foreground/40" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx(
+                "h3",
+                {
+                  className: `font-semibold text-sm ${shiftIsActive ? "text-secondary-foreground" : "text-muted-foreground"}`,
+                  children: shiftIsActive ? t("shift_activeShift") : t("shift_noActiveShift")
+                }
+              )
+            ] }),
+            shiftIsActive && (activeShift == null ? void 0 : activeShift.period) && /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-xs font-medium px-2 py-0.5 rounded-full bg-secondary/15 text-secondary-foreground", children: activeShift.period === "morning" ? t("shift_morning").split(" ")[0] : t("shift_evening").split(" ")[0] })
+          ] }),
+          shiftIsActive && activeShift ? /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-1", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-xs text-secondary-foreground font-medium", children: [
+              "✓ ",
+              t("shift_activated")
+            ] }),
+            activeShift.activatedAt && /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-muted-foreground", children: shiftTimeRemaining(activeShift) }),
+            activeShift.zNumber && /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-xs font-mono text-muted-foreground", children: [
+              "Z-Number: ****",
+              activeShift.zNumber.slice(-4)
+            ] })
+          ] }) : /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-2", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-muted-foreground", children: "You need an active shift to accept orders." }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "button",
+              {
+                "data-ocid": "shift.start_shift_button",
+                type: "button",
+                onClick: () => navigate({ to: "/driver/shift" }),
+                className: "w-full py-2.5 rounded-lg bg-primary text-primary-foreground font-semibold text-sm transition-smooth active:scale-95",
+                children: t("shift_startShift")
+              }
+            )
+          ] })
+        ]
+      }
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-card border border-border rounded-xl p-4 space-y-3", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-between", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-sm font-medium text-muted-foreground", children: t("dash_zone") }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(StatusBadge, { status: driver.status })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "select",
+          {
+            "data-ocid": "dash.zone_select",
+            className: "flex-1 bg-background border border-input rounded-lg px-3 py-2 text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-ring",
+            value: String(zoneId),
+            onChange: (e) => switchZone(BigInt(e.target.value)),
+            disabled: zoneBusy,
+            children: zones.map((z2) => /* @__PURE__ */ jsxRuntimeExports.jsx("option", { value: String(z2.id), children: z2.name }, String(z2.id)))
+          }
+        ),
+        zoneBusy && /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-xs text-muted-foreground", children: t("dash_saving_zone") }),
+        zoneMsg && /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-xs text-green-600", children: zoneMsg })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-1", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "label",
+          {
+            htmlFor: "dash-truck-plate",
+            className: "text-sm font-medium text-foreground",
+            children: t("dash_truck_plate")
+          }
+        ),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "input",
+          {
+            id: "dash-truck-plate",
+            "data-ocid": "dash.truck_plate_input",
+            type: "text",
+            className: "w-full bg-background border border-input rounded-lg px-3 py-2 text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-ring uppercase",
+            placeholder: t("dash_truck_placeholder"),
+            value: plate,
+            onChange: (e) => {
+              setPlate(e.target.value.toUpperCase());
+              setPlateErr("");
+            }
+          }
+        ),
+        plateErr && /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-destructive", children: plateErr })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(
+        "button",
+        {
+          "data-ocid": "dash.status_toggle",
+          type: "button",
+          disabled: statusBusy,
+          onClick: toggleStatus,
+          className: `w-full py-4 rounded-xl font-bold text-lg transition-smooth active:scale-95 disabled:opacity-60 ${isOnline ? "bg-destructive text-destructive-foreground" : "bg-primary text-primary-foreground"}`,
+          children: statusBusy ? isOnline ? t("dash_going_offline") : t("dash_going_online") : isOnline ? t("dash_go_offline") : t("dash_go_online")
+        }
+      )
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-card border border-border rounded-xl p-4 space-y-3", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-between", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "font-semibold text-foreground", children: t("prices_title") }),
+        !editPrices && /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "button",
+          {
+            "data-ocid": "prices.edit_button",
+            type: "button",
+            onClick: () => {
+              setDraftPrices(prices);
+              setEditPrices(true);
+              setPricesMsg("");
+            },
+            className: "text-sm text-primary font-medium",
+            children: t("prices_edit")
+          }
+        )
+      ] }),
+      pricesMsg && /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-green-700", children: pricesMsg }),
+      editPrices ? /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-2", children: [
+        ["small", "medium", "large"].map((sz) => /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-3", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-sm text-muted-foreground w-28", children: t(`prices_${sz}`) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "input",
+            {
+              "data-ocid": `prices.${sz}_input`,
+              type: "number",
+              min: "0",
+              className: "flex-1 bg-background border border-input rounded-lg px-3 py-2 text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-ring",
+              value: String(draftPrices[sz]),
+              onChange: (e) => setDraftPrices((p2) => ({
+                ...p2,
+                [sz]: BigInt(e.target.value || 0)
+              }))
+            }
+          )
+        ] }, sz)),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex gap-2 pt-1", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "button",
+            {
+              "data-ocid": "prices.save_button",
+              type: "button",
+              disabled: pricesBusy,
+              onClick: savePrices,
+              className: "flex-1 bg-primary text-primary-foreground py-2 rounded-lg text-sm font-semibold disabled:opacity-50",
+              children: pricesBusy ? t("prices_saving") : t("prices_save")
+            }
+          ),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "button",
+            {
+              "data-ocid": "prices.cancel_button",
+              type: "button",
+              onClick: () => {
+                setEditPrices(false);
+                setPricesMsg("");
+              },
+              className: "flex-1 bg-muted text-foreground py-2 rounded-lg text-sm font-semibold",
+              children: t("prices_cancel")
+            }
+          )
+        ] })
+      ] }) : /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid grid-cols-3 gap-2", children: ["small", "medium", "large"].map((sz) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+        "div",
+        {
+          className: "bg-background border border-border rounded-lg p-2 text-center",
+          children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-muted-foreground", children: t(`prices_${sz}`) }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-bold text-foreground", children: fmtSlsh$1(prices[sz]) })
+          ]
+        },
+        sz
+      )) })
+    ] }),
+    (activeOrder == null ? void 0 : activeOrder.status) === OrderStatus.exception && /* @__PURE__ */ jsxRuntimeExports.jsxs(
+      "div",
+      {
+        "data-ocid": "active.exception_card",
+        className: "bg-destructive/10 border border-destructive/30 rounded-xl p-4 space-y-2",
+        children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "text-destructive font-bold text-sm", children: [
+              "⚠ ",
+              t("exception_title")
+            ] }),
+            activeOrder.help_flagged && /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-xs bg-destructive/20 text-destructive px-2 py-0.5 rounded-full", children: t("exception_flagged") })
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-destructive", children: t("exception_body") })
+        ]
+      }
+    ),
+    activeOrder && activeOrder.status !== OrderStatus.exception && /* @__PURE__ */ jsxRuntimeExports.jsxs(
+      "div",
+      {
+        "data-ocid": "active.delivery_card",
+        className: "bg-card border border-border rounded-xl p-4 space-y-4",
+        children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "font-semibold text-foreground", children: t("active_title") }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid grid-cols-2 gap-2 text-sm", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-muted-foreground text-xs", children: t("active_customer") }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-medium", children: phoneLast4$1(activeOrder.customer_phone) })
+            ] }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-muted-foreground text-xs", children: t("active_size") }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-medium", children: sizeLabel2(activeOrder.size) })
+            ] }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-muted-foreground text-xs", children: t("active_price") }),
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "font-medium", children: [
+                fmtSlsh$1(priceForSize(activeOrder)),
+                " SLSh"
+              ] })
+            ] }),
+            activeOrder.address_note && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "col-span-2", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-muted-foreground text-xs", children: t("active_address") }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-medium text-foreground break-words", children: activeOrder.address_note })
+            ] })
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex items-center justify-between", children: DELIVERY_STEPS.map((step, i) => {
+            const stepLabels = [
+              t("active_step_accepted"),
+              t("active_step_en_route"),
+              t("active_step_pumping"),
+              t("active_step_completed")
+            ];
+            const currentIdx = DELIVERY_STEPS.indexOf(activeOrder.status);
+            const done = i <= currentIdx;
+            return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col items-center flex-1", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx(
+                "div",
+                {
+                  className: `w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold border-2 ${done ? "bg-primary border-primary text-primary-foreground" : "bg-background border-border text-muted-foreground"}`,
+                  children: i + 1
+                }
+              ),
+              /* @__PURE__ */ jsxRuntimeExports.jsx(
+                "p",
+                {
+                  className: `text-xs mt-1 text-center leading-tight ${done ? "text-primary font-semibold" : "text-muted-foreground"}`,
+                  children: stepLabels[i]
+                }
+              ),
+              i < DELIVERY_STEPS.length - 1 && /* @__PURE__ */ jsxRuntimeExports.jsx(
+                "div",
+                {
+                  className: "absolute hidden"
+                }
+              )
+            ] }, step);
+          }) }),
+          activeOrder.status !== OrderStatus.completed && /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "button",
+            {
+              "data-ocid": "active.advance_button",
+              type: "button",
+              disabled: advanceBusy,
+              onClick: () => advanceStatus(activeOrder),
+              className: "w-full bg-primary text-primary-foreground py-3 rounded-xl font-bold text-base transition-smooth active:scale-95 disabled:opacity-60",
+              children: advanceBusy ? t("active_advancing") : nextStatusLabel(activeOrder)
+            }
+          ),
+          activeOrder.status === OrderStatus.completed && /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "button",
+            {
+              "data-ocid": "active.confirm_delivery_button",
+              type: "button",
+              onClick: () => navigate({
+                to: "/confirm",
+                search: { orderId: String(activeOrder.id), role: "driver" }
+              }),
+              className: "w-full bg-secondary text-secondary-foreground py-3 rounded-xl font-bold text-base transition-smooth active:scale-95",
+              children: t("confirm_driverBtn")
+            }
+          )
+        ]
+      }
+    ),
+    !activeOrder && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-card border border-border rounded-xl p-4 space-y-3", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "font-semibold text-foreground", children: t("incoming_title") }),
+      !isOnline ? /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground text-center py-4", children: t("incoming_offline_hint") }) : firstIncoming ? /* @__PURE__ */ jsxRuntimeExports.jsxs(
+        "div",
+        {
+          "data-ocid": "incoming.order_card",
+          className: "bg-background border border-border rounded-lg p-3 space-y-3",
+          children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid grid-cols-2 gap-2 text-sm", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-muted-foreground text-xs", children: t("incoming_zone") }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-semibold", children: (incomingZone == null ? void 0 : incomingZone.name) ?? "-" })
+              ] }),
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-muted-foreground text-xs", children: t("incoming_size") }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-semibold", children: sizeLabel2(firstIncoming.size) })
+              ] }),
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-muted-foreground text-xs", children: t("incoming_phone") }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-semibold", children: phoneLast4$1(firstIncoming.customer_phone) })
+              ] }),
+              firstIncoming.address_note && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "col-span-2", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-muted-foreground text-xs", children: t("incoming_note") }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "break-words", children: firstIncoming.address_note })
+              ] })
+            ] }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid grid-cols-2 gap-2", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx(
+                "button",
+                {
+                  "data-ocid": "incoming.reject_button",
+                  type: "button",
+                  disabled: orderBusy !== null,
+                  onClick: () => handleReject(firstIncoming),
+                  className: "py-3 rounded-xl bg-destructive text-destructive-foreground font-bold text-base transition-smooth active:scale-95 disabled:opacity-60",
+                  children: orderBusy === "reject" ? t("incoming_rejecting") : t("incoming_reject")
+                }
+              ),
+              /* @__PURE__ */ jsxRuntimeExports.jsx(
+                "button",
+                {
+                  "data-ocid": "incoming.accept_button",
+                  type: "button",
+                  disabled: orderBusy !== null,
+                  onClick: () => handleAccept(firstIncoming),
+                  className: "py-3 rounded-xl bg-green-600 text-white font-bold text-base transition-smooth active:scale-95 disabled:opacity-60",
+                  children: orderBusy === "accept" ? t("incoming_accepting") : t("incoming_accept")
+                }
+              )
+            ] })
+          ]
+        }
+      ) : /* @__PURE__ */ jsxRuntimeExports.jsx(
+        "p",
+        {
+          "data-ocid": "incoming.empty_state",
+          className: "text-sm text-muted-foreground text-center py-6",
+          children: t("incoming_waiting")
+        }
+      )
+    ] })
+  ] });
+}
+function fmtSlsh(val) {
+  return Number(val).toLocaleString();
+}
+function fmtDate(ts) {
+  return new Date(Number(ts)).toLocaleDateString();
+}
+function EarningsView({ driverId, zones }) {
+  const { t } = useLang();
+  const { actor, isFetching } = useActor(createActor);
+  const todayQuery = useQuery({
+    queryKey: ["driver-earnings-today", String(driverId)],
+    queryFn: async () => {
+      if (!actor) return null;
+      return actor.getDriverEarnings(driverId, null, null);
+    },
+    enabled: !!actor && !isFetching
+  });
+  const today = (/* @__PURE__ */ new Date()).toISOString().split("T")[0];
+  const [startDate, setStartDate] = reactExports.useState(today);
+  const [endDate, setEndDate] = reactExports.useState(today);
+  const [rangeKey, setRangeKey] = reactExports.useState(0);
+  const rangeQuery = useQuery({
+    queryKey: [
+      "driver-earnings-range",
+      String(driverId),
+      startDate,
+      endDate,
+      rangeKey
+    ],
+    queryFn: async () => {
+      if (!actor) return null;
+      const startMs = BigInt(new Date(startDate).getTime());
+      const endMs = BigInt((/* @__PURE__ */ new Date(`${endDate}T23:59:59`)).getTime());
+      return actor.getDriverEarnings(driverId, startMs, endMs);
+    },
+    enabled: !!actor && !isFetching && rangeKey > 0
+  });
+  const todayData = todayQuery.data;
+  const rangeData = rangeQuery.data;
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-4 pb-4", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-card border border-border rounded-xl p-4", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "font-semibold text-foreground mb-3", children: t("earnings_today") }),
+      todayQuery.isLoading ? /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground", children: t("earnings_loading") }) : /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid grid-cols-2 gap-3", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-background border border-border rounded-lg p-3 text-center", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-muted-foreground", children: t("earnings_today_orders") }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-2xl font-bold text-foreground", children: (todayData == null ? void 0 : todayData.orders.length) ?? 0 })
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-background border border-border rounded-lg p-3 text-center", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-muted-foreground", children: t("earnings_today_total") }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-xl font-bold text-primary", children: [
+            fmtSlsh((todayData == null ? void 0 : todayData.today_total) ?? 0n),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-xs font-normal text-muted-foreground ml-1", children: t("earnings_slsh") })
+          ] })
+        ] })
+      ] })
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-card border border-border rounded-xl p-4 space-y-3", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "font-semibold text-foreground", children: t("earnings_period") }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid grid-cols-2 gap-2", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-1", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "label",
+            {
+              htmlFor: "earnings-start",
+              className: "text-xs text-muted-foreground",
+              children: t("earnings_start")
+            }
+          ),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "input",
+            {
+              id: "earnings-start",
+              "data-ocid": "earnings.start_input",
+              type: "date",
+              className: "w-full bg-background border border-input rounded-lg px-3 py-2 text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-ring",
+              value: startDate,
+              onChange: (e) => setStartDate(e.target.value)
+            }
+          )
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-1", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "label",
+            {
+              htmlFor: "earnings-end",
+              className: "text-xs text-muted-foreground",
+              children: t("earnings_end")
+            }
+          ),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "input",
+            {
+              id: "earnings-end",
+              "data-ocid": "earnings.end_input",
+              type: "date",
+              className: "w-full bg-background border border-input rounded-lg px-3 py-2 text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-ring",
+              value: endDate,
+              onChange: (e) => setEndDate(e.target.value)
+            }
+          )
+        ] })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(
+        "button",
+        {
+          "data-ocid": "earnings.view_button",
+          type: "button",
+          onClick: () => setRangeKey((k2) => k2 + 1),
+          className: "w-full bg-primary text-primary-foreground py-2 rounded-lg text-sm font-semibold",
+          children: t("earnings_view")
+        }
+      ),
+      rangeQuery.isLoading && /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground", children: t("earnings_loading") }),
+      rangeData && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-2", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex justify-between items-center py-2 border-t border-border", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-sm font-medium text-foreground", children: t("earnings_period_total") }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "font-bold text-primary", children: [
+            fmtSlsh(rangeData.period_total),
+            " ",
+            t("earnings_slsh")
+          ] })
+        ] }),
+        rangeData.orders.length === 0 ? /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "p",
+          {
+            "data-ocid": "earnings.empty_state",
+            className: "text-sm text-muted-foreground text-center py-4",
+            children: t("earnings_no_orders")
+          }
+        ) : /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "space-y-2", children: rangeData.orders.map((order, i) => {
+          const zone = zones.find((z2) => z2.id === order.zone_id);
+          return /* @__PURE__ */ jsxRuntimeExports.jsxs(
+            "div",
+            {
+              "data-ocid": `earnings.item.${i + 1}`,
+              className: "flex items-center justify-between bg-background border border-border rounded-lg px-3 py-2",
+              children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-sm font-medium text-foreground", children: [
+                    (zone == null ? void 0 : zone.name) ?? "-",
+                    " · ",
+                    order.size
+                  ] }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-muted-foreground", children: fmtDate(order.created_at) })
+                ] }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex items-center gap-2", children: /* @__PURE__ */ jsxRuntimeExports.jsx(StatusBadge, { status: order.status }) })
+              ]
+            },
+            String(order.id)
+          );
+        }) })
+      ] })
+    ] })
+  ] });
+}
+function fmtDateTime(ts) {
+  return new Date(Number(ts)).toLocaleString();
+}
+function phoneLast4(phone) {
+  return `…${phone.slice(-4)}`;
+}
+function HistoryView({ driverId, zones }) {
+  const { t } = useLang();
+  const { actor, isFetching } = useActor(createActor);
+  const [expanded, setExpanded] = reactExports.useState(/* @__PURE__ */ new Set());
+  const historyQuery = useQuery({
+    queryKey: ["driver-history", String(driverId)],
+    queryFn: async () => {
+      if (!actor) return [];
+      return actor.getDriverHistory(driverId);
+    },
+    enabled: !!actor && !isFetching
+  });
+  function toggleExpand(id) {
+    setExpanded((prev) => {
+      const next = new Set(prev);
+      if (next.has(id)) next.delete(id);
+      else next.add(id);
+      return next;
+    });
+  }
+  const orders = historyQuery.data ?? [];
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-2 pb-4", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-base font-semibold text-foreground px-1", children: t("history_title") }),
+    historyQuery.isLoading && /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground text-center py-8", children: t("history_loading") }),
+    !historyQuery.isLoading && orders.length === 0 && /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "p",
+      {
+        "data-ocid": "history.empty_state",
+        className: "text-sm text-muted-foreground text-center py-10",
+        children: t("history_empty")
+      }
+    ),
+    orders.map((order, i) => {
+      const id = String(order.id);
+      const zone = zones.find((z2) => z2.id === order.zone_id);
+      const isExpanded = expanded.has(id);
+      return /* @__PURE__ */ jsxRuntimeExports.jsxs(
+        "div",
+        {
+          "data-ocid": `history.item.${i + 1}`,
+          className: "bg-card border border-border rounded-xl overflow-hidden",
+          children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsxs(
+              "button",
+              {
+                type: "button",
+                className: "w-full flex items-center justify-between px-4 py-3 text-left",
+                onClick: () => toggleExpand(id),
+                "data-ocid": `history.expand_button.${i + 1}`,
+                children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex-1 min-w-0", children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2", children: [
+                      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-sm font-semibold text-foreground", children: (zone == null ? void 0 : zone.name) ?? "-" }),
+                      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-xs text-muted-foreground", children: "·" }),
+                      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-xs text-muted-foreground", children: order.size })
+                    ] }),
+                    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-xs text-muted-foreground mt-0.5", children: [
+                      new Date(Number(order.created_at)).toLocaleDateString(),
+                      " · ",
+                      phoneLast4(order.customer_phone)
+                    ] })
+                  ] }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2 ml-2 flex-shrink-0", children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsx(StatusBadge, { status: order.status }),
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-muted-foreground text-xs", children: isExpanded ? "▲" : "▼" })
+                  ] })
+                ]
+              }
+            ),
+            isExpanded && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "bg-background border-t border-border px-4 py-3 space-y-2", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid grid-cols-2 gap-2 text-sm", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-muted-foreground", children: t("history_date") }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-medium", children: fmtDateTime(order.created_at) })
+              ] }),
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-muted-foreground", children: t("history_customer") }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-medium", children: phoneLast4(order.customer_phone) })
+              ] }),
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-muted-foreground", children: t("history_zone") }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-medium", children: (zone == null ? void 0 : zone.name) ?? "-" })
+              ] }),
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-muted-foreground", children: t("history_size") }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-medium", children: order.size })
+              ] }),
+              order.address_note && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "col-span-2", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-muted-foreground", children: t("active_address") }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-medium break-words", children: order.address_note })
+              ] }),
+              order.completed_at && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "col-span-2", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-muted-foreground", children: t("active_step_completed") }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-medium", children: fmtDateTime(order.completed_at) })
+              ] })
+            ] }) })
+          ]
+        },
+        id
+      );
+    })
+  ] });
+}
+function LoginView({ onLogin }) {
+  const { t } = useLang();
+  const { actor } = useActor(createActor);
+  const [phone, setPhone] = reactExports.useState("");
+  const [pin, setPin] = reactExports.useState("");
+  const [loading, setLoading] = reactExports.useState(false);
+  const [error, setError] = reactExports.useState("");
+  async function handleLogin() {
+    if (!actor || !phone.trim() || pin.length !== 4) return;
+    setLoading(true);
+    setError("");
+    try {
+      const res = await actor.driverLogin(phone.trim(), pin);
+      if (res.__kind__ === "ok") {
+        localStorage.setItem("biyo_driver_id", String(res.ok.driver_id));
+        onLogin(res.ok.driver_id, res.ok.name);
+      } else {
+        setError(t("login_error_invalid"));
+      }
+    } catch {
+      setError(t("login_error_generic"));
+    } finally {
+      setLoading(false);
+    }
+  }
+  return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "min-h-screen bg-background flex items-center justify-center p-4", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "w-full max-w-sm", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "text-center mb-8", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-4xl mb-2", children: "💧" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "text-2xl font-bold text-foreground", children: t("app_name") })
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-card border border-border rounded-xl p-6 space-y-4 shadow-sm", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-lg font-semibold text-foreground", children: t("login_title") }),
+      error && /* @__PURE__ */ jsxRuntimeExports.jsx(
+        "div",
+        {
+          "data-ocid": "login.error_state",
+          className: "bg-destructive/10 border border-destructive/30 text-destructive text-sm rounded-lg px-3 py-2",
+          children: error
+        }
+      ),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-1", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "label",
+          {
+            htmlFor: "login-phone",
+            className: "text-sm font-medium text-foreground",
+            children: t("login_phone")
+          }
+        ),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "input",
+          {
+            id: "login-phone",
+            "data-ocid": "login.phone_input",
+            type: "tel",
+            className: "w-full bg-background border border-input rounded-lg px-3 py-3 text-foreground text-base focus:outline-none focus:ring-2 focus:ring-ring",
+            placeholder: "063 XXXXXXX",
+            value: phone,
+            onChange: (e) => setPhone(e.target.value),
+            onKeyDown: (e) => e.key === "Enter" && handleLogin()
+          }
+        )
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-1", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "label",
+          {
+            htmlFor: "login-pin",
+            className: "text-sm font-medium text-foreground",
+            children: t("login_pin")
+          }
+        ),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "input",
+          {
+            id: "login-pin",
+            "data-ocid": "login.pin_input",
+            type: "password",
+            inputMode: "numeric",
+            maxLength: 4,
+            className: "w-full bg-background border border-input rounded-lg px-3 py-3 text-foreground text-base tracking-widest focus:outline-none focus:ring-2 focus:ring-ring",
+            placeholder: "••••",
+            value: pin,
+            onChange: (e) => setPin(e.target.value.replace(/\D/g, "").slice(0, 4)),
+            onKeyDown: (e) => e.key === "Enter" && handleLogin()
+          }
+        )
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(
+        "button",
+        {
+          "data-ocid": "login.submit_button",
+          type: "button",
+          disabled: loading || !actor,
+          onClick: handleLogin,
+          className: "w-full bg-primary text-primary-foreground font-semibold py-3 rounded-lg transition-smooth disabled:opacity-50 active:scale-95 text-base",
+          children: loading ? t("loading") : t("login_button")
+        }
+      ),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "pt-1 text-center", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+        Link,
+        {
+          "data-ocid": "login.register_link",
+          to: "/driver/register",
+          className: "text-sm text-primary hover:underline transition-colors",
+          children: t("driver_alreadyRegistered").replace(
+            "Already registered? Sign in",
+            "New driver? Register here"
+          )
+        }
+      ) })
+    ] })
+  ] }) });
+}
+const DRIVER_ID_KEY$1 = "biyo_driver_id";
+function DriverPage() {
+  const { t, lang, setLang } = useLang();
+  const { actor } = useActor(createActor);
+  const queryClient2 = useQueryClient();
+  const [session, setSession] = reactExports.useState(() => {
+    const stored = localStorage.getItem(DRIVER_ID_KEY$1);
+    if (!stored) return null;
+    return { driverId: BigInt(stored), name: "" };
+  });
+  const [activeTab, setActiveTab] = reactExports.useState("dashboard");
+  const [resetMsg, setResetMsg] = reactExports.useState("");
+  const profileQuery = useQuery({
+    queryKey: ["driver-profile", session ? String(session.driverId) : null],
+    queryFn: async () => {
+      if (!actor || !session) return null;
+      return actor.getDriverProfile(session.driverId);
+    },
+    enabled: !!actor && !!session,
+    staleTime: 5e3
+  });
+  const zonesQuery = useQuery({
+    queryKey: ["zones"],
+    queryFn: async () => {
+      if (!actor) return [];
+      const result = await actor.getZones();
+      return [...result].sort(
+        (a2, b2) => Number(a2.display_order) - Number(b2.display_order)
+      );
+    },
+    enabled: !!actor,
+    staleTime: 6e4
+  });
+  const zones = zonesQuery.data ?? [];
+  reactExports.useEffect(() => {
+    var _a3;
+    if (((_a3 = profileQuery.data) == null ? void 0 : _a3.driver) && session) {
+      const name = profileQuery.data.driver.name;
+      if (name && session.name !== name) {
+        setSession((s2) => s2 ? { ...s2, name } : s2);
+      }
+    }
+  }, [profileQuery.data, session]);
+  function handleLogin(driverId, name) {
+    localStorage.setItem(DRIVER_ID_KEY$1, String(driverId));
+    setSession({ driverId, name });
+  }
+  function handleLogout() {
+    localStorage.removeItem(DRIVER_ID_KEY$1);
+    setSession(null);
+    void queryClient2.clear();
+  }
+  const refreshProfile = reactExports.useCallback(() => {
+    if (session) {
+      void queryClient2.invalidateQueries({
+        queryKey: ["driver-profile", String(session.driverId)]
+      });
+    }
+  }, [queryClient2, session]);
+  async function handleDemoReset() {
+    if (!actor) return;
+    if (!window.confirm(t("demo_reset_confirm"))) return;
+    await actor.resetDemo();
+    setResetMsg(t("demo_reset_success"));
+    void queryClient2.clear();
+    setTimeout(() => setResetMsg(""), 3e3);
+  }
+  if (!session) {
+    return /* @__PURE__ */ jsxRuntimeExports.jsx(LoginView, { onLogin: handleLogin });
+  }
+  const profile = profileQuery.data;
+  if (!profile && profileQuery.isLoading) {
+    return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "min-h-screen bg-background flex items-center justify-center", children: /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground font-mono", children: t("loading") }) });
+  }
+  if (!profile && !profileQuery.isLoading) {
+    handleLogout();
+    return null;
+  }
+  const driver = profile.driver;
+  const prices = profile.prices;
+  const isOnline = driver.status === DriverStatus.online;
+  function renderTab() {
+    if (!profile) return null;
+    switch (activeTab) {
+      case "dashboard":
+        return /* @__PURE__ */ jsxRuntimeExports.jsx(
+          DashboardView,
+          {
+            driver,
+            prices,
+            zones,
+            onDriverUpdate: refreshProfile
+          }
+        );
+      case "earnings":
+        return /* @__PURE__ */ jsxRuntimeExports.jsx(EarningsView, { driverId: session.driverId, zones });
+      case "history":
+        return /* @__PURE__ */ jsxRuntimeExports.jsx(HistoryView, { driverId: session.driverId, zones });
+    }
+  }
+  const tabs = [
+    { id: "dashboard", label: t("nav_dashboard") },
+    { id: "earnings", label: t("nav_earnings") },
+    { id: "history", label: t("nav_history") }
+  ];
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "min-h-screen flex flex-col bg-background", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("header", { className: "bg-card border-b border-border sticky top-0 z-30", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-[480px] mx-auto px-4 py-3 space-y-2", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-between", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-primary text-lg", children: "💧" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-display font-bold text-base text-foreground", children: t("app_name") })
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "button",
+            {
+              type: "button",
+              "data-ocid": "driver.lang_toggle",
+              onClick: () => setLang(lang === "en" ? "so" : "en"),
+              className: "text-xs font-mono text-muted-foreground hover:text-foreground border border-border rounded px-2 py-1 transition-colors duration-200",
+              "aria-label": `Switch to ${lang === "en" ? "Somali" : "English"}`,
+              children: t("lang_toggle")
+            }
+          ),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "button",
+            {
+              type: "button",
+              "data-ocid": "driver.logout_button",
+              onClick: handleLogout,
+              className: "text-xs text-destructive font-medium border border-destructive/30 rounded px-2 py-1 hover:bg-destructive/10 transition-colors",
+              children: t("nav_logout")
+            }
+          )
+        ] })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-sm font-semibold text-foreground truncate", children: session.name || driver.name }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "span",
+          {
+            className: `text-xs font-mono px-2 py-0.5 rounded-full border ${isOnline ? "bg-primary/10 text-primary border-primary/30" : "bg-muted text-muted-foreground border-border"}`,
+            children: isOnline ? "● Online" : "○ Offline"
+          }
+        )
+      ] })
+    ] }) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "nav",
+      {
+        className: "bg-card border-b border-border",
+        "aria-label": "Driver navigation",
+        children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "max-w-[480px] mx-auto flex", children: tabs.map((tab) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "button",
+          {
+            type: "button",
+            "data-ocid": `driver.${tab.id}_tab`,
+            onClick: () => setActiveTab(tab.id),
+            className: `flex-1 py-3 text-sm font-medium transition-colors duration-150 border-b-2 ${activeTab === tab.id ? "border-primary text-primary" : "border-transparent text-muted-foreground hover:text-foreground"}`,
+            children: tab.label
+          },
+          tab.id
+        )) })
+      }
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("main", { className: "flex-1 max-w-[480px] mx-auto w-full px-4 pt-4", children: renderTab() }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("footer", { className: "bg-muted/40 border-t border-border py-4", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-[480px] mx-auto px-4 space-y-2", children: [
+      resetMsg && /* @__PURE__ */ jsxRuntimeExports.jsx(
+        "p",
+        {
+          "data-ocid": "driver.reset_success",
+          className: "text-xs text-primary text-center font-mono",
+          children: resetMsg
+        }
+      ),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(
+        "button",
+        {
+          type: "button",
+          "data-ocid": "driver.demo_reset_button",
+          onClick: handleDemoReset,
+          className: "w-full text-xs text-muted-foreground border border-border rounded-lg py-2 hover:bg-destructive/5 hover:text-destructive hover:border-destructive/30 transition-colors",
+          children: t("demo_reset")
+        }
+      ),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-xs text-muted-foreground text-center", children: [
+        "© ",
+        (/* @__PURE__ */ new Date()).getFullYear(),
+        ".",
+        " ",
+        /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "a",
+          {
+            href: `https://caffeine.ai?utm_source=caffeine-footer&utm_medium=referral&utm_content=${encodeURIComponent(typeof window !== "undefined" ? window.location.hostname : "")}`,
+            target: "_blank",
+            rel: "noopener noreferrer",
+            className: "underline hover:text-foreground transition-colors",
+            children: "Built with love using caffeine.ai"
+          }
+        )
+      ] })
+    ] }) })
+  ] });
+}
+const INITIAL = {
+  fullName: "",
+  phone: "",
+  pin: "",
+  confirmPin: "",
+  truckPlate: ""
+};
+function DriverRegisterPage() {
+  const { t, lang, setLang } = useLang();
+  const [form, setForm] = reactExports.useState(INITIAL);
+  const [errors, setErrors] = reactExports.useState({});
+  const [submitted, setSubmitted] = reactExports.useState(false);
+  function set(field, value) {
+    setForm((f) => ({ ...f, [field]: value }));
+    setErrors((e) => ({ ...e, [field]: void 0 }));
+  }
+  function validate() {
+    const newErrors = {};
+    if (!form.fullName.trim()) newErrors.fullName = "Full name is required";
+    if (!form.phone.trim()) newErrors.phone = "Phone number is required";
+    if (form.pin.length !== 4) newErrors.pin = "PIN must be exactly 4 digits";
+    if (form.confirmPin !== form.pin)
+      newErrors.confirmPin = "PINs do not match";
+    if (!form.truckPlate.trim())
+      newErrors.truckPlate = "Truck plate / ID is required";
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  }
+  function handleSubmit() {
+    if (!validate()) return;
+    setSubmitted(true);
+  }
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "min-h-screen bg-background flex flex-col", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("header", { className: "bg-card border-b border-border", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-[480px] mx-auto px-4 py-3 flex items-center justify-between", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-primary text-xl", children: "💧" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-display font-bold text-base text-foreground", children: t("app_name") })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(
+        "button",
+        {
+          type: "button",
+          "data-ocid": "register.lang_toggle",
+          onClick: () => setLang(lang === "en" ? "so" : "en"),
+          className: "text-xs font-mono text-muted-foreground hover:text-foreground border border-border rounded px-2 py-1 transition-colors duration-200",
+          "aria-label": `Switch to ${lang === "en" ? "Somali" : "English"}`,
+          children: t("lang_toggle")
+        }
+      )
+    ] }) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("main", { className: "flex-1 flex items-start justify-center px-4 py-8", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "w-full max-w-sm", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "text-center mb-6", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-14 h-14 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center mx-auto mb-3", children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-2xl", children: "💧" }) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "font-display text-2xl font-bold text-foreground", children: t("driver_register") }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground mt-1", children: t("app_tagline") })
+      ] }),
+      submitted ? (
+        // ── Success / pending state ─────────────────────────────────────
+        /* @__PURE__ */ jsxRuntimeExports.jsxs(
+          "div",
+          {
+            "data-ocid": "register.success_state",
+            className: "bg-card border border-border rounded-xl p-6 text-center space-y-4 shadow-sm",
+            children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-12 h-12 rounded-full bg-accent/20 border border-accent/40 flex items-center justify-center mx-auto", children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-2xl", children: "✅" }) }),
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "font-display text-lg font-semibold text-foreground", children: "Registration Received" }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground mt-1", children: "Your details have been submitted. Driver account activation will be available once registration is confirmed." })
+              ] }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "bg-primary/5 border border-primary/20 rounded-lg px-4 py-3", children: /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-primary font-medium", children: "📱 Once approved, you'll be able to sign in and activate your shift by paying $1 via ZAAD." }) }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx(
+                Link,
+                {
+                  to: "/driver",
+                  "data-ocid": "register.goto_login_link",
+                  className: "block w-full bg-primary text-primary-foreground font-semibold py-3 rounded-lg text-center text-sm transition-smooth active:scale-95",
+                  children: t("driver_alreadyRegistered")
+                }
+              )
+            ]
+          }
+        )
+      ) : (
+        // ── Registration form ───────────────────────────────────────────
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-card border border-border rounded-xl p-6 space-y-4 shadow-sm", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-1", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "label",
+              {
+                htmlFor: "reg-name",
+                className: "text-sm font-medium text-foreground",
+                children: t("driver_fullName")
+              }
+            ),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "input",
+              {
+                id: "reg-name",
+                "data-ocid": "register.name_input",
+                type: "text",
+                autoComplete: "name",
+                className: `w-full bg-background border rounded-lg px-3 py-3 text-foreground text-base focus:outline-none focus:ring-2 focus:ring-ring transition-colors ${errors.fullName ? "border-destructive" : "border-input"}`,
+                placeholder: "e.g. Axmed Maxamed",
+                value: form.fullName,
+                onChange: (e) => set("fullName", e.target.value)
+              }
+            ),
+            errors.fullName && /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "p",
+              {
+                "data-ocid": "register.name_field_error",
+                className: "text-xs text-destructive mt-0.5",
+                children: errors.fullName
+              }
+            )
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-1", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "label",
+              {
+                htmlFor: "reg-phone",
+                className: "text-sm font-medium text-foreground",
+                children: t("driver_phone")
+              }
+            ),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "input",
+              {
+                id: "reg-phone",
+                "data-ocid": "register.phone_input",
+                type: "tel",
+                autoComplete: "tel",
+                className: `w-full bg-background border rounded-lg px-3 py-3 text-foreground text-base focus:outline-none focus:ring-2 focus:ring-ring transition-colors ${errors.phone ? "border-destructive" : "border-input"}`,
+                placeholder: "063 XXXXXXX",
+                value: form.phone,
+                onChange: (e) => set("phone", e.target.value)
+              }
+            ),
+            errors.phone && /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "p",
+              {
+                "data-ocid": "register.phone_field_error",
+                className: "text-xs text-destructive mt-0.5",
+                children: errors.phone
+              }
+            )
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-1", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "label",
+              {
+                htmlFor: "reg-pin",
+                className: "text-sm font-medium text-foreground",
+                children: t("driver_pin")
+              }
+            ),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "input",
+              {
+                id: "reg-pin",
+                "data-ocid": "register.pin_input",
+                type: "password",
+                inputMode: "numeric",
+                maxLength: 4,
+                className: `w-full bg-background border rounded-lg px-3 py-3 text-foreground text-base tracking-widest focus:outline-none focus:ring-2 focus:ring-ring transition-colors ${errors.pin ? "border-destructive" : "border-input"}`,
+                placeholder: "••••",
+                value: form.pin,
+                onChange: (e) => set("pin", e.target.value.replace(/\D/g, "").slice(0, 4))
+              }
+            ),
+            errors.pin && /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "p",
+              {
+                "data-ocid": "register.pin_field_error",
+                className: "text-xs text-destructive mt-0.5",
+                children: errors.pin
+              }
+            )
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-1", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "label",
+              {
+                htmlFor: "reg-confirm-pin",
+                className: "text-sm font-medium text-foreground",
+                children: t("driver_confirmPin")
+              }
+            ),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "input",
+              {
+                id: "reg-confirm-pin",
+                "data-ocid": "register.confirm_pin_input",
+                type: "password",
+                inputMode: "numeric",
+                maxLength: 4,
+                className: `w-full bg-background border rounded-lg px-3 py-3 text-foreground text-base tracking-widest focus:outline-none focus:ring-2 focus:ring-ring transition-colors ${errors.confirmPin ? "border-destructive" : "border-input"}`,
+                placeholder: "••••",
+                value: form.confirmPin,
+                onChange: (e) => set(
+                  "confirmPin",
+                  e.target.value.replace(/\D/g, "").slice(0, 4)
+                )
+              }
+            ),
+            errors.confirmPin && /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "p",
+              {
+                "data-ocid": "register.confirm_pin_field_error",
+                className: "text-xs text-destructive mt-0.5",
+                children: errors.confirmPin
+              }
+            )
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-1", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "label",
+              {
+                htmlFor: "reg-truck",
+                className: "text-sm font-medium text-foreground",
+                children: t("driver_truckPlate")
+              }
+            ),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "input",
+              {
+                id: "reg-truck",
+                "data-ocid": "register.truck_input",
+                type: "text",
+                className: `w-full bg-background border rounded-lg px-3 py-3 text-foreground text-base focus:outline-none focus:ring-2 focus:ring-ring transition-colors ${errors.truckPlate ? "border-destructive" : "border-input"}`,
+                placeholder: "e.g. HGS-1234",
+                value: form.truckPlate,
+                onChange: (e) => set("truckPlate", e.target.value)
+              }
+            ),
+            errors.truckPlate && /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "p",
+              {
+                "data-ocid": "register.truck_field_error",
+                className: "text-xs text-destructive mt-0.5",
+                children: errors.truckPlate
+              }
+            )
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "button",
+            {
+              type: "button",
+              "data-ocid": "register.submit_button",
+              onClick: handleSubmit,
+              className: "w-full bg-primary text-primary-foreground font-semibold py-3 rounded-lg transition-smooth active:scale-95 text-base mt-2",
+              children: t("driver_registerBtn")
+            }
+          ),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-center text-sm text-muted-foreground", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+            Link,
+            {
+              to: "/driver",
+              "data-ocid": "register.signin_link",
+              className: "text-primary font-medium hover:underline transition-colors",
+              children: t("driver_alreadyRegistered")
+            }
+          ) })
+        ] })
+      )
+    ] }) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("footer", { className: "bg-muted/40 border-t border-border py-4", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "max-w-[480px] mx-auto px-4", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-xs text-muted-foreground text-center", children: [
+      "© ",
+      (/* @__PURE__ */ new Date()).getFullYear(),
+      ".",
+      " ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx(
+        "a",
+        {
+          href: `https://caffeine.ai?utm_source=caffeine-footer&utm_medium=referral&utm_content=${encodeURIComponent(typeof window !== "undefined" ? window.location.hostname : "")}`,
+          target: "_blank",
+          rel: "noopener noreferrer",
+          className: "underline hover:text-foreground transition-colors",
+          children: "Built with love using caffeine.ai"
+        }
+      )
+    ] }) }) })
+  ] });
+}
+const DRIVER_ID_KEY = "biyo_driver_id";
+const TOTAL_STEPS = 3;
+function getDriverId() {
+  const raw = localStorage.getItem(DRIVER_ID_KEY);
+  if (!raw) return null;
+  try {
+    return BigInt(raw);
+  } catch {
+    return null;
+  }
+}
+function todayDate() {
+  return (/* @__PURE__ */ new Date()).toISOString().slice(0, 10);
+}
+function formatDate(iso) {
+  const d2 = new Date(iso);
+  return d2.toLocaleDateString("en-GB", {
+    weekday: "long",
+    day: "numeric",
+    month: "long",
+    year: "numeric"
+  });
+}
+function ShiftActivationPage() {
+  const { t, lang, setLang } = useLang();
+  const { actor } = useActor(createActor);
+  const navigate = useNavigate();
+  const driverId = getDriverId();
+  const [step, setStep] = reactExports.useState(1);
+  const [selectedPeriod, setSelectedPeriod] = reactExports.useState(
+    null
+  );
+  const [shiftId, setShiftId] = reactExports.useState(null);
+  const [zNumber, setZNumber] = reactExports.useState("");
+  const [revealedZNumber, setRevealedZNumber] = reactExports.useState("");
+  const [error, setError] = reactExports.useState("");
+  const [activating, setActivating] = reactExports.useState(false);
+  const [activated, setActivated] = reactExports.useState(false);
+  const redirectTimer = reactExports.useRef(null);
+  const requestShift = useRequestShift();
+  const payShiftFee = usePayShiftFee();
+  const submitZNumber = useSubmitZNumber();
+  const { data: zones } = useZones();
+  reactExports.useEffect(() => {
+    if (!driverId) {
+      void navigate({ to: "/driver" });
+    }
+  }, [driverId, navigate]);
+  reactExports.useEffect(() => {
+    if (activated) {
+      redirectTimer.current = setTimeout(() => {
+        void navigate({ to: "/driver" });
+      }, 2e3);
+    }
+    return () => {
+      if (redirectTimer.current) clearTimeout(redirectTimer.current);
+    };
+  }, [activated, navigate]);
+  async function handlePayNow() {
+    if (!driverId || !selectedPeriod || !actor) return;
+    setError("");
+    setStep(2);
+    try {
+      const shift = await requestShift.mutateAsync({
+        driverId,
+        period: selectedPeriod,
+        date: todayDate()
+      });
+      const payResult = await payShiftFee.mutateAsync({
+        shiftId: shift.id,
+        driverId
+      });
+      setShiftId(shift.id);
+      setRevealedZNumber(payResult.zNumber);
+    } catch (err) {
+      setError(
+        err instanceof Error ? err.message : "Payment failed. Please try again."
+      );
+      setStep(1);
+    }
+  }
+  async function handleActivate() {
+    if (!driverId || !shiftId || zNumber.length !== 8) return;
+    setError("");
+    setActivating(true);
+    try {
+      await submitZNumber.mutateAsync({
+        shiftId,
+        zNumber: zNumber.toUpperCase(),
+        driverId
+      });
+      setActivated(true);
+    } catch (err) {
+      setError(
+        err instanceof Error ? err.message : "Verification failed. Check your Z-number."
+      );
+    } finally {
+      setActivating(false);
+    }
+  }
+  const isPaying = requestShift.isPending || payShiftFee.isPending;
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "min-h-screen bg-background flex flex-col", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("header", { className: "bg-card border-b border-border sticky top-0 z-30", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-[480px] mx-auto px-4 py-3 flex items-center justify-between", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-primary text-xl", children: "💧" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-display font-bold text-base text-foreground", children: t("app_name") })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(
+        "button",
+        {
+          type: "button",
+          "data-ocid": "shift.lang_toggle",
+          onClick: () => setLang(lang === "en" ? "so" : "en"),
+          className: "text-xs font-mono text-muted-foreground hover:text-foreground border border-border rounded px-2 py-1 transition-colors duration-200",
+          "aria-label": `Switch to ${lang === "en" ? "Somali" : "English"}`,
+          children: t("lang_toggle")
+        }
+      )
+    ] }) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("main", { className: "flex-1 flex items-start justify-center px-4 py-8", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "w-full max-w-sm", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "text-center mb-6", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "font-display text-2xl font-bold text-foreground", children: t("shift_title") }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground mt-1", children: formatDate(todayDate()) })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(StepIndicator, { current: step, total: TOTAL_STEPS }),
+      error && /* @__PURE__ */ jsxRuntimeExports.jsx(
+        "div",
+        {
+          "data-ocid": "shift.error_state",
+          className: "mt-4 bg-destructive/10 border border-destructive/30 text-destructive text-sm rounded-lg px-3 py-2",
+          children: error
+        }
+      ),
+      step === 1 && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { "data-ocid": "shift.step1.panel", className: "mt-4 space-y-4", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-medium text-foreground", children: t("shift_selectPeriod") }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-3", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            PeriodCard,
+            {
+              ocid: "shift.morning_card",
+              period: ShiftPeriod.morning,
+              label: t("shift_morning"),
+              icon: "🌅",
+              selected: selectedPeriod === ShiftPeriod.morning,
+              onSelect: () => setSelectedPeriod(ShiftPeriod.morning)
+            }
+          ),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            PeriodCard,
+            {
+              ocid: "shift.evening_card",
+              period: ShiftPeriod.evening,
+              label: t("shift_evening"),
+              icon: "🌙",
+              selected: selectedPeriod === ShiftPeriod.evening,
+              onSelect: () => setSelectedPeriod(ShiftPeriod.evening)
+            }
+          )
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2 bg-primary/5 border border-primary/20 rounded-lg px-4 py-3", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-primary text-sm", children: "💵" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-sm text-primary font-medium", children: t("shift_feeLabel") })
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "button",
+          {
+            type: "button",
+            "data-ocid": "shift.pay_now_button",
+            disabled: !selectedPeriod || isPaying,
+            onClick: handlePayNow,
+            className: "w-full bg-primary text-primary-foreground font-semibold py-3 rounded-lg transition-smooth active:scale-95 text-base disabled:opacity-50",
+            children: t("shift_payNow")
+          }
+        )
+      ] }),
+      step === 2 && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { "data-ocid": "shift.step2.panel", className: "mt-4 space-y-4", children: isPaying ? (
+        // Processing spinner
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-card border border-border rounded-xl p-8 flex flex-col items-center gap-4 shadow-sm", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "div",
+            {
+              "data-ocid": "shift.paying_loading_state",
+              className: "w-12 h-12 border-4 border-primary/30 border-t-primary rounded-full animate-spin",
+              "aria-label": "Processing payment"
+            }
+          ),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-base font-medium text-foreground", children: t("shift_paying") }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-muted-foreground text-center", children: "Please do not close this page" })
+        ] })
+      ) : revealedZNumber ? (
+        // Z-number reveal
+        /* @__PURE__ */ jsxRuntimeExports.jsxs(
+          "div",
+          {
+            "data-ocid": "shift.payment_success_state",
+            className: "bg-card border border-border rounded-xl p-6 space-y-5 shadow-sm",
+            children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col items-center gap-2", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-12 h-12 rounded-full bg-accent/20 border border-accent/40 flex items-center justify-center", children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-2xl", children: "✅" }) }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-semibold text-foreground", children: t("shift_paymentSuccess") })
+              ] }),
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-primary/5 border-2 border-primary/30 rounded-xl p-5 text-center", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-muted-foreground mb-1 uppercase tracking-wider font-mono", children: "Your Z-Number" }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  "p",
+                  {
+                    "data-ocid": "shift.z_number_display",
+                    className: "text-3xl font-display font-bold tracking-[0.2em] text-primary",
+                    children: revealedZNumber
+                  }
+                )
+              ] }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "bg-muted/60 rounded-lg px-4 py-3", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-xs text-muted-foreground text-center", children: [
+                "📱 ",
+                t("shift_zNumberHint")
+              ] }) }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx(
+                "button",
+                {
+                  type: "button",
+                  "data-ocid": "shift.continue_button",
+                  onClick: () => setStep(3),
+                  className: "w-full bg-primary text-primary-foreground font-semibold py-3 rounded-lg transition-smooth active:scale-95 text-base",
+                  children: t("btn_continue")
+                }
+              )
+            ]
+          }
+        )
+      ) : null }),
+      step === 3 && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { "data-ocid": "shift.step3.panel", className: "mt-4 space-y-4", children: activated ? (
+        // Activated confirmation
+        /* @__PURE__ */ jsxRuntimeExports.jsxs(
+          "div",
+          {
+            "data-ocid": "shift.activated_success_state",
+            className: "bg-card border border-border rounded-xl p-8 flex flex-col items-center gap-4 shadow-sm",
+            children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-16 h-16 rounded-full bg-accent/20 border border-accent/40 flex items-center justify-center", children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-3xl", children: "🟢" }) }),
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "text-center", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-lg font-display font-bold text-foreground", children: t("shift_activated") }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground mt-1", children: t("shift_redirecting") }),
+                zones && (() => {
+                  var _a3;
+                  try {
+                    const wtSession = JSON.parse(
+                      localStorage.getItem("wt_session") || "null"
+                    );
+                    const zoneId = wtSession == null ? void 0 : wtSession.zone_id;
+                    const zoneName = zoneId !== void 0 ? (_a3 = zones.find((z2) => z2.id === BigInt(zoneId))) == null ? void 0 : _a3.name : void 0;
+                    return zoneName ? /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-sm text-muted-foreground mt-2", children: [
+                      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-medium text-foreground", children: "Assigned Zone:" }),
+                      " ",
+                      zoneName
+                    ] }) : null;
+                  } catch {
+                    return null;
+                  }
+                })()
+              ] })
+            ]
+          }
+        )
+      ) : /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-card border border-border rounded-xl p-6 space-y-4 shadow-sm", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-base font-semibold text-foreground", children: t("shift_enterZNumber") }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-muted-foreground mt-0.5", children: t("shift_zNumberHint") })
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-1", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "label",
+            {
+              htmlFor: "z-number-input",
+              className: "text-sm font-medium text-foreground sr-only",
+              children: t("shift_enterZNumber")
+            }
+          ),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "input",
+            {
+              id: "z-number-input",
+              "data-ocid": "shift.z_number_input",
+              type: "text",
+              maxLength: 8,
+              autoCapitalize: "characters",
+              autoCorrect: "off",
+              spellCheck: false,
+              className: "w-full bg-background border border-input rounded-lg px-4 py-4 text-center text-foreground text-2xl tracking-[0.4em] font-mono font-bold uppercase focus:outline-none focus:ring-2 focus:ring-ring transition-colors",
+              placeholder: "XXXXXXXX",
+              value: zNumber,
+              onChange: (e) => setZNumber(
+                e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, "").slice(0, 8)
+              )
+            }
+          ),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-xs text-muted-foreground text-right", children: [
+            zNumber.length,
+            "/8 characters"
+          ] })
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "button",
+          {
+            type: "button",
+            "data-ocid": "shift.activate_button",
+            disabled: zNumber.length !== 8 || activating,
+            onClick: handleActivate,
+            className: "w-full bg-primary text-primary-foreground font-semibold py-3 rounded-lg transition-smooth active:scale-95 text-base disabled:opacity-50",
+            children: activating ? /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "flex items-center justify-center gap-2", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx(
+                "span",
+                {
+                  className: "w-4 h-4 border-2 border-primary-foreground/30 border-t-primary-foreground rounded-full animate-spin",
+                  "aria-hidden": "true"
+                }
+              ),
+              t("shift_verifying")
+            ] }) : t("shift_submitZNumber")
+          }
+        )
+      ] }) })
+    ] }) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("footer", { className: "bg-muted/40 border-t border-border py-4", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "max-w-[480px] mx-auto px-4", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-xs text-muted-foreground text-center", children: [
+      "© ",
+      (/* @__PURE__ */ new Date()).getFullYear(),
+      ".",
+      " ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx(
+        "a",
+        {
+          href: `https://caffeine.ai?utm_source=caffeine-footer&utm_medium=referral&utm_content=${encodeURIComponent(typeof window !== "undefined" ? window.location.hostname : "")}`,
+          target: "_blank",
+          rel: "noopener noreferrer",
+          className: "underline hover:text-foreground transition-colors",
+          children: "Built with love using caffeine.ai"
+        }
+      )
+    ] }) }) })
+  ] });
+}
+function StepIndicator({ current, total }) {
+  const { t } = useLang();
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(
+    "div",
+    {
+      "data-ocid": "shift.step_indicator",
+      className: "flex items-center justify-between",
+      children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex items-center gap-2 flex-1", children: Array.from({ length: total }, (_2, i) => {
+          const stepNum = i + 1;
+          const isDone = stepNum < current;
+          const isActive = stepNum === current;
+          return /* @__PURE__ */ jsxRuntimeExports.jsxs(
+            "div",
+            {
+              className: "flex items-center flex-1 last:flex-none",
+              children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  "div",
+                  {
+                    className: `w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold shrink-0 transition-colors ${isDone ? "bg-accent text-accent-foreground" : isActive ? "bg-primary text-primary-foreground" : "bg-muted text-muted-foreground"}`,
+                    children: isDone ? "✓" : stepNum
+                  }
+                ),
+                stepNum < total && /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  "div",
+                  {
+                    className: `flex-1 h-0.5 mx-1 rounded-full transition-colors ${isDone ? "bg-accent" : "bg-border"}`
+                  }
+                )
+              ]
+            },
+            stepNum
+          );
+        }) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "ml-3 text-xs text-muted-foreground font-mono whitespace-nowrap", children: t("step_of", { current, total }) })
+      ]
+    }
+  );
+}
+function PeriodCard({
+  ocid,
+  label,
+  icon,
+  selected,
+  onSelect
+}) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(
+    "button",
+    {
+      type: "button",
+      "data-ocid": ocid,
+      onClick: onSelect,
+      className: `w-full flex items-center gap-4 rounded-xl border-2 px-5 py-4 text-left transition-all duration-150 ${selected ? "border-primary bg-primary/8 shadow-sm" : "border-border bg-card hover:border-primary/40"}`,
+      children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-2xl", children: icon }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "span",
+          {
+            className: `text-base font-medium ${selected ? "text-primary" : "text-foreground"}`,
+            children: label
+          }
+        ),
+        selected && /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "ml-auto w-5 h-5 rounded-full bg-primary flex items-center justify-center", children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-primary-foreground text-xs font-bold", children: "✓" }) })
+      ]
+    }
+  );
+}
 const rootRoute = createRootRoute();
 const indexRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "/",
   beforeLoad: () => {
-    throw redirect({ to: "/customer" });
+    throw redirect({ to: "/auth" });
   }
+});
+const authRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: "/auth",
+  component: AuthPage
 });
 const customerRoute = createRoute({
   getParentRoute: () => rootRoute,
@@ -35946,10 +42980,41 @@ const driverRoute = createRoute({
   path: "/driver",
   component: DriverPage
 });
+const availabilityRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: "/availability",
+  component: AvailabilityPage
+});
+const confirmRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: "/confirm",
+  component: DeliveryConfirmPage
+});
+const driverShiftRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: "/driver/shift",
+  component: ShiftActivationPage
+});
+const driverRegisterRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: "/driver/register",
+  component: DriverRegisterPage
+});
+const adminRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: "/admin",
+  component: AdminPage
+});
 const routeTree = rootRoute.addChildren([
   indexRoute,
+  authRoute,
   customerRoute,
-  driverRoute
+  driverRoute,
+  availabilityRoute,
+  confirmRoute,
+  driverShiftRoute,
+  driverRegisterRoute,
+  adminRoute
 ]);
 const router = createRouter({ routeTree });
 function App() {
